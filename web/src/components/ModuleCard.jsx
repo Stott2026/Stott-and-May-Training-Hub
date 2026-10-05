@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Card from "./Card.jsx";
 import IconBadge from "./IconBadge.jsx";
 import Eyebrow from "./Eyebrow.jsx";
@@ -6,11 +7,12 @@ import { Icon } from "./icons.jsx";
 import "./ModuleCard.css";
 
 // A training module tile for the home page grid.
-export default function ModuleCard({ module, done = 0, onOpen }) {
-  const { icon, eyebrow, title, subtitle, accent = "brand", sectionCount } = module;
+export default function ModuleCard({ module, done = 0 }) {
+  const { icon, eyebrow, title, subtitle, accent = "brand", slug } = module;
+  const sectionCount = module.sectionKeys?.length ?? 0;
   const pct = sectionCount ? (done / sectionCount) * 100 : 0;
   return (
-    <Card as="button" type="button" interactive accent={accent} className="module-card" onClick={onOpen}>
+    <Card as={Link} to={`/modules/${slug}`} interactive accent={accent} className="module-card">
       <div className="module-card__top">
         <IconBadge name={icon} accent={accent} />
         {done === sectionCount && sectionCount > 0 ? (

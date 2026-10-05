@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Logo from "./Logo.jsx";
 import Avatar from "./Avatar.jsx";
 import { Icon } from "./icons.jsx";
@@ -11,18 +12,18 @@ export default function AppShell({ navItems = [], current, user, children }) {
       <a href="#main" className="skip-link">Skip to main content</a>
       <header className="topnav">
         <div className="container topnav__inner">
-          <a href="/" className="topnav__brand">
+          <Link to="/" className="topnav__brand">
             <Logo size={36} />
             <span className="topnav__product">Training Hub</span>
-          </a>
+          </Link>
           <nav aria-label="Main" className="topnav__nav">
             <ul>
               {navItems.map((item) => (
                 <li key={item.id}>
-                  <a href={item.href} className="topnav__link" aria-current={current === item.id ? "page" : undefined}>
+                  <Link to={item.href} className="topnav__link" aria-current={current === item.id ? "page" : undefined}>
                     <Icon name={item.icon} size={18} />
                     <span>{item.label}</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

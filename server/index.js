@@ -1,6 +1,7 @@
 import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { api } from "./api.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const webRoot = path.resolve(here, "../web");
@@ -17,9 +18,18 @@ app.get("/api/health", (req, res) => {
   res.json({ ok: true });
 });
 
+// Training content from Sanity: home page, values, modules, quiz and search.
+app.use("/api", api);
+
 // Any other /api address that doesn't exist gets a clear 404 rather than the web page.
 app.use("/api", (req, res) => {
   res.status(404).json({ error: "Not found" });
+});
+
+// If Sanity can't be reached or a query fails, log the details and send a plain message.
+app.use("/api", (err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: "Something went wrong loading the content. Please try again." });
 });
 
 // ── Front end ───────────────────────────────────────────

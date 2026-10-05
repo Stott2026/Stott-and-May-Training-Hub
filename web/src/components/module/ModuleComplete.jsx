@@ -3,7 +3,7 @@ import IconBadge from "../IconBadge.jsx";
 import "./ModuleComplete.css";
 
 // Celebration shown when every section in a module is complete.
-export default function ModuleComplete({ module, nextModule, onNext, onReview }) {
+export default function ModuleComplete({ module, nextModule, onReview }) {
   return (
     <section className="module-complete" data-accent={module.accent} aria-labelledby="complete-title">
       <div className="module-complete__confetti" aria-hidden="true">
@@ -15,7 +15,7 @@ export default function ModuleComplete({ module, nextModule, onNext, onReview })
         You've finished all {module.sections.length} sections of {module.title}. Put one new tactic into practice today.
       </p>
       <div className="module-complete__actions">
-        {nextModule && <Button size="lg" iconAfter="arrow-right" onClick={onNext}>Next: {nextModule.title}</Button>}
+        {nextModule && <Button size="lg" iconAfter="arrow-right" to={`/modules/${nextModule.slug}`}>Next: {nextModule.title}</Button>}
         <Button variant="secondary" size="lg" onClick={onReview}>Review this module</Button>
       </div>
     </section>

@@ -11,8 +11,8 @@ export default function QuickCheck({ question }) {
     <section className="content-block quick-check">
       <BlockHeading icon="brain" title="Quick check" hint="One question to lock in what you've learnt." />
       <fieldset className="quick-check__set">
-        <legend className="quick-check__question">{question.q}</legend>
-        {question.opts.map((o, i) => {
+        <legend className="quick-check__question">{question.question}</legend>
+        {question.options.map((o, i) => {
           const state = !answered ? "" : i === question.correct ? "is-correct" : i === chosen ? "is-wrong" : "is-dim";
           return (
             <button key={i} type="button" className={`quick-check__option ${state}`} onClick={() => !answered && setChosen(i)} aria-disabled={answered}>
@@ -27,7 +27,7 @@ export default function QuickCheck({ question }) {
       {answered && (
         <div className={`quick-check__feedback ${right ? "is-right" : "is-wrong"}`} role="status">
           <p className="quick-check__verdict">{right ? "Spot on." : "Not quite."}</p>
-          <p>{question.exp}</p>
+          <p>{question.explanation}</p>
           {!right && (
             <button type="button" className="quick-check__retry" onClick={() => setChosen(null)}>Try again</button>
           )}

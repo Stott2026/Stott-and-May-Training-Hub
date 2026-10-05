@@ -1,0 +1,10 @@
+.quiz { padding-top: var(--space-10); padding-bottom: var(--space-16); }
+.quiz__card { max-width: var(--reading-width); margin: 0 auto; display: grid; gap: var(--space-5); padding: var(--space-6); box-shadow: var(--shadow-md); }
+@media (max-width: 640px) { .quiz__card { padding: var(--space-5) var(--space-4); } }
+.quiz__top { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); }
+.quiz__question { font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: var(--text-lg); line-height: 1.4; margin-bottom: var(--space-3); padding: 0; }
+.quiz__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: flex-end; }
+.quiz__result { justify-items: center; text-align: center; }
+.quiz__result .quiz__actions { justify-content: center; }
+.quiz__score { font-size: var(--text-display); font-weight: var(--weight-extrabold); }
+.quiz__verdict { font-size: var(--text-lg); color: var(--color-text-muted); }

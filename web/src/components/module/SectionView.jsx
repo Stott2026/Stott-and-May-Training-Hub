@@ -17,6 +17,7 @@ export default function SectionView({ section, index, total, completed, avatar, 
         <h2 id="section-title" className="section-view__title">{section.title}</h2>
         {section.takeaway && <p className="section-view__takeaway">{section.takeaway}</p>}
         <p className="section-view__intro">{section.content}</p>
+        {section.image?.url && <img className="section-view__image" src={`${section.image.url}?w=1200&auto=format`} alt={section.image.alt || ""} />}
       </header>
 
       {/* Phase 2: a video player goes here when the section has a video. */}

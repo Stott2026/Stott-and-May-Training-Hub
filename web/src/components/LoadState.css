@@ -1,0 +1,2 @@
+.load-state { max-width: var(--reading-width); margin: 0 auto; padding: var(--space-16) var(--space-4); text-align: center; color: var(--color-text-muted); display: grid; gap: var(--space-4); justify-items: center; }
+.load-state__title { font-size: var(--text-xl); font-weight: var(--weight-extrabold); color: var(--color-text); }

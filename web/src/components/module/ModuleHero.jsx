@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Eyebrow from "../Eyebrow.jsx";
 import Button from "../Button.jsx";
 import ProgressRing from "../ProgressRing.jsx";
@@ -8,7 +9,7 @@ import "../accents.css";
 import "./ModuleHero.css";
 
 // Top of a module page: title, quick facts, progress and a person photo.
-export default function ModuleHero({ module, done, minutes, onBack, onStart }) {
+export default function ModuleHero({ module, done, minutes, onStart }) {
   const total = module.sections.length;
   const pct = total ? (done / total) * 100 : 0;
   const counts = module.sections.reduce(
@@ -22,9 +23,9 @@ export default function ModuleHero({ module, done, minutes, onBack, onStart }) {
       <div className="module-hero__wave" aria-hidden="true"><Wave variant="glow" /></div>
       <div className="container module-hero__inner">
         <div className="module-hero__copy">
-          <button type="button" className="module-hero__back" onClick={onBack}>
+          <Link to="/" className="module-hero__back">
             <Icon name="arrow-left" size={18} /> All modules
-          </button>
+          </Link>
           <Eyebrow tone="ink">{module.eyebrow}</Eyebrow>
           <h1 id="module-title" className="module-hero__title">{module.title}</h1>
           <p className="module-hero__subtitle">{module.subtitle}</p>
@@ -43,9 +44,9 @@ export default function ModuleHero({ module, done, minutes, onBack, onStart }) {
             </div>
           </div>
         </div>
-        {module.heroImage && (
+        {module.heroImage?.url && (
           <div className="module-hero__visual">
-            <ShapeImage src={module.heroImage} shape="diamond" accent={module.accent} className="module-hero__person" />
+            <ShapeImage src={module.heroImage.url} alt={module.heroImage.alt} shape="diamond" accent={module.accent} className="module-hero__person" />
           </div>
         )}
       </div>
