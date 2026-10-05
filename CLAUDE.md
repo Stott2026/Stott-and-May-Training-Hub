@@ -41,6 +41,7 @@ Ian chose a **light, welcoming design** (October 2026), moving on from the proto
 - Visual details to keep: the wave line, gradient top borders on cards, eyebrow labels, cut-out people rising out of brand shapes, gradient-ringed avatars, soft gradient icon tiles
 - Icons are Lucide line icons (closest match to the brand iconography), registered by name in `web/src/components/icons.jsx`. No emoji in the UI
 - All colours, gradients, fonts, spacing and shadows are tokens in `web/src/styles/tokens.css`. Nothing outside that file may contain a hex or rgba value. Components live in `web/src/components/`
+- **Module pages are the heart of the hub** and must be engaging and good to look at, not walls of text: give each type of content (tactics, phrases, mistakes, scenarios) its own visual treatment, show progress through the module, add small interactive moments, and always offer a clear next step
 - Photos in `web/public/placeholders/` were extracted from the brand guidelines for design review only. Real images will be uploaded to Sanity
 
 ## Rules
