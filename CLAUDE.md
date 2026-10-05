@@ -72,7 +72,8 @@ Run all of these from the project root. Needs Node 22.12 or newer.
 | Run just the Studio | `npm run dev:studio` |
 | Build the front end for production | `npm run build` |
 | Run the production build locally | `npm run build`, then `NODE_ENV=production npm start` |
-| Deploy the hosted Studio | `npm run studio:deploy` |
+| Deploy the hosted Studio | `npm run studio:deploy` (needs `SANITY_AUTH_TOKEN` in `.env`) |
+| Import the prototype content into Sanity | `npm run import:prototype` (add `-- --dry-run` to check first; needs `SANITY_WRITE_TOKEN`) |
 
 ### Project layout
 

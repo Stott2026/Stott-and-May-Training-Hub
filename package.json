@@ -16,7 +16,8 @@
     "dev:studio": "npm run dev -w studio",
     "build": "npm run build -w web",
     "start": "npm start -w server",
-    "studio:deploy": "npm run deploy -w studio"
+    "studio:deploy": "npm run deploy -w studio",
+    "import:prototype": "npm run import:prototype -w studio --"
   },
   "devDependencies": {
     "concurrently": "^10.0.5"

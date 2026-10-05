@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "dotenv -e ../.env -- sanity dev --port 3333",
     "build": "dotenv -e ../.env -- sanity build",
-    "deploy": "dotenv -e ../.env -- sanity deploy"
+    "deploy": "dotenv -e ../.env -- sanity deploy",
+    "import:prototype": "dotenv -e ../.env -- node migrations/import-prototype.js"
   },
   "dependencies": {
+    "@sanity/client": "^8.9.0",
     "@sanity/icons": "^5.2.3",
     "@sanity/vision": "^6.17.0",
     "react": "^19.3.0",
