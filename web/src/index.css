@@ -1,0 +1,18 @@
+/* Temporary base styles for step 1. Step 2 moves all colours and fonts into a single tokens file. */
+:root {
+  color-scheme: dark;
+}
+body {
+  margin: 0;
+  background: #111314;
+  color: #ffffff;
+  font-family: Inter, "Segoe UI", system-ui, sans-serif;
+}
+.placeholder {
+  max-width: 40rem;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+.placeholder h1 {
+  font-family: Manrope, sans-serif;
+}
