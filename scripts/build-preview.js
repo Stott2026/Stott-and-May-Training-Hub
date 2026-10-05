@@ -47,10 +47,11 @@ try {
     html = html.replace(tag, () => `<style>${css}</style>`);
   }
   const types = { webp: "image/webp", png: "image/png", jpg: "image/jpeg", svg: "image/svg+xml" };
-  const refs = new Set(html.match(/\.\/(placeholders|brand)\/[\w.-]+\.(webp|png|jpg|svg)/g));
+  // Matches both "./brand/logo.png" in the page and "brand/logo.png" passed to assetUrl() in the script.
+  const refs = new Set(html.match(/(?<=["'`]|\.\/)(placeholders|brand)\/[\w.-]+\.(webp|png|jpg|svg)/g));
   for (const ref of refs) {
     const data = await fs.readFile(path.join(web, "public", ref));
-    html = html.replaceAll(ref, `data:${types[ref.split(".").pop()]};base64,${data.toString("base64")}`);
+    html = html.replaceAll(`./${ref}`, ref).replaceAll(ref, `data:${types[ref.split(".").pop()]};base64,${data.toString("base64")}`);
   }
   // The preview host adds its own page wrapper, so keep only what goes inside it.
   html = html

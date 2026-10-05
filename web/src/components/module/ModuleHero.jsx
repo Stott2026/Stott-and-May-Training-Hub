@@ -5,6 +5,7 @@ import ProgressRing from "../ProgressRing.jsx";
 import ShapeImage from "../ShapeImage.jsx";
 import Wave from "../Wave.jsx";
 import { Icon } from "../icons.jsx";
+import { placeholderPhotos } from "../../lib/placeholderPhotos.js";
 import "../accents.css";
 import "./ModuleHero.css";
 
@@ -16,6 +17,8 @@ export default function ModuleHero({ module, done, minutes, onStart }) {
     (n, s) => ({ tactics: n.tactics + (s.tactics?.length || 0), phrases: n.phrases + (s.phrases?.length || 0), scenarios: n.scenarios + (s.scenario ? 1 : 0) }),
     { tactics: 0, phrases: 0, scenarios: 0 }
   );
+  const photos = placeholderPhotos.moduleHeroes;
+  const photo = module.heroImage?.url ?? photos[Math.round((module.order ?? 0) / 10) % photos.length];
   const startLabel = done === 0 ? "Start the module" : done === total ? "Review the module" : "Continue where you left off";
 
   return (
@@ -44,9 +47,9 @@ export default function ModuleHero({ module, done, minutes, onStart }) {
             </div>
           </div>
         </div>
-        {module.heroImage?.url && (
+        {photo && (
           <div className="module-hero__visual">
-            <ShapeImage src={module.heroImage.url} alt={module.heroImage.alt} shape="diamond" accent={module.accent} className="module-hero__person" />
+            <ShapeImage src={photo} alt={module.heroImage?.alt} shape="diamond" accent={module.accent} className="module-hero__person" />
           </div>
         )}
       </div>
