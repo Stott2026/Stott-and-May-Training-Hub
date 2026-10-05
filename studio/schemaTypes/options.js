@@ -18,6 +18,7 @@ export const ICON_OPTIONS = [
   { title: "Megaphone", value: "megaphone" },
   { title: "Rocket", value: "rocket" },
   { title: "Speech bubbles", value: "messages" },
+  { title: "Laptop", value: "laptop" },
   { title: "Light bulb", value: "lightbulb" },
   { title: "Sparkles", value: "sparkles" },
   { title: "Compass", value: "compass" },

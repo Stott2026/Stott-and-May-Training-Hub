@@ -5,7 +5,7 @@ import {
   FileText, FolderKanban, GraduationCap, Handshake, HeartHandshake, Lightbulb, MessageCircle,
   MessagesSquare, Mic, Play, Puzzle, Rocket, Scale, Search, Sparkles, Target, Timer,
   TrendingUp, Trophy, UserRound, Users, X, Megaphone, Compass, ShieldCheck, Clock,
-  ArrowLeft, ChevronLeft, ChevronRight, CircleX, Copy, ListChecks, PartyPopper, TriangleAlert, Eye, Quote, Map,
+  ArrowLeft, Laptop, ChevronLeft, ChevronRight, CircleX, Copy, ListChecks, PartyPopper, TriangleAlert, Eye, Quote, Map,
 } from "lucide-react";
 
 export const icons = {
@@ -35,6 +35,7 @@ export const icons = {
   "graduation-cap": GraduationCap,
   handshake: Handshake,
   "heart-handshake": HeartHandshake,
+  laptop: Laptop,
   lightbulb: Lightbulb,
   megaphone: Megaphone,
   "message-circle": MessageCircle,
