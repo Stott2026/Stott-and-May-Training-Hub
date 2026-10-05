@@ -15,7 +15,7 @@ import { sampleModules, samplePeople, sampleSection, sampleValues } from "../pla
 import "./HomePlaceholder.css";
 
 // Step 2 placeholder home page: shows every building block with sample content.
-export default function HomePlaceholder() {
+export default function HomePlaceholder({ onOpenModule }) {
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(true);
   const [complete, setComplete] = useState(false);
@@ -73,7 +73,7 @@ export default function HomePlaceholder() {
             <h2 className="progress-card__title">Keep the momentum going</h2>
             <ProgressBar value={overall} label={`${doneSections} of ${totalSections} sections complete`} showValue size="md" />
           </div>
-          <Button iconAfter="arrow-right">Continue learning</Button>
+          <Button iconAfter="arrow-right" onClick={onOpenModule}>Continue learning</Button>
         </Card>
 
         {/* ── Values ── */}
@@ -112,7 +112,7 @@ export default function HomePlaceholder() {
           </div>
           <ul className="module-grid">
             {sampleModules.map((m) => (
-              <li key={m.id}><ModuleCard module={m} done={m.done} /></li>
+              <li key={m.id}><ModuleCard module={m} done={m.done} onOpen={onOpenModule} /></li>
             ))}
           </ul>
         </section>

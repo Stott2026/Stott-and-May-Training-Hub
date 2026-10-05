@@ -1,0 +1,36 @@
+.module-complete {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
+  border-radius: var(--radius-xl);
+  background: var(--accent-soft);
+  border: 1px solid var(--color-border);
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+}
+.module-complete__title { font-size: var(--text-2xl); font-weight: var(--weight-extrabold); }
+.module-complete__text { max-width: 32rem; color: var(--color-text-muted); }
+.module-complete__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); margin-top: var(--space-2); }
+
+/* A short burst of brand-coloured diamonds. Turned off for people who prefer reduced motion. */
+.module-complete__confetti { position: absolute; inset: 0; pointer-events: none; }
+.module-complete__confetti span {
+  position: absolute;
+  top: -10%;
+  left: calc(var(--i) * 5.5% + 2%);
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--accent-gradient);
+  transform: rotate(45deg);
+  opacity: 0;
+  animation: confetti-fall 1.8s var(--ease-out) calc(var(--i) * 60ms) 1 forwards;
+}
+.module-complete__confetti span:nth-child(3n) { width: 7px; height: 7px; background: var(--gradient-sky); }
+.module-complete__confetti span:nth-child(4n) { background: var(--gradient-lime); }
+@keyframes confetti-fall {
+  0% { opacity: 1; transform: translateY(0) rotate(45deg); }
+  100% { opacity: 0; transform: translateY(26rem) rotate(405deg); }
+}

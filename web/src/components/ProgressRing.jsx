@@ -28,7 +28,7 @@ export default function ProgressRing({ value = 0, size = 96, stroke = 10, label 
           strokeDashoffset={c * (1 - pct / 100)}
         />
       </svg>
-      <span className="ring__value">{pct}%</span>
+      <span className="ring__value" style={{ fontSize: Math.max(12, Math.round(size * 0.2)) }}>{pct}%</span>
     </div>
   );
 }

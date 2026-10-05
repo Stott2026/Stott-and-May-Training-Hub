@@ -8,7 +8,7 @@ export const sampleValues = [
 ];
 
 export const sampleModules = [
-  { id: "a", icon: "user", eyebrow: "People", title: "Module title", subtitle: "Short module description from Sanity", accent: "brand", sectionCount: 6, done: 6 },
+  { id: "a", icon: "user", eyebrow: "People", title: "Candidate Management", subtitle: "Click any module to see the module page preview", accent: "brand", sectionCount: 6, done: 0 },
   { id: "b", icon: "handshake", eyebrow: "Relationships", title: "Module title", subtitle: "Short module description from Sanity", accent: "sky", sectionCount: 6, done: 2 },
   { id: "c", icon: "folder-kanban", eyebrow: "Delivery", title: "Module title", subtitle: "Short module description from Sanity", accent: "brand", sectionCount: 5, done: 0 },
   { id: "d", icon: "trending-up", eyebrow: "Growth", title: "Module title", subtitle: "Short module description from Sanity", accent: "lime", sectionCount: 7, done: 1 },

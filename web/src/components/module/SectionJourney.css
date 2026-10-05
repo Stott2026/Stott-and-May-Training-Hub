@@ -1,0 +1,72 @@
+.journey { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: var(--space-5); }
+.journey__heading {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+  font-family: var(--font-heading);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-link);
+}
+.journey__heading span { color: var(--color-text-muted); }
+.journey__list { list-style: none; margin: 0; padding: 0; position: relative; }
+.journey__item { position: relative; }
+/* the line joining one step to the next */
+.journey__item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--space-3) + 0.875rem - 1px);
+  top: 2.6rem;
+  bottom: -0.35rem;
+  width: 2px;
+  background: var(--color-track);
+}
+.journey__item--done:not(:last-child)::after { background: var(--gradient-brand); }
+.journey__item button {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+.journey__item button:hover { background: var(--color-surface-sunken); }
+.journey__item--current button { background: var(--gradient-brand-soft); }
+.journey__marker {
+  width: 1.75rem;
+  height: 1.75rem;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--color-border-strong);
+  background: var(--color-surface);
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-muted);
+  position: relative;
+  z-index: 1;
+}
+.journey__item--current .journey__marker { border-color: var(--color-link); color: var(--color-link); }
+.journey__item--done .journey__marker { background: var(--gradient-brand); border-color: transparent; color: var(--color-text-on-brand); }
+.journey__title { font-size: var(--text-sm); font-weight: var(--weight-semibold); line-height: 1.35; padding-top: 0.2rem; }
+.journey__item--todo .journey__title { color: var(--color-text-muted); }
+
+/* On phones the journey becomes a row of numbered steps you can scroll sideways */
+@media (max-width: 899px) {
+  .journey { padding: var(--space-3); }
+  .journey__heading { margin-bottom: var(--space-2); padding-inline: var(--space-2); }
+  .journey__list { display: flex; gap: var(--space-2); overflow-x: auto; scrollbar-width: none; padding-bottom: var(--space-1); }
+  .journey__item { flex: 0 0 auto; }
+  .journey__item:not(:last-child)::after { display: none; }
+  .journey__item button { width: auto; align-items: center; padding: var(--space-2) var(--space-3); }
+  .journey__title { display: none; }
+  .journey__item--current .journey__title { display: inline; max-width: 12rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0; }
+}
