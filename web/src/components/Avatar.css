@@ -1,0 +1,26 @@
+.avatar {
+  display: inline-block;
+  flex-shrink: 0;
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  box-shadow: var(--shadow-glow);
+}
+.avatar img,
+.avatar__initials {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--color-surface);
+  background: var(--accent-soft);
+  object-fit: cover;
+  object-position: top;
+}
+.avatar__initials {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}

@@ -1,0 +1,5 @@
+/* Accent themes. Any element with data-accent="brand|sky|lime" gets matching gradients.
+   Content editors will choose one of these three for each module in Sanity. */
+[data-accent] { --accent-gradient: var(--gradient-brand); --accent-soft: var(--gradient-brand-soft); }
+[data-accent="sky"] { --accent-gradient: var(--gradient-sky); --accent-soft: var(--gradient-sky-soft); }
+[data-accent="lime"] { --accent-gradient: var(--gradient-lime); --accent-soft: var(--gradient-lime-soft); }

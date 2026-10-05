@@ -1,0 +1,33 @@
+.shape-image {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 1 / 1.1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  isolation: isolate;
+}
+.shape-image__shape {
+  position: absolute;
+  inset: 22% 6% 0 6%;
+  background: var(--accent-gradient);
+  box-shadow: var(--shadow-lg);
+}
+.shape-image--squircle .shape-image__shape { border-radius: 30%; transform: rotate(-6deg); }
+.shape-image--diamond .shape-image__shape { inset: 22% 12% 6% 12%; border-radius: 22%; transform: rotate(45deg); }
+.shape-image--rings .shape-image__shape { inset: 18% 8% 0 8%; border-radius: 50%; }
+.shape-image__rings {
+  position: absolute;
+  inset: 8% -2% -10% -2%;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  z-index: -1;
+}
+.shape-image__photo {
+  position: relative;
+  width: 82%;
+  height: auto;
+  border-bottom-left-radius: 30%;
+  border-bottom-right-radius: 30%;
+}
+.shape-image--diamond .shape-image__photo { border-radius: 0 0 40% 40%; }

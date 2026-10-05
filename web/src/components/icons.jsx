@@ -1,0 +1,50 @@
+// The icon set for the hub. Content editors will pick icons by these names in Sanity,
+// so add new ones here (from https://lucide.dev/icons) rather than using emoji.
+import {
+  ArrowRight, BadgeCheck, BookOpen, Brain, Check, ChevronDown, CircleCheck, CircleUserRound,
+  FileText, FolderKanban, GraduationCap, Handshake, HeartHandshake, Lightbulb, MessageCircle,
+  MessagesSquare, Mic, Play, Puzzle, Rocket, Scale, Search, Sparkles, Target, Timer,
+  TrendingUp, Trophy, UserRound, Users, X, Megaphone, Compass, ShieldCheck, Clock,
+} from "lucide-react";
+
+export const icons = {
+  "arrow-right": ArrowRight,
+  "badge-check": BadgeCheck,
+  "book-open": BookOpen,
+  brain: Brain,
+  check: Check,
+  "chevron-down": ChevronDown,
+  "circle-check": CircleCheck,
+  "circle-user": CircleUserRound,
+  clock: Clock,
+  compass: Compass,
+  "file-text": FileText,
+  "folder-kanban": FolderKanban,
+  "graduation-cap": GraduationCap,
+  handshake: Handshake,
+  "heart-handshake": HeartHandshake,
+  lightbulb: Lightbulb,
+  megaphone: Megaphone,
+  "message-circle": MessageCircle,
+  messages: MessagesSquare,
+  mic: Mic,
+  play: Play,
+  puzzle: Puzzle,
+  rocket: Rocket,
+  scale: Scale,
+  search: Search,
+  "shield-check": ShieldCheck,
+  sparkles: Sparkles,
+  target: Target,
+  timer: Timer,
+  "trending-up": TrendingUp,
+  trophy: Trophy,
+  user: UserRound,
+  users: Users,
+  x: X,
+};
+
+export function Icon({ name, size = 20, strokeWidth = 1.75, ...rest }) {
+  const Component = icons[name] || Sparkles;
+  return <Component size={size} strokeWidth={strokeWidth} aria-hidden="true" focusable="false" {...rest} />;
+}

@@ -1,0 +1,7 @@
+.ring { position: relative; display: inline-grid; place-items: center; flex-shrink: 0; }
+.ring svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+.ring__track { fill: none; stroke: var(--color-track); }
+.ring__fill { fill: none; stroke-linecap: round; transition: stroke-dashoffset var(--duration-medium) var(--ease-out); }
+.ring__stop-start { stop-color: var(--sm-teal); }
+.ring__stop-end { stop-color: var(--sm-aqua); }
+.ring__value { font-family: var(--font-heading); font-weight: var(--weight-extrabold); font-size: var(--text-lg); }

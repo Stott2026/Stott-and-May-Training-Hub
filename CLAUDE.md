@@ -32,11 +32,16 @@ The Express server serves the built React app and is the only thing that talks t
 
 ## Brand
 
-- Background `#111314`, surfaces `#181c20` and `#1a1f24`, borders `#2a2f35`, muted text `#7A8798`
-- Signature gradient: teal `#00C8C8` to aquamarine `#73F7BB`
+Ian chose a **light, welcoming design** (October 2026), moving on from the prototype's dark theme. The hub should feel energetic and easy to navigate. Source: `reference/brand/Stott_and_May_Group_Brand_Guidelines.pdf`.
+
+- Page background `#ECEEF3` (brand light mode), white cards with soft shadows, ink text `#111314`
+- Signature gradient: teal `#00C8C8` to aquamarine `#73F7BB`. Sister gradients (teal to sky `#44B3F4`, teal to lime `#7EFF2C`) are used as module accents, as in the prototype
+- Brand teal fails contrast as small text on white, so text uses the darker `--sm-teal-ink`; muted text uses `--sm-slate-ink`. Dark text on gradients, never white
 - Headings in Manrope, body in Inter (Google Fonts)
-- Visual details from the prototype to keep: the thin wave line, gradient top borders on cards, the diamond mark, the eyebrow labels
-- Define all colours, fonts and spacing as design tokens in one place and build reusable components. Nothing should hard-code a hex value outside the tokens file.
+- Visual details to keep: the wave line, gradient top borders on cards, eyebrow labels, cut-out people rising out of brand shapes, gradient-ringed avatars, soft gradient icon tiles
+- Icons are Lucide line icons (closest match to the brand iconography), registered by name in `web/src/components/icons.jsx`. No emoji in the UI
+- All colours, gradients, fonts, spacing and shadows are tokens in `web/src/styles/tokens.css`. Nothing outside that file may contain a hex or rgba value. Components live in `web/src/components/`
+- Photos in `web/public/placeholders/` were extracted from the brand guidelines for design review only. Real images will be uploaded to Sanity
 
 ## Rules
 

@@ -1,0 +1,124 @@
+/*
+ * Stott and May Training Hub design tokens
+ * ----------------------------------------
+ * This is the ONLY file allowed to contain colour values.
+ * Change a value here and it changes everywhere in the app.
+ * Source: Stott and May Group Brand System (reference/brand/).
+ */
+
+:root {
+  /* ── Brand colours ─────────────────────────────── */
+  --sm-teal: #00c8c8;        /* shared group root */
+  --sm-aqua: #73f7bb;        /* Stott and May gradient end */
+  --sm-sky: #44b3f4;         /* sister gradient end (sky blue) */
+  --sm-lime: #7eff2c;        /* sister gradient end (electric lime) */
+  --sm-ink: #111314;         /* near-black from the brand neutrals */
+  --sm-slate: #7a8798;       /* secondary UI labels */
+  --sm-mist: #c3cad2;        /* borders and dividers */
+  --sm-cloud: #eceef3;       /* page background, light mode */
+  --sm-white: #ffffff;       /* card surfaces */
+
+  /* Accessible text versions of brand colours (pass WCAG AA on white) */
+  --sm-teal-ink: #007a7a;    /* teal for small text and links on light surfaces */
+  --sm-slate-ink: #5b6675;   /* muted body text on light surfaces */
+  --sm-danger: #c93838;      /* "common mistakes" and "weak approach" labels */
+
+  /* Soft tints, for welcoming backgrounds */
+  --sm-teal-50: #e6fafa;
+  --sm-teal-100: #ccf4f4;
+  --sm-aqua-50: #ebfdf5;
+  --sm-sky-50: #e8f5fd;
+  --sm-lime-50: #f0ffe4;
+  --sm-danger-50: #fdeeee;
+
+  /* ── Roles (use these in components) ──────────── */
+  --color-page: var(--sm-cloud);
+  --color-surface: var(--sm-white);
+  --color-surface-sunken: #f5f7fa;
+  --color-border: #dfe3e9;
+  --color-border-strong: var(--sm-mist);
+  --color-text: var(--sm-ink);
+  --color-text-muted: var(--sm-slate-ink);
+  --color-text-subtle: var(--sm-slate);
+  --color-text-on-brand: var(--sm-ink);
+  --color-text-inverse: var(--sm-white);
+  --color-link: var(--sm-teal-ink);
+  --color-accent: var(--sm-teal);
+  --color-focus: var(--sm-teal-ink);
+  --color-success: var(--sm-teal-ink);
+  --color-danger: var(--sm-danger);
+  --color-dark-surface: var(--sm-ink);
+  --color-track: #e4e8ee;    /* empty part of progress bars */
+  --color-overlay: rgba(17, 19, 20, 0.55);
+  --color-glass: rgba(255, 255, 255, 0.72);
+  --color-glass-line: rgba(255, 255, 255, 0.45);
+
+  /* ── Gradients ─────────────────────────────────── */
+  --gradient-brand: linear-gradient(135deg, var(--sm-teal), var(--sm-aqua));
+  --gradient-sky: linear-gradient(135deg, var(--sm-teal), var(--sm-sky));
+  --gradient-lime: linear-gradient(135deg, var(--sm-teal), var(--sm-lime));
+  --gradient-brand-soft: linear-gradient(135deg, var(--sm-teal-50), var(--sm-aqua-50));
+  --gradient-sky-soft: linear-gradient(135deg, var(--sm-teal-50), var(--sm-sky-50));
+  --gradient-lime-soft: linear-gradient(135deg, var(--sm-teal-50), var(--sm-lime-50));
+  --gradient-hero:
+    radial-gradient(60% 80% at 30% 20%, rgba(255, 255, 255, 0.55), transparent 70%),
+    linear-gradient(120deg, var(--sm-aqua), var(--sm-teal) 70%);
+
+  /* ── Typography ────────────────────────────────── */
+  --font-heading: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --text-eyebrow: 0.6875rem;  /* 11px */
+  --text-xs: 0.75rem;         /* 12px */
+  --text-sm: 0.875rem;        /* 14px */
+  --text-md: 1rem;            /* 16px */
+  --text-lg: 1.125rem;        /* 18px */
+  --text-xl: 1.5rem;          /* 24px, H2 */
+  --text-2xl: 2rem;           /* 32px */
+  --text-display: clamp(2.25rem, 5vw, 3.5rem);
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-body: 1.6;
+  --tracking-eyebrow: 0.12em;
+
+  /* ── Spacing (4px scale) ───────────────────────── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* ── Shape, depth and motion ───────────────────── */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(17, 19, 20, 0.05), 0 2px 8px rgba(17, 19, 20, 0.04);
+  --shadow-md: 0 4px 12px rgba(17, 19, 20, 0.06), 0 12px 32px rgba(17, 19, 20, 0.06);
+  --shadow-lg: 0 12px 40px rgba(17, 19, 20, 0.12);
+  --shadow-glow: 0 8px 28px rgba(0, 200, 200, 0.35);
+
+  --accent-bar: 4px;          /* gradient top border on cards */
+  --content-width: 72rem;
+  --reading-width: 46rem;
+  --nav-height: 4rem;
+
+  --duration-fast: 150ms;
+  --duration-medium: 300ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
