@@ -6,5 +6,5 @@ export default defineCliConfig({
   // The hosted Studio's address: https://<studioHost>.sanity.studio
   studioHost: process.env.SANITY_STUDIO_HOSTNAME || "stottandmay-training",
   // Editors always get the latest Studio version without a redeploy.
-  deployment: { autoUpdates: true },
+  deployment: { appId: "bwhqk9ggtvpbez5kvzkrs37r", autoUpdates: true },
 });
