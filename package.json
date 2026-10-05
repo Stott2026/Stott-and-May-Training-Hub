@@ -17,7 +17,8 @@
     "build": "npm run build -w web",
     "start": "npm start -w server",
     "studio:deploy": "npm run deploy -w studio",
-    "import:prototype": "npm run import:prototype -w studio --"
+    "import:prototype": "npm run import:prototype -w studio --",
+    "preview:build": "node --env-file-if-exists=.env scripts/build-preview.js"
   },
   "devDependencies": {
     "concurrently": "^10.0.5"

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router";
+import { BrowserRouter, HashRouter, Route, Routes, useLocation } from "react-router";
 import AppShell from "./components/AppShell.jsx";
 import LoadState from "./components/LoadState.jsx";
 import HomePage from "./pages/HomePage.jsx";
@@ -24,9 +24,12 @@ function ScrollToTop() {
   return null;
 }
 
+// The preview build is a single page, so it keeps the page address after a # instead.
+const Router = import.meta.env.MODE === "preview" ? HashRouter : BrowserRouter;
+
 export default function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <ProgressProvider>
         <ScrollToTop />
         {/* Step 6 replaces this with the signed-in person's name. */}
@@ -39,6 +42,6 @@ export default function App() {
           </Routes>
         </AppShell>
       </ProgressProvider>
-    </BrowserRouter>
+    </Router>
   );
 }
