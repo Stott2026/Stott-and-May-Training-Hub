@@ -2,6 +2,7 @@ import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { api } from "./api.js";
+import { auth, requireSignIn, session } from "./auth.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const webRoot = path.resolve(here, "../web");
@@ -10,12 +11,26 @@ const port = Number(process.env.PORT) || 3000;
 
 const app = express();
 
+// Railway sits in front of the app, so trust it to say whether the visitor used HTTPS.
+app.set("trust proxy", 1);
+app.use(session);
+
+// Used by Railway to check the app is up. Returns no data, so it is the one route open to all.
+app.get("/api/health", (req, res) => {
+  res.json({ ok: true });
+});
+
+// ── Sign-in ─────────────────────────────────────────────
+// Microsoft sign-in pages. Everything below requireSignIn needs a signed-in Stott and May account.
+app.use("/auth", auth);
+app.use(requireSignIn);
+
 // ── API routes ──────────────────────────────────────────
 // Everything the browser needs from Sanity (and later the database) goes through /api.
 
-// Used by Railway to check the app is up. Returns no data.
-app.get("/api/health", (req, res) => {
-  res.json({ ok: true });
+// Who is signed in, for the name in the top bar.
+app.get("/api/me", (req, res) => {
+  res.json({ name: req.user.name, email: req.user.email });
 });
 
 // Training content from Sanity: home page, values, modules, quiz and search.

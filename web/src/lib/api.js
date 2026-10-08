@@ -15,6 +15,11 @@ function fromSnapshot(path) {
 async function load(path) {
   if (snapshot) return fromSnapshot(path);
   const res = await fetch(`/api${path}`);
+  if (res.status === 401) {
+    // Signed out or the 12 hours ran out: sign in again and come back to this page.
+    window.location.assign(`/auth/signin?returnTo=${encodeURIComponent(window.location.pathname + window.location.search)}`);
+    return new Promise(() => {});
+  }
   const body = await res.json().catch(() => ({}));
   if (!res.ok) throw Object.assign(new Error(body.error || "Something went wrong."), { status: res.status });
   return body;

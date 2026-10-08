@@ -5,7 +5,7 @@ import { Icon } from "./icons.jsx";
 import "./AppShell.css";
 
 // The page frame: skip link, top navigation and the main content area.
-// navItems: [{ id, label, icon, href }]. user: { name } once sign-in is added in step 6.
+// navItems: [{ id, label, icon, href }]. user: { name, initials, canSignOut } for the signed-in person.
 export default function AppShell({ navItems = [], current, user, children }) {
   return (
     <>
@@ -32,6 +32,8 @@ export default function AppShell({ navItems = [], current, user, children }) {
             <div className="topnav__user">
               <span className="topnav__user-name">{user.name}</span>
               <Avatar size={36} initials={user.initials} />
+              {/* A plain link, not an in-app one: signing out goes through the server and Microsoft. */}
+              {user.canSignOut && <a href="/auth/signout" className="topnav__signout">Sign out</a>}
             </div>
           )}
         </div>

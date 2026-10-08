@@ -18,7 +18,7 @@ const outDir = path.join(web, "dist-preview");
 const [home, values, modules, quiz, searchable] = await Promise.all(
   [queries.home, queries.values, queries.modules, queries.quiz, queries.searchable].map((q) => sanity.fetch(q))
 );
-const routes = { "/home": home ?? {}, "/values": values, "/modules": modules, "/quiz": quiz };
+const routes = { "/me": { name: "Preview", preview: true }, "/home": home ?? {}, "/values": values, "/modules": modules, "/quiz": quiz };
 for (const m of modules) {
   routes[`/modules/${m.slug}`] = withQuickChecks(await sanity.fetch(queries.module, { slug: m.slug }));
 }

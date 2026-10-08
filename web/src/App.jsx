@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage.jsx";
 import ModulePage from "./pages/ModulePage.jsx";
 import QuizPage from "./pages/QuizPage.jsx";
 import { ProgressProvider } from "./lib/progress.jsx";
+import { useApi } from "./lib/api.js";
 
 const NAV = [
   { id: "training", label: "Training", icon: "graduation-cap", href: "/" },
@@ -27,13 +28,17 @@ function ScrollToTop() {
 // The preview build is a single page, so it keeps the page address after a # instead.
 const Router = import.meta.env.MODE === "preview" ? HashRouter : BrowserRouter;
 
+// "Ian Barker" → "IB"
+const initialsOf = (name = "") => name.split(/\s+/).filter(Boolean).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
+
 export default function App() {
+  const { data: me } = useApi("/me");
+  const user = me && { name: me.name, initials: initialsOf(me.name), canSignOut: !me.preview };
   return (
     <Router>
       <ProgressProvider>
         <ScrollToTop />
-        {/* Step 6 replaces this with the signed-in person's name. */}
-        <AppShell navItems={NAV} current="training" user={{ name: "Signed-in user", initials: "SM" }}>
+        <AppShell navItems={NAV} current="training" user={user}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/modules/:slug" element={<ModulePage />} />
