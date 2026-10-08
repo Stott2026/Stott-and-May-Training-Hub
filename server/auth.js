@@ -4,7 +4,8 @@
 // 1. Someone who isn't signed in is sent to /auth/signin, which sends them to Microsoft.
 // 2. They sign in with their Stott and May account. Microsoft sends them back to /auth/callback.
 // 3. The server swaps the one-time code from Microsoft for their details, checks they belong to
-//    our organisation, and remembers them in a signed, browser-locked cookie for 12 hours.
+//    our organisation, and remembers them in a signed, browser-locked cookie: for 7 days, renewed
+//    each time they use the hub, and never longer than 30 days without signing in again.
 // 4. /auth/signout forgets them and signs them out of Microsoft too.
 import crypto from "node:crypto";
 import { Router } from "express";
@@ -43,12 +44,19 @@ const msal = signInConfigured
 const pkce = new CryptoProvider();
 const SCOPES = ["User.Read"];
 
+// How long the hub remembers someone (agreed with Ian, October 2026). Shorter is more secure:
+// a leaver whose Microsoft account is disabled keeps hub access on a device already signed in
+// until their sign-in here runs out.
+const DAY = 24 * 60 * 60 * 1000;
+const STAY_SIGNED_IN = 7 * DAY; // renewed on every visit
+const SIGN_IN_AGAIN_AFTER = 30 * DAY; // however often they visit
+
 // The signed-in person is kept in a cookie that is signed with SESSION_SECRET (so it can't be
 // forged or edited), hidden from page scripts, and only sent over HTTPS on the live site.
 export const session = cookieSession({
   name: "sm_hub_session",
   keys: [SESSION_SECRET || crypto.randomBytes(32).toString("hex")],
-  maxAge: 12 * 60 * 60 * 1000,
+  maxAge: STAY_SIGNED_IN,
   httpOnly: true,
   sameSite: "lax",
   secure: baseUrl.startsWith("https://"),
@@ -65,7 +73,7 @@ export const auth = Router();
 auth.get("/signin", async (req, res) => {
   const returnTo = safeReturnTo(req.query.returnTo);
   if (devUser) {
-    req.session = { user: devUser };
+    req.session = { user: devUser, signedInAt: Date.now() };
     return res.redirect(returnTo);
   }
   if (!signInConfigured) return notSetUp(res);
@@ -111,7 +119,10 @@ auth.get("/callback", async (req, res) => {
   }
 
   // A fresh session, holding only what the hub needs to show who is signed in.
-  req.session = { user: { name: claims.name || claims.preferred_username, email: claims.preferred_username || "", id: claims.oid } };
+  req.session = {
+    user: { name: claims.name || claims.preferred_username, email: claims.preferred_username || "", id: claims.oid },
+    signedInAt: Date.now(),
+  };
   res.redirect(pending.returnTo);
 });
 
@@ -135,10 +146,15 @@ auth.use((err, req, res, next) => {
 // Everything after this needs a signed-in person.
 export function requireSignIn(req, res, next) {
   const user = req.session?.user;
-  if (user) {
+  const signedInAt = req.session?.signedInAt ?? 0;
+  if (user && Date.now() - signedInAt < SIGN_IN_AGAIN_AFTER) {
     req.user = user;
+    // Renew the 7 days. Changing the session makes the browser keep the cookie for another 7 days;
+    // doing it once an hour is plenty and keeps the cookie quiet the rest of the time.
+    req.session.renewed = Math.floor(Date.now() / (60 * 60 * 1000));
     return next();
   }
+  if (user) req.session = null; // past the 30 days: sign in again
   if (req.path.startsWith("/api/")) return res.status(401).json({ error: "Please sign in." });
   if (!signInConfigured && !devUser) return notSetUp(res);
   res.redirect(`/auth/signin?returnTo=${encodeURIComponent(req.originalUrl)}`);
