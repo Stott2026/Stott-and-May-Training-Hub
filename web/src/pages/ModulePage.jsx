@@ -5,6 +5,7 @@ import ModuleHero from "../components/module/ModuleHero.jsx";
 import SectionJourney from "../components/module/SectionJourney.jsx";
 import SectionView from "../components/module/SectionView.jsx";
 import ModuleComplete from "../components/module/ModuleComplete.jsx";
+import AskMayConcept, { showMayConcept } from "../components/AskMayConcept.jsx";
 import { useApi } from "../lib/api.js";
 import { useProgress } from "../lib/progress.jsx";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
@@ -97,6 +98,8 @@ function ModuleView({ module, startAt, completed, onToggleComplete }) {
           )}
         </div>
       </div>
+      {/* Concept only, in the preview build: the planned "Ask May" coach, aware of the current section. */}
+      {showMayConcept && <AskMayConcept module={module} section={celebrate ? null : module.sections[current]} showCard={false} />}
     </>
   );
 }
