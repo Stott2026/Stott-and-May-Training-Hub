@@ -48,7 +48,7 @@ try {
   }
   const types = { webp: "image/webp", png: "image/png", jpg: "image/jpeg", svg: "image/svg+xml" };
   // Matches both "./brand/logo.png" in the page and "brand/logo.png" passed to assetUrl() in the script.
-  const refs = new Set(html.match(/(?<=["'`]|\.\/)(placeholders|brand)\/[\w.-]+\.(webp|png|jpg|svg)/g));
+  const refs = new Set(html.match(/(?<=["'`]|\.\/)(placeholders|brand|concepts)\/[\w.-]+\.(webp|png|jpg|svg)/g));
   for (const ref of refs) {
     const data = await fs.readFile(path.join(web, "public", ref));
     html = html.replaceAll(`./${ref}`, ref).replaceAll(ref, `data:${types[ref.split(".").pop()]};base64,${data.toString("base64")}`);

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- CONCEPT ONLY: illustration of "May", the planned AI training coach (see CLAUDE.md, Phase 3). -->
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00C8C8"/><stop offset="1" stop-color="#73F7BB"/></linearGradient>
+    <clipPath id="round"><circle cx="200" cy="200" r="200"/></clipPath>
+  </defs>
+  <g clip-path="url(#round)">
+    <circle cx="200" cy="200" r="200" fill="#E6FAFA"/>
+    <path d="M112 190 C 100 110, 160 62, 210 66 C 270 70, 306 118, 296 196 C 300 250, 300 290, 286 316 L 118 316 C 104 286, 104 240, 112 190 Z" fill="#2B1D16"/>
+    <path d="M70 400 C 74 330, 120 300, 172 290 L 228 290 C 280 300, 326 330, 330 400 Z" fill="#111314"/>
+    <path d="M172 290 L 200 352 L 228 290 Z" fill="url(#brand)"/>
+    <path d="M150 296 L 200 400 L 172 400 L 136 312 Z M250 296 L 200 400 L 228 400 L 264 312 Z" fill="#23272A"/>
+    <path d="M178 238 L 178 292 C 186 306, 214 306, 222 292 L 222 238 Z" fill="#B57A58"/>
+    <ellipse cx="200" cy="186" rx="70" ry="84" fill="#C98E6B"/>
+    <ellipse cx="131" cy="192" rx="11" ry="16" fill="#B57A58"/>
+    <ellipse cx="269" cy="192" rx="11" ry="16" fill="#B57A58"/>
+    <circle cx="131" cy="214" r="6" fill="url(#brand)"/>
+    <circle cx="269" cy="214" r="6" fill="url(#brand)"/>
+    <path d="M128 168 C 132 110, 180 92, 214 98 C 252 104, 276 132, 274 170 C 250 140, 214 128, 176 134 C 156 138, 140 150, 128 168 Z" fill="#2B1D16"/>
+    <path d="M214 98 C 250 100, 280 124, 286 160 C 270 134, 248 118, 222 112 Z" fill="#45302A"/>
+    <path d="M160 160 C 170 153, 184 153, 192 158" stroke="#2B1D16" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M208 158 C 216 153, 230 153, 240 160" stroke="#2B1D16" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="176" cy="182" rx="7" ry="8.5" fill="#111314"/>
+    <ellipse cx="224" cy="182" rx="7" ry="8.5" fill="#111314"/>
+    <circle cx="178.5" cy="179" r="2.4" fill="#FFFFFF"/>
+    <circle cx="226.5" cy="179" r="2.4" fill="#FFFFFF"/>
+    <path d="M200 192 C 197 206, 196 212, 204 214" stroke="#B57A58" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <circle cx="158" cy="214" r="12" fill="#E07A6B" opacity=".28"/>
+    <circle cx="242" cy="214" r="12" fill="#E07A6B" opacity=".28"/>
+    <path d="M174 228 C 186 246, 214 246, 226 228 C 214 236, 186 236, 174 228 Z" fill="#7A2E2A"/>
+    <path d="M180 230 C 192 236, 208 236, 220 230 L 218 233 C 206 237, 194 237, 182 233 Z" fill="#FFFFFF"/>
+  </g>
+</svg>

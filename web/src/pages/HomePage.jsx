@@ -11,6 +11,7 @@ import ProgressRing from "../components/ProgressRing.jsx";
 import SearchField from "../components/SearchField.jsx";
 import ShapeImage from "../components/ShapeImage.jsx";
 import Wave from "../components/Wave.jsx";
+import AskMayConcept, { showMayConcept } from "../components/AskMayConcept.jsx";
 import { Icon } from "../components/icons.jsx";
 import { useApi } from "../lib/api.js";
 import { useProgress } from "../lib/progress.jsx";
@@ -97,6 +98,9 @@ export default function HomePage() {
                 </Button>
               )}
             </Card>
+
+            {/* Concept only, in the preview build: the planned "Ask May" coach. */}
+            {showMayConcept && <AskMayConcept />}
 
             {/* ── Philosophy and values ── */}
             <Card tone="soft" topBar={false} className="values" aria-labelledby="values-title">
