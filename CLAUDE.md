@@ -58,7 +58,7 @@ Ian chose a **light, welcoming design** (October 2026), moving on from the proto
 1. Foundation and content migration (current phase, see `PHASE-1-BRIEF.md`)
 2. Video (Mux), per-person progress, manager dashboard, learning paths
 3. Forms in Sanity, PDF export, server-side AI Coach grounded in hub content
-   - The AI Coach is called **May** ("Ask May"), agreed with Ian in October 2026. Parked for now on cost. When picked up: start with a named chat coach (with role-play, e.g. May plays a hiring manager pushing back on fees), pilot on Claude Sonnet 5.5 with a monthly spending cap, and consider voice and an interactive avatar later. No candidate personal data in coach conversations until the data policy is confirmed.
+   - The AI Coach is called **May** ("Ask May"), agreed with Ian in October 2026. Parked for now on cost. When picked up: start with a named chat coach (with role-play, e.g. May plays a hiring manager pushing back on fees), pilot on Claude Sonnet 5.5 with a monthly spending cap, and consider voice and an interactive avatar later. No candidate personal data in coach conversations until the data policy is confirmed. A look-and-feel concept already exists (`web/src/components/AskMayConcept.jsx`, illustration `web/public/concepts/may.svg`): shown only in the preview build, with example conversations that adapt to the current section (role-play its scenario, or quiz). Ian liked it (October 2026); build the real coach from it.
 4. Pilot with one desk, then company-wide launch
 
 ## Useful commands
