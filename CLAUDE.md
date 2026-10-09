@@ -78,7 +78,7 @@ Run all of these from the project root. Needs Node 22.12 or newer.
 
 ### Deploying (Railway)
 
-Railway deploys the `claude/training-hub-platform-a9e704` branch from GitHub automatically on every push. `railway.json` sets the build (`npm run build`), start (`npm start`) and health check (`/api/health`). Railway variables: `NODE_ENV=production`, `BASE_URL` (the Railway address, https), `SANITY_STUDIO_PROJECT_ID`, `SANITY_STUDIO_DATASET`, `SANITY_READ_TOKEN`, `SESSION_SECRET`, and the three `ENTRA_*` sign-in values. The Sanity write and deploy tokens are never needed on Railway. IT registers `<BASE_URL>/auth/callback` and `<BASE_URL>/auth/signed-out` as redirect URIs.
+Live address: https://server-production-fc323.up.railway.app (Railway service "server"). Railway deploys the `claude/training-hub-platform-a9e704` branch from GitHub automatically on every push. `railway.json` sets the build (`npm run build`), start (`npm start`) and health check (`/api/health`). Railway variables: `NODE_ENV=production`, `BASE_URL` (the Railway address, https), `SANITY_STUDIO_PROJECT_ID`, `SANITY_STUDIO_DATASET`, `SANITY_READ_TOKEN`, `SESSION_SECRET`, and the three `ENTRA_*` sign-in values. The Sanity write and deploy tokens are never needed on Railway. IT registers `<BASE_URL>/auth/callback` and `<BASE_URL>/auth/signed-out` as redirect URIs.
 
 ### Project layout
 
