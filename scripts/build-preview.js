@@ -1,18 +1,21 @@
 // Builds a single-file preview of the hub with a snapshot of the current Sanity content,
 // for sharing as a private preview link before the hub is live on Railway.
 // Run from the project root: npm run preview:build
+// Add -- --drafts to include unpublished drafts, so they can be reviewed before publishing.
 // Output: web/dist-preview/hub-preview.html (not committed: it contains the training content).
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { build } from "vite";
-import { sanity, queries } from "../server/sanity.js";
+import { sanity as published, queries } from "../server/sanity.js";
 import { withQuickChecks } from "../server/content.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const web = path.join(root, "web");
 const snapshotFile = path.join(web, "src/preview/snapshot.json");
 const outDir = path.join(web, "dist-preview");
+const withDrafts = process.argv.includes("--drafts");
+const sanity = withDrafts ? published.withConfig({ perspective: "drafts" }) : published;
 
 // 1. Take a snapshot of the content, in the same shape the /api routes return.
 const [home, values, modules, quiz, searchable] = await Promise.all(
@@ -59,7 +62,7 @@ try {
     .replace(/<title>[^<]*<\/title>/, "<title>Training Hub Preview</title>");
   const file = path.join(outDir, "hub-preview.html");
   await fs.writeFile(file, html);
-  console.log(`Preview built: ${path.relative(root, file)} (${Math.round(html.length / 1024)} KB, ${modules.length} modules)`);
+  console.log(`Preview built: ${path.relative(root, file)} (${Math.round(html.length / 1024)} KB, ${modules.length} modules${withDrafts ? ", drafts included" : ""})`);
 } finally {
   // The snapshot must never end up in a normal build or in Git.
   await fs.rm(snapshotFile, { force: true });
