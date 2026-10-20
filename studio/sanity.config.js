@@ -5,6 +5,8 @@ import { schemaTypes } from "./schemaTypes/index.js";
 import { projectId, dataset } from "./env.js";
 import { structure } from "./structure.js";
 
+const SINGLETONS = ["homePage", "libraryPage"];
+
 export default defineConfig({
   name: "default",
   title: "Stott and May Training Hub",
@@ -13,11 +15,11 @@ export default defineConfig({
   plugins: [structureTool({ structure }), visionTool()],
   schema: {
     types: schemaTypes,
-    // The home page is a single document: hide it from the "create new" menu.
-    templates: (templates) => templates.filter((t) => t.schemaType !== "homePage"),
+    // The home page and the Library page are single documents: hide them from the "create new" menu.
+    templates: (templates) => templates.filter((t) => !SINGLETONS.includes(t.schemaType)),
   },
   document: {
     actions: (actions, { schemaType }) =>
-      schemaType === "homePage" ? actions.filter((a) => !["duplicate", "delete", "unpublish"].includes(a.action)) : actions,
+      SINGLETONS.includes(schemaType) ? actions.filter((a) => !["duplicate", "delete", "unpublish"].includes(a.action)) : actions,
   },
 });

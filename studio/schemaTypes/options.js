@@ -26,6 +26,9 @@ export const ICON_OPTIONS = [
   { title: "Trophy", value: "trophy" },
   { title: "Open book", value: "book-open" },
   { title: "Graduation cap", value: "graduation-cap" },
+  { title: "Presentation", value: "presentation" },
+  { title: "Clipboard", value: "clipboard-list" },
+  { title: "Library", value: "library" },
 ];
 
 export const ACCENT_OPTIONS = [

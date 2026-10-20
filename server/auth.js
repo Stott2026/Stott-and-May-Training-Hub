@@ -155,9 +155,12 @@ export function requireSignIn(req, res, next) {
     return next();
   }
   if (user) req.session = null; // past the 30 days: sign in again
-  if (req.path.startsWith("/api/")) return res.status(401).json({ error: "Please sign in." });
+  // Library downloads are plain links, so they go to the sign-in page (and back to the Library)
+  // rather than getting the "please sign in" message the hub's own requests get.
+  const download = /^\/api\/library\/[^/]+\/download$/.test(req.path);
+  if (req.path.startsWith("/api/") && !download) return res.status(401).json({ error: "Please sign in." });
   if (!signInConfigured && !devUser) return notSetUp(res);
-  res.redirect(`/auth/signin?returnTo=${encodeURIComponent(req.originalUrl)}`);
+  res.redirect(`/auth/signin?returnTo=${encodeURIComponent(download ? "/library" : req.originalUrl)}`);
 }
 
 function notSetUp(res) {

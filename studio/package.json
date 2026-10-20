@@ -12,7 +12,8 @@
     "import:playbook-02-04": "dotenv -e ../.env -- node migrations/import-playbook-02-04.js",
     "import:playbook-03": "dotenv -e ../.env -- node migrations/import-playbook-03.js",
     "import:playbook-05-06": "dotenv -e ../.env -- node migrations/import-playbook-05-06.js",
-    "import:playbook-10-11": "dotenv -e ../.env -- node migrations/import-playbook-10-11.js"
+    "import:playbook-10-11": "dotenv -e ../.env -- node migrations/import-playbook-10-11.js",
+    "import:library": "dotenv -e ../.env -- node migrations/import-library-decks.js"
   },
   "dependencies": {
     "@sanity/client": "^8.9.0",

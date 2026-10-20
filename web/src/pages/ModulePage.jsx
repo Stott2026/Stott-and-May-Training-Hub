@@ -5,6 +5,7 @@ import ModuleHero from "../components/module/ModuleHero.jsx";
 import SectionJourney from "../components/module/SectionJourney.jsx";
 import SectionView from "../components/module/SectionView.jsx";
 import ModuleComplete from "../components/module/ModuleComplete.jsx";
+import ModuleLibrary from "../components/library/ModuleLibrary.jsx";
 import AskMayConcept, { showMayConcept } from "../components/AskMayConcept.jsx";
 import { useApi } from "../lib/api.js";
 import { useProgress } from "../lib/progress.jsx";
@@ -84,6 +85,7 @@ function ModuleView({ module, startAt, completed, onToggleComplete }) {
       <div className="container module-layout">
         <aside className="module-layout__side">
           <SectionJourney sections={module.sections} current={celebrate ? -1 : current} completed={completed} onSelect={goTo} />
+          <ModuleLibrary items={module.library} accent={module.accent} />
         </aside>
         <div className="module-layout__main" ref={contentRef} tabIndex={-1}>
           {celebrate ? (

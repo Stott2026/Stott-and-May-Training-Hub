@@ -28,6 +28,12 @@ const MODULE_SUMMARY = `
   "sectionKeys": sections[]._key
 `;
 
+// What a Library card needs. The file's address is left out: downloads go through the server.
+const LIBRARY_ITEM = `
+  _id, title, label, kind, summary, duration, audience,
+  "file": file.asset->{ "name": originalFilename, extension, size }
+`;
+
 export const queries = {
   home: `*[_id == "homePage"][0]{ heroTitle, heroIntro, ${image("heroImage")}, philosophyTitle, philosophyText }`,
 
@@ -39,11 +45,23 @@ export const queries = {
     ${MODULE_SUMMARY}, estimatedMinutes, ${image("heroImage")},
     sections[]{ _key, title, takeaway, content, ${image("image")}, framework, tables, tip, tactics, phrases, mistakes, scenario },
     "quiz": *[_type == "quizQuestion" && references(^._id)]{ _id, question, options, correct, explanation, afterSection },
+    // Library files for this module, such as its classroom deck.
+    "library": *[_type == "libraryItem" && module._ref == ^._id && defined(file.asset)] | order(order asc){ ${LIBRARY_ITEM} },
     // The next module in the same group (Playbook or Core skills).
     "next": *[_type == "trainingModule" && (category._ref == ^.category._ref || (!defined(category) && !defined(^.category))) && order > ^.order] | order(order asc)[0]{ title, "slug": slug.current }
   }`,
 
   quiz: `*[_type == "quizQuestion"]{ _id, question, options, correct, explanation }`,
+
+  library: `{
+    "page": *[_id == "libraryPage"][0]{ title, intro },
+    "items": *[_type == "libraryItem" && defined(file.asset)] | order(order asc){
+      ${LIBRARY_ITEM}, "module": module->{ title, "slug": slug.current, accent }
+    }
+  }`,
+
+  // Only the server ever sees this address.
+  libraryFile: `*[_type == "libraryItem" && _id == $id][0].file.asset->{ url, originalFilename, mimeType, size }`,
 
   // Everything search looks through.
   searchable: `*[_type == "trainingModule"] | order(order asc){

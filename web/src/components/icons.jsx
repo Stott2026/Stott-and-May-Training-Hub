@@ -6,6 +6,7 @@ import {
   MessagesSquare, Mic, Play, Puzzle, Rocket, Scale, Search, Sparkles, Target, Timer,
   TrendingUp, Trophy, UserRound, Users, X, Megaphone, Compass, ShieldCheck, Clock,
   ArrowLeft, Laptop, ChevronLeft, ChevronRight, CircleX, Copy, ListChecks, PartyPopper, TriangleAlert, Eye, Quote, Map,
+  Presentation, Download, LayoutTemplate, ClipboardList, Library,
 } from "lucide-react";
 
 export const icons = {
@@ -19,8 +20,12 @@ export const icons = {
   "chevron-left": ChevronLeft,
   "chevron-right": ChevronRight,
   "circle-x": CircleX,
+  "clipboard-list": ClipboardList,
   copy: Copy,
+  download: Download,
   eye: Eye,
+  "layout-template": LayoutTemplate,
+  library: Library,
   "list-checks": ListChecks,
   map: Map,
   "party-popper": PartyPopper,
@@ -42,6 +47,7 @@ export const icons = {
   messages: MessagesSquare,
   mic: Mic,
   play: Play,
+  presentation: Presentation,
   puzzle: Puzzle,
   rocket: Rocket,
   scale: Scale,
