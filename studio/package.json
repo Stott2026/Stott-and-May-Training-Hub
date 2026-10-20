@@ -10,6 +10,7 @@
     "import:playbook": "dotenv -e ../.env -- node migrations/import-playbook-07-08.js",
     "import:playbook-01-09": "dotenv -e ../.env -- node migrations/import-playbook-01-09.js",
     "import:playbook-02-04": "dotenv -e ../.env -- node migrations/import-playbook-02-04.js",
+    "import:playbook-03": "dotenv -e ../.env -- node migrations/import-playbook-03.js",
     "import:playbook-05-06": "dotenv -e ../.env -- node migrations/import-playbook-05-06.js",
     "import:playbook-10-11": "dotenv -e ../.env -- node migrations/import-playbook-10-11.js"
   },
