@@ -24,7 +24,7 @@ const image = (field) => `${field}{ alt, "url": asset->url }`;
 // What a module card needs. Section keys let the browser work out progress.
 const MODULE_SUMMARY = `
   _id, title, "slug": slug.current, eyebrow, subtitle, icon, accent, order,
-  "category": category->title,
+  "category": category->{ _id, title, order, description },
   "sectionKeys": sections[]._key
 `;
 
@@ -37,9 +37,10 @@ export const queries = {
 
   module: `*[_type == "trainingModule" && slug.current == $slug][0]{
     ${MODULE_SUMMARY}, estimatedMinutes, ${image("heroImage")},
-    sections[]{ _key, title, takeaway, content, ${image("image")}, tactics, phrases, mistakes, scenario },
+    sections[]{ _key, title, takeaway, content, ${image("image")}, framework, tables, tip, tactics, phrases, mistakes, scenario },
     "quiz": *[_type == "quizQuestion" && references(^._id)]{ _id, question, options, correct, explanation, afterSection },
-    "next": *[_type == "trainingModule" && order > ^.order] | order(order asc)[0]{ title, "slug": slug.current }
+    // The next module in the same group (Playbook or Core skills).
+    "next": *[_type == "trainingModule" && (category._ref == ^.category._ref || (!defined(category) && !defined(^.category))) && order > ^.order] | order(order asc)[0]{ title, "slug": slug.current }
   }`,
 
   quiz: `*[_type == "quizQuestion"]{ _id, question, options, correct, explanation }`,
@@ -47,6 +48,6 @@ export const queries = {
   // Everything search looks through.
   searchable: `*[_type == "trainingModule"] | order(order asc){
     title, "slug": slug.current, accent,
-    sections[]{ title, content, tactics, phrases, mistakes, scenario }
+    sections[]{ title, content, framework, tables, tip, tactics, phrases, mistakes, scenario }
   }`,
 };

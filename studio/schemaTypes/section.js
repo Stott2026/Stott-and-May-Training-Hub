@@ -11,6 +11,7 @@ export const section = defineType({
   groups: [
     { name: "main", title: "Main content", default: true },
     { name: "practice", title: "Tactics, phrases and mistakes" },
+    { name: "structure", title: "Steps, tables and tips" },
     { name: "scenario", title: "Scenario" },
   ],
   fields: [
@@ -49,6 +50,75 @@ export const section = defineType({
       fields: [{ name: "alt", title: "Image description", type: "string", description: "Describe the image for people using screen readers." }],
     }),
     // Phase 2: a video field (Mux) will be added here.
+    defineField({
+      name: "framework",
+      title: "Step-by-step framework (optional)",
+      type: "object",
+      group: "structure",
+      description: "A short process or model, shown as numbered cards side by side. For example: the four-part sell-in.",
+      options: { collapsible: false },
+      fields: [
+        { name: "title", title: "Framework name", type: "string", description: "For example: The four-part sell-in." },
+        {
+          name: "steps",
+          title: "Steps",
+          type: "array",
+          description: "Two to four steps look best. Drag to reorder.",
+          of: [
+            {
+              type: "object",
+              name: "step",
+              fields: [
+                { name: "label", title: "Label", type: "string", description: "One or two words shown in small capitals, for example 'Outcome'. Optional." },
+                { name: "title", title: "Step title", type: "string", validation: (r) => r.required() },
+                { name: "text", title: "Explanation", type: "text", rows: 2 },
+              ],
+              preview: { select: { title: "title", subtitle: "label" } },
+            },
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: "tables",
+      title: "Tables (optional)",
+      type: "array",
+      group: "structure",
+      description: "Comparisons or reference tables, for example 'Order-taker or process owner?'.",
+      of: [
+        {
+          type: "object",
+          name: "dataTable",
+          title: "Table",
+          fields: [
+            { name: "title", title: "Table title", type: "string" },
+            { name: "columns", title: "Column headings", type: "array", of: [{ type: "string" }], description: "Left to right. Two to four columns read best.", validation: (r) => r.required().min(2).max(5) },
+            {
+              name: "rows",
+              title: "Rows",
+              type: "array",
+              of: [
+                {
+                  type: "object",
+                  name: "row",
+                  fields: [{ name: "cells", title: "Cells", type: "array", of: [{ type: "text", rows: 2 }], description: "One entry per column, in the same order as the headings." }],
+                  preview: { select: { cells: "cells" }, prepare: ({ cells = [] }) => ({ title: cells.join(" · ") }) },
+                },
+              ],
+            },
+          ],
+          preview: { select: { title: "title", rows: "rows" }, prepare: ({ title, rows = [] }) => ({ title: title || "Untitled table", subtitle: `${rows.length} rows` }) },
+        },
+      ],
+    }),
+    defineField({
+      name: "tip",
+      title: "Tip (optional)",
+      type: "text",
+      rows: 2,
+      group: "structure",
+      description: "One memorable line, shown in a highlighted box. For example: 'Ask a question back before you answer.'",
+    }),
     defineField({ ...textList("tactics", "Key tactics", "Practical actions. Each one becomes a tick box for the learner. Drag to reorder."), group: "practice" }),
     defineField({ ...textList("phrases", "Phrases to use", "Word-for-word lines a consultant can say or write. Each one appears as a speech bubble with a copy button."), group: "practice" }),
     defineField({ ...textList("mistakes", "Common mistakes to avoid", "What not to do. Each one appears as a red warning card."), group: "practice" }),

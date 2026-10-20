@@ -6,7 +6,8 @@
     "dev": "dotenv -e ../.env -- sanity dev --port 3333",
     "build": "dotenv -e ../.env -- sanity build",
     "deploy": "dotenv -e ../.env -- sanity deploy",
-    "import:prototype": "dotenv -e ../.env -- node migrations/import-prototype.js"
+    "import:prototype": "dotenv -e ../.env -- node migrations/import-prototype.js",
+    "import:playbook": "dotenv -e ../.env -- node migrations/import-playbook-07-08.js"
   },
   "dependencies": {
     "@sanity/client": "^8.9.0",

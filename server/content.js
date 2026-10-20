@@ -22,7 +22,9 @@ export function searchModules(modules, query) {
     (m.sections ?? []).forEach((s, index) => {
       const places = [
         ["Section", [s.title]],
-        ["Explanation", [s.content]],
+        ["Explanation", [s.content, s.tip]],
+        ["Framework", (s.framework?.steps ?? []).flatMap((st) => [st.title, st.text])],
+        ["Table", (s.tables ?? []).flatMap((t) => [t.title, ...(t.rows ?? []).flatMap((r) => r.cells ?? [])])],
         ["Tactic", s.tactics],
         ["Phrase", s.phrases],
         ["Mistake", s.mistakes],

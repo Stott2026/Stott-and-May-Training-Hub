@@ -41,7 +41,8 @@ export default function HomePage() {
   const done = modules.data.reduce((n, m) => n + countDone(m.slug, m.sectionKeys), 0);
   const overall = total ? (done / total) * 100 : 0;
   // The module to continue: the first one started but not finished, otherwise the first not finished.
-  const counts = modules.data.map((m) => [m, countDone(m.slug, m.sectionKeys), m.sectionKeys?.length ?? 0]);
+  const groups = groupModules(modules.data);
+  const counts = groups.flatMap((g) => g.modules).map((m) => [m, countDone(m.slug, m.sectionKeys), m.sectionKeys?.length ?? 0]);
   const resume = (counts.find(([, d, t]) => d > 0 && d < t) ?? counts.find(([, d, t]) => d < t))?.[0];
 
   return (
@@ -127,25 +128,44 @@ export default function HomePage() {
               </ul>
             </Card>
 
-            {/* ── Modules ── */}
-            <section aria-labelledby="modules-title">
-              <div className="section-head">
-                <div>
-                  <Eyebrow>Training modules</Eyebrow>
-                  <h2 id="modules-title" className="section-title">{modules.data.length} modules, from first call to placement</h2>
+            {/* ── Modules, in their groups (categories in Sanity) ── */}
+            {groups.map((g, i) => (
+              <section key={g.id} aria-labelledby={`modules-title-${i}`}>
+                <div className="section-head">
+                  <div>
+                    <Eyebrow>{g.modules.length} {g.modules.length === 1 ? "module" : "modules"}</Eyebrow>
+                    <h2 id={`modules-title-${i}`} className="section-title">{g.title}</h2>
+                    {g.description && <p className="section-lead">{g.description}</p>}
+                  </div>
                 </div>
-              </div>
-              <ul className="module-grid">
-                {modules.data.map((m) => (
-                  <li key={m._id}><ModuleCard module={m} done={countDone(m.slug, m.sectionKeys)} /></li>
-                ))}
-              </ul>
-            </section>
+                <ul className="module-grid">
+                  {g.modules.map((m) => (
+                    <li key={m._id}><ModuleCard module={m} done={countDone(m.slug, m.sectionKeys)} /></li>
+                  ))}
+                </ul>
+              </section>
+            ))}
           </>
         )}
       </div>
     </>
   );
+}
+
+// Groups modules by their category, in the categories' display order. Modules without a
+// category go last. With no categories at all, everything shows as one group.
+function groupModules(modules) {
+  const groups = new Map();
+  for (const m of modules) {
+    const id = m.category?._id ?? "none";
+    if (!groups.has(id)) {
+      groups.set(id, { id, title: m.category?.title, description: m.category?.description, order: m.category?.order ?? Infinity, modules: [] });
+    }
+    groups.get(id).modules.push(m);
+  }
+  const list = [...groups.values()].sort((a, b) => a.order - b.order);
+  const fallback = list.length === 1 ? "Training modules" : "More modules";
+  return list.map((g) => ({ ...g, title: g.title ?? fallback }));
 }
 
 // Waits until the learner stops typing for a moment before searching.

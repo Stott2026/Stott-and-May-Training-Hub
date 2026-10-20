@@ -40,7 +40,11 @@ export default function ModulePage() {
 function estimateMinutes(module) {
   if (module.estimatedMinutes) return module.estimatedMinutes;
   const text = module.sections
-    .flatMap((s) => [s.content, ...(s.tactics || []), ...(s.phrases || []), ...(s.mistakes || []), s.scenario?.title, s.scenario?.weak, s.scenario?.strong])
+    .flatMap((s) => [
+      s.content, s.tip,
+      ...(s.framework?.steps || []).flatMap((st) => [st.title, st.text]),
+      ...(s.tables || []).flatMap((t) => (t.rows || []).flatMap((r) => r.cells || [])),
+      ...(s.tactics || []), ...(s.phrases || []), ...(s.mistakes || []), s.scenario?.title, s.scenario?.weak, s.scenario?.strong])
     .filter(Boolean)
     .join(" ");
   const words = text.split(/\s+/).length;

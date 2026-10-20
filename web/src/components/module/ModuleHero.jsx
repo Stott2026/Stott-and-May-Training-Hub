@@ -9,6 +9,8 @@ import { placeholderPhotos } from "../../lib/placeholderPhotos.js";
 import "../accents.css";
 import "./ModuleHero.css";
 
+const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
+
 // Top of a module page: title, quick facts, progress and a person photo.
 export default function ModuleHero({ module, done, minutes, onStart }) {
   const total = module.sections.length;
@@ -33,11 +35,11 @@ export default function ModuleHero({ module, done, minutes, onStart }) {
           <h1 id="module-title" className="module-hero__title">{module.title}</h1>
           <p className="module-hero__subtitle">{module.subtitle}</p>
           <ul className="module-hero__facts">
-            <li><Icon name="map" size={16} /> {total} sections</li>
+            <li><Icon name="map" size={16} /> {plural(total, "section")}</li>
             <li><Icon name="clock" size={16} /> About {minutes} minutes</li>
-            <li><Icon name="list-checks" size={16} /> {counts.tactics} tactics</li>
-            <li><Icon name="messages" size={16} /> {counts.phrases} phrases</li>
-            <li><Icon name="target" size={16} /> {counts.scenarios} scenarios</li>
+            <li><Icon name="list-checks" size={16} /> {plural(counts.tactics, "tactic")}</li>
+            <li><Icon name="messages" size={16} /> {plural(counts.phrases, "phrase")}</li>
+            <li><Icon name="target" size={16} /> {plural(counts.scenarios, "scenario")}</li>
           </ul>
           <div className="module-hero__actions">
             <Button variant="dark" size="lg" iconAfter="arrow-right" onClick={onStart}>{startLabel}</Button>

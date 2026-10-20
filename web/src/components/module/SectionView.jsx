@@ -5,6 +5,9 @@ import PhraseList from "./PhraseList.jsx";
 import MistakeCards from "./MistakeCards.jsx";
 import ScenarioChallenge from "./ScenarioChallenge.jsx";
 import QuickCheck from "./QuickCheck.jsx";
+import FrameworkSteps from "./FrameworkSteps.jsx";
+import InfoTable from "./InfoTable.jsx";
+import TipCallout from "./TipCallout.jsx";
 import "./ModuleContent.css";
 
 // One section of a module, shown on its own so the learner can focus on it.
@@ -21,9 +24,12 @@ export default function SectionView({ section, index, total, completed, avatar, 
       </header>
 
       {/* Phase 2: a video player goes here when the section has a video. */}
+      {section.framework?.steps?.length > 0 && <FrameworkSteps framework={section.framework} />}
+      {(section.tables ?? []).map((t, i) => <InfoTable key={t._key ?? i} table={t} />)}
       {section.tactics?.length > 0 && <TacticChecklist key={`t${index}`} tactics={section.tactics} />}
       {section.phrases?.length > 0 && <PhraseList phrases={section.phrases} avatar={avatar} />}
       {section.mistakes?.length > 0 && <MistakeCards mistakes={section.mistakes} />}
+      {section.tip && <TipCallout tip={section.tip} />}
       {section.scenario && <ScenarioChallenge key={`s${index}`} scenario={section.scenario} />}
       {section.quiz && <QuickCheck key={`q${index}`} question={section.quiz} />}
 
