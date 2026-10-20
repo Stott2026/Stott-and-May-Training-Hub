@@ -20,6 +20,7 @@
     "import:prototype": "npm run import:prototype -w studio --",
     "preview:build": "node --env-file-if-exists=.env scripts/build-preview.js",
     "import:playbook": "npm run import:playbook -w studio --",
+    "import:playbook-02-04": "npm run import:playbook-02-04 -w studio --",
     "import:playbook-05-06": "npm run import:playbook-05-06 -w studio --"
   },
   "devDependencies": {

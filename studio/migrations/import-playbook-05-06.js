@@ -4,24 +4,8 @@
 //
 // Run from the project root:  npm run import:playbook-05-06 -- --dry-run   (check only)
 //                             npm run import:playbook-05-06                (import)
-// The two modules and their quiz questions arrive as DRAFTS, to review and publish in the Studio.
-// Safe to re-run: existing documents are left alone. Add --replace to overwrite the two module
-// drafts and their quiz drafts instead (only before anyone has edited them in the Studio).
-import { createClient } from "@sanity/client";
-import { projectId, dataset } from "../env.js";
-
-const dryRun = process.argv.includes("--dry-run");
-const replace = process.argv.includes("--replace");
-
-const key = (prefix, i) => `${prefix}-${i + 1}`;
-const steps = (list) => list.map(([label, title, text], i) => ({ _type: "step", _key: key("step", i), ...(label && { label }), title, text }));
-const table = (title, columns, rows, i = 0) => ({
-  _type: "dataTable",
-  _key: key("table", i),
-  title,
-  columns,
-  rows: rows.map((cells, j) => ({ _type: "row", _key: key("row", j), cells })),
-});
+// The two modules and their quiz questions arrive as DRAFTS. See playbook-kit.js for the options.
+import { steps, table, quizDrafts, importPlaybook } from "./playbook-kit.js";
 
 const bdFundamentals = {
   _id: "drafts.module-bd-fundamentals",
@@ -346,7 +330,7 @@ const reverseHeadhunting = {
   ],
 };
 
-const quiz = [
+const quiz = quizDrafts([
   {
     _id: "drafts.quiz-playbook-05-01", module: "module-bd-fundamentals", afterSection: 2,
     question: "Which part of your USP matters most?",
@@ -375,44 +359,6 @@ const quiz = [
     correct: 1,
     explanation: "The aim is a follow-up to discuss how we can support their initiatives. A great conversation with no next step booked is a missed opportunity.",
   },
-// The modules are drafts too, so link to them the way the Studio does for unpublished documents:
-// a weak link that becomes a normal one when the module is published.
-].map(({ module, ...q }) => ({ ...q, _type: "quizQuestion", module: { _type: "reference", _ref: module, _weak: true, _strengthenOnPublish: { type: "trainingModule" } } }));
+]);
 
-const modules = [bdFundamentals, reverseHeadhunting];
-
-// Check against the Studio's limits.
-const problems = [];
-for (const m of modules) {
-  if (m.title.length > 60) problems.push(`${m.title}: title`);
-  if (m.subtitle.length > 90) problems.push(`${m.title}: subtitle (${m.subtitle.length})`);
-  if (m.eyebrow.length > 24) problems.push(`${m.title}: eyebrow`);
-  m.sections = m.sections.map((s, i) => ({ _type: "section", _key: key("section", i), ...s }));
-  for (const s of m.sections) {
-    if (s.title.length > 80) problems.push(`${s.title}: section title (${s.title.length})`);
-    if (s.takeaway?.length > 160) problems.push(`${s.title}: takeaway (${s.takeaway.length})`);
-    for (const t of s.tables ?? []) for (const r of t.rows) if (r.cells.length !== t.columns.length) problems.push(`${s.title}: table row has wrong number of cells`);
-  }
-}
-for (const q of quiz) {
-  const m = modules.find((m) => m._id === `drafts.${q.module._ref}`);
-  if (q.afterSection > m.sections.length) problems.push(`${q._id}: afterSection is past the last section`);
-}
-if (problems.length) { console.error("Problems:\n  " + problems.join("\n  ")); process.exit(1); }
-
-for (const m of modules) {
-  const count = (f) => m.sections.reduce((n, s) => n + (s[f]?.length ?? 0), 0);
-  console.log(`${m.title}: ${m.sections.length} sections, ${m.sections.filter((s) => s.framework).length} frameworks, ${count("tables")} tables, ${m.sections.filter((s) => s.tip).length} tips, ${count("tactics")} tactics, ${count("phrases")} phrases, ${count("mistakes")} mistakes, ${m.sections.filter((s) => s.scenario).length} scenarios`);
-}
-console.log(`Quiz questions: ${quiz.length}`);
-if (dryRun) { console.log("Dry run: nothing sent to Sanity."); process.exit(0); }
-
-const client = createClient({ projectId, dataset, token: process.env.SANITY_WRITE_TOKEN, apiVersion: "2025-02-19", useCdn: false });
-if (!(await client.fetch(`count(*[_id == "category-playbook"])`))) {
-  console.error("The Recruitment Playbook group is missing. Run npm run import:playbook first.");
-  process.exit(1);
-}
-const tx = client.transaction();
-for (const doc of [...modules, ...quiz]) (replace ? tx.createOrReplace(doc) : tx.createIfNotExists(doc));
-await tx.commit({ visibility: "sync" });
-console.log("Imported as drafts. Review and publish them in the Studio.");
+await importPlaybook([bdFundamentals, reverseHeadhunting], quiz);
