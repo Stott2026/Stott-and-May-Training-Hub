@@ -75,7 +75,7 @@ Run all of these from the project root. Needs Node 22.12 or newer.
 | Run the production build locally | `npm run build`, then `NODE_ENV=production npm start` |
 | Build a private preview page with a snapshot of the content | `npm run preview:build` (creates `web/dist-preview/hub-preview.html`; needs `SANITY_READ_TOKEN`; add `-- --drafts` to include unpublished drafts for review) |
 | Deploy the hosted Studio | `npm run studio:deploy` (needs `SANITY_AUTH_TOKEN` in `.env`) |
-| Import Playbook modules as drafts | `npm run import:playbook` (07, 08 and the home page groups; run first), `npm run import:playbook-01-09`, `npm run import:playbook-02-04`, `npm run import:playbook-05-06`. Add `-- --dry-run` to check first; needs `SANITY_WRITE_TOKEN`. Shared helpers in `studio/migrations/playbook-kit.js` |
+| Import Playbook modules as drafts | `npm run import:playbook` (07, 08 and the home page groups; run first), `npm run import:playbook-01-09`, `npm run import:playbook-02-04`, `npm run import:playbook-05-06`, `npm run import:playbook-10-11`. Add `-- --dry-run` to check first; needs `SANITY_WRITE_TOKEN`. Shared helpers in `studio/migrations/playbook-kit.js` |
 | Import the prototype content into Sanity | `npm run import:prototype` (add `-- --dry-run` to check first; needs `SANITY_WRITE_TOKEN`) |
 
 ### Deploying (Railway)

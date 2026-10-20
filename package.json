@@ -22,7 +22,8 @@
     "import:playbook": "npm run import:playbook -w studio --",
     "import:playbook-01-09": "npm run import:playbook-01-09 -w studio --",
     "import:playbook-02-04": "npm run import:playbook-02-04 -w studio --",
-    "import:playbook-05-06": "npm run import:playbook-05-06 -w studio --"
+    "import:playbook-05-06": "npm run import:playbook-05-06 -w studio --",
+    "import:playbook-10-11": "npm run import:playbook-10-11 -w studio --"
   },
   "devDependencies": {
     "concurrently": "^10.0.5"
