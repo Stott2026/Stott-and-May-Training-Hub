@@ -37,9 +37,9 @@ export default function ModuleHero({ module, done, minutes, onStart }) {
           <ul className="module-hero__facts">
             <li><Icon name="map" size={16} /> {plural(total, "section")}</li>
             <li><Icon name="clock" size={16} /> About {minutes} minutes</li>
-            <li><Icon name="list-checks" size={16} /> {plural(counts.tactics, "tactic")}</li>
-            <li><Icon name="messages" size={16} /> {plural(counts.phrases, "phrase")}</li>
-            <li><Icon name="target" size={16} /> {plural(counts.scenarios, "scenario")}</li>
+            {counts.tactics > 0 && <li><Icon name="list-checks" size={16} /> {plural(counts.tactics, "tactic")}</li>}
+            {counts.phrases > 0 && <li><Icon name="messages" size={16} /> {plural(counts.phrases, "phrase")}</li>}
+            {counts.scenarios > 0 && <li><Icon name="target" size={16} /> {plural(counts.scenarios, "scenario")}</li>}
           </ul>
           <div className="module-hero__actions">
             <Button variant="dark" size="lg" iconAfter="arrow-right" onClick={onStart}>{startLabel}</Button>
