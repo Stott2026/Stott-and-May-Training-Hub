@@ -24,7 +24,9 @@
     "import:playbook-02-04": "npm run import:playbook-02-04 -w studio --",
     "import:playbook-03": "npm run import:playbook-03 -w studio --",
     "import:playbook-05-06": "npm run import:playbook-05-06 -w studio --",
-    "import:playbook-10-11": "npm run import:playbook-10-11 -w studio --"
+    "import:playbook-10-11": "npm run import:playbook-10-11 -w studio --",
+    "decks:install": "npm install --prefix scripts/decks",
+    "decks": "node --env-file-if-exists=.env scripts/decks/build.mjs"
   },
   "devDependencies": {
     "concurrently": "^10.0.5"

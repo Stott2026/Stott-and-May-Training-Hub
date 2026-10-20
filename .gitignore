@@ -12,6 +12,7 @@ studio/dist/
 web/dist-preview/
 web/src/preview/
 studio/.sanity/
+scripts/decks/out/
 
 # Logs and OS files
 *.log
