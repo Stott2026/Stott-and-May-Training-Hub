@@ -29,6 +29,7 @@ export const ICON_OPTIONS = [
   { title: "Presentation", value: "presentation" },
   { title: "Clipboard", value: "clipboard-list" },
   { title: "Library", value: "library" },
+  { title: "Briefcase", value: "briefcase" },
 ];
 
 export const ACCENT_OPTIONS = [

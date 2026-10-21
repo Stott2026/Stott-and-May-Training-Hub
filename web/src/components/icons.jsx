@@ -6,7 +6,7 @@ import {
   MessagesSquare, Mic, Play, Puzzle, Rocket, Scale, Search, Sparkles, Target, Timer,
   TrendingUp, Trophy, UserRound, Users, X, Megaphone, Compass, ShieldCheck, Clock,
   ArrowLeft, Laptop, ChevronLeft, ChevronRight, CircleX, Copy, ListChecks, PartyPopper, TriangleAlert, Eye, Quote, Map,
-  Presentation, Download, LayoutTemplate, ClipboardList, Library,
+  Presentation, Download, LayoutTemplate, ClipboardList, Library, Briefcase,
 } from "lucide-react";
 
 export const icons = {
@@ -14,6 +14,7 @@ export const icons = {
   "arrow-right": ArrowRight,
   "badge-check": BadgeCheck,
   "book-open": BookOpen,
+  briefcase: Briefcase,
   brain: Brain,
   check: Check,
   "chevron-down": ChevronDown,

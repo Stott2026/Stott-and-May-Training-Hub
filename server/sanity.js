@@ -24,9 +24,13 @@ const image = (field) => `${field}{ alt, "url": asset->url }`;
 // What a module card needs. Section keys let the browser work out progress.
 const MODULE_SUMMARY = `
   _id, title, "slug": slug.current, eyebrow, subtitle, icon, accent, order,
-  "category": category->{ _id, title, order, description },
+  "category": category->{ _id, title, order, description, area },
   "sectionKeys": sections[]._key
 `;
+
+// Manager material sits in groups (categories) or Library files marked "Managers" in the Studio.
+// It shows on the Managers page only, never in the consultants' training, quiz, search or Library.
+const FOR_MANAGERS = `category->area == "managers"`;
 
 // What a Library card needs. The file's address is left out: downloads go through the server.
 const LIBRARY_ITEM = `
@@ -39,7 +43,7 @@ export const queries = {
 
   values: `*[_type == "value"] | order(order asc){ _id, title, description, icon }`,
 
-  modules: `*[_type == "trainingModule"] | order(order asc){ ${MODULE_SUMMARY} }`,
+  modules: `*[_type == "trainingModule" && !(${FOR_MANAGERS})] | order(order asc){ ${MODULE_SUMMARY} }`,
 
   module: `*[_type == "trainingModule" && slug.current == $slug][0]{
     ${MODULE_SUMMARY}, estimatedMinutes, ${image("heroImage")},
@@ -51,11 +55,19 @@ export const queries = {
     "next": *[_type == "trainingModule" && (category._ref == ^.category._ref || (!defined(category) && !defined(^.category))) && order > ^.order] | order(order asc)[0]{ title, "slug": slug.current }
   }`,
 
-  quiz: `*[_type == "quizQuestion"]{ _id, question, options, correct, explanation }`,
+  quiz: `*[_type == "quizQuestion" && !(module->${FOR_MANAGERS})]{ _id, question, options, correct, explanation }`,
 
   library: `{
     "page": *[_id == "libraryPage"][0]{ title, intro },
-    "items": *[_type == "libraryItem" && defined(file.asset)] | order(order asc){
+    "items": *[_type == "libraryItem" && area != "managers" && defined(file.asset)] | order(order asc){
+      ${LIBRARY_ITEM}, "module": module->{ title, "slug": slug.current, accent }
+    }
+  }`,
+
+  managers: `{
+    "page": *[_id == "managersPage"][0]{ title, intro },
+    "modules": *[_type == "trainingModule" && ${FOR_MANAGERS}] | order(order asc){ ${MODULE_SUMMARY} },
+    "library": *[_type == "libraryItem" && area == "managers" && defined(file.asset)] | order(order asc){
       ${LIBRARY_ITEM}, "module": module->{ title, "slug": slug.current, accent }
     }
   }`,
@@ -64,7 +76,7 @@ export const queries = {
   libraryFile: `*[_type == "libraryItem" && _id == $id][0].file.asset->{ url, originalFilename, mimeType, size }`,
 
   // Everything search looks through.
-  searchable: `*[_type == "trainingModule"] | order(order asc){
+  searchable: `*[_type == "trainingModule" && !(${FOR_MANAGERS})] | order(order asc){
     title, "slug": slug.current, accent,
     sections[]{ title, content, framework, tables, tip, tactics, phrases, mistakes, scenario }
   }`,

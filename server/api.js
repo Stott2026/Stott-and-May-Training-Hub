@@ -34,6 +34,10 @@ api.get("/search", async (req, res) => {
   res.json(searchModules(await sanity.fetch(queries.searchable), q));
 });
 
+api.get("/managers", async (req, res) => {
+  res.json(await sanity.fetch(queries.managers));
+});
+
 api.get("/library", async (req, res) => {
   res.json(await sanity.fetch(queries.library));
 });

@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { DocumentsIcon } from "@sanity/icons/Documents";
+import { areaField } from "./area.js";
 
 export const LIBRARY_KINDS = [
   { title: "Training deck", value: "deck" },
@@ -31,6 +32,7 @@ export const libraryItem = defineType({
     defineField({ name: "duration", title: "Session length (optional)", type: "string", description: "For example: 90 minutes." }),
     defineField({ name: "audience", title: "Who it's for (optional)", type: "string", description: "For example: Consultants · 3+ months on desk." }),
     defineField({ name: "order", title: "Display order", type: "number", validation: (r) => r.integer() }),
+    areaField("this file"),
   ],
   orderings: [{ title: "Display order", name: "orderAsc", by: [{ field: "order", direction: "asc" }] }],
   preview: {

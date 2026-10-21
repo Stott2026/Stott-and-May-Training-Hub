@@ -6,12 +6,14 @@ import HomePage from "./pages/HomePage.jsx";
 import ModulePage from "./pages/ModulePage.jsx";
 import QuizPage from "./pages/QuizPage.jsx";
 import LibraryPage from "./pages/LibraryPage.jsx";
+import ManagersPage from "./pages/ManagersPage.jsx";
 import { ProgressProvider } from "./lib/progress.jsx";
 import { useApi } from "./lib/api.js";
 
 const NAV = [
   { id: "training", label: "Training", icon: "graduation-cap", href: "/" },
   { id: "library", label: "Library", icon: "library", href: "/library" },
+  { id: "managers", label: "Managers", icon: "briefcase", href: "/managers" },
   // Phase 3: the Documents & Forms page.
   { id: "documents", label: "Documents & Forms", icon: "file-text", href: "/" },
 ];
@@ -33,10 +35,10 @@ const Router = import.meta.env.MODE === "preview" ? HashRouter : BrowserRouter;
 // "Ian Barker" → "IB"
 const initialsOf = (name = "") => name.split(/\s+/).filter(Boolean).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
 
-// Which top tab is lit: the Library for /library, otherwise Training.
+// Which top tab is lit: Library or Managers for their pages, otherwise Training.
 function Shell({ user, children }) {
   const { pathname } = useLocation();
-  return <AppShell navItems={NAV} current={pathname.startsWith("/library") ? "library" : "training"} user={user}>{children}</AppShell>;
+  return <AppShell navItems={NAV} current={pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") ? "managers" : "training"} user={user}>{children}</AppShell>;
 }
 
 export default function App() {
@@ -52,6 +54,7 @@ export default function App() {
             <Route path="/modules/:slug" element={<ModulePage />} />
             <Route path="/quiz" element={<QuizPage />} />
             <Route path="/library" element={<LibraryPage />} />
+            <Route path="/managers" element={<ManagersPage />} />
             <Route path="*" element={<LoadState error={{ status: 404 }} />} />
           </Routes>
         </Shell>

@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router";
-import Eyebrow from "../components/Eyebrow.jsx";
 import LoadState from "../components/LoadState.jsx";
-import ShapeImage from "../components/ShapeImage.jsx";
-import Wave from "../components/Wave.jsx";
+import PageHero from "../components/PageHero.jsx";
 import LibraryCard from "../components/library/LibraryCard.jsx";
 import { Icon } from "../components/icons.jsx";
 import { useApi } from "../lib/api.js";
@@ -28,20 +26,11 @@ export default function LibraryPage() {
 
   return (
     <>
-      <section className="library-hero" aria-labelledby="library-title">
-        <div className="library-hero__wave" aria-hidden="true"><Wave variant="glow" /></div>
-        <div className="container library-hero__inner">
-          <div>
-            <Eyebrow tone="ink">Stott and May</Eyebrow>
-            <h1 id="library-title" className="library-hero__title">{data.page?.title ?? "Library"}</h1>
-            {data.page?.intro && <p className="library-hero__lead">{data.page.intro}</p>}
-            <p className="library-hero__count">
-              <Icon name="library" size={18} /> {items.length} {items.length === 1 ? "file" : "files"} to download
-            </p>
-          </div>
-          <ShapeImage src={placeholderPhotos.values} shape="squircle" className="library-hero__person" />
-        </div>
-      </section>
+      <PageHero eyebrow="Stott and May" title={data.page?.title ?? "Library"} intro={data.page?.intro} photo={placeholderPhotos.values}>
+        <p className="library-count">
+          <Icon name="library" size={18} /> {items.length} {items.length === 1 ? "file" : "files"} to download
+        </p>
+      </PageHero>
 
       <div className="container library-body">
         {kinds.length > 1 && (

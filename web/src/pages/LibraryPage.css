@@ -1,20 +1,4 @@
-/* ── Header ── */
-.library-hero {
-  position: relative;
-  overflow: hidden;
-  background: var(--gradient-hero);
-  padding: var(--space-10) 0 var(--space-16);
-  isolation: isolate;
-}
-.library-hero__wave { position: absolute; left: 0; right: 0; bottom: 0; height: 100px; z-index: -1; }
-.library-hero__inner { display: grid; gap: var(--space-6); align-items: center; }
-@media (min-width: 760px) { .library-hero__inner { grid-template-columns: 1fr 13rem; } }
-.library-hero__title { font-size: var(--text-display); font-weight: var(--weight-extrabold); letter-spacing: -0.02em; margin-bottom: var(--space-3); }
-.library-hero__lead { font-size: var(--text-lg); max-width: 38rem; margin-bottom: var(--space-4); }
-.library-hero__count { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-heading); font-weight: var(--weight-bold); }
-.library-hero__person { max-width: 13rem; justify-self: center; }
-.library-hero__person .shape-image__shape { background: var(--color-glass); backdrop-filter: blur(6px); }
-@media (max-width: 759px) { .library-hero__person { display: none; } }
+.library-count { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-heading); font-weight: var(--weight-bold); }
 
 /* ── Filters and grid ── */
 .library-body { margin-top: calc(var(--space-8) * -1); position: relative; padding-bottom: var(--space-16); }

@@ -1,0 +1,15 @@
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--gradient-hero);
+  padding: var(--space-10) 0 var(--space-16);
+  isolation: isolate;
+}
+.page-hero__wave { position: absolute; left: 0; right: 0; bottom: 0; height: 100px; z-index: -1; }
+.page-hero__inner { display: grid; gap: var(--space-6); align-items: center; }
+@media (min-width: 760px) { .page-hero__inner { grid-template-columns: 1fr 13rem; } }
+.page-hero__title { font-size: var(--text-display); font-weight: var(--weight-extrabold); letter-spacing: -0.02em; margin-bottom: var(--space-3); }
+.page-hero__lead { font-size: var(--text-lg); max-width: 38rem; margin-bottom: var(--space-4); }
+.page-hero__person { max-width: 13rem; justify-self: center; }
+.page-hero__person .shape-image__shape { background: var(--color-glass); backdrop-filter: blur(6px); }
+@media (max-width: 759px) { .page-hero__person { display: none; } }

@@ -23,13 +23,15 @@ export default function ModuleHero({ module, done, minutes, onStart }) {
   const photo = module.heroImage?.url ?? photos[Math.round((module.order ?? 0) / 10) % photos.length];
   const startLabel = done === 0 ? "Start the module" : done === total ? "Review the module" : "Continue where you left off";
 
+  const forManagers = module.category?.area === "managers";
   return (
     <section className="module-hero" data-accent={module.accent} aria-labelledby="module-title">
       <div className="module-hero__wave" aria-hidden="true"><Wave variant="glow" /></div>
       <div className="container module-hero__inner">
         <div className="module-hero__copy">
-          <Link to="/" className="module-hero__back">
-            <Icon name="arrow-left" size={18} /> All modules
+          {/* Manager modules go back to the Managers page; everything else to the home page. */}
+          <Link to={forManagers ? "/managers" : "/"} className="module-hero__back">
+            <Icon name="arrow-left" size={18} /> {forManagers ? "Manager modules" : "All modules"}
           </Link>
           <Eyebrow tone="ink">{module.eyebrow}</Eyebrow>
           <h1 id="module-title" className="module-hero__title">{module.title}</h1>
