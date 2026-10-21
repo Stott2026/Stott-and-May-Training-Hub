@@ -32,7 +32,9 @@ export const quizDrafts = (list) =>
     module: { _type: "reference", _ref: module, _weak: true, _strengthenOnPublish: { type: "trainingModule" } },
   }));
 
-export async function importPlaybook(modules, quiz) {
+// groups: home page groups (categories) to create if they don't exist yet. They're created
+// published, as they hold no training content of their own.
+export async function importPlaybook(modules, quiz, { groups = [] } = {}) {
   const dryRun = process.argv.includes("--dry-run");
   const replace = process.argv.includes("--replace");
 
@@ -64,12 +66,23 @@ export async function importPlaybook(modules, quiz) {
   if (dryRun) { console.log("Dry run: nothing sent to Sanity."); return; }
 
   const client = createClient({ projectId, dataset, token: process.env.SANITY_WRITE_TOKEN, apiVersion: "2025-02-19", useCdn: false });
-  if (!(await client.fetch(`count(*[_id == "category-playbook"])`))) {
-    console.error("The Recruitment Playbook group is missing. Run npm run import:playbook first.");
+  const needed = [...new Set(modules.map((m) => m.category?._ref).filter(Boolean))];
+  const found = new Set([...groups.map((g) => g._id), ...(await client.fetch(`*[_id in $ids]._id`, { ids: needed }))]);
+  const missing = needed.filter((id) => !found.has(id));
+  if (missing.length) {
+    console.error(`Missing group ${missing.join(", ")}. For the Recruitment Playbook, run npm run import:playbook first.`);
     process.exit(1);
   }
   const tx = client.transaction();
-  for (const doc of [...modules, ...quiz]) (replace ? tx.createOrReplace(doc) : tx.createIfNotExists(doc));
+  for (const g of groups) tx.createIfNotExists(g);
+  // Without --replace, skip anything already there, whether as a draft or published.
+  const docs = [...modules, ...quiz];
+  const ids = docs.flatMap((d) => [d._id, d._id.replace("drafts.", "")]);
+  const there = new Set((await client.withConfig({ perspective: "raw" }).fetch(`*[_id in $ids]._id`, { ids })).map((id) => id.replace("drafts.", "")));
+  for (const doc of docs) {
+    if (replace) tx.createOrReplace(doc);
+    else if (!there.has(doc._id.replace("drafts.", ""))) tx.create(doc);
+  }
   await tx.commit({ visibility: "sync" });
   console.log("Imported as drafts. Review and publish them in the Studio.");
 }

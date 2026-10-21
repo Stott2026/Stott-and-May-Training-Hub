@@ -159,13 +159,17 @@ const X0 = 0.6, CW = 12.13, BOTTOM = 6.72, GAP = 0.25;
 
 export async function buildDeck({ slug, number, extras, outFile }) {
   const m = await loadModule(slug);
-  const notes = JSON.parse(fs.readFileSync(path.join(HERE, "notes", `${number}.json`), "utf8"));
+  const notesFile = path.join(HERE, "notes", `${number}.json`);
+  const notes = fs.existsSync(notesFile) ? JSON.parse(fs.readFileSync(notesFile, "utf8")) : {};
   const accent = ACCENT[m.accent] ?? ACCENT.brand;
   const tileKinds = ["brand", m.accent === "brand" ? "sky" : m.accent];
 
   const pres = new pptxgen();
   pres.layout = "LAYOUT_WIDE";
-  pres.title = `${m.title}: Recruitment Playbook ${number}`;
+  // Playbook decks by default; extras.programme switches the naming (e.g. the Management Programme, "M8").
+  const programme = extras.programme ?? "Recruitment Playbook";
+  const tag = extras.tag ?? `Module ${number}`;
+  pres.title = `${m.title}: ${programme} ${extras.tag ?? number}`;
   pres.author = "Stott and May";
   pres.company = "Stott and May";
   pres.theme = { headFontFace: THEME.headFontFace, bodyFontFace: THEME.bodyFontFace };
@@ -180,7 +184,7 @@ export async function buildDeck({ slug, number, extras, outFile }) {
     personClose: await personInShape(extras.people?.close ?? "person-3.webp", accent),
   };
 
-  const FOOT = `Stott and May Recruitment Playbook · ${m.title}`;
+  const FOOT = `Stott and May ${programme} · ${m.title}`;
   const footer = [{ text: { text: FOOT, options: { x: X0, y: 6.95, w: 9, h: 0.3, fontSize: 10, color: C.text2, margin: 0 } } }];
   const slideNumber = { x: 12.1, y: 6.95, w: 0.65, h: 0.3, fontSize: 10, color: C.text2, align: "right" };
   pres.defineSlideMaster({
@@ -425,13 +429,13 @@ export async function buildDeck({ slug, number, extras, outFile }) {
   }
 
   // ── Slides ──
-  const eyebrow = (part) => `Module ${number} · ${part}`;
+  const eyebrow = (part) => `${tag} · ${part}`;
   const noteFor = (i) => [extras.sectionNotes?.[i]?.map((n) => notes[n]).filter(Boolean).join("\n\n"), extras.extraNotes?.[i]].filter(Boolean).join("\n\n");
 
   // 1 Title
   {
     const s = addSlide("Title", null, null, extras.notes?.title ?? notes[1]);
-    s.addText(`RECRUITMENT PLAYBOOK · MODULE ${number}`, { placeholder: "eyebrow" });
+    s.addText(`${programme} · ${tag}`.toUpperCase(), { placeholder: "eyebrow" });
     s.addText(m.title, { placeholder: "title" });
     const ly = underTitle(m.title), lead = extras.lead ?? m.subtitle;
     text(s, lead, { x: X0, y: ly, w: 7.0, h: textH(lead, 7.0, 18) + 0.1, fontSize: 18 });
@@ -448,7 +452,7 @@ export async function buildDeck({ slug, number, extras, outFile }) {
 
   // 2 What you'll leave with
   {
-    const s = addSlide("Content", `Module ${number} · Overview`, "What you'll leave with", extras.notes?.overview ?? notes[2]);
+    const s = addSlide("Content", `${tag} · Overview`, "What you'll leave with", extras.notes?.overview ?? notes[2]);
     for (const [i, [ic, t]] of extras.outcomes.entries()) {
       const y = 1.95 + i * 1.5;
       card(s, X0, y, 7.6, 1.25);
@@ -563,7 +567,7 @@ export async function buildDeck({ slug, number, extras, outFile }) {
   }
 
   async function scenarioSlide(sc) {
-    const s = addSlide("Content", `Module ${number} · Scenario`, "What would you do?", "Read the situation aloud and ask the room what they would do before revealing the two approaches. Discuss what makes the strong approach work.");
+    const s = addSlide("Content", `${tag} · Scenario`, "What would you do?", "Read the situation aloud and ask the room what they would do before revealing the two approaches. Discuss what makes the strong approach work.");
     const sitW = 8.55, sitH = Math.max(1.5, 0.75 + textH(sc.title, sitW - 1.3, 17) + 0.3);
     card(s, X0, 1.75, sitW, sitH, { fill: HEX.teal50, flat: true });
     await tile(s, X0 + 0.3, 2.0, 0.55, "LuTarget", { kind: tileKinds[0] });
@@ -584,7 +588,7 @@ export async function buildDeck({ slug, number, extras, outFile }) {
   }
 
   async function takeawaysSlide(sec, note) {
-    const s = addSlide("Content", `Module ${number} · Takeaways and actions`, "What to take back to your desk", note);
+    const s = addSlide("Content", `${tag} · Takeaways and actions`, "What to take back to your desk", note);
     const take = sec.content.replace(/\s*Tick off each action below.*$/, "").replace(/\s*Test yourself:.*?\?\s*/, " ").split(/(?<=[.?!])\s+/).filter(Boolean);
     const colW = (CW - 0.25) / 2, y = 1.85, h = BOTTOM - y;
     const tz = take.length > 6 ? 14 : 16, az = sec.tactics.length > 5 ? 14 : 16;
@@ -605,7 +609,7 @@ export async function buildDeck({ slug, number, extras, outFile }) {
 
   // Close
   {
-    const s = addSlide("Title", null, null, extras.notes?.close ?? notes[Math.max(...Object.keys(notes).map(Number))]);
+    const s = addSlide("Title", null, null, extras.notes?.close ?? notes[Math.max(0, ...Object.keys(notes).map(Number))] ?? "Open the floor for questions.");
     s.addText("QUESTIONS & DISCUSSION", { placeholder: "eyebrow" });
     s.addText(extras.close.title, { placeholder: "title" });
     text(s, extras.close.body, { x: X0, y: underTitle(extras.close.title), w: 7.0, h: 0.8, fontSize: 18 });

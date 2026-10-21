@@ -1,4 +1,4 @@
-// Uploads the rebuilt Recruitment Playbook decks to the Library, as DRAFTS to review and publish
+// Uploads the rebuilt Recruitment Playbook and Management Programme decks to the Library, as DRAFTS to review and publish
 // in the Studio. Also creates the Library page's heading and introduction.
 //
 // Build the decks first (npm run decks -- all), then from the project root:
@@ -38,15 +38,17 @@ for (const f of fs.readdirSync(path.join(DECKS, "extras")).sort()) {
   items.push({
     file,
     doc: {
-      _id: `drafts.library-playbook-${deck.number}`,
+      _id: deck.programme ? `drafts.library-management-${deck.tag.toLowerCase()}` : `drafts.library-playbook-${deck.number}`,
       _type: "libraryItem",
       title: module.title,
-      label: `Playbook ${deck.number}`,
+      label: deck.programme ? `Management ${deck.tag}` : `Playbook ${deck.number}`,
       kind: "deck",
       summary: deck.lead,
       duration,
       audience,
-      order: Number(deck.number) * 10,
+      order: Number(String(deck.number).replace(/\D/g, "")) * 10,
+      // Management Programme decks show on the Managers page only.
+      area: deck.programme ? "managers" : "training",
       // The modules may still be drafts: link the way the Studio does for unpublished documents.
       module: { _type: "reference", _ref: module.id, _weak: true, _strengthenOnPublish: { type: "trainingModule" } },
     },
@@ -61,7 +63,10 @@ if (problems.length) { console.error("Problems:\n  " + problems.join("\n  ")); p
 for (const { doc, file } of items) console.log(`${doc.label} ${doc.title} · ${doc.duration} · ${(fs.statSync(file).size / 1e6).toFixed(1)} MB`);
 if (dryRun) { console.log("Dry run: nothing sent to Sanity."); process.exit(0); }
 
-const existing = new Set(await client.fetch(`*[_id in $ids]._id`, { ids: items.map((i) => i.doc._id) }));
+// Count an item as existing if it's there as a draft or already published.
+const ids = items.flatMap((i) => [i.doc._id, i.doc._id.replace("drafts.", "")]);
+const found = await client.withConfig({ perspective: "raw" }).fetch(`*[_id in $ids]._id`, { ids });
+const existing = new Set(found.map((id) => (id.startsWith("drafts.") ? id : `drafts.${id}`)));
 const tx = client.transaction().createIfNotExists(libraryPage);
 for (const { doc, file } of items) {
   if (existing.has(doc._id) && !replace) { console.log(`Skipped ${doc.label}: already in Sanity.`); continue; }

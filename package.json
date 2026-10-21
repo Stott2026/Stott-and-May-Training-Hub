@@ -26,6 +26,7 @@
     "import:playbook-05-06": "npm run import:playbook-05-06 -w studio --",
     "import:playbook-10-11": "npm run import:playbook-10-11 -w studio --",
     "import:library": "npm run import:library -w studio --",
+    "import:management": "npm run import:management -w studio --",
     "decks:install": "npm install --prefix scripts/decks",
     "decks": "node --env-file-if-exists=.env scripts/decks/build.mjs"
   },

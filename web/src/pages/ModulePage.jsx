@@ -9,6 +9,7 @@ import ModuleLibrary from "../components/library/ModuleLibrary.jsx";
 import AskMayConcept, { showMayConcept } from "../components/AskMayConcept.jsx";
 import { useApi } from "../lib/api.js";
 import { useProgress } from "../lib/progress.jsx";
+import { useSetNavArea } from "../lib/navArea.jsx";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import "./ModulePage.css";
 
@@ -19,6 +20,7 @@ export default function ModulePage() {
   const [params] = useSearchParams();
   const { data: module, error } = useApi(`/modules/${slug}`);
   const progress = useProgress();
+  useSetNavArea(module?.slug === slug && module.category?.area === "managers" ? "managers" : null);
 
   useEffect(() => { if (module) document.title = `${module.title} · Stott and May Training Hub`; }, [module]);
   if (error || !module || module.slug !== slug) return <LoadState error={error} notFoundText="We couldn't find that module" />;

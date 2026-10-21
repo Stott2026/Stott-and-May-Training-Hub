@@ -8,6 +8,7 @@ import QuizPage from "./pages/QuizPage.jsx";
 import LibraryPage from "./pages/LibraryPage.jsx";
 import ManagersPage from "./pages/ManagersPage.jsx";
 import { ProgressProvider } from "./lib/progress.jsx";
+import { NavAreaProvider, useNavArea } from "./lib/navArea.jsx";
 import { useApi } from "./lib/api.js";
 
 const NAV = [
@@ -35,10 +36,12 @@ const Router = import.meta.env.MODE === "preview" ? HashRouter : BrowserRouter;
 // "Ian Barker" → "IB"
 const initialsOf = (name = "") => name.split(/\s+/).filter(Boolean).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
 
-// Which top tab is lit: Library or Managers for their pages, otherwise Training.
+// Which top tab is lit: Library or Managers for their pages (and manager modules), otherwise Training.
 function Shell({ user, children }) {
   const { pathname } = useLocation();
-  return <AppShell navItems={NAV} current={pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") ? "managers" : "training"} user={user}>{children}</AppShell>;
+  const area = useNavArea();
+  const current = pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : "training";
+  return <AppShell navItems={NAV} current={current} user={user}>{children}</AppShell>;
 }
 
 export default function App() {
@@ -47,17 +50,19 @@ export default function App() {
   return (
     <Router>
       <ProgressProvider>
-        <ScrollToTop />
-        <Shell user={user}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/modules/:slug" element={<ModulePage />} />
-            <Route path="/quiz" element={<QuizPage />} />
-            <Route path="/library" element={<LibraryPage />} />
-            <Route path="/managers" element={<ManagersPage />} />
-            <Route path="*" element={<LoadState error={{ status: 404 }} />} />
-          </Routes>
-        </Shell>
+        <NavAreaProvider>
+          <ScrollToTop />
+          <Shell user={user}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/modules/:slug" element={<ModulePage />} />
+              <Route path="/quiz" element={<QuizPage />} />
+              <Route path="/library" element={<LibraryPage />} />
+              <Route path="/managers" element={<ManagersPage />} />
+              <Route path="*" element={<LoadState error={{ status: 404 }} />} />
+            </Routes>
+          </Shell>
+        </NavAreaProvider>
       </ProgressProvider>
     </Router>
   );
