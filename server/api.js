@@ -6,6 +6,10 @@ import { searchModules, withQuickChecks } from "./content.js";
 
 export const api = Router();
 
+api.get("/site", async (req, res) => {
+  res.json((await sanity.fetch(queries.site)) ?? {});
+});
+
 api.get("/home", async (req, res) => {
   res.json((await sanity.fetch(queries.home)) ?? {});
 });

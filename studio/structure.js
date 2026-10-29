@@ -1,6 +1,7 @@
 import { BookIcon } from "@sanity/icons/Book";
 import { DocumentsIcon } from "@sanity/icons/Documents";
 import { CaseIcon } from "@sanity/icons/Case";
+import { CogIcon } from "@sanity/icons/Cog";
 import { HeartIcon } from "@sanity/icons/Heart";
 import { HelpCircleIcon } from "@sanity/icons/HelpCircle";
 import { HomeIcon } from "@sanity/icons/Home";
@@ -11,6 +12,7 @@ export const structure = (S) =>
   S.list()
     .title("Training Hub content")
     .items([
+      S.listItem().title("Site settings").icon(CogIcon).child(S.document().schemaType("siteSettings").documentId("siteSettings")),
       S.listItem().title("Home page").icon(HomeIcon).child(S.document().schemaType("homePage").documentId("homePage")),
       S.divider(),
       S.documentTypeListItem("trainingModule").title("Training modules").icon(BookIcon)

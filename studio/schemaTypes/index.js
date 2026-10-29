@@ -7,5 +7,6 @@ import { homePage } from "./homePage.js";
 import { libraryItem } from "./libraryItem.js";
 import { libraryPage } from "./libraryPage.js";
 import { managersPage } from "./managersPage.js";
+import { siteSettings } from "./siteSettings.js";
 
-export const schemaTypes = [trainingModule, section, quizQuestion, value, category, homePage, libraryItem, libraryPage, managersPage];
+export const schemaTypes = [trainingModule, section, quizQuestion, value, category, homePage, libraryItem, libraryPage, managersPage, siteSettings];

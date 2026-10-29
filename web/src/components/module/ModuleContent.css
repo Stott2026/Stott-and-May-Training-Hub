@@ -164,3 +164,18 @@
 .tip-callout p { line-height: 1.55; }
 .tip-callout__icon { color: var(--sm-aqua); flex-shrink: 0; margin-top: 0.1rem; }
 .tip-callout__label { font-family: var(--font-heading); font-size: var(--text-eyebrow); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--sm-aqua); margin-right: var(--space-2); }
+
+/* ── Look here ── */
+.look-here { border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--gradient-brand-soft); padding: var(--space-5); }
+.look-here__head { display: flex; gap: var(--space-3); align-items: center; margin-bottom: var(--space-4); }
+.look-here__icon { display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border-radius: var(--radius-md); background: var(--gradient-brand); flex-shrink: 0; }
+.look-here__title { font-size: var(--text-md); font-weight: var(--weight-extrabold); }
+.look-here__lead { font-size: var(--text-sm); color: var(--color-text-muted); }
+.look-here__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+.look-here__link { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); color: var(--color-text); text-decoration: none; }
+.look-here__link:hover { border-color: var(--color-accent); box-shadow: var(--shadow-sm); }
+.look-here__text { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.look-here__name { font-family: var(--font-heading); font-weight: var(--weight-bold); }
+.look-here__note { font-size: var(--text-sm); color: var(--color-text-muted); }
+.look-here__where { font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--color-link); }
+.look-here__go { color: var(--color-link); flex-shrink: 0; }

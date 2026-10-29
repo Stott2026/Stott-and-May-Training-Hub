@@ -6,7 +6,7 @@ import {
   MessagesSquare, Mic, Play, Puzzle, Rocket, Scale, Search, Sparkles, Target, Timer,
   TrendingUp, Trophy, UserRound, Users, X, Megaphone, Compass, ShieldCheck, Clock,
   ArrowLeft, Laptop, ChevronLeft, ChevronRight, CircleX, Copy, ListChecks, PartyPopper, TriangleAlert, Eye, Quote, Map,
-  Presentation, Download, LayoutTemplate, ClipboardList, Library, Briefcase,
+  Presentation, Download, LayoutTemplate, ClipboardList, Library, Briefcase, ExternalLink, FolderOpen,
 } from "lucide-react";
 
 export const icons = {
@@ -25,6 +25,7 @@ export const icons = {
   copy: Copy,
   download: Download,
   eye: Eye,
+  "external-link": ExternalLink,
   "layout-template": LayoutTemplate,
   library: Library,
   "list-checks": ListChecks,
@@ -38,6 +39,7 @@ export const icons = {
   compass: Compass,
   "file-text": FileText,
   "folder-kanban": FolderKanban,
+  "folder-open": FolderOpen,
   "graduation-cap": GraduationCap,
   handshake: Handshake,
   "heart-handshake": HeartHandshake,

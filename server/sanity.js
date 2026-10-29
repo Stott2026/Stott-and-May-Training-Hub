@@ -39,6 +39,8 @@ const LIBRARY_ITEM = `
 `;
 
 export const queries = {
+  site: `*[_id == "siteSettings"][0]{ "quickLinks": quickLinks[]{ _key, label, url } }`,
+
   home: `*[_id == "homePage"][0]{ heroTitle, heroIntro, ${image("heroImage")}, philosophyTitle, philosophyText }`,
 
   values: `*[_type == "value"] | order(order asc){ _id, title, description, icon }`,
@@ -47,7 +49,7 @@ export const queries = {
 
   module: `*[_type == "trainingModule" && slug.current == $slug][0]{
     ${MODULE_SUMMARY}, estimatedMinutes, ${image("heroImage")},
-    sections[]{ _key, title, takeaway, content, ${image("image")}, framework, tables, tip, tactics, phrases, mistakes, scenario },
+    sections[]{ _key, title, takeaway, content, ${image("image")}, framework, tables, tip, tactics, phrases, mistakes, scenario, lookHere },
     "quiz": *[_type == "quizQuestion" && references(^._id)]{ _id, question, options, correct, explanation, afterSection },
     // Library files for this module, such as its classroom deck.
     "library": *[_type == "libraryItem" && module._ref == ^._id && defined(file.asset)] | order(order asc){ ${LIBRARY_ITEM} },

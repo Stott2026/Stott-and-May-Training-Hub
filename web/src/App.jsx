@@ -9,6 +9,7 @@ import LibraryPage from "./pages/LibraryPage.jsx";
 import ManagersPage from "./pages/ManagersPage.jsx";
 import { ProgressProvider } from "./lib/progress.jsx";
 import { NavAreaProvider, useNavArea } from "./lib/navArea.jsx";
+import { SiteProvider, useSite } from "./lib/site.jsx";
 import { useApi } from "./lib/api.js";
 
 const NAV = [
@@ -40,8 +41,9 @@ const initialsOf = (name = "") => name.split(/\s+/).filter(Boolean).map((w) => w
 function Shell({ user, children }) {
   const { pathname } = useLocation();
   const area = useNavArea();
+  const { quickLinks } = useSite();
   const current = pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : "training";
-  return <AppShell navItems={NAV} current={current} user={user}>{children}</AppShell>;
+  return <AppShell navItems={NAV} quickLinks={quickLinks} current={current} user={user}>{children}</AppShell>;
 }
 
 export default function App() {
@@ -49,6 +51,7 @@ export default function App() {
   const user = me && { name: me.name, initials: initialsOf(me.name), canSignOut: !me.preview };
   return (
     <Router>
+      <SiteProvider>
       <ProgressProvider>
         <NavAreaProvider>
           <ScrollToTop />
@@ -64,6 +67,7 @@ export default function App() {
           </Shell>
         </NavAreaProvider>
       </ProgressProvider>
+      </SiteProvider>
     </Router>
   );
 }

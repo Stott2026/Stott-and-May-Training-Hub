@@ -6,7 +6,8 @@ import "./AppShell.css";
 
 // The page frame: skip link, top navigation and the main content area.
 // navItems: [{ id, label, icon, href }]. user: { name, initials, canSignOut } for the signed-in person.
-export default function AppShell({ navItems = [], current, user, children }) {
+// quickLinks: [{ label, url }] from Site settings, always shown as buttons that open in a new tab.
+export default function AppShell({ navItems = [], quickLinks = [], current, user, children }) {
   return (
     <>
       <a href="#main" className="skip-link">Skip to main content</a>
@@ -28,6 +29,13 @@ export default function AppShell({ navItems = [], current, user, children }) {
               ))}
             </ul>
           </nav>
+          {quickLinks.map((l) => (
+            <a key={l._key ?? l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="topnav__quick" aria-label={`${l.label} (opens in a new tab)`}>
+              <Icon name="folder-open" size={18} />
+              <span>{l.label}</span>
+              <Icon name="external-link" size={14} className="topnav__quick-out" />
+            </a>
+          ))}
           {user && (
             <div className="topnav__user">
               <span className="topnav__user-name">{user.name}</span>

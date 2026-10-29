@@ -13,6 +13,7 @@ export const section = defineType({
     { name: "practice", title: "Tactics, phrases and mistakes" },
     { name: "structure", title: "Steps, tables and tips" },
     { name: "scenario", title: "Scenario" },
+    { name: "resources", title: "Look here" },
   ],
   fields: [
     defineField({
@@ -118,6 +119,26 @@ export const section = defineType({
       rows: 2,
       group: "structure",
       description: "One memorable line, shown in a highlighted box. For example: 'Ask a question back before you answer.'",
+    }),
+    defineField({
+      name: "lookHere",
+      title: "Look here (optional)",
+      type: "array",
+      group: "resources",
+      description: "Point learners to something useful elsewhere, such as case studies or salary guides in the Marketing Hub. Shown as a 'Look here' card in the section.",
+      of: [
+        {
+          type: "object",
+          name: "resourceLink",
+          fields: [
+            { name: "title", title: "What to look at", type: "string", description: "For example: Client case studies.", validation: (r) => r.required().max(80) },
+            { name: "note", title: "Why it helps (optional)", type: "string", description: "One line, for example: 'Learn two from your market by heart.'", validation: (r) => r.max(160) },
+            { name: "where", title: "Where to find it (optional)", type: "string", description: "For example: the Case studies section.", validation: (r) => r.max(60) },
+            { name: "url", title: "Web address (optional)", type: "url", description: "Leave empty to link to the Marketing Hub (set in Site settings).", validation: (r) => r.uri({ scheme: ["https"] }) },
+          ],
+          preview: { select: { title: "title", subtitle: "where" } },
+        },
+      ],
     }),
     defineField({ ...textList("tactics", "Key tactics", "Practical actions. Each one becomes a tick box for the learner. Drag to reorder."), group: "practice" }),
     defineField({ ...textList("phrases", "Phrases to use", "Word-for-word lines a consultant can say or write. Each one appears as a speech bubble with a copy button."), group: "practice" }),
