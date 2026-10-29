@@ -7,6 +7,8 @@ import ModulePage from "./pages/ModulePage.jsx";
 import QuizPage from "./pages/QuizPage.jsx";
 import LibraryPage from "./pages/LibraryPage.jsx";
 import ManagersPage from "./pages/ManagersPage.jsx";
+import FormsPage from "./pages/FormsPage.jsx";
+import FormPage from "./pages/FormPage.jsx";
 import { ProgressProvider } from "./lib/progress.jsx";
 import { NavAreaProvider, useNavArea } from "./lib/navArea.jsx";
 import { SiteProvider, useSite } from "./lib/site.jsx";
@@ -16,8 +18,7 @@ const NAV = [
   { id: "training", label: "Training", icon: "graduation-cap", href: "/" },
   { id: "library", label: "Library", icon: "library", href: "/library" },
   { id: "managers", label: "Managers", icon: "briefcase", href: "/managers" },
-  // Phase 3: the Documents & Forms page.
-  { id: "documents", label: "Documents & Forms", icon: "file-text", href: "/" },
+  { id: "documents", label: "Documents & Forms", icon: "file-text", href: "/documents" },
 ];
 
 // Back to the top of the page whenever the page (not just the search words) changes.
@@ -42,7 +43,7 @@ function Shell({ user, children }) {
   const { pathname } = useLocation();
   const area = useNavArea();
   const { quickLinks } = useSite();
-  const current = pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : "training";
+  const current = pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : pathname.startsWith("/documents") ? "documents" : "training";
   return <AppShell navItems={NAV} quickLinks={quickLinks} current={current} user={user}>{children}</AppShell>;
 }
 
@@ -62,6 +63,8 @@ export default function App() {
               <Route path="/quiz" element={<QuizPage />} />
               <Route path="/library" element={<LibraryPage />} />
               <Route path="/managers" element={<ManagersPage />} />
+              <Route path="/documents" element={<FormsPage />} />
+              <Route path="/documents/:slug" element={<FormPage />} />
               <Route path="*" element={<LoadState error={{ status: 404 }} />} />
             </Routes>
           </Shell>

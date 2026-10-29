@@ -42,6 +42,16 @@ api.get("/managers", async (req, res) => {
   res.json(await sanity.fetch(queries.managers));
 });
 
+api.get("/forms", async (req, res) => {
+  res.json(await sanity.fetch(queries.forms));
+});
+
+api.get("/forms/:slug", async (req, res) => {
+  const form = await sanity.fetch(queries.form, { slug: req.params.slug });
+  if (!form) return res.status(404).json({ error: "Form not found" });
+  res.json(form);
+});
+
 api.get("/library", async (req, res) => {
   res.json(await sanity.fetch(queries.library));
 });

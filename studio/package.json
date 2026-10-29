@@ -15,7 +15,8 @@
     "import:playbook-10-11": "dotenv -e ../.env -- node migrations/import-playbook-10-11.js",
     "import:library": "dotenv -e ../.env -- node migrations/import-library-decks.js",
     "import:management": "dotenv -e ../.env -- node migrations/import-management.js",
-    "import:marketing-hub": "dotenv -e ../.env -- node migrations/import-marketing-hub.js"
+    "import:marketing-hub": "dotenv -e ../.env -- node migrations/import-marketing-hub.js",
+    "import:forms": "dotenv -e ../.env -- node migrations/import-forms.js"
   },
   "dependencies": {
     "@sanity/client": "^8.9.0",

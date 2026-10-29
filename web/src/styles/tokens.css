@@ -113,6 +113,9 @@
   --shadow-lg: 0 12px 40px rgba(17, 19, 20, 0.12);
   --shadow-glow: 0 8px 28px rgba(0, 200, 200, 0.35);
 
+  /* Tick shown in a checked form checkbox (ink on teal) */
+  --icon-tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111314' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+
   --accent-bar: 4px;          /* gradient top border on cards */
   --content-width: 72rem;
   --reading-width: 46rem;

@@ -7,6 +7,7 @@ import {
   TrendingUp, Trophy, UserRound, Users, X, Megaphone, Compass, ShieldCheck, Clock,
   ArrowLeft, Laptop, ChevronLeft, ChevronRight, CircleX, Copy, ListChecks, PartyPopper, TriangleAlert, Eye, Quote, Map,
   Presentation, Download, LayoutTemplate, ClipboardList, Library, Briefcase, ExternalLink, FolderOpen,
+  Phone, Calendar, FileCheck, ChartColumn, Banknote, Printer, RotateCcw, Minus, Plus,
 } from "lucide-react";
 
 export const icons = {
@@ -14,6 +15,9 @@ export const icons = {
   "arrow-right": ArrowRight,
   "badge-check": BadgeCheck,
   "book-open": BookOpen,
+  banknote: Banknote,
+  calendar: Calendar,
+  "chart-column": ChartColumn,
   briefcase: Briefcase,
   brain: Brain,
   check: Check,
@@ -40,6 +44,7 @@ export const icons = {
   "file-text": FileText,
   "folder-kanban": FolderKanban,
   "folder-open": FolderOpen,
+  "file-check": FileCheck,
   "graduation-cap": GraduationCap,
   handshake: Handshake,
   "heart-handshake": HeartHandshake,
@@ -49,7 +54,10 @@ export const icons = {
   "message-circle": MessageCircle,
   messages: MessagesSquare,
   mic: Mic,
+  phone: Phone,
   play: Play,
+  printer: Printer,
+  "rotate-ccw": RotateCcw,
   presentation: Presentation,
   puzzle: Puzzle,
   rocket: Rocket,

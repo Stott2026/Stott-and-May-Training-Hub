@@ -74,6 +74,13 @@ export const queries = {
     }
   }`,
 
+  forms: `{
+    "page": *[_id == "formsPage"][0]{ title, intro },
+    "items": *[_type == "formDocument"] | order(order asc){ _id, title, "slug": slug.current, group, summary, icon }
+  }`,
+
+  form: `*[_type == "formDocument" && slug.current == $slug][0]{ _id, title, "slug": slug.current, group, summary, intro, icon, blocks }`,
+
   // Only the server ever sees this address.
   libraryFile: `*[_type == "libraryItem" && _id == $id][0].file.asset->{ url, originalFilename, mimeType, size }`,
 

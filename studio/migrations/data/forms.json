@@ -1,0 +1,3263 @@
+[
+ {
+  "_id": "drafts.form-candidate-registration",
+  "_type": "formDocument",
+  "title": "Candidate Registration Form",
+  "slug": {
+   "_type": "slug",
+   "current": "candidate-registration"
+  },
+  "group": "Candidates",
+  "summary": "Complete during or after first candidate call",
+  "intro": "Complete during or immediately after first candidate call",
+  "icon": "user",
+  "order": 10,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b51",
+    "label": "Full name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "First and last name"
+   },
+   {
+    "_type": "formField",
+    "_key": "b52",
+    "label": "Current job title",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Current role"
+   },
+   {
+    "_type": "formField",
+    "_key": "b53",
+    "label": "Current employer",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Company name"
+   },
+   {
+    "_type": "formField",
+    "_key": "b54",
+    "label": "Location",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "City / Region"
+   },
+   {
+    "_type": "formField",
+    "_key": "b55",
+    "label": "Email",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Professional email"
+   },
+   {
+    "_type": "formField",
+    "_key": "b56",
+    "label": "Phone",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Mobile number"
+   },
+   {
+    "_type": "formField",
+    "_key": "b57",
+    "label": "LinkedIn URL",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "linkedin.com/in/..."
+   },
+   {
+    "_type": "formField",
+    "_key": "b58",
+    "label": "Right to work",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Authorised to work here? Sponsorship needed now or in future?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b59",
+    "title": "Experience and skills"
+   },
+   {
+    "_type": "formField",
+    "_key": "b60",
+    "label": "Years experience",
+    "lines": 1,
+    "width": "third",
+    "placeholder": "e.g. 7 years"
+   },
+   {
+    "_type": "formField",
+    "_key": "b61",
+    "label": "Seniority",
+    "lines": 1,
+    "width": "third",
+    "placeholder": "e.g. Senior / Lead / Head of"
+   },
+   {
+    "_type": "formField",
+    "_key": "b62",
+    "label": "Specialism",
+    "lines": 1,
+    "width": "third",
+    "placeholder": "e.g. Backend, Data, GTM"
+   },
+   {
+    "_type": "formField",
+    "_key": "b63",
+    "label": "Key skills and technologies",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "List the most relevant skills, stacks, or tools"
+   },
+   {
+    "_type": "formField",
+    "_key": "b64",
+    "label": "Notable achievements",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Any standout projects, promotions, or impact"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b65",
+    "title": "Motivation and move"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b66",
+    "label": "Actively looking?",
+    "options": [
+     "Actively",
+     "Passively",
+     "Not looking"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b67",
+    "label": "Reason for looking",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Push factors — what is driving them to consider a move?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b68",
+    "label": "What they want next",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Pull factors — what does the ideal next role look like?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b69",
+    "label": "Notice period",
+    "lines": 1,
+    "width": "third",
+    "placeholder": "e.g. 1 month"
+   },
+   {
+    "_type": "formField",
+    "_key": "b70",
+    "label": "Availability",
+    "lines": 1,
+    "width": "third",
+    "placeholder": "e.g. 2 weeks"
+   },
+   {
+    "_type": "formField",
+    "_key": "b71",
+    "label": "Commitment (1-10)",
+    "lines": 1,
+    "width": "third",
+    "placeholder": "Self-rated"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b72",
+    "title": "Compensation"
+   },
+   {
+    "_type": "formField",
+    "_key": "b74",
+    "label": "Benefits / package",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "What matters to them: bonus, equity, pension"
+   },
+   {
+    "_type": "formField",
+    "_key": "b75",
+    "label": "Target salary / rate",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Target package for the next role"
+   },
+   {
+    "_type": "formField",
+    "_key": "b76",
+    "label": "Preferred type",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Perm / Contract / Either"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b77",
+    "title": "Notes"
+   },
+   {
+    "_type": "formField",
+    "_key": "b78",
+    "label": "Other processes running",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Are they interviewing elsewhere? How live?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b79",
+    "label": "Counter-offer risk",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "How likely is a counter-offer, and what is their response?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b80",
+    "label": "Consultant notes",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Anything else relevant — personality, culture fit, concerns"
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-interview-prep-sheet",
+  "_type": "formDocument",
+  "title": "Interview Prep Sheet",
+  "slug": {
+   "_type": "slug",
+   "current": "interview-prep-sheet"
+  },
+  "group": "Candidates",
+  "summary": "Prepare candidates for every interview",
+  "intro": "Complete with the candidate before every interview",
+  "icon": "mic",
+  "order": 20,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b81",
+    "label": "Candidate name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Full name"
+   },
+   {
+    "_type": "formField",
+    "_key": "b82",
+    "label": "Role applied for",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Job title"
+   },
+   {
+    "_type": "formField",
+    "_key": "b83",
+    "label": "Client / company",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Hiring company"
+   },
+   {
+    "_type": "formField",
+    "_key": "b84",
+    "label": "Interview date and time",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "dd/mm/yyyy hh:mm"
+   },
+   {
+    "_type": "formField",
+    "_key": "b85",
+    "label": "Interview format",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Video / In-person / Phone"
+   },
+   {
+    "_type": "formField",
+    "_key": "b86",
+    "label": "Number of interviewers",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "e.g. 1 / Panel of 3"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b87",
+    "title": "Interviewer research"
+   },
+   {
+    "_type": "formField",
+    "_key": "b88",
+    "label": "Interviewer name(s)",
+    "lines": 1,
+    "width": "full",
+    "placeholder": "Full names of those interviewing"
+   },
+   {
+    "_type": "formField",
+    "_key": "b89",
+    "label": "Interviewer background",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What did you find on their LinkedIn? Career history, focus areas, recent activity"
+   },
+   {
+    "_type": "formField",
+    "_key": "b90",
+    "label": "Known priorities",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "What does the interviewer care about most based on your research?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b91",
+    "title": "Interview coaching"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b92",
+    "label": "Interview type",
+    "options": [
+     "Competency",
+     "Technical",
+     "Commercial",
+     "Values",
+     "Presentation",
+     "Hybrid"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b93",
+    "label": "Likely questions to prepare for",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Based on the role and interviewer — what questions should the candidate prepare for?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b94",
+    "label": "Key messages to land",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "The 3 most important things the candidate should communicate in this interview"
+   },
+   {
+    "_type": "formField",
+    "_key": "b95",
+    "label": "Questions for the candidate to ask",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "3 smart, researched questions the candidate should have ready"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b96",
+    "title": "Motivation check"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b97",
+    "label": "Candidate excitement about the role (1-10)"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b98",
+    "label": "Candidate commitment to making a move (1-10)"
+   },
+   {
+    "_type": "formField",
+    "_key": "b99",
+    "label": "Concerns to address before interview",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Any worries the candidate has raised — address these before the interview"
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-candidate-pipeline",
+  "_type": "formDocument",
+  "title": "Candidate Pipeline Tracker",
+  "slug": {
+   "_type": "slug",
+   "current": "candidate-pipeline"
+  },
+  "group": "Candidates",
+  "summary": "Track all active candidates across live roles",
+  "intro": "Track all active candidates across your live roles",
+  "icon": "folder-kanban",
+  "order": 30,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b100",
+    "label": "Role / search",
+    "lines": 1,
+    "width": "full",
+    "placeholder": "Job title and client this tracker is for"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b101",
+    "title": "Pipeline stages"
+   },
+   {
+    "_type": "formRows",
+    "_key": "b1",
+    "groups": [
+     "Longlist",
+     "Screened",
+     "Shortlisted",
+     "Submitted",
+     "1st interview",
+     "2nd interview",
+     "Offer stage",
+     "Placed"
+    ],
+    "rowsPerGroup": 3,
+    "columns": [
+     {
+      "_type": "rowColumn",
+      "_key": "b2",
+      "label": "Candidate",
+      "kind": "text"
+     },
+     {
+      "_type": "rowColumn",
+      "_key": "b3",
+      "label": "Notes / next step",
+      "kind": "text"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-counter-offer-guide",
+  "_type": "formDocument",
+  "title": "Counter-Offer Conversation Guide",
+  "slug": {
+   "_type": "slug",
+   "current": "counter-offer-guide"
+  },
+  "group": "Candidates",
+  "summary": "Have this conversation at screening, not at offer stage",
+  "intro": "Use at screening stage — not at offer stage. Have this conversation early.",
+  "icon": "shield-check",
+  "order": 40,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b102",
+    "label": "Candidate name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Full name"
+   },
+   {
+    "_type": "formField",
+    "_key": "b103",
+    "label": "Date of conversation",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "dd/mm/yyyy"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b104",
+    "title": "Key facts"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b105",
+    "items": [
+     "Counter-offers are reactive: they rarely fix the reasons someone wanted to leave",
+     "Accepting one can change how the current employer sees them, for good",
+     "The strongest argument is always the candidate's own reasons for moving",
+     "Have this conversation at screening, not at offer stage"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b106",
+    "title": "Conversation script"
+   },
+   {
+    "_type": "formGuide",
+    "_key": "b4",
+    "steps": [
+     {
+      "_type": "guideStep",
+      "_key": "b5",
+      "tag": "Step 1",
+      "title": "Open naturally",
+      "text": "Before we go any further with this process, I want to have a quick conversation about something that trips a lot of people up at the end. Is that okay?"
+     },
+     {
+      "_type": "guideStep",
+      "_key": "b6",
+      "tag": "Step 2",
+      "title": "Ask directly",
+      "text": "If we get to offer stage and your current employer finds out you are leaving, which they will when you hand in your notice, what do you think they will do?"
+     },
+     {
+      "_type": "guideStep",
+      "_key": "b7",
+      "tag": "Step 3",
+      "title": "Explore the response",
+      "text": "And if they made you a counter-offer (matched the salary, gave you a promotion, promised things would change), what would you do?"
+     },
+     {
+      "_type": "guideStep",
+      "_key": "b8",
+      "tag": "Step 4",
+      "title": "Address the root cause",
+      "text": "We spoke about why you are looking to move. A counter-offer might address the salary, but does it address the real reason you wanted to leave?"
+     },
+     {
+      "_type": "guideStep",
+      "_key": "b9",
+      "tag": "Step 5",
+      "title": "Future pace",
+      "text": "If you imagine accepting the counter-offer and sitting back at your desk six months later, has anything actually changed?"
+     },
+     {
+      "_type": "guideStep",
+      "_key": "b10",
+      "tag": "Step 6",
+      "title": "Get a commitment",
+      "text": "I am not trying to pressure you. But if we get to offer stage, what will you do?"
+     }
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b107",
+    "title": "Candidate response and notes"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b108",
+    "label": "How did they respond?",
+    "options": [
+     "Committed to move",
+     "Uncertain",
+     "Would likely accept counter",
+     "Refused to discuss"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b109",
+    "label": "What did they say?",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Record their response to the counter-offer conversation"
+   },
+   {
+    "_type": "formField",
+    "_key": "b110",
+    "label": "Agreed position",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "What has the candidate committed to doing if a counter-offer arrives?"
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-candidate-feedback",
+  "_type": "formDocument",
+  "title": "Candidate Feedback Form",
+  "slug": {
+   "_type": "slug",
+   "current": "candidate-feedback"
+  },
+  "group": "Candidates",
+  "summary": "Structure and deliver client feedback after interviews",
+  "intro": "Structure client feedback before delivering it — every time, after every stage",
+  "icon": "message-circle",
+  "order": 50,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b111",
+    "label": "Candidate name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Full name"
+   },
+   {
+    "_type": "formField",
+    "_key": "b112",
+    "label": "Role applied for",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Job title"
+   },
+   {
+    "_type": "formField",
+    "_key": "b113",
+    "label": "Client / company",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Hiring company"
+   },
+   {
+    "_type": "formField",
+    "_key": "b114",
+    "label": "Interview stage",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "e.g. 1st interview, final"
+   },
+   {
+    "_type": "formField",
+    "_key": "b115",
+    "label": "Interview date",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "dd/mm/yyyy"
+   },
+   {
+    "_type": "formField",
+    "_key": "b116",
+    "label": "Feedback received from",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Interviewer name and title"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b117",
+    "label": "Outcome",
+    "options": [
+     "Progressing to next stage",
+     "On hold",
+     "Unsuccessful",
+     "Offer to be made"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b118",
+    "title": "Skills and experience feedback"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b119",
+    "label": "Technical skills / role-specific experience"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b120",
+    "label": "Depth and relevance of background"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b121",
+    "label": "Quality and specificity of examples given"
+   },
+   {
+    "_type": "formField",
+    "_key": "b122",
+    "label": "Strengths highlighted by the client",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What did the interviewer specifically praise or respond positively to?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b123",
+    "label": "Gaps or concerns",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Where did the client feel the candidate fell short technically or experientially?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b124",
+    "title": "Culture and fit feedback"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b125",
+    "label": "Culture and values alignment"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b126",
+    "label": "Communication style and presence"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b127",
+    "label": "Enthusiasm and genuine interest in the role"
+   },
+   {
+    "_type": "formField",
+    "_key": "b128",
+    "label": "Fit observations",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "How did the interviewer feel about the candidate as a person — energy, style, team fit?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b129",
+    "title": "Delivering the feedback"
+   },
+   {
+    "_type": "formField",
+    "_key": "b130",
+    "label": "What to tell the candidate — script it out",
+    "lines": 4,
+    "width": "full",
+    "placeholder": "Write out exactly what you will say. The candidate deserves specific, useful feedback."
+   },
+   {
+    "_type": "formField",
+    "_key": "b131",
+    "label": "What not to say / sensitive areas",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Anything the client said that should be reframed carefully before delivery"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b132",
+    "label": "How will you deliver this?",
+    "options": [
+     "Phone call (preferred)",
+     "Video call",
+     "Email"
+    ]
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b133",
+    "items": [
+     "Called the candidate same day where possible",
+     "Started with what went well before moving to the gap",
+     "Kept it specific — no vague platitudes",
+     "Asked how the candidate is feeling before diving in",
+     "Ended on a positive — kept the relationship intact"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b134",
+    "label": "Candidate reaction and next steps",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "How did they take the feedback? What is agreed next?"
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-cv-submission-checklist",
+  "_type": "formDocument",
+  "title": "CV Review and Submission Checklist",
+  "slug": {
+   "_type": "slug",
+   "current": "cv-submission-checklist"
+  },
+  "group": "Candidates",
+  "summary": "Quality gate before sending any CV to a client",
+  "intro": "Complete before sending any CV to a client. If it does not pass this gate, it does not go.",
+  "icon": "file-check",
+  "order": 60,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b135",
+    "label": "Candidate name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Full name"
+   },
+   {
+    "_type": "formField",
+    "_key": "b136",
+    "label": "Role being submitted for",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Job title and client"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b137",
+    "title": "CV quality gate"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b138",
+    "items": [
+     "CV is up to date — current role, dates, and responsibilities are accurate",
+     "No unexplained employment gaps — or gaps can be explained",
+     "Formatting is clean and professional — consistent fonts, readable layout",
+     "Contact details are present and correct",
+     "No spelling errors or obvious grammatical mistakes",
+     "Dates are consistent and chronological — no overlapping roles",
+     "Most recent role is described in sufficient detail",
+     "Key skills relevant to THIS role are visible and prominent",
+     "CV length is appropriate — 2 pages for most, 3 max for very senior"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b139",
+    "title": "Tailoring check"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b140",
+    "items": [
+     "The CV speaks directly to the brief — I have mentally mapped it against the must-haves",
+     "I have confirmed with the candidate that the experience described is accurate",
+     "I have flagged any gaps or concerns to the candidate before submitting",
+     "The candidate knows which role this is being submitted for and has given explicit consent",
+     "I have not submitted this candidate to the same client before (or if I have, the client is aware)"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b141",
+    "title": "Covering note"
+   },
+   {
+    "_type": "formField",
+    "_key": "b142",
+    "label": "Headline summary (2-3 sentences)",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Why is this person right for this role? Not a CV summary — a specific reason they fit this brief."
+   },
+   {
+    "_type": "formField",
+    "_key": "b143",
+    "label": "Stand-out points to highlight",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "2-3 specific things about this candidate that the CV does not fully convey"
+   },
+   {
+    "_type": "formField",
+    "_key": "b144",
+    "label": "Anything the client needs to know",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Notice period, salary expectation, other processes running, any important context"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b145",
+    "title": "Compliance"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b146",
+    "items": [
+     "Candidate has been informed they are being submitted to this specific client",
+     "Candidate has confirmed their CV is accurate and up to date",
+     "Right to work confirmed: authorised to work, and whether sponsorship is needed",
+     "Candidate is aware of the role, company, and salary range",
+     "GDPR consent — candidate is aware their CV will be shared with a third party"
+    ]
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b147",
+    "label": "Submission confidence level",
+    "options": [
+     "High — strong fit",
+     "Medium — good fit, minor gaps",
+     "Low — stretch",
+     "Do not submit"
+    ]
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-reference-check",
+  "_type": "formDocument",
+  "title": "Reference Check Template",
+  "slug": {
+   "_type": "slug",
+   "current": "reference-check"
+  },
+  "group": "Candidates",
+  "summary": "Structured professional reference questions",
+  "intro": "Take structured references before every permanent placement — ideally two per candidate",
+  "icon": "search",
+  "order": 70,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b148",
+    "label": "Candidate name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Name being referenced"
+   },
+   {
+    "_type": "formField",
+    "_key": "b149",
+    "label": "Role they are being placed into",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Job title and client"
+   },
+   {
+    "_type": "formField",
+    "_key": "b150",
+    "label": "Referee name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Full name"
+   },
+   {
+    "_type": "formField",
+    "_key": "b151",
+    "label": "Referee job title",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Their current role"
+   },
+   {
+    "_type": "formField",
+    "_key": "b152",
+    "label": "Company (at time of working together)",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Where they worked together"
+   },
+   {
+    "_type": "formField",
+    "_key": "b153",
+    "label": "Relationship",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "e.g. Direct manager, peer, skip-level"
+   },
+   {
+    "_type": "formField",
+    "_key": "b154",
+    "label": "Dates worked together",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "From — To"
+   },
+   {
+    "_type": "formField",
+    "_key": "b155",
+    "label": "Date of reference call",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "dd/mm/yyyy"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b156",
+    "title": "Opening and context"
+   },
+   {
+    "_type": "formField",
+    "_key": "b157",
+    "label": "Opening — referee response",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Can you start by describing the candidate's role and what they were responsible for when you worked together?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b158",
+    "title": "Performance and capability"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b159",
+    "label": "Overall performance in role"
+   },
+   {
+    "_type": "formField",
+    "_key": "b160",
+    "label": "Greatest strengths",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What were the candidate's greatest strengths — where did they really stand out?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b161",
+    "label": "Areas for development",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What were the areas where the candidate had room to develop? Vague answers often mean they are being diplomatic."
+   },
+   {
+    "_type": "formField",
+    "_key": "b162",
+    "label": "Specific example of strong performance",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Can you give me a specific example of a project where the candidate performed particularly well?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b163",
+    "title": "Work style and culture fit"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b164",
+    "label": "Team fit and working relationships"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b165",
+    "label": "Communication and stakeholder management"
+   },
+   {
+    "_type": "formField",
+    "_key": "b166",
+    "label": "Working style",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "How would you describe the candidate's working style — how did they fit into the team?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b167",
+    "label": "Handling pressure",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "How did the candidate handle pressure, tight deadlines, or difficult situations?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b168",
+    "title": "Reliability and conduct"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b169",
+    "label": "Attendance and reliability",
+    "options": [
+     "Excellent",
+     "Good",
+     "Satisfactory",
+     "Concerns"
+    ]
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b170",
+    "label": "Any conduct or disciplinary issues?",
+    "options": [
+     "None",
+     "Minor — resolved",
+     "Yes — details below"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b171",
+    "label": "If yes — please detail",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "What happened and how was it resolved?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b172",
+    "title": "The key question"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b173",
+    "label": "Would you rehire this candidate if the opportunity arose?",
+    "options": [
+     "Yes — without hesitation",
+     "Yes — with reservations",
+     "Probably not",
+     "No"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b174",
+    "label": "If with reservations or no — why?",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "This is the most important question on the form. If they hesitate or qualify, explore it fully."
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b175",
+    "title": "Reference summary"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b176",
+    "label": "Overall reference quality",
+    "options": [
+     "Strong positive",
+     "Positive with caveats",
+     "Neutral / inconclusive",
+     "Concerning"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b177",
+    "label": "Key themes and anything to flag",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Summarise the 3-4 most important things you heard — strengths, concerns, and overall picture"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b178",
+    "items": [
+     "Reference obtained verbally — not just by email",
+     "Referee confirmed they managed or worked directly with the candidate",
+     "No material concerns raised that have not been addressed",
+     "Reference summary shared internally before placement proceeds"
+    ]
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-client-brief",
+  "_type": "formDocument",
+  "title": "Client Meeting and Brief Sheet",
+  "slug": {
+   "_type": "slug",
+   "current": "client-brief"
+  },
+  "group": "Clients",
+  "summary": "New client meetings and job briefs — perm, contract and SOW",
+  "intro": "Use for new client meetings and job briefs — perm, contract and SOW",
+  "icon": "handshake",
+  "order": 80,
+  "blocks": [
+   {
+    "_type": "formHeading",
+    "_key": "b179",
+    "title": "Client and contact details"
+   },
+   {
+    "_type": "formField",
+    "_key": "b180",
+    "label": "Company name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Client organisation"
+   },
+   {
+    "_type": "formField",
+    "_key": "b181",
+    "label": "Website",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Company URL"
+   },
+   {
+    "_type": "formField",
+    "_key": "b182",
+    "label": "Hiring manager name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Primary contact"
+   },
+   {
+    "_type": "formField",
+    "_key": "b183",
+    "label": "Job title",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Their role"
+   },
+   {
+    "_type": "formField",
+    "_key": "b184",
+    "label": "Email",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Contact email"
+   },
+   {
+    "_type": "formField",
+    "_key": "b185",
+    "label": "Phone",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Direct number"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b186",
+    "title": "The opportunity"
+   },
+   {
+    "_type": "formField",
+    "_key": "b187",
+    "label": "Role title",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Job title"
+   },
+   {
+    "_type": "formField",
+    "_key": "b188",
+    "label": "Location / remote",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Office / hybrid / remote"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b189",
+    "label": "Engagement type",
+    "options": [
+     "Permanent",
+     "Contract",
+     "SOW"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b190",
+    "label": "Salary / rate",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Budget range"
+   },
+   {
+    "_type": "formField",
+    "_key": "b191",
+    "label": "Start date",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Target start"
+   },
+   {
+    "_type": "formField",
+    "_key": "b192",
+    "label": "Role overview",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Brief summary of the role and its purpose"
+   },
+   {
+    "_type": "formField",
+    "_key": "b193",
+    "label": "Must-have skills",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Non-negotiables — what they absolutely need"
+   },
+   {
+    "_type": "formField",
+    "_key": "b194",
+    "label": "Nice-to-have skills",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Desirable but not essential"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b195",
+    "title": "Culture and fit"
+   },
+   {
+    "_type": "formField",
+    "_key": "b196",
+    "label": "Team structure",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Size, who they report to, who reports to them"
+   },
+   {
+    "_type": "formField",
+    "_key": "b197",
+    "label": "What makes a great hire here",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Beyond the spec — what does brilliant look like?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b198",
+    "label": "What has caused issues in past hires",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Common reasons hires have not worked out"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b199",
+    "title": "Qualification — MEDDPICC"
+   },
+   {
+    "_type": "formField",
+    "_key": "b200",
+    "label": "Budget approved?",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Yes / No / In progress"
+   },
+   {
+    "_type": "formField",
+    "_key": "b201",
+    "label": "Economic buyer",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Who has final sign-off?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b202",
+    "label": "Decision process",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Interview stages, who is involved, timeline to offer"
+   },
+   {
+    "_type": "formField",
+    "_key": "b203",
+    "label": "Internal candidates?",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Yes / No / Unsure"
+   },
+   {
+    "_type": "formField",
+    "_key": "b204",
+    "label": "Other agencies?",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "How many, who, exclusive?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b205",
+    "label": "Pain / urgency",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "What is the cost of not filling this role? What is driving the timeline?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b206",
+    "title": "Agreed next steps"
+   },
+   {
+    "_type": "formField",
+    "_key": "b207",
+    "label": "Shortlist deadline",
+    "lines": 1,
+    "width": "full",
+    "placeholder": "When do they expect CVs?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b208",
+    "label": "Next steps and actions",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What have you agreed to do, and by when?"
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-bd-call-prep",
+  "_type": "formDocument",
+  "title": "BD Call Prep Sheet",
+  "slug": {
+   "_type": "slug",
+   "current": "bd-call-prep"
+  },
+  "group": "Clients",
+  "summary": "Prepare for every business development call",
+  "intro": "Complete before every business development call",
+  "icon": "phone",
+  "order": 90,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b209",
+    "label": "Company name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Target company"
+   },
+   {
+    "_type": "formField",
+    "_key": "b210",
+    "label": "Contact name and title",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Who are you calling?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b211",
+    "label": "LinkedIn profile",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "URL"
+   },
+   {
+    "_type": "formField",
+    "_key": "b212",
+    "label": "Call date and time",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "dd/mm/yyyy hh:mm"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b213",
+    "label": "Call type",
+    "options": [
+     "Cold outreach",
+     "Warm follow-up",
+     "Existing relationship",
+     "Referral intro"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b214",
+    "title": "Research"
+   },
+   {
+    "_type": "formField",
+    "_key": "b215",
+    "label": "Company overview",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "What does the company do? Stage, size, sector, recent news?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b216",
+    "label": "Recent triggers / news",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Funding, hiring surge, product launch, leadership change — what is the hook?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b217",
+    "label": "Known hiring needs",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "What roles are they advertising? What gaps might they have?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b218",
+    "title": "Call strategy"
+   },
+   {
+    "_type": "formField",
+    "_key": "b219",
+    "label": "Opening line",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "How will you open this call? Write it out."
+   },
+   {
+    "_type": "formField",
+    "_key": "b220",
+    "label": "3 insight points to lead with",
+    "lines": 4,
+    "width": "full",
+    "placeholder": "1. First insight point"
+   },
+   {
+    "_type": "formField",
+    "_key": "b221",
+    "label": "Value proposition",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "In one sentence — why should they work with Stott and May?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b222",
+    "title": "Anticipated objections"
+   },
+   {
+    "_type": "formField",
+    "_key": "b223",
+    "label": "Most likely objections",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "e.g. We have a PSL / We use direct hiring / We are not hiring right now"
+   },
+   {
+    "_type": "formField",
+    "_key": "b224",
+    "label": "Planned responses",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "How will you handle each objection?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b225",
+    "title": "Call outcomes"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b226",
+    "label": "Call result",
+    "options": [
+     "Positive — next step agreed",
+     "Warm — follow up",
+     "Cold — not now",
+     "Dead"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b227",
+    "label": "Key notes from the call",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What did you learn? What was said? What surprised you?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b228",
+    "label": "Agreed next step",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Exactly what happens next, and by when?"
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-client-qbr",
+  "_type": "formDocument",
+  "title": "Client Quarterly Business Review",
+  "slug": {
+   "_type": "slug",
+   "current": "client-qbr"
+  },
+  "group": "Clients",
+  "summary": "Quarterly business review for key accounts",
+  "intro": "Use with key accounts every quarter — review, add value, and plan forward together",
+  "icon": "chart-column",
+  "order": 100,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b229",
+    "label": "Client / company",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Account name"
+   },
+   {
+    "_type": "formField",
+    "_key": "b230",
+    "label": "Key contact(s)",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Names and titles attending"
+   },
+   {
+    "_type": "formField",
+    "_key": "b231",
+    "label": "QBR date",
+    "lines": 1,
+    "width": "third",
+    "placeholder": "dd/mm/yyyy"
+   },
+   {
+    "_type": "formField",
+    "_key": "b232",
+    "label": "Period reviewed",
+    "lines": 1,
+    "width": "third",
+    "placeholder": "e.g. Q1 2025 (Jan-Mar)"
+   },
+   {
+    "_type": "formField",
+    "_key": "b233",
+    "label": "Next QBR date",
+    "lines": 1,
+    "width": "third",
+    "placeholder": "dd/mm/yyyy"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b234",
+    "title": "Account performance — this quarter"
+   },
+   {
+    "_type": "formNumbers",
+    "_key": "b11",
+    "items": [
+     {
+      "_type": "numberItem",
+      "_key": "b12",
+      "label": "Roles worked"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b13",
+      "label": "CVs submitted"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b14",
+      "label": "Interviews arranged"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b15",
+      "label": "Placements made"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b16",
+      "label": "Perm placements"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b17",
+      "label": "Contract starts"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b18",
+      "label": "SOW engagements"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b19",
+      "label": "Revenue"
+     }
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b235",
+    "label": "Roles placed this quarter",
+    "lines": 4,
+    "width": "full",
+    "placeholder": "List the roles placed, candidates placed, and a one-line outcome for each"
+   },
+   {
+    "_type": "formField",
+    "_key": "b236",
+    "label": "Roles not filled — and why",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "What did not close? Brief or process issues, market challenges, budget changes?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b237",
+    "title": "Candidate and process quality"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b238",
+    "label": "Quality of CVs submitted"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b239",
+    "label": "Speed of delivery against agreed SLAs"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b240",
+    "label": "Communication and responsiveness"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b241",
+    "label": "Overall satisfaction with Stott and May this quarter"
+   },
+   {
+    "_type": "formField",
+    "_key": "b242",
+    "label": "What has worked well?",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What has the client valued most this quarter? Ask them directly."
+   },
+   {
+    "_type": "formField",
+    "_key": "b243",
+    "label": "What could we do better?",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What feedback has the client given, or what have you noticed?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b244",
+    "title": "Market intelligence to share"
+   },
+   {
+    "_type": "formField",
+    "_key": "b245",
+    "label": "Salary benchmarking update",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What has moved in the market? Any roles where their bands are now behind?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b246",
+    "label": "Sector / market trends",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Anything relevant happening in their sector that will impact hiring plans?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b247",
+    "title": "Forward plan — next quarter"
+   },
+   {
+    "_type": "formField",
+    "_key": "b248",
+    "label": "Known roles / headcount pipeline",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What roles are they planning to hire next quarter?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b249",
+    "label": "Account development actions",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Who else in the business should we be meeting? New hiring managers, leadership introductions?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b250",
+    "title": "Agreed actions"
+   },
+   {
+    "_type": "formRows",
+    "_key": "b20",
+    "groups": [],
+    "rowsPerGroup": 5,
+    "columns": [
+     {
+      "_type": "rowColumn",
+      "_key": "b21",
+      "label": "Action",
+      "kind": "text"
+     },
+     {
+      "_type": "rowColumn",
+      "_key": "b22",
+      "label": "Owner",
+      "kind": "text"
+     },
+     {
+      "_type": "rowColumn",
+      "_key": "b23",
+      "label": "Due date",
+      "kind": "text"
+     }
+    ]
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b251",
+    "label": "Relationship health",
+    "options": [
+     "Strategic partner",
+     "Trusted supplier",
+     "Transactional",
+     "At risk",
+     "New / building"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b252",
+    "label": "Overall QBR notes",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Any other observations, commitments made, or context from the meeting"
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-job-qualification",
+  "_type": "formDocument",
+  "title": "Job Qualification Checklist",
+  "slug": {
+   "_type": "slug",
+   "current": "job-qualification"
+  },
+  "group": "Jobs and offers",
+  "summary": "Complete before committing resource to any role",
+  "intro": "Complete before committing resource to any new role",
+  "icon": "list-checks",
+  "order": 110,
+  "blocks": [
+   {
+    "_type": "formChoice",
+    "_key": "b253",
+    "label": "Engagement type",
+    "options": [
+     "Permanent",
+     "Contract",
+     "SOW"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b254",
+    "label": "Role title",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Job title"
+   },
+   {
+    "_type": "formField",
+    "_key": "b255",
+    "label": "Client",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Company name"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b256",
+    "title": "Perm qualification"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b257",
+    "items": [
+     "Budget has been formally approved",
+     "Salary range confirmed and is market-rate",
+     "I am speaking to the decision-maker",
+     "Interview process is defined — stages, timeline, decision-makers",
+     "No internal candidate being benchmarked",
+     "Client has committed to a response time on CVs submitted",
+     "Counter-offer risk has been discussed with candidate",
+     "Brief taken on a live call, not just by email"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b258",
+    "title": "Contract qualification"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b259",
+    "items": [
+     "IR35 status confirmed with the client",
+     "Day rate is approved and within market range",
+     "Start date is confirmed, not just ASAP",
+     "Contract duration and extension likelihood discussed",
+     "Shortlist SLA agreed — client commits to respond within 24-48hrs",
+     "Number of CVs required agreed (2-3, not 10)",
+     "Contractor availability and notice period confirmed",
+     "IR35 payment method discussed with candidate"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b260",
+    "title": "SOW qualification"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b261",
+    "items": [
+     "Deliverable and success criteria clearly defined",
+     "Client understands SOW means buying an outcome, not a resource",
+     "Budget envelope confirmed — fixed price or T and M",
+     "Milestones and payment schedule agreed",
+     "Governance structure and stakeholders identified",
+     "Procurement and legal are aware and aligned",
+     "Contract signed before work commences"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b262",
+    "title": "RAG rating"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b263",
+    "label": "Likelihood to close",
+    "options": [
+     "Green — Hot",
+     "Amber — Possible",
+     "Red — Unlikely"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b264",
+    "label": "Reason for rating",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "What is driving your assessment?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b265",
+    "label": "What needs to change to make this green?",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Action items to improve the qualification status"
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-offer-tracker",
+  "_type": "formDocument",
+  "title": "Offer Management Tracker",
+  "slug": {
+   "_type": "slug",
+   "current": "offer-tracker"
+  },
+  "group": "Jobs and offers",
+  "summary": "Track from verbal offer through to signed contract",
+  "intro": "Use from verbal offer through to signed contract",
+  "icon": "banknote",
+  "order": 120,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b266",
+    "label": "Candidate name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Full name"
+   },
+   {
+    "_type": "formField",
+    "_key": "b267",
+    "label": "Client / company",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Hiring company"
+   },
+   {
+    "_type": "formField",
+    "_key": "b268",
+    "label": "Role title",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Job title being offered"
+   },
+   {
+    "_type": "formField",
+    "_key": "b269",
+    "label": "Offer date",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Date verbal offer made"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b270",
+    "title": "Offer details"
+   },
+   {
+    "_type": "formField",
+    "_key": "b271",
+    "label": "Base salary / day rate",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "£"
+   },
+   {
+    "_type": "formField",
+    "_key": "b272",
+    "label": "Bonus / equity",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Details of variable pay"
+   },
+   {
+    "_type": "formField",
+    "_key": "b273",
+    "label": "Benefits",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Pension, healthcare, holiday etc."
+   },
+   {
+    "_type": "formField",
+    "_key": "b274",
+    "label": "Start date",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Agreed or proposed start"
+   },
+   {
+    "_type": "formField",
+    "_key": "b275",
+    "label": "Offer vs expectation",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "How does the offer compare to what the candidate said they needed? Any gap?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b276",
+    "title": "Candidate response"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b277",
+    "label": "Verbal response",
+    "options": [
+     "Accepted",
+     "Needs time",
+     "Negotiating",
+     "Declined"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b278",
+    "label": "Candidate reaction",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "How did they respond? Enthusiasm level? Any concerns raised?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b279",
+    "label": "Outstanding concerns",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "What is stopping them from an immediate yes?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b280",
+    "title": "Counter-offer risk"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b281",
+    "label": "Counter-offer likelihood",
+    "options": [
+     "High",
+     "Medium",
+     "Low",
+     "Unknown"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b282",
+    "label": "Counter-offer conversation notes",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What did the candidate say when you discussed counter-offers?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b283",
+    "title": "Formal offer checklist"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b284",
+    "items": [
+     "Verbal offer made and accepted in principle",
+     "Written offer / contract sent to candidate",
+     "Candidate has confirmed receipt",
+     "Reference check process agreed and initiated",
+     "Start date confirmed with both parties",
+     "Onboarding logistics communicated to candidate",
+     "Client informed of acceptance",
+     "Pre-start check-in call scheduled"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b285",
+    "label": "Signed contract date",
+    "lines": 1,
+    "width": "full",
+    "placeholder": "Date signed contract received"
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-interview-feedback",
+  "_type": "formDocument",
+  "title": "Interview Feedback Form",
+  "slug": {
+   "_type": "slug",
+   "current": "interview-feedback"
+  },
+  "group": "Jobs and offers",
+  "summary": "Capture structured client feedback after every interview stage",
+  "intro": "Capture structured client feedback after every interview stage — call within 2 hours",
+  "icon": "messages",
+  "order": 130,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b286",
+    "label": "Candidate name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Full name"
+   },
+   {
+    "_type": "formField",
+    "_key": "b287",
+    "label": "Role",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Job title"
+   },
+   {
+    "_type": "formField",
+    "_key": "b288",
+    "label": "Client / company",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Hiring company"
+   },
+   {
+    "_type": "formField",
+    "_key": "b289",
+    "label": "Interview stage",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "e.g. 1st interview, technical, final"
+   },
+   {
+    "_type": "formField",
+    "_key": "b290",
+    "label": "Interview date",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "dd/mm/yyyy"
+   },
+   {
+    "_type": "formField",
+    "_key": "b291",
+    "label": "Feedback from",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Interviewer name and title"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b292",
+    "title": "Overall decision"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b293",
+    "label": "Outcome",
+    "options": [
+     "Progress to next stage",
+     "Final stage / offer pending",
+     "Unsuccessful",
+     "Decision pending"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b294",
+    "label": "If unsuccessful — primary reason",
+    "lines": 1,
+    "width": "full",
+    "placeholder": "e.g. Strong technically but not as commercially driven as they need"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b295",
+    "title": "Skills and technical fit"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b296",
+    "label": "Technical skills / role-specific competency"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b297",
+    "label": "Depth and relevance of experience"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b298",
+    "label": "Quality of examples given"
+   },
+   {
+    "_type": "formField",
+    "_key": "b299",
+    "label": "Specific skills feedback",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What did the interviewer say about technical skills, experience, or qualifications?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b300",
+    "title": "Culture and soft skills"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b301",
+    "label": "Cultural fit and values alignment"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b302",
+    "label": "Communication, presence and clarity"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b303",
+    "label": "Enthusiasm and genuine interest in the role"
+   },
+   {
+    "_type": "formField",
+    "_key": "b304",
+    "label": "Culture and soft skills feedback",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "How did the interviewer describe the candidate's presence and personality?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b305",
+    "title": "Specific feedback captured"
+   },
+   {
+    "_type": "formField",
+    "_key": "b306",
+    "label": "What the client liked (direct quotes where possible)",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "The more specific the better — these are gold for briefing the candidate before the next stage"
+   },
+   {
+    "_type": "formField",
+    "_key": "b307",
+    "label": "Concerns or reservations",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What held them back? Any specific moments that gave them pause?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b308",
+    "title": "Competitor intel"
+   },
+   {
+    "_type": "formField",
+    "_key": "b309",
+    "label": "How does this candidate compare to others seen?",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Are they front of the pack, middle, or behind? How many other candidates at this stage?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b310",
+    "title": "Actions"
+   },
+   {
+    "_type": "formField",
+    "_key": "b311",
+    "label": "Feedback to deliver to candidate",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What will you tell the candidate? Write it out before you call them."
+   },
+   {
+    "_type": "formField",
+    "_key": "b312",
+    "label": "Coaching for next stage (if progressing)",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What does the candidate need to do differently or emphasise more in stage 2?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b313",
+    "label": "Next step and timeline",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "What happens next and by when?"
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-sow-scope-checklist",
+  "_type": "formDocument",
+  "title": "SOW Scope Checklist",
+  "slug": {
+   "_type": "slug",
+   "current": "sow-scope-checklist"
+  },
+  "group": "Commercial and compliance",
+  "summary": "Before proposing or agreeing any SOW engagement",
+  "intro": "Complete before proposing or agreeing any Statement of Work engagement",
+  "icon": "clipboard-list",
+  "order": 140,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b314",
+    "label": "Client",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Company name"
+   },
+   {
+    "_type": "formField",
+    "_key": "b315",
+    "label": "Project name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Working title"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b316",
+    "title": "Problem definition"
+   },
+   {
+    "_type": "formField",
+    "_key": "b317",
+    "label": "The problem being solved",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "In the client's own words — what business problem does this SOW address?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b318",
+    "label": "Consequence of not delivering",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "What happens if this project does not go ahead or is delayed?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b319",
+    "title": "Deliverables and success criteria"
+   },
+   {
+    "_type": "formField",
+    "_key": "b320",
+    "label": "Primary deliverable(s)",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What specifically will be handed over at the end of this engagement?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b321",
+    "label": "Success criteria",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "How will both parties agree that the deliverable has been met?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b322",
+    "label": "Out of scope",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "What is explicitly NOT included in this SOW?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b323",
+    "title": "Commercial structure"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b324",
+    "label": "Pricing model",
+    "options": [
+     "Fixed price",
+     "Time and materials",
+     "Milestone-based",
+     "Retainer"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b325",
+    "label": "Total value",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "£"
+   },
+   {
+    "_type": "formField",
+    "_key": "b326",
+    "label": "Payment terms",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "e.g. 30% on start, 70% on delivery"
+   },
+   {
+    "_type": "formField",
+    "_key": "b327",
+    "label": "Milestone schedule",
+    "lines": 4,
+    "width": "full",
+    "placeholder": "List key milestones, deliverables, and payment trigger dates"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b328",
+    "title": "Governance and risk"
+   },
+   {
+    "_type": "formField",
+    "_key": "b329",
+    "label": "Reporting line",
+    "lines": 1,
+    "width": "full",
+    "placeholder": "Who does the delivery team report to day-to-day?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b330",
+    "label": "Risk register",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Key risks and how they will be managed / mitigated"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b331",
+    "title": "Legal and compliance"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b332",
+    "items": [
+     "IP ownership agreed — all work product belongs to client on payment",
+     "Confidentiality / NDA in place",
+     "IR35 assessment completed — SOW is genuinely outcome-based",
+     "Indemnity and liability clauses reviewed",
+     "Data protection / GDPR obligations identified",
+     "Procurement and legal aligned on contract timeline",
+     "Contract signed before work commences"
+    ]
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-pre-placement-compliance",
+  "_type": "formDocument",
+  "title": "Pre-Placement Compliance Checklist",
+  "slug": {
+   "_type": "slug",
+   "current": "pre-placement-compliance"
+  },
+  "group": "Commercial and compliance",
+  "summary": "Pre-placement compliance gate",
+  "intro": "Complete in full before any candidate starts — perm, contract or SOW. No exceptions.",
+  "icon": "badge-check",
+  "order": 150,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b333",
+    "label": "Candidate name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Full name"
+   },
+   {
+    "_type": "formField",
+    "_key": "b334",
+    "label": "Role / engagement",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Job title and client"
+   },
+   {
+    "_type": "formField",
+    "_key": "b335",
+    "label": "Client / company",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Hiring company"
+   },
+   {
+    "_type": "formField",
+    "_key": "b336",
+    "label": "Proposed start date",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "dd/mm/yyyy"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b337",
+    "label": "Engagement type",
+    "options": [
+     "Permanent",
+     "Contract (PAYE)",
+     "Contract (Umbrella)",
+     "Contract (Ltd Co)",
+     "SOW"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b338",
+    "title": "Right to work"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b339",
+    "items": [
+     "Right to work in the UK confirmed",
+     "Document type verified (passport / biometric / share code)",
+     "Document expiry date checked — not expired",
+     "Copy of document obtained and stored securely",
+     "For share codes: verified via gov.uk employer checking service",
+     "For non-UK nationals: visa type and work restrictions confirmed",
+     "Expiry date diarised for re-check if applicable"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b340",
+    "label": "Document type",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "e.g. UK Passport, BRP, Share Code"
+   },
+   {
+    "_type": "formField",
+    "_key": "b341",
+    "label": "Document expiry date",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "dd/mm/yyyy or N/A"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b342",
+    "title": "IR35 (contract and SOW only)"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b343",
+    "label": "IR35 status",
+    "options": [
+     "Inside IR35",
+     "Outside IR35",
+     "Not applicable (Perm)",
+     "To be determined"
+    ]
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b344",
+    "items": [
+     "IR35 status confirmed by client in writing (SDS issued)",
+     "SDS shared with and acknowledged by candidate",
+     "Payment method aligned with IR35 status",
+     "Candidate confirmed preferred payment method",
+     "Umbrella company name confirmed (if applicable)",
+     "Ltd company details confirmed (if applicable)",
+     "Substitution clause reviewed (if claiming outside IR35)"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b345",
+    "title": "References"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b346",
+    "label": "References required?",
+    "options": [
+     "Yes — perm placement",
+     "Yes — contract (client requires)",
+     "No — not required"
+    ]
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b347",
+    "items": [
+     "Minimum 2 references obtained (for perm placements)",
+     "At least 1 reference from a direct line manager",
+     "References cover most recent 2 years of employment",
+     "No material concerns raised in any reference",
+     "Reference documentation stored securely"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b348",
+    "title": "Contracts and documentation"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b349",
+    "items": [
+     "Candidate has received and signed their contract / offer letter",
+     "Client contract / terms of business signed and on file",
+     "For contract: assignment schedule issued and signed",
+     "For SOW: SOW agreement signed by both parties before work commences",
+     "Fee / rate confirmed in writing to both parties",
+     "Start date confirmed in writing to both parties"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b350",
+    "title": "Financial and payroll"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b351",
+    "items": [
+     "Candidate bank details obtained securely for payroll (contract)",
+     "Payment frequency agreed and communicated (weekly / monthly)",
+     "For umbrella: candidate registered and confirmed with umbrella company",
+     "Invoice / timesheet process explained to client",
+     "Payment terms confirmed with client"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b352",
+    "title": "Data protection and GDPR"
+   },
+   {
+    "_type": "formChecklist",
+    "_key": "b353",
+    "items": [
+     "Candidate has consented to data being shared with the end client",
+     "Candidate privacy notice issued",
+     "No sensitive personal data shared beyond what is necessary",
+     "Candidate informed of how their data will be stored and for how long"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b354",
+    "title": "Final sign-off"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b355",
+    "label": "All compliance items complete?",
+    "options": [
+     "Yes — cleared to start",
+     "No — outstanding items below",
+     "Partial — approved exception below"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b356",
+    "label": "Outstanding items / exceptions",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "List any items not yet complete and the agreed plan to resolve them before start date"
+   },
+   {
+    "_type": "formField",
+    "_key": "b357",
+    "label": "Compliance checked by",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Consultant name"
+   },
+   {
+    "_type": "formField",
+    "_key": "b358",
+    "label": "Date completed",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "dd/mm/yyyy"
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-lead-generation",
+  "_type": "formDocument",
+  "title": "Lead Generation Form",
+  "slug": {
+   "_type": "slug",
+   "current": "lead-generation"
+  },
+  "group": "Business development",
+  "summary": "Qualify and capture new BD leads",
+  "intro": "Capture, qualify and score every new BD lead before you invest time working it",
+  "icon": "target",
+  "order": 160,
+  "blocks": [
+   {
+    "_type": "formHeading",
+    "_key": "b359",
+    "title": "Lead source and context"
+   },
+   {
+    "_type": "formField",
+    "_key": "b360",
+    "label": "Company name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Target company"
+   },
+   {
+    "_type": "formField",
+    "_key": "b361",
+    "label": "Website",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "www..."
+   },
+   {
+    "_type": "formField",
+    "_key": "b362",
+    "label": "Contact name",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Primary contact"
+   },
+   {
+    "_type": "formField",
+    "_key": "b363",
+    "label": "Job title",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Their role"
+   },
+   {
+    "_type": "formField",
+    "_key": "b364",
+    "label": "Email",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Direct email"
+   },
+   {
+    "_type": "formField",
+    "_key": "b365",
+    "label": "Phone / LinkedIn",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "Best contact method"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b366",
+    "label": "How was this lead generated?",
+    "options": [
+     "Candidate referral",
+     "LinkedIn outreach",
+     "Inbound enquiry",
+     "Event / networking",
+     "Placed candidate intro",
+     "Cold research"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b367",
+    "label": "What was the trigger?",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "e.g. funding announcement, job ad spotted, mutual connection — what made you reach out now?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b368",
+    "title": "Company intelligence"
+   },
+   {
+    "_type": "formField",
+    "_key": "b369",
+    "label": "Sector / vertical",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "e.g. FinTech, HealthTech, SaaS"
+   },
+   {
+    "_type": "formField",
+    "_key": "b370",
+    "label": "Company stage",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "e.g. Seed, Series A, PE-backed"
+   },
+   {
+    "_type": "formField",
+    "_key": "b371",
+    "label": "Headcount (approx)",
+    "lines": 1,
+    "width": "third",
+    "placeholder": "e.g. 50-100"
+   },
+   {
+    "_type": "formField",
+    "_key": "b372",
+    "label": "Location(s)",
+    "lines": 1,
+    "width": "third",
+    "placeholder": "HQ and key offices"
+   },
+   {
+    "_type": "formField",
+    "_key": "b373",
+    "label": "Tech stack",
+    "lines": 1,
+    "width": "third",
+    "placeholder": "e.g. Python, Salesforce"
+   },
+   {
+    "_type": "formField",
+    "_key": "b374",
+    "label": "Recent trigger / news",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Raised Series B, new CTO hired, 2x headcount plan — what is happening that creates a hiring need?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b375",
+    "label": "Known pain points",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Skills shortage, poor agency experience, IR35 complexity, speed of growth?"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b376",
+    "title": "Opportunity assessment — BANT"
+   },
+   {
+    "_type": "formPrompts",
+    "_key": "b24",
+    "cards": [
+     {
+      "_type": "promptCard",
+      "_key": "b25",
+      "tag": "B",
+      "title": "Budget",
+      "question": "Is there likely budget for recruitment? Are they growing, well-funded, or visibly hiring?"
+     },
+     {
+      "_type": "promptCard",
+      "_key": "b26",
+      "tag": "A",
+      "title": "Authority",
+      "question": "Is your contact a decision-maker? Or is this an HR gatekeeper?"
+     },
+     {
+      "_type": "promptCard",
+      "_key": "b27",
+      "tag": "N",
+      "title": "Need",
+      "question": "Is there a visible, active or near-term hiring need, or is this speculative?"
+     },
+     {
+      "_type": "promptCard",
+      "_key": "b28",
+      "tag": "T",
+      "title": "Timeline",
+      "question": "When are they likely to need someone? Is there urgency, or is this a six-month pipeline?"
+     }
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b377",
+    "title": "Key questions to ask on first contact"
+   },
+   {
+    "_type": "formGuide",
+    "_key": "b29",
+    "steps": [
+     {
+      "_type": "guideStep",
+      "_key": "b30",
+      "tag": "Opening",
+      "text": "I won't take much of your time. I wanted to understand a bit about where you are at with hiring before I said anything about us. What does your team look like right now?"
+     },
+     {
+      "_type": "guideStep",
+      "_key": "b31",
+      "tag": "Need",
+      "text": "What is the one role that, if you got it right this year, would make the biggest difference to your business?"
+     },
+     {
+      "_type": "guideStep",
+      "_key": "b32",
+      "tag": "Pain",
+      "text": "What has been your experience with recruitment so far? Have you found it straightforward, or are there areas where you have struggled?"
+     },
+     {
+      "_type": "guideStep",
+      "_key": "b33",
+      "tag": "Urgency",
+      "text": "Are these hires you need to make in the next few weeks, or are you planning further ahead?"
+     },
+     {
+      "_type": "guideStep",
+      "_key": "b34",
+      "tag": "Authority",
+      "text": "Is hiring something you own directly, or do you work with HR or a talent team on this?"
+     },
+     {
+      "_type": "guideStep",
+      "_key": "b35",
+      "tag": "Competition",
+      "text": "Are you working with any agencies at the moment, or have you been going direct?"
+     },
+     {
+      "_type": "guideStep",
+      "_key": "b36",
+      "tag": "Value",
+      "text": "Would it be useful if I shared some market data on what I am seeing in your space: salary benchmarks, skills availability, what other companies are doing?"
+     },
+     {
+      "_type": "guideStep",
+      "_key": "b37",
+      "tag": "Close",
+      "text": "I would love to come back to you with something specific. Is it okay if I put together a short overview of how we work and reach out again next week?"
+     }
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b378",
+    "title": "Lead scoring"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b379",
+    "label": "Strength of trigger / reason to call now"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b380",
+    "label": "Clarity of hiring need"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b381",
+    "label": "Quality of contact (decision-maker vs gatekeeper)"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b382",
+    "label": "Warm route in / relationship depth"
+   },
+   {
+    "_type": "formScore",
+    "_key": "b383",
+    "label": "Strategic fit with our specialism"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b384",
+    "label": "Overall lead rating",
+    "options": [
+     "Hot — work now",
+     "Warm — nurture",
+     "Cold — long-term pipeline",
+     "Dead"
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b385",
+    "title": "Outreach plan"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b386",
+    "label": "First contact method",
+    "options": [
+     "Phone call",
+     "LinkedIn message",
+     "LinkedIn voice note",
+     "Email",
+     "Referral intro"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b387",
+    "label": "Opening message / hook",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "Write out your opening line before you send it. What is the specific hook?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b388",
+    "label": "Planned follow-up sequence",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "e.g. LinkedIn message Day 1, Phone call Day 3, Email with market data Day 7, Final follow-up Day 14"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b389",
+    "title": "Outcome and next steps"
+   },
+   {
+    "_type": "formChoice",
+    "_key": "b390",
+    "label": "First contact result",
+    "options": [
+     "Positive — meeting booked",
+     "Warm — follow up agreed",
+     "No response",
+     "Not interested"
+    ]
+   },
+   {
+    "_type": "formField",
+    "_key": "b391",
+    "label": "Notes from first contact",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What did you learn? What was said? Any useful intel?"
+   },
+   {
+    "_type": "formField",
+    "_key": "b392",
+    "label": "Agreed next step",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Exactly what happens next, and by when?"
+   }
+  ]
+ },
+ {
+  "_id": "drafts.form-weekly-activity-planner",
+  "_type": "formDocument",
+  "title": "Weekly Activity Planner",
+  "slug": {
+   "_type": "slug",
+   "current": "weekly-activity-planner"
+  },
+  "group": "Planning",
+  "summary": "Plan and track your weekly recruitment activity",
+  "intro": "Plan and track your weekly recruitment activity",
+  "icon": "calendar",
+  "order": 170,
+  "blocks": [
+   {
+    "_type": "formField",
+    "_key": "b393",
+    "label": "Week commencing",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "dd/mm/yyyy"
+   },
+   {
+    "_type": "formField",
+    "_key": "b394",
+    "label": "Billing target this week",
+    "lines": 1,
+    "width": "half",
+    "placeholder": "£"
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b395",
+    "title": "Weekly priorities"
+   },
+   {
+    "_type": "formField",
+    "_key": "b396",
+    "label": "Top 3 roles to focus on this week",
+    "lines": 4,
+    "width": "full",
+    "placeholder": "1. Role one and client"
+   },
+   {
+    "_type": "formField",
+    "_key": "b397",
+    "label": "Key outcomes I need to achieve",
+    "lines": 3,
+    "width": "full",
+    "placeholder": "What does a successful week look like? Be specific."
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b398",
+    "title": "Daily planner"
+   },
+   {
+    "_type": "formRows",
+    "_key": "b38",
+    "groups": [
+     "Monday",
+     "Tuesday",
+     "Wednesday",
+     "Thursday",
+     "Friday"
+    ],
+    "rowsPerGroup": 1,
+    "columns": [
+     {
+      "_type": "rowColumn",
+      "_key": "b39",
+      "label": "Priority actions",
+      "kind": "long"
+     },
+     {
+      "_type": "rowColumn",
+      "_key": "b40",
+      "label": "Calls made",
+      "kind": "number"
+     },
+     {
+      "_type": "rowColumn",
+      "_key": "b41",
+      "label": "CVs sent",
+      "kind": "number"
+     }
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b399",
+    "title": "Weekly KPI tracker"
+   },
+   {
+    "_type": "formNumbers",
+    "_key": "b42",
+    "items": [
+     {
+      "_type": "numberItem",
+      "_key": "b43",
+      "label": "BD calls made",
+      "target": "20"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b44",
+      "label": "CVs submitted",
+      "target": "10"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b45",
+      "label": "Interviews arranged",
+      "target": "5"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b46",
+      "label": "New roles taken",
+      "target": "3"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b47",
+      "label": "New clients contacted",
+      "target": "10"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b48",
+      "label": "Offers made",
+      "target": "2"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b49",
+      "label": "Placements",
+      "target": "1"
+     },
+     {
+      "_type": "numberItem",
+      "_key": "b50",
+      "label": "LinkedIn posts",
+      "target": "2"
+     }
+    ]
+   },
+   {
+    "_type": "formHeading",
+    "_key": "b400",
+    "title": "End of week reflection"
+   },
+   {
+    "_type": "formField",
+    "_key": "b401",
+    "label": "What went well?",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Wins, breakthroughs, good conversations"
+   },
+   {
+    "_type": "formField",
+    "_key": "b402",
+    "label": "What could have gone better?",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "Missed opportunities, things to improve"
+   },
+   {
+    "_type": "formField",
+    "_key": "b403",
+    "label": "Top priorities for next week",
+    "lines": 2,
+    "width": "full",
+    "placeholder": "What must happen next week to keep momentum?"
+   }
+  ]
+ }
+]

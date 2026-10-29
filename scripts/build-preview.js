@@ -18,10 +18,11 @@ const withDrafts = process.argv.includes("--drafts");
 const sanity = withDrafts ? published.withConfig({ perspective: "drafts" }) : published;
 
 // 1. Take a snapshot of the content, in the same shape the /api routes return.
-const [home, values, modules, quiz, searchable, library, managers, site] = await Promise.all(
-  [queries.home, queries.values, queries.modules, queries.quiz, queries.searchable, queries.library, queries.managers, queries.site].map((q) => sanity.fetch(q))
+const [home, values, modules, quiz, searchable, library, managers, site, forms] = await Promise.all(
+  [queries.home, queries.values, queries.modules, queries.quiz, queries.searchable, queries.library, queries.managers, queries.site, queries.forms].map((q) => sanity.fetch(q))
 );
-const routes = { "/me": { name: "Preview", preview: true }, "/home": home ?? {}, "/values": values, "/modules": modules, "/quiz": quiz, "/library": library, "/managers": managers, "/site": site ?? {} };
+const routes = { "/me": { name: "Preview", preview: true }, "/home": home ?? {}, "/values": values, "/modules": modules, "/quiz": quiz, "/library": library, "/managers": managers, "/site": site ?? {}, "/forms": forms };
+for (const f of forms.items) routes[`/forms/${f.slug}`] = await sanity.fetch(queries.form, { slug: f.slug });
 for (const m of [...modules, ...managers.modules]) {
   routes[`/modules/${m.slug}`] = withQuickChecks(await sanity.fetch(queries.module, { slug: m.slug }));
 }

@@ -1,0 +1,28 @@
+.form-page { padding-top: var(--space-8); padding-bottom: var(--space-16); max-width: 56rem; }
+.form-page__back { display: inline-flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-4); font-weight: var(--weight-bold); color: var(--color-link); }
+.form-sheet { position: relative; padding: var(--space-6); border-radius: var(--radius-lg); background: var(--color-surface); box-shadow: var(--shadow-md); overflow: hidden; }
+.form-sheet::before { content: ""; position: absolute; inset: 0 0 auto; height: var(--accent-bar); background: var(--gradient-brand); }
+@media (min-width: 720px) { .form-sheet { padding: var(--space-8) var(--space-10); } }
+.form-sheet__head { display: flex; gap: var(--space-4); align-items: flex-start; margin-bottom: var(--space-5); }
+.form-sheet__title { font-size: var(--text-2xl); font-weight: var(--weight-extrabold); line-height: var(--leading-tight); margin: var(--space-1) 0 var(--space-2); }
+.form-sheet__intro { color: var(--color-text-muted); }
+.form-sheet__actions { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-3); padding: var(--space-3) 0; margin-bottom: var(--space-5); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+.form-sheet__saved { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--color-text-muted); }
+.form-sheet__saved svg { color: var(--color-link); }
+.form-sheet__buttons, .form-sheet__confirm { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.form-sheet__confirm { font-size: var(--text-sm); font-weight: var(--weight-bold); }
+.form-sheet__meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6); padding: var(--space-4); border-radius: var(--radius-md); background: var(--color-surface-sunken); }
+
+/* Printing: just the form, on white, with what was typed. */
+@media print {
+  .topnav, .skip-link, .form-page__back, .form-sheet__actions, .ask-may { display: none !important; }
+  body, .app-main { background: var(--color-surface) !important; }
+  .form-page { padding: 0; max-width: none; }
+  .form-sheet { box-shadow: none; padding: 0; }
+  .form-sheet::before { display: none; }
+  .form-input, .form-number, .form-prompt, .form-rows__group, .form-sheet__meta { break-inside: avoid; }
+  .form-input { border-color: var(--color-border-strong); }
+  textarea.form-input { resize: none; }
+  .form-heading { break-after: avoid; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

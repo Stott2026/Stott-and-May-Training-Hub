@@ -1,0 +1,11 @@
+.forms-search { max-width: 30rem; }
+.forms-body { margin-top: calc(var(--space-8) * -1); position: relative; padding-bottom: var(--space-16); }
+.forms-group { margin-top: var(--space-8); }
+.forms-group__title { font-size: var(--text-xl); font-weight: var(--weight-extrabold); margin-bottom: var(--space-4); }
+.forms-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); }
+.forms-grid > li { display: flex; }
+.forms-grid > li > * { flex: 1; }
+.form-card { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-5); text-decoration: none; color: var(--color-text); }
+.form-card__title { font-size: var(--text-md); font-weight: var(--weight-extrabold); }
+.form-card__summary { font-size: var(--text-sm); color: var(--color-text-muted); flex: 1; }
+.form-card__go { display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--text-sm); font-weight: var(--weight-bold); color: var(--color-link); }

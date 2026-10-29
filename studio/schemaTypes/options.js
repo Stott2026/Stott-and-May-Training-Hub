@@ -30,6 +30,14 @@ export const ICON_OPTIONS = [
   { title: "Clipboard", value: "clipboard-list" },
   { title: "Library", value: "library" },
   { title: "Briefcase", value: "briefcase" },
+  { title: "Phone", value: "phone" },
+  { title: "Calendar", value: "calendar" },
+  { title: "File with tick", value: "file-check" },
+  { title: "Search", value: "search" },
+  { title: "Message", value: "message-circle" },
+  { title: "Bar chart", value: "chart-column" },
+  { title: "Banknote", value: "banknote" },
+  { title: "Triangle warning", value: "triangle-alert" },
 ];
 
 export const ACCENT_OPTIONS = [

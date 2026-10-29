@@ -8,5 +8,7 @@ import { libraryItem } from "./libraryItem.js";
 import { libraryPage } from "./libraryPage.js";
 import { managersPage } from "./managersPage.js";
 import { siteSettings } from "./siteSettings.js";
+import { formDocument } from "./formDocument.js";
+import { formsPage } from "./formsPage.js";
 
-export const schemaTypes = [trainingModule, section, quizQuestion, value, category, homePage, libraryItem, libraryPage, managersPage, siteSettings];
+export const schemaTypes = [trainingModule, section, quizQuestion, value, category, homePage, libraryItem, libraryPage, managersPage, siteSettings, formDocument, formsPage];
