@@ -49,7 +49,8 @@ export const queries = {
 
   module: `*[_type == "trainingModule" && slug.current == $slug][0]{
     ${MODULE_SUMMARY}, estimatedMinutes, ${image("heroImage")},
-    sections[]{ _key, title, takeaway, content, ${image("image")}, framework, tables, tip, tactics, phrases, mistakes, scenario, lookHere },
+    sections[]{ _key, title, takeaway, content, ${image("image")}, framework, tables, tip, tactics, phrases, mistakes, scenario, lookHere,
+      "forms": forms[]->{ _id, title, "slug": slug.current, summary, icon } },
     "quiz": *[_type == "quizQuestion" && references(^._id)]{ _id, question, options, correct, explanation, afterSection },
     // Library files for this module, such as its classroom deck.
     "library": *[_type == "libraryItem" && module._ref == ^._id && defined(file.asset)] | order(order asc){ ${LIBRARY_ITEM} },
@@ -79,7 +80,9 @@ export const queries = {
     "items": *[_type == "formDocument"] | order(order asc){ _id, title, "slug": slug.current, group, summary, icon }
   }`,
 
-  form: `*[_type == "formDocument" && slug.current == $slug][0]{ _id, title, "slug": slug.current, group, summary, intro, icon, blocks }`,
+  form: `*[_type == "formDocument" && slug.current == $slug][0]{ _id, title, "slug": slug.current, group, summary, intro, icon, blocks,
+    // Training modules that point to this form.
+    "usedIn": *[_type == "trainingModule" && references(^._id)] | order(order asc){ _id, title, "slug": slug.current } }`,
 
   // Only the server ever sees this address.
   libraryFile: `*[_type == "libraryItem" && _id == $id][0].file.asset->{ url, originalFilename, mimeType, size }`,

@@ -9,6 +9,7 @@ import FrameworkSteps from "./FrameworkSteps.jsx";
 import InfoTable from "./InfoTable.jsx";
 import TipCallout from "./TipCallout.jsx";
 import LookHere from "./LookHere.jsx";
+import SectionForms from "./SectionForms.jsx";
 import "./ModuleContent.css";
 
 // One section of a module, shown on its own so the learner can focus on it.
@@ -31,6 +32,7 @@ export default function SectionView({ section, index, total, completed, avatar, 
       {section.phrases?.length > 0 && <PhraseList phrases={section.phrases} avatar={avatar} />}
       {section.mistakes?.length > 0 && <MistakeCards mistakes={section.mistakes} />}
       {section.tip && <TipCallout tip={section.tip} />}
+      {section.forms?.length > 0 && <SectionForms forms={section.forms} />}
       {section.lookHere?.length > 0 && <LookHere items={section.lookHere} />}
       {section.scenario && <ScenarioChallenge key={`s${index}`} scenario={section.scenario} />}
       {section.quiz && <QuickCheck key={`q${index}`} question={section.quiz} />}

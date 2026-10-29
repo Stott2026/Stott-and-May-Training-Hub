@@ -13,7 +13,7 @@ export const section = defineType({
     { name: "practice", title: "Tactics, phrases and mistakes" },
     { name: "structure", title: "Steps, tables and tips" },
     { name: "scenario", title: "Scenario" },
-    { name: "resources", title: "Look here" },
+    { name: "resources", title: "Look here and forms" },
   ],
   fields: [
     defineField({
@@ -139,6 +139,15 @@ export const section = defineType({
           preview: { select: { title: "title", subtitle: "where" } },
         },
       ],
+    }),
+    defineField({
+      name: "forms",
+      title: "Forms to use (optional)",
+      type: "array",
+      group: "resources",
+      description: "Forms from the Documents & Forms tab that help with this section. Shown as a 'Use this form' card in the section.",
+      of: [{ type: "reference", to: [{ type: "formDocument" }] }],
+      validation: (r) => r.unique().max(3),
     }),
     defineField({ ...textList("tactics", "Key tactics", "Practical actions. Each one becomes a tick box for the learner. Drag to reorder."), group: "practice" }),
     defineField({ ...textList("phrases", "Phrases to use", "Word-for-word lines a consultant can say or write. Each one appears as a speech bubble with a copy button."), group: "practice" }),

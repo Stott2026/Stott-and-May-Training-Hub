@@ -104,6 +104,7 @@ function ModuleView({ module, startAt, completed, onToggleComplete }) {
               onNext={() => (current === total - 1 ? (done === total ? setCelebrate(true) : goTo(module.sections.findIndex((_, i) => !completed[i]))) : goTo(current + 1))}
             />
           )}
+          <ModuleLibrary items={module.library} accent={module.accent} place="below" />
         </div>
       </div>
       {/* Concept only, in the preview build: the planned "Ask May" coach, aware of the current section. */}

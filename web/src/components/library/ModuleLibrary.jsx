@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { Link } from "react-router";
 import IconBadge from "../IconBadge.jsx";
 import { Icon } from "../icons.jsx";
@@ -5,11 +6,13 @@ import { canDownload, downloadUrl, fileDetails, kindOf } from "../../lib/library
 import "./ModuleLibrary.css";
 
 // Beside a module's sections: its files from the Library, such as the classroom deck.
-export default function ModuleLibrary({ items = [], accent = "brand" }) {
+// "place" is "side" (beside the sections, on wider screens) or "below" (under them, on phones).
+export default function ModuleLibrary({ items = [], accent = "brand", place = "side" }) {
+  const titleId = useId();
   if (!items.length) return null;
   return (
-    <section className="module-library" aria-labelledby="module-library-title">
-      <h2 id="module-library-title" className="module-library__heading">From the Library</h2>
+    <section className={`module-library module-library--${place}`} aria-labelledby={titleId}>
+      <h2 id={titleId} className="module-library__heading">From the Library</h2>
       <ul className="module-library__list">
         {items.map((item) => {
           const kind = kindOf(item.kind);

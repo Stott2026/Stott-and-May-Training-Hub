@@ -14,8 +14,16 @@
 .form-sheet__meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6); padding: var(--space-4); border-radius: var(--radius-md); background: var(--color-surface-sunken); }
 
 /* Printing: just the form, on white, with what was typed. */
+/* Links back to the training modules that use this form */
+.form-page__training { margin-top: var(--space-6); }
+.form-page__training-title { font-size: var(--text-md); font-weight: var(--weight-extrabold); margin-bottom: var(--space-3); }
+.form-page__training-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.form-page__training-link { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill); background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--shadow-sm); color: var(--color-text); font-weight: var(--weight-semibold); text-decoration: none; }
+.form-page__training-link:hover { border-color: var(--color-accent); }
+.form-page__training-link svg { color: var(--color-link); }
+
 @media print {
-  .topnav, .skip-link, .form-page__back, .form-sheet__actions, .ask-may { display: none !important; }
+  .topnav, .skip-link, .form-page__back, .form-sheet__actions, .form-page__training, .ask-may { display: none !important; }
   body, .app-main { background: var(--color-surface) !important; }
   .form-page { padding: 0; max-width: none; }
   .form-sheet { box-shadow: none; padding: 0; }

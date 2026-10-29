@@ -59,6 +59,21 @@ export default function FormPage() {
 
         <FormBlocks blocks={form.blocks} values={draft.values} set={draft.set} />
       </article>
+
+      {form.usedIn?.length > 0 && (
+        <nav className="form-page__training" aria-labelledby="form-training-title">
+          <h2 id="form-training-title" className="form-page__training-title">Learn more in the training</h2>
+          <ul className="form-page__training-list">
+            {form.usedIn.map((m) => (
+              <li key={m._id}>
+                <Link to={`/modules/${m.slug}`} className="form-page__training-link">
+                  <Icon name="graduation-cap" size={18} /> {m.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
     </div>
   );
 }

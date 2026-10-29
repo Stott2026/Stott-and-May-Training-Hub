@@ -16,7 +16,8 @@
     "import:library": "dotenv -e ../.env -- node migrations/import-library-decks.js",
     "import:management": "dotenv -e ../.env -- node migrations/import-management.js",
     "import:marketing-hub": "dotenv -e ../.env -- node migrations/import-marketing-hub.js",
-    "import:forms": "dotenv -e ../.env -- node migrations/import-forms.js"
+    "import:forms": "dotenv -e ../.env -- node migrations/import-forms.js",
+    "link:forms": "dotenv -e ../.env -- node migrations/link-forms.js"
   },
   "dependencies": {
     "@sanity/client": "^8.9.0",

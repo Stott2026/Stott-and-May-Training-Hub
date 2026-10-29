@@ -8,3 +8,8 @@
   .module-layout__side { position: sticky; top: var(--nav-height); z-index: 10; }
 }
 .module-layout__side { min-width: 0; }
+
+/* The Library card sits beside the sections on wider screens and under them on phones,
+   so it doesn't make the sticky journey bar too tall. */
+@media (max-width: 899px) { .module-library--side { display: none; } .module-library--below { margin-top: var(--space-6); } }
+@media (min-width: 900px) { .module-library--below { display: none; } }
