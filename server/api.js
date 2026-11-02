@@ -3,11 +3,13 @@ import { Readable } from "node:stream";
 import { Router } from "express";
 import { sanity, queries } from "./sanity.js";
 import { searchHub, withQuickChecks } from "./content.js";
+import { mayEnabled } from "./may.js";
 
 export const api = Router();
 
 api.get("/site", async (req, res) => {
-  res.json((await sanity.fetch(queries.site)) ?? {});
+  // may: whether Ask May is switched on (it is when ANTHROPIC_API_KEY is set).
+  res.json({ ...((await sanity.fetch(queries.site)) ?? {}), may: mayEnabled });
 });
 
 api.get("/home", async (req, res) => {

@@ -20,6 +20,7 @@ import { groupModules } from "../lib/groupModules.js";
 import LibraryCard from "../components/library/LibraryCard.jsx";
 import { usePathProgress } from "../components/StartHerePath.jsx";
 import { useAchievements } from "../lib/achievements.jsx";
+import { MeetMayCard } from "../components/AskMay.jsx";
 import "./LibraryPage.css";
 import "./HomePage.css";
 
@@ -140,6 +141,7 @@ export default function HomePage() {
 
             {/* Concept only, in the preview build: the planned "Ask May" coach. */}
             {showMayConcept && <AskMayConcept />}
+            <MeetMayCard />
 
             {/* ── Modules: one group at a time (groups are categories in Sanity) ── */}
             {group && (

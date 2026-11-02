@@ -9,6 +9,7 @@ import ToolMark from "../components/tech/ToolMark.jsx";
 import FlipCards from "../components/module/FlipCards.jsx";
 import { useApi } from "../lib/api.js";
 import { useProgress } from "../lib/progress.jsx";
+import { useMayPlace } from "../lib/may.jsx";
 import { TOOL_CAPABILITIES } from "../../../studio/schemaTypes/options.js";
 import "../components/module/ModuleContent.css";
 import "../components/module/Activities.css";
@@ -20,6 +21,7 @@ export default function ToolPage() {
   const { slug } = useParams();
   const { data: tool, error } = useApi(`/tech/${slug}`);
   const progress = useProgress();
+  useMayPlace(tool?.slug === slug ? { type: "tool", slug, name: tool.name, label: `Technology · ${tool.name}` } : null);
   useEffect(() => { if (tool) document.title = `${tool.name} · Technology · Stott and May Training Hub`; }, [tool]);
   if (error || !tool || tool.slug !== slug) return <LoadState error={error} notFoundText="We couldn't find that tool" />;
 

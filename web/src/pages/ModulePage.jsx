@@ -9,6 +9,7 @@ import ModuleLibrary from "../components/library/ModuleLibrary.jsx";
 import AskMayConcept, { showMayConcept } from "../components/AskMayConcept.jsx";
 import { useApi } from "../lib/api.js";
 import { useProgress } from "../lib/progress.jsx";
+import { useMayPlace } from "../lib/may.jsx";
 import { useSetNavArea } from "../lib/navArea.jsx";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import "./ModulePage.css";
@@ -69,6 +70,9 @@ function ModuleView({ module, startAt, completed, onToggleComplete }) {
     contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   useEffect(() => { contentRef.current?.focus({ preventScroll: true }); }, [current, celebrate]);
+  // Ask May knows which section the learner is reading.
+  const here = module.sections[current];
+  useMayPlace(here && { type: "section", module: module.slug, section: here._key, label: `${module.title} · ${here.title}`, scenario: !!here.scenario?.title });
 
   const completeAndContinue = () => {
     if (!completed[current]) onToggleComplete(current);

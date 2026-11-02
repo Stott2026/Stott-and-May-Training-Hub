@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { api } from "./api.js";
 import { auth, requireSignIn, session } from "./auth.js";
+import { may } from "./may.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const webRoot = path.resolve(here, "../web");
@@ -32,6 +33,9 @@ app.use(requireSignIn);
 app.get("/api/me", (req, res) => {
   res.json({ name: req.user.name, email: req.user.email });
 });
+
+// Ask May, the AI training coach. Signed-in staff only, like everything else.
+app.use("/api/may", express.json({ limit: "100kb" }), may);
 
 // Training content from Sanity: home page, values, modules, quiz and search.
 app.use("/api", api);

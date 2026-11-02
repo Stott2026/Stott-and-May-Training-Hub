@@ -3,10 +3,12 @@ import BlockHeading from "./BlockHeading.jsx";
 import Button from "../Button.jsx";
 import Eyebrow from "../Eyebrow.jsx";
 import { Icon } from "../icons.jsx";
+import { useLiveMay } from "../AskMay.jsx";
 
 // A real-world scenario set as a challenge: think first, then reveal the weak and strong approaches.
 export default function ScenarioChallenge({ scenario }) {
   const [revealed, setRevealed] = useState(false);
+  const may = useLiveMay();
   return (
     <section className="content-block scenario">
       <BlockHeading icon="target" title="Your challenge" hint="A real situation from the desk." />
@@ -17,7 +19,10 @@ export default function ScenarioChallenge({ scenario }) {
       {!revealed ? (
         <div className="scenario__prompt">
           <p>How would you handle it? Take a moment to think about what you'd say, then compare.</p>
-          <Button icon="eye" onClick={() => setRevealed(true)}>Reveal the approaches</Button>
+          <div className="scenario__buttons">
+            <Button icon="eye" onClick={() => setRevealed(true)}>Reveal the approaches</Button>
+            {may && <Button variant="secondary" icon="users" onClick={() => may.open("Let's role-play this section's scenario. You start.", "roleplay")}>Role-play it with May</Button>}
+          </div>
         </div>
       ) : (
         <div className="scenario__answers">

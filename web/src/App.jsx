@@ -18,6 +18,9 @@ import { NavAreaProvider, useNavArea } from "./lib/navArea.jsx";
 import { SiteProvider, useSite } from "./lib/site.jsx";
 import { AchievementsProvider, useAchievements } from "./lib/achievements.jsx";
 import Celebration from "./components/Celebration.jsx";
+import AskMay from "./components/AskMay.jsx";
+import { showMayConcept } from "./components/AskMayConcept.jsx";
+import { MayProvider } from "./lib/may.jsx";
 import { useApi } from "./lib/api.js";
 
 const NAV = [
@@ -59,6 +62,13 @@ function Shell({ user, children }) {
   return <AppShell navItems={NAV} quickLinks={quickLinks ?? []} level={level} current={current} user={user}>{children}</AppShell>;
 }
 
+// The real Ask May, when it's switched on (the server has an Anthropic API key). The preview
+// build has no server, so it shows the concept instead.
+function LiveMay() {
+  const { may } = useSite();
+  return may && !showMayConcept ? <AskMay /> : null;
+}
+
 export default function App() {
   const { data: me } = useApi("/me");
   const user = me && { name: me.name, initials: initialsOf(me.name), canSignOut: !me.preview };
@@ -67,6 +77,7 @@ export default function App() {
       <SiteProvider>
       <ProgressProvider>
       <AchievementsProvider>
+        <MayProvider>
         <NavAreaProvider>
           <ScrollToTop />
           <Shell user={user}>
@@ -86,7 +97,9 @@ export default function App() {
             </Routes>
           </Shell>
           <Celebration />
+          <LiveMay />
         </NavAreaProvider>
+        </MayProvider>
       </AchievementsProvider>
       </ProgressProvider>
       </SiteProvider>
