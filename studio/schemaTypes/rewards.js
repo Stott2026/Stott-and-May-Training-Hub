@@ -12,7 +12,8 @@ export const rewards = defineType({
   icon: StarIcon,
   groups: [{ name: "levels", title: "Levels and points", default: true }, { name: "badges", title: "Badges" }],
   fields: [
-    defineField({ name: "title", title: "Heading on the home page", type: "string", group: "levels", initialValue: "Your achievements", validation: (r) => r.required().max(40) }),
+    defineField({ name: "title", title: "Heading", type: "string", group: "levels", initialValue: "Your achievements", validation: (r) => r.required().max(40) }),
+    defineField({ name: "intro", title: "Introduction", type: "text", rows: 2, group: "levels", description: "Shown at the top of the achievements page.", validation: (r) => r.max(200) }),
     defineField({
       name: "points",
       title: "Points for each action",

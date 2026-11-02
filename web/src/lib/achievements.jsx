@@ -118,6 +118,7 @@ export function AchievementsProvider({ children }) {
   const value = useMemo(() => ({
     enabled: !!result,
     title: rewards?.title,
+    intro: rewards?.intro,
     ...result,
     celebration: celebrations[0] ?? null,
     dismiss: () => setCelebrations((c) => c.slice(1)),

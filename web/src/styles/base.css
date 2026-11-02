@@ -91,3 +91,8 @@ a {
     scroll-behavior: auto !important;
   }
 }
+
+/* Section headings shared by the home, new-starter and achievements pages. */
+.section-title { font-size: var(--text-xl); font-weight: var(--weight-extrabold); margin-bottom: var(--space-3); }
+.section-lead { color: var(--color-text-muted); max-width: 40rem; margin-bottom: var(--space-4); }
+.section-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--space-4); margin-bottom: var(--space-5); }

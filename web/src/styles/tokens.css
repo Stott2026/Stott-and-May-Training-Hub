@@ -119,6 +119,7 @@
   --accent-bar: 4px;          /* gradient top border on cards */
   --content-width: 72rem;
   --reading-width: 46rem;
+  --nav-max-width: 90rem; /* the top bar on very wide screens */
   --nav-height: 4rem;
 
   --duration-fast: 150ms;

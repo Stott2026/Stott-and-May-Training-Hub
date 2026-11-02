@@ -28,7 +28,7 @@ export default function Celebration() {
             <p className="celebration__title">{c.kind === "level" ? `You're now a ${c.level.title}` : c.badge.title}</p>
             <p className="celebration__note">
               {c.kind === "level" ? "Keep going to reach the next level." : c.badge.description}{" "}
-              <Link to="/#achievements" onClick={dismiss} className="celebration__link">See your badges</Link>
+              <Link to="/achievements" onClick={dismiss} className="celebration__link">See your badges</Link>
             </p>
           </div>
           <button type="button" className="celebration__close" onClick={dismiss} aria-label="Close">

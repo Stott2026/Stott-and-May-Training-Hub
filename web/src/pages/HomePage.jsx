@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import Button from "../components/Button.jsx";
 import Card from "../components/Card.jsx";
 import Eyebrow from "../components/Eyebrow.jsx";
@@ -18,26 +18,24 @@ import { useProgress } from "../lib/progress.jsx";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import { groupModules } from "../lib/groupModules.js";
 import LibraryCard from "../components/library/LibraryCard.jsx";
-import StartHerePath, { usePathProgress } from "../components/StartHerePath.jsx";
-import AchievementsCard from "../components/AchievementsCard.jsx";
+import { usePathProgress } from "../components/StartHerePath.jsx";
+import { useAchievements } from "../lib/achievements.jsx";
 import "./LibraryPage.css";
 import "./HomePage.css";
 
-const VALUE_ACCENTS = ["brand", "sky", "lime"];
+const GROUP_KEY = "sm-hub-module-group";
 
-// The hub home page: header and search, overall progress, values and the module grid.
+// The Training page: header and search, progress (with achievements), a pointer to the Start here
+// path for new starters, and the modules one group at a time.
 export default function HomePage() {
   const home = useApi("/home");
-  const values = useApi("/values");
   const modules = useApi("/modules");
   const { countDone } = useProgress();
   const path = usePathProgress(home.data?.startHere);
-  // "See your badges" links here with #achievements: scroll to them once the page has loaded.
-  const { hash } = useLocation();
-  const loaded = !!(home.data && values.data && modules.data);
-  useEffect(() => {
-    if (loaded && hash) document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [loaded, hash]);
+  const ach = useAchievements();
+  // The module group being shown, remembered in this browser.
+  const [groupId, setGroupId] = useState(() => { try { return localStorage.getItem(GROUP_KEY); } catch { return null; } });
+  const chooseGroup = (id) => { setGroupId(id); try { localStorage.setItem(GROUP_KEY, id); } catch { /* not remembered */ } };
 
   // The search words live in the page address (?q=), so Back returns to the results.
   const [params, setParams] = useSearchParams();
@@ -45,10 +43,10 @@ export default function HomePage() {
   const setSearch = (q) => setParams(q ? { q } : {}, { replace: true });
   const searching = search.trim().length >= 2;
 
-  const error = home.error || values.error || modules.error;
-  if (error || !home.data || !values.data || !modules.data) return <LoadState error={error} />;
+  const error = home.error || modules.error;
+  if (error || !home.data || !modules.data) return <LoadState error={error} />;
 
-  const { heroTitle, heroIntro, heroImage, philosophyTitle, philosophyText } = home.data;
+  const { heroTitle, heroIntro, heroImage } = home.data;
   const total = modules.data.reduce((n, m) => n + (m.sectionKeys?.length ?? 0), 0);
   const done = modules.data.reduce((n, m) => n + countDone(m.slug, m.sectionKeys), 0);
   const overall = total ? (done / total) * 100 : 0;
@@ -57,6 +55,7 @@ export default function HomePage() {
   const counts = groups.flatMap((g) => g.modules).map((m) => [m, countDone(m.slug, m.sectionKeys), m.sectionKeys?.length ?? 0]);
   // The Start here path comes first while it has modules left.
   const resume = path.nextModule ?? (counts.find(([, d, t]) => d > 0 && d < t) ?? counts.find(([, d, t]) => d < t))?.[0];
+  const group = groups.find((g) => g.id === groupId) ?? groups[0];
 
   return (
     <>
@@ -96,7 +95,7 @@ export default function HomePage() {
           <SearchResults search={search} />
         ) : (
           <>
-            {/* ── Overall progress ── */}
+            {/* ── Overall progress, with level, points, streak and badges ── */}
             <Card className="progress-card">
               <ProgressRing value={overall} size={104} label="Overall progress" />
               <div className="progress-card__body">
@@ -105,6 +104,15 @@ export default function HomePage() {
                   {done === 0 ? "Ready when you are" : done === total ? "Every module complete" : "Keep the momentum going"}
                 </h2>
                 <ProgressBar value={overall} label={`${done} of ${total} sections complete`} showValue size="md" />
+                {ach.enabled && (
+                  <Link to="/achievements" className="progress-card__stats">
+                    <span><Icon name="crown" size={16} /> Level {ach.levelIndex + 1} · {ach.level.title}</span>
+                    <span><Icon name="star" size={16} /> {ach.points.toLocaleString("en-GB")} points</span>
+                    <span><Icon name="flame" size={16} /> {ach.streak}-day streak</span>
+                    <span><Icon name="award" size={16} /> {ach.badges.filter((b) => b.earned).length} of {ach.badges.length} badges</span>
+                    <span className="progress-card__stats-go">See your achievements <Icon name="arrow-right" size={14} /></span>
+                  </Link>
+                )}
               </div>
               {resume && (
                 <Button iconAfter="arrow-right" to={`/modules/${resume.slug}`}>
@@ -113,57 +121,53 @@ export default function HomePage() {
               )}
             </Card>
 
-            {/* ── Points, level, streak and badges ── */}
-            <AchievementsCard />
-
-            {/* ── Start here path for new starters ── */}
-            {home.data.startHere && <StartHerePath path={home.data.startHere} />}
+            {/* ── New to the desk: a slim pointer to the Start here path until it's finished ── */}
+            {path.current >= 0 && (
+              <section className="start-strip" aria-labelledby="start-strip-title">
+                <IconBadge name="rocket" variant="solid" />
+                <div className="start-strip__body">
+                  <Eyebrow>New to the desk?</Eyebrow>
+                  <h2 id="start-strip-title" className="start-strip__title">
+                    {path.finishedCount === 0 && path.current === 0 ? "Start here: a step-by-step path through the training" : `Step ${path.current + 1} of ${path.steps.length}: ${path.steps[path.current].title}`}
+                  </h2>
+                  <ol className="start-strip__steps" aria-label={`${path.steps.filter((st) => st.finished).length} of ${path.steps.length} steps done`}>
+                    {path.steps.map((st, i) => <li key={st._key ?? i} className={st.finished ? "is-done" : i === path.current ? "is-current" : ""} />)}
+                  </ol>
+                </div>
+                <Button variant="secondary" iconAfter="arrow-right" to="/start">See your path</Button>
+              </section>
+            )}
 
             {/* Concept only, in the preview build: the planned "Ask May" coach. */}
             {showMayConcept && <AskMayConcept />}
 
-            {/* ── Philosophy and values ── */}
-            <Card tone="soft" topBar={false} className="values" aria-labelledby="values-title">
-              <div className="values__intro">
-                <div>
-                  <Eyebrow>Our philosophy</Eyebrow>
-                  <h2 id="values-title" className="section-title">{philosophyTitle}</h2>
-                  {philosophyText && <p className="section-lead">{philosophyText}</p>}
-                  <Wave height={24} />
-                </div>
-                <ShapeImage src={placeholderPhotos.values} shape="rings" className="values__person" />
-              </div>
-              <Eyebrow>Our values</Eyebrow>
-              <ul className="values__grid">
-                {values.data.map((v, i) => (
-                  <li key={v._id}>
-                    <Card className="value-card" accent={VALUE_ACCENTS[i % VALUE_ACCENTS.length]}>
-                      <IconBadge name={v.icon} variant="solid" accent={VALUE_ACCENTS[i % VALUE_ACCENTS.length]} />
-                      <h3 className="value-card__title">{v.title}</h3>
-                      <p className="value-card__desc">{v.description}</p>
-                    </Card>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-
-            {/* ── Modules, in their groups (categories in Sanity) ── */}
-            {groups.map((g, i) => (
-              <section key={g.id} aria-labelledby={`modules-title-${i}`}>
+            {/* ── Modules: one group at a time (groups are categories in Sanity) ── */}
+            {group && (
+              <section aria-labelledby="modules-title">
                 <div className="section-head">
                   <div>
-                    <Eyebrow>{g.modules.length} {g.modules.length === 1 ? "module" : "modules"}</Eyebrow>
-                    <h2 id={`modules-title-${i}`} className="section-title">{g.title}</h2>
-                    {g.description && <p className="section-lead">{g.description}</p>}
+                    <Eyebrow>{modules.data.length} modules</Eyebrow>
+                    <h2 id="modules-title" className="section-title">Training modules</h2>
                   </div>
                 </div>
-                <ul className="module-grid">
-                  {g.modules.map((m) => (
+                {groups.length > 1 && (
+                  <div className="library-filters module-groups" role="group" aria-label="Show modules from">
+                    {groups.map((g) => (
+                      <button key={g.id} type="button" className="library-filter" aria-pressed={g.id === group.id} onClick={() => chooseGroup(g.id)}>
+                        <span>{g.title}</span>
+                        <span className="library-filter__count">{g.modules.length}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+                {group.description && <p className="section-lead">{group.description}</p>}
+                <ul className="module-grid" key={group.id}>
+                  {group.modules.map((m) => (
                     <li key={m._id}><ModuleCard module={m} done={countDone(m.slug, m.sectionKeys)} /></li>
                   ))}
                 </ul>
               </section>
-            ))}
+            )}
           </>
         )}
       </div>

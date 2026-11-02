@@ -7,7 +7,8 @@ import "./AppShell.css";
 // The page frame: skip link, top navigation and the main content area.
 // navItems: [{ id, label, icon, href }]. user: { name, initials, canSignOut } for the signed-in person.
 // quickLinks: [{ label, url }] from Site settings, always shown as buttons that open in a new tab.
-export default function AppShell({ navItems = [], quickLinks = [], current, user, children }) {
+// level: { title, points } for the chip that opens the achievements page (none until switched on).
+export default function AppShell({ navItems = [], quickLinks = [], level, current, user, children }) {
   return (
     <>
       <a href="#main" className="skip-link">Skip to main content</a>
@@ -21,9 +22,9 @@ export default function AppShell({ navItems = [], quickLinks = [], current, user
             <ul>
               {navItems.map((item) => (
                 <li key={item.id}>
-                  <Link to={item.href} className="topnav__link" aria-current={current === item.id ? "page" : undefined}>
+                  <Link to={item.href} className="topnav__link" aria-current={current === item.id ? "page" : undefined} title={item.label}>
                     <Icon name={item.icon} size={18} />
-                    <span>{item.label}</span>
+                    <span className="topnav__link-label">{item.label}</span>
                   </Link>
                 </li>
               ))}
@@ -36,6 +37,13 @@ export default function AppShell({ navItems = [], quickLinks = [], current, user
               <Icon name="external-link" size={14} className="topnav__quick-out" />
             </a>
           ))}
+          {level && (
+            <Link to="/achievements" className="topnav__level" aria-current={current === "achievements" ? "page" : undefined} aria-label={`Your achievements: ${level.title}, ${level.points} points`}>
+              <Icon name="crown" size={16} />
+              <span className="topnav__level-title">{level.title}</span>
+              <span className="topnav__level-points">{level.points.toLocaleString("en-GB")}</span>
+            </Link>
+          )}
           {user && (
             <div className="topnav__user">
               <span className="topnav__user-name">{user.name}</span>

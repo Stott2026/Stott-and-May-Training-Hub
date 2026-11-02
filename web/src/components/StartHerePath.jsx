@@ -25,8 +25,9 @@ export function usePathProgress(path) {
   return { steps, current, nextModule, finishedCount: all.filter((m) => m.finished).length, moduleCount: all.length };
 }
 
-// The "Start here" path on the home page: a recommended order through the training for new starters.
-export default function StartHerePath({ path }) {
+// The "Start here" path: a recommended order through the training for new starters.
+// On the New to the desk page the page header already gives the title, so heading={false}.
+export default function StartHerePath({ path, heading = true }) {
   const { steps, current, finishedCount, moduleCount } = usePathProgress(path);
   if (!steps.length) return null;
   const complete = current === -1;
@@ -35,9 +36,9 @@ export default function StartHerePath({ path }) {
     <section className="start-here" aria-labelledby="start-here-title">
       <div className="start-here__head">
         <div>
-          <Eyebrow>New to the desk?</Eyebrow>
-          <h2 id="start-here-title" className="section-title">{path.title || "Start here"}</h2>
-          {path.intro && <p className="section-lead">{path.intro}</p>}
+          <Eyebrow>{heading ? "New to the desk?" : `${steps.length} steps`}</Eyebrow>
+          <h2 id="start-here-title" className="section-title">{heading ? path.title || "Start here" : "Your path"}</h2>
+          {heading && path.intro && <p className="section-lead">{path.intro}</p>}
         </div>
         <div className="start-here__summary">
           <ProgressBar value={moduleCount ? (finishedCount / moduleCount) * 100 : 0} label={complete ? "Path complete" : `${finishedCount} of ${moduleCount} modules done`} size="sm" />
