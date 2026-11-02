@@ -118,7 +118,7 @@ export const queries = {
   // The Technology tab: its page and every tool, with what the page's daily check and map need.
   tech: `{
     "page": *[_id == "techPage"][0]{
-      title, intro, ruleTitle, ruleText, "ruleTool": ruleTool->{ name, "slug": slug.current },
+      title, titleAccent, intro, ruleTitle, ruleText, "ruleTool": ruleTool->{ name, "slug": slug.current },
       bigFiveIntro, mapNote, programmeIntro, rhythm, tracks,
       "workflow": workflow[]{ _key, title, text, stage, "tools": tools[]->{ name, "slug": slug.current, icon, ${image("logo")} } },
       "phases": phases[]{ _key, weeks, title, text, gate, "tools": tools[]->{ name, "slug": slug.current } },

@@ -18,6 +18,7 @@ export const techPage = defineType({
   ],
   fields: [
     defineField({ name: "title", title: "Main heading", type: "string", group: "top", initialValue: "Technology", validation: (r) => r.required().max(60) }),
+    defineField({ name: "titleAccent", title: "Heading, second line (optional)", type: "string", group: "top", description: "Shown under the main heading in the accent colour, the brand's two-tone headline. For example: Learn it once, use it every day.", validation: (r) => r.max(60) }),
     defineField({ name: "intro", title: "Introduction", type: "text", rows: 3, group: "top", validation: (r) => r.max(300) }),
     defineField({ name: "ruleTitle", title: "The rule for day one", type: "string", group: "top", description: "For example: Bullhorn is the single source of truth.", validation: (r) => r.max(80) }),
     defineField({ name: "ruleText", title: "The rule, explained", type: "string", group: "top", validation: (r) => r.max(160) }),

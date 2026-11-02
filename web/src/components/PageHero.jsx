@@ -4,9 +4,11 @@ import Wave from "./Wave.jsx";
 import "./PageHero.css";
 
 // The gradient header at the top of the Library and Managers pages.
-export default function PageHero({ eyebrow, title, intro, photo, children }) {
+// decoration: optional background shapes behind the content.
+export default function PageHero({ eyebrow, title, intro, photo, decoration, children }) {
   return (
     <section className="page-hero" aria-labelledby="page-hero-title">
+      {decoration}
       <div className="page-hero__wave" aria-hidden="true"><Wave variant="glow" /></div>
       <div className="container page-hero__inner">
         <div>

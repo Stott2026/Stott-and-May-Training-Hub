@@ -36,10 +36,12 @@ export default function ToolPage() {
   };
   const caps = TOOL_CAPABILITIES.filter((c) => tool.capabilities?.includes(c.value));
 
+  // Technology is the pilot for the brand's dark mode (tokens.css, [data-theme="dark"]).
   return (
-    <>
+    <div className="theme-dark" data-theme="dark">
       <section className="tool-hero" data-accent={tool.accent || "brand"} aria-labelledby="tool-title">
         <div className="tool-hero__wave" aria-hidden="true"><Wave variant="glow" /></div>
+      <div className="tech-shapes" aria-hidden="true"><span /><span /><span /><span /></div>
         <div className="container">
           <Link to="/tech" className="tool-hero__back"><Icon name="arrow-left" size={18} /> All tools</Link>
           <div className="tool-hero__inner">
@@ -148,6 +150,6 @@ export default function ToolPage() {
         {tool.previous ? <Link to={`/tech/${tool.previous.slug}`} className="tool-next__link"><Icon name="arrow-left" size={16} /> {tool.previous.name}</Link> : <span />}
         {tool.next && <Link to={`/tech/${tool.next.slug}`} className="tool-next__link tool-next__link--next">Next: {tool.next.name} <Icon name="arrow-right" size={16} /></Link>}
       </nav>
-    </>
+    </div>
   );
 }

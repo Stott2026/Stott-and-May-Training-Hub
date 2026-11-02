@@ -30,13 +30,20 @@ export default function TechPage() {
   const more = tools.filter((t) => !t.core);
   const feeders = tools.filter((t) => t.core && t.slug !== page.ruleTool?.slug);
 
+  // Technology is the pilot for the brand's dark mode (tokens.css, [data-theme="dark"]).
   return (
-    <>
-      <PageHero eyebrow="Stott and May" title={page.title || "Technology"} intro={page.intro} photo={placeholderPhotos.values}>
-        <ul className="tech-facts">
-          {core.length > 0 && <li><Icon name="laptop" size={16} /> {core.length} core systems</li>}
-          {page.phases?.length > 0 && <li><Icon name="shield-check" size={16} /> {page.phases.length} gated phases</li>}
-          {more.length > 0 && <li><Icon name="plus" size={16} /> {more.length} more tools</li>}
+    <div className="theme-dark" data-theme="dark">
+      <PageHero
+        eyebrow="Stott and May"
+        title={<>{page.title || "Technology"}{page.titleAccent && <span className="headline-accent">{page.titleAccent}</span>}</>}
+        intro={page.intro}
+        photo={placeholderPhotos.values}
+        decoration={<div className="tech-shapes" aria-hidden="true"><span /><span /><span /><span /></div>}
+      >
+        <ul className="stat-tiles">
+          {core.length > 0 && <li className="stat-tile"><span className="stat-tile__number">{core.length}</span><span className="stat-tile__label">core systems</span></li>}
+          {page.phases?.length > 0 && <li className="stat-tile"><span className="stat-tile__number">{page.phases.length}</span><span className="stat-tile__label">gated phases</span></li>}
+          {tools.length > 0 && <li className="stat-tile"><span className="stat-tile__number">{tools.length}</span><span className="stat-tile__label">tools to master</span></li>}
         </ul>
       </PageHero>
 
@@ -80,7 +87,7 @@ export default function TechPage() {
 
         <Programme page={page} />
       </div>
-    </>
+    </div>
   );
 }
 
