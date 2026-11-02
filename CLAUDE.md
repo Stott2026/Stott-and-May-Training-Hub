@@ -82,6 +82,7 @@ Run all of these from the project root. Needs Node 22.12 or newer.
 | Add the Marketing Hub quick link and "Look here" cards as drafts | `npm run import:marketing-hub` (add `-- --dry-run` to check first). Quick links (top-bar buttons) live in Site settings in the Studio; a Look here card with no address of its own links to the first quick link |
 | Import the fillable forms for the Documents & Forms tab as drafts | `npm run import:forms` (17 forms from `studio/migrations/data/forms.json`; add `-- --dry-run` to check first, `-- --replace` to overwrite the drafts; needs `SANITY_WRITE_TOKEN`). What people type in a form stays in their own browser only |
 | Link training sections to the forms ("Use this form" cards) as drafts | `npm run link:forms` (run after `import:forms`; add `-- --dry-run` to check first). The links are set per section in the Studio under "Look here and forms"; each form page lists the modules that use it |
+| Add the first "Start here" path for new starters as a draft | `npm run import:start-here` (add `-- --dry-run` to check first; leaves an existing path alone). Edit it in the Studio under "Start here path": steps with a timing, modules and forms to practise with. It shows on the home page under Your progress |
 | Import the prototype content into Sanity | `npm run import:prototype` (add `-- --dry-run` to check first; needs `SANITY_WRITE_TOKEN`) |
 
 ### Deploying (Railway)

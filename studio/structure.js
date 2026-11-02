@@ -6,6 +6,7 @@ import { ClipboardIcon } from "@sanity/icons/Clipboard";
 import { HeartIcon } from "@sanity/icons/Heart";
 import { HelpCircleIcon } from "@sanity/icons/HelpCircle";
 import { HomeIcon } from "@sanity/icons/Home";
+import { RocketIcon } from "@sanity/icons/Rocket";
 import { TagIcon } from "@sanity/icons/Tag";
 
 // The menu editors see down the left of the Studio.
@@ -15,6 +16,7 @@ export const structure = (S) =>
     .items([
       S.listItem().title("Site settings").icon(CogIcon).child(S.document().schemaType("siteSettings").documentId("siteSettings")),
       S.listItem().title("Home page").icon(HomeIcon).child(S.document().schemaType("homePage").documentId("homePage")),
+      S.listItem().title("Start here path").icon(RocketIcon).child(S.document().schemaType("startHere").documentId("startHere")),
       S.divider(),
       S.documentTypeListItem("trainingModule").title("Training modules").icon(BookIcon)
         .child(S.documentTypeList("trainingModule").title("Training modules").defaultOrdering([{ field: "order", direction: "asc" }])),

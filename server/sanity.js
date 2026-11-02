@@ -41,7 +41,14 @@ const LIBRARY_ITEM = `
 export const queries = {
   site: `*[_id == "siteSettings"][0]{ "quickLinks": quickLinks[]{ _key, label, url } }`,
 
-  home: `*[_id == "homePage"][0]{ heroTitle, heroIntro, ${image("heroImage")}, philosophyTitle, philosophyText }`,
+  home: `*[_id == "homePage"][0]{ heroTitle, heroIntro, ${image("heroImage")}, philosophyTitle, philosophyText,
+    // The "Start here" path for new starters (its own document in the Studio).
+    "startHere": *[_id == "startHere"][0]{ title, intro, steps[]{
+      _key, timing, title, note,
+      "modules": modules[]->{ _id, title, "slug": slug.current, icon, accent, "sectionKeys": sections[]._key },
+      "forms": forms[]->{ _id, title, "slug": slug.current, icon }
+    } }
+  }`,
 
   values: `*[_type == "value"] | order(order asc){ _id, title, description, icon }`,
 

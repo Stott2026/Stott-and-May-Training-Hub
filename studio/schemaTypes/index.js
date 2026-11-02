@@ -10,5 +10,6 @@ import { managersPage } from "./managersPage.js";
 import { siteSettings } from "./siteSettings.js";
 import { formDocument } from "./formDocument.js";
 import { formsPage } from "./formsPage.js";
+import { startHere } from "./startHere.js";
 
-export const schemaTypes = [trainingModule, section, quizQuestion, value, category, homePage, libraryItem, libraryPage, managersPage, siteSettings, formDocument, formsPage];
+export const schemaTypes = [trainingModule, section, quizQuestion, value, category, homePage, libraryItem, libraryPage, managersPage, siteSettings, formDocument, formsPage, startHere];

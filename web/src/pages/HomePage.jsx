@@ -18,6 +18,7 @@ import { useProgress } from "../lib/progress.jsx";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import { groupModules } from "../lib/groupModules.js";
 import LibraryCard from "../components/library/LibraryCard.jsx";
+import StartHerePath, { usePathProgress } from "../components/StartHerePath.jsx";
 import "./LibraryPage.css";
 import "./HomePage.css";
 
@@ -29,6 +30,7 @@ export default function HomePage() {
   const values = useApi("/values");
   const modules = useApi("/modules");
   const { countDone } = useProgress();
+  const path = usePathProgress(home.data?.startHere);
 
   // The search words live in the page address (?q=), so Back returns to the results.
   const [params, setParams] = useSearchParams();
@@ -46,7 +48,8 @@ export default function HomePage() {
   // The module to continue: the first one started but not finished, otherwise the first not finished.
   const groups = groupModules(modules.data);
   const counts = groups.flatMap((g) => g.modules).map((m) => [m, countDone(m.slug, m.sectionKeys), m.sectionKeys?.length ?? 0]);
-  const resume = (counts.find(([, d, t]) => d > 0 && d < t) ?? counts.find(([, d, t]) => d < t))?.[0];
+  // The Start here path comes first while it has modules left.
+  const resume = path.nextModule ?? (counts.find(([, d, t]) => d > 0 && d < t) ?? counts.find(([, d, t]) => d < t))?.[0];
 
   return (
     <>
@@ -102,6 +105,9 @@ export default function HomePage() {
                 </Button>
               )}
             </Card>
+
+            {/* ── Start here path for new starters ── */}
+            {home.data.startHere && <StartHerePath path={home.data.startHere} />}
 
             {/* Concept only, in the preview build: the planned "Ask May" coach. */}
             {showMayConcept && <AskMayConcept />}
