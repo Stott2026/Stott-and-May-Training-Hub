@@ -28,6 +28,7 @@ export const ICON_OPTIONS = [
   { title: "Graduation cap", value: "graduation-cap" },
   { title: "Presentation", value: "presentation" },
   { title: "Clipboard", value: "clipboard-list" },
+  { title: "Checklist", value: "list-checks" },
   { title: "Library", value: "library" },
   { title: "Briefcase", value: "briefcase" },
   { title: "Phone", value: "phone" },
