@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router";
+import { Link, useLocation, useSearchParams } from "react-router";
 import Button from "../components/Button.jsx";
 import Card from "../components/Card.jsx";
 import Eyebrow from "../components/Eyebrow.jsx";
@@ -19,6 +19,7 @@ import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import { groupModules } from "../lib/groupModules.js";
 import LibraryCard from "../components/library/LibraryCard.jsx";
 import StartHerePath, { usePathProgress } from "../components/StartHerePath.jsx";
+import AchievementsCard from "../components/AchievementsCard.jsx";
 import "./LibraryPage.css";
 import "./HomePage.css";
 
@@ -31,6 +32,12 @@ export default function HomePage() {
   const modules = useApi("/modules");
   const { countDone } = useProgress();
   const path = usePathProgress(home.data?.startHere);
+  // "See your badges" links here with #achievements: scroll to them once the page has loaded.
+  const { hash } = useLocation();
+  const loaded = !!(home.data && values.data && modules.data);
+  useEffect(() => {
+    if (loaded && hash) document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [loaded, hash]);
 
   // The search words live in the page address (?q=), so Back returns to the results.
   const [params, setParams] = useSearchParams();
@@ -105,6 +112,9 @@ export default function HomePage() {
                 </Button>
               )}
             </Card>
+
+            {/* ── Points, level, streak and badges ── */}
+            <AchievementsCard />
 
             {/* ── Start here path for new starters ── */}
             {home.data.startHere && <StartHerePath path={home.data.startHere} />}

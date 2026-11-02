@@ -1,10 +1,13 @@
-import { useId } from "react";
+import { useEffect, useId, useState } from "react";
 import "./ProgressRing.css";
 
 // Circular progress, like the brand "Milestone progress" chart card. value is 0–100.
 export default function ProgressRing({ value = 0, size = 96, stroke = 10, label = "Progress" }) {
   const id = useId();
   const pct = Math.max(0, Math.min(100, Math.round(value)));
+  // Starts empty and fills up to the value just after it appears.
+  const [shown, setShown] = useState(0);
+  useEffect(() => { const f = requestAnimationFrame(() => setShown(pct)); return () => cancelAnimationFrame(f); }, [pct]);
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
   return (
@@ -25,7 +28,7 @@ export default function ProgressRing({ value = 0, size = 96, stroke = 10, label 
           strokeWidth={stroke}
           stroke={`url(#${id})`}
           strokeDasharray={c}
-          strokeDashoffset={c * (1 - pct / 100)}
+          strokeDashoffset={c * (1 - shown / 100)}
         />
       </svg>
       <span className="ring__value" style={{ fontSize: Math.max(12, Math.round(size * 0.2)) }}>{pct}%</span>

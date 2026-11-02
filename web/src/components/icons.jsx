@@ -8,10 +8,19 @@ import {
   ArrowLeft, Laptop, ChevronLeft, ChevronRight, CircleX, Copy, ListChecks, PartyPopper, TriangleAlert, Eye, Quote, Map,
   Presentation, Download, LayoutTemplate, ClipboardList, Library, Briefcase, ExternalLink, FolderOpen,
   Phone, Calendar, FileCheck, ChartColumn, Banknote, Printer, RotateCcw, Minus, Plus,
+  Award, Crown, Flame, Footprints, Lock, Medal, Star, Zap,
 } from "lucide-react";
 
 export const icons = {
   "arrow-left": ArrowLeft,
+  award: Award,
+  crown: Crown,
+  flame: Flame,
+  footprints: Footprints,
+  lock: Lock,
+  medal: Medal,
+  star: Star,
+  zap: Zap,
   "arrow-right": ArrowRight,
   "badge-check": BadgeCheck,
   "book-open": BookOpen,

@@ -1,12 +1,19 @@
 import { useState } from "react";
 import BlockHeading from "./BlockHeading.jsx";
 import { Icon } from "../icons.jsx";
+import { useProgress } from "../../lib/progress.jsx";
 
 // One multiple-choice question with instant feedback.
 export default function QuickCheck({ question }) {
   const [chosen, setChosen] = useState(null);
   const answered = chosen !== null;
   const right = chosen === question.correct;
+  const { markQuickCheck } = useProgress();
+  const choose = (i) => {
+    if (answered) return;
+    setChosen(i);
+    if (i === question.correct && question._id) markQuickCheck(question._id);
+  };
   return (
     <section className="content-block quick-check">
       <BlockHeading icon="brain" title="Quick check" hint="One question to lock in what you've learnt." />
@@ -15,7 +22,7 @@ export default function QuickCheck({ question }) {
         {question.options.map((o, i) => {
           const state = !answered ? "" : i === question.correct ? "is-correct" : i === chosen ? "is-wrong" : "is-dim";
           return (
-            <button key={i} type="button" className={`quick-check__option ${state}`} onClick={() => !answered && setChosen(i)} aria-disabled={answered}>
+            <button key={i} type="button" className={`quick-check__option ${state}`} onClick={() => choose(i)} aria-disabled={answered}>
               <span className="quick-check__letter" aria-hidden="true">{String.fromCharCode(65 + i)}</span>
               <span>{o}</span>
               {answered && i === question.correct && <Icon name="circle-check" size={20} className="quick-check__mark" />}

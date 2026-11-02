@@ -12,6 +12,8 @@ import FormPage from "./pages/FormPage.jsx";
 import { ProgressProvider } from "./lib/progress.jsx";
 import { NavAreaProvider, useNavArea } from "./lib/navArea.jsx";
 import { SiteProvider, useSite } from "./lib/site.jsx";
+import { AchievementsProvider } from "./lib/achievements.jsx";
+import Celebration from "./components/Celebration.jsx";
 import { useApi } from "./lib/api.js";
 
 const NAV = [
@@ -23,12 +25,13 @@ const NAV = [
 
 // Back to the top of the page whenever the page (not just the search words) changes.
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
+    if (hash) return;
     window.scrollTo(0, 0);
     if (pathname === "/") document.title = "Stott and May Training Hub";
     if (pathname === "/quiz") document.title = "Quiz · Stott and May Training Hub";
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
 }
 
@@ -44,7 +47,7 @@ function Shell({ user, children }) {
   const area = useNavArea();
   const { quickLinks } = useSite();
   const current = pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : pathname.startsWith("/documents") ? "documents" : "training";
-  return <AppShell navItems={NAV} quickLinks={quickLinks} current={current} user={user}>{children}</AppShell>;
+  return <AppShell navItems={NAV} quickLinks={quickLinks ?? []} current={current} user={user}>{children}</AppShell>;
 }
 
 export default function App() {
@@ -54,6 +57,7 @@ export default function App() {
     <Router>
       <SiteProvider>
       <ProgressProvider>
+      <AchievementsProvider>
         <NavAreaProvider>
           <ScrollToTop />
           <Shell user={user}>
@@ -68,7 +72,9 @@ export default function App() {
               <Route path="*" element={<LoadState error={{ status: 404 }} />} />
             </Routes>
           </Shell>
+          <Celebration />
         </NavAreaProvider>
+      </AchievementsProvider>
       </ProgressProvider>
       </SiteProvider>
     </Router>

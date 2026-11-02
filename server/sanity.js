@@ -39,7 +39,11 @@ const LIBRARY_ITEM = `
 `;
 
 export const queries = {
-  site: `*[_id == "siteSettings"][0]{ "quickLinks": quickLinks[]{ _key, label, url } }`,
+  site: `{
+    "quickLinks": *[_id == "siteSettings"][0].quickLinks[]{ _key, label, url },
+    // Badges, levels and points (Badges and levels in the Studio). Missing means no gamification.
+    "rewards": *[_id == "rewards"][0]{ title, points, levels[]{ _key, title, points }, badges[]{ _key, rule, title, description, icon } }
+  }`,
 
   home: `*[_id == "homePage"][0]{ heroTitle, heroIntro, ${image("heroImage")}, philosophyTitle, philosophyText,
     // The "Start here" path for new starters (its own document in the Studio).

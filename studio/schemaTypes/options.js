@@ -1,6 +1,13 @@
 // Choices shown to editors in drop-down lists.
 // The icon names must match the ones registered in web/src/components/icons.jsx.
 export const ICON_OPTIONS = [
+  { title: "Award ribbon", value: "award" },
+  { title: "Crown", value: "crown" },
+  { title: "Flame", value: "flame" },
+  { title: "Footprints", value: "footprints" },
+  { title: "Medal", value: "medal" },
+  { title: "Star", value: "star" },
+  { title: "Lightning", value: "zap" },
   { title: "Person", value: "user" },
   { title: "People", value: "users" },
   { title: "Handshake", value: "handshake" },
@@ -55,3 +62,20 @@ export const textList = (name, title, description) => ({
   type: "array",
   of: [{ type: "text", rows: 2 }],
 });
+
+// The achievements the hub can spot for badges. Each badge in "Badges and levels" picks one.
+// The hub's code knows how to check each of these (web/src/lib/achievements.jsx), so add new ones there too.
+export const BADGE_RULES = [
+  { title: "Finish a first section", value: "first-section" },
+  { title: "Finish a first module", value: "first-module" },
+  { title: "Finish five modules", value: "five-modules" },
+  { title: "Finish ten modules", value: "ten-modules" },
+  { title: "Finish every module", value: "all-modules" },
+  { title: "Finish a Start here step", value: "path-step" },
+  { title: "Finish the whole Start here path", value: "path-complete" },
+  { title: "Get ten quick checks right", value: "quick-checks" },
+  { title: "Finish a round of the quiz", value: "quiz-taken" },
+  { title: "Full marks in a round of the quiz", value: "quiz-ace" },
+  { title: "Learn on three working days in a row", value: "streak-3" },
+  { title: "Learn on five working days in a row", value: "streak-5" },
+];

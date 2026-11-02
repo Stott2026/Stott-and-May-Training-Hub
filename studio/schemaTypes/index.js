@@ -11,5 +11,6 @@ import { siteSettings } from "./siteSettings.js";
 import { formDocument } from "./formDocument.js";
 import { formsPage } from "./formsPage.js";
 import { startHere } from "./startHere.js";
+import { rewards } from "./rewards.js";
 
-export const schemaTypes = [trainingModule, section, quizQuestion, value, category, homePage, libraryItem, libraryPage, managersPage, siteSettings, formDocument, formsPage, startHere];
+export const schemaTypes = [trainingModule, section, quizQuestion, value, category, homePage, libraryItem, libraryPage, managersPage, siteSettings, formDocument, formsPage, startHere, rewards];

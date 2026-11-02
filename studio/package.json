@@ -18,7 +18,8 @@
     "import:marketing-hub": "dotenv -e ../.env -- node migrations/import-marketing-hub.js",
     "import:forms": "dotenv -e ../.env -- node migrations/import-forms.js",
     "link:forms": "dotenv -e ../.env -- node migrations/link-forms.js",
-    "import:start-here": "dotenv -e ../.env -- node migrations/import-start-here.js"
+    "import:start-here": "dotenv -e ../.env -- node migrations/import-start-here.js",
+    "import:rewards": "dotenv -e ../.env -- node migrations/import-rewards.js"
   },
   "dependencies": {
     "@sanity/client": "^8.9.0",
