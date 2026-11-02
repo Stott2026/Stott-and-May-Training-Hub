@@ -12,7 +12,7 @@ export default function Workflow({ steps = [] }) {
   return (
     <section className="workflow" aria-labelledby="workflow-title">
       <Eyebrow>A day in the life</Eyebrow>
-      <h2 id="workflow-title" className="section-title">Daily workflow of a 360 recruiter</h2>
+      <h2 id="workflow-title" className="section-title" tabIndex={-1}>Daily workflow of a 360 recruiter</h2>
       <ul className="workflow__key" aria-label="Parts of the day">
         {used.map((s) => <li key={s} className={`workflow__stage workflow__stage--${s}`}>{STAGES[s]}</li>)}
       </ul>

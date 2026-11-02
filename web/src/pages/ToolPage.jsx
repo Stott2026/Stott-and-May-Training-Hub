@@ -41,7 +41,7 @@ export default function ToolPage() {
     <div className="theme-dark" data-theme="dark">
       <section className="tool-hero" data-accent={tool.accent || "brand"} aria-labelledby="tool-title">
         <div className="tool-hero__wave" aria-hidden="true"><Wave variant="glow" /></div>
-      <div className="tech-shapes" aria-hidden="true"><span /><span /><span /><span /></div>
+      <div className="brand-shapes" aria-hidden="true"><span /><span /><span /><span /></div>
         <div className="container">
           <Link to="/tech" className="tool-hero__back"><Icon name="arrow-left" size={18} /> All tools</Link>
           <div className="tool-hero__inner">
@@ -58,7 +58,7 @@ export default function ToolPage() {
               {tool.links?.length > 0 && (
                 <div className="tool-hero__links">
                   {tool.links.map((l) => (
-                    <a key={l._key ?? l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="btn btn--dark btn--md">
+                    <a key={l._key ?? l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="btn btn--primary btn--md">
                       <Icon name="graduation-cap" size={18} /> {l.label} <Icon name="external-link" size={14} /><span className="visually-hidden"> (opens in a new tab)</span>
                     </a>
                   ))}
@@ -128,7 +128,7 @@ export default function ToolPage() {
             <section className="tool-side-card tool-daily" aria-labelledby="daily-title">
               <h2 id="daily-title" className="tool-block__title"><Icon name="flame" size={20} /> Every morning</h2>
               <p className="tool-daily__check">{tool.dailyCheck}</p>
-              <Link to="/tech#big-five-title" className="tool-side-card__link">Part of the daily Big 5 check <Icon name="arrow-right" size={14} /></Link>
+              <Link to="/tech#daily" className="tool-side-card__link">Part of the daily Big 5 check <Icon name="arrow-right" size={14} /></Link>
             </section>
           )}
           {caps.length > 0 && (

@@ -21,7 +21,7 @@ export default function StartPage() {
 
   return (
     <>
-      <PageHero eyebrow="New to the desk?" title={startHere?.title || "Start here"} intro={startHere?.intro} photo={placeholderPhotos.homeHero}>
+      <PageHero eyebrow="New to the desk?" title={startHere?.title || "Start here"} intro={startHere?.intro} photo={placeholderPhotos.start} photoShape="frame">
         {path.nextModule && (
           <Button size="lg" iconAfter="arrow-right" to={`/modules/${path.nextModule.slug}`}>
             {path.finishedCount === 0 ? `Start with ${path.nextModule.title}` : `Continue ${path.nextModule.title}`}

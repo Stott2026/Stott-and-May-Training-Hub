@@ -11,18 +11,29 @@
 .tool-mark--md { width: 3rem; height: 3rem; }
 .tool-mark--lg { width: 4.5rem; height: 4.5rem; }
 
-/* The day-one rule */
-.tech-rule { color: var(--color-text-on-brand); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-6); padding: var(--space-8); border-radius: var(--radius-xl); background: var(--gradient-brand); box-shadow: var(--shadow-md); }
-.tech-rule__title { font-size: var(--text-2xl); font-weight: var(--weight-extrabold); max-width: 30rem; line-height: 1.15; }
-.tech-rule__text { margin-top: var(--space-2); font-weight: var(--weight-semibold); }
+/* The day-one rule: a card with a gradient edge, so it reads as important without shouting. */
+.tech-rule { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4) var(--space-6); padding: var(--space-5) var(--space-6); border: 2px solid transparent; border-radius: var(--radius-lg); background: var(--surface-card) padding-box, var(--gradient-brand) border-box; box-shadow: var(--shadow-md); }
+.tech-rule__title { font-size: var(--text-xl); font-weight: var(--weight-extrabold); line-height: 1.2; }
+.tech-rule__text { margin-top: var(--space-1); color: var(--color-text-muted); }
 .tech-rule__flow { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
 .tech-rule__feeders { display: flex; flex-wrap: wrap; gap: var(--space-2); max-width: 20rem; }
-.tech-rule__chip { padding: var(--space-1) var(--space-3); border-radius: var(--radius-sm); background: var(--color-glass); color: var(--color-text-on-brand); font-family: var(--font-heading); font-size: var(--text-sm); font-weight: var(--weight-bold); }
-.tech-rule__target { padding: var(--space-3) var(--space-5); border-radius: var(--radius-md); background: var(--color-dark-surface); color: var(--color-text-inverse); font-family: var(--font-heading); font-weight: var(--weight-extrabold); text-decoration: none; }
+.tech-rule__chip { padding: 2px var(--space-3); border-radius: var(--radius-pill); background: var(--color-tint); border: 1px solid var(--color-border); font-family: var(--font-heading); font-size: var(--text-xs); font-weight: var(--weight-bold); }
+.tech-rule__arrow { color: var(--color-link); }
+.tech-rule__target { padding: var(--space-2) var(--space-5); border-radius: var(--radius-pill); background: var(--gradient-brand); color: var(--color-text-on-brand); font-family: var(--font-heading); font-weight: var(--weight-extrabold); text-decoration: none; }
 @media (prefers-reduced-motion: no-preference) {
   .tech-rule__arrow { animation: nudge 1.6s ease-in-out infinite; }
 }
 @keyframes nudge { 50% { transform: translateX(6px); } }
+
+/* Jump bar: stays under the top bar while you scroll the page. */
+.jump-bar { position: sticky; top: var(--nav-height); z-index: 20; background: var(--color-glass-strong); border-bottom: 1px solid var(--color-border); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.jump-bar ul { list-style: none; display: flex; gap: var(--space-1); margin: 0 auto; padding: var(--space-2) var(--space-4); max-width: var(--content-width); overflow-x: auto; scrollbar-width: none; }
+@media (min-width: 640px) { .jump-bar ul { padding-inline: var(--space-6); } }
+.jump-bar__link { white-space: nowrap; padding: var(--space-1) var(--space-3); border: 1px solid transparent; border-radius: var(--radius-pill); background: none; font: inherit; font-family: var(--font-heading); font-size: var(--text-sm); font-weight: var(--weight-bold); color: var(--color-text-muted); cursor: pointer; }
+.jump-bar__link:hover { color: var(--color-text); border-color: var(--color-border-strong); }
+.jump-bar__link[aria-current="true"] { color: var(--color-text-on-brand); background: var(--gradient-brand); }
+.tech-page > [id] { scroll-margin-top: calc(var(--nav-height) + 4rem); }
+.tech-page .section-title:focus { outline: none; }
 
 /* Tool cards */
 .tool-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
@@ -174,35 +185,7 @@
 .tool-next__link { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-3) var(--space-4); border-radius: var(--radius-pill); background: var(--surface-card); border: 1px solid var(--color-border); font-weight: var(--weight-bold); color: var(--color-text); text-decoration: none; }
 .tool-next__link--next { background: var(--gradient-brand); border-color: transparent; }
 
-/* ── Dark mode (the Technology tab) ──
-   The colours come from tokens.css ([data-theme="dark"]); these add the brand's dark-page details. */
-.theme-dark { background: var(--color-page); color: var(--color-text); }
-/* The page area around a dark section is dark too (it sits outside data-theme, so name the ink). */
-.app-main:has(> .theme-dark) { background: var(--sm-ink); }
-/* The wave's white glow is for light pages: keep it faint on dark. */
-.theme-dark .wave__fill-top { stop-opacity: 0.06; }
-.theme-dark .tech-rule .eyebrow { color: var(--color-text-on-brand); }
-.theme-dark .card--interactive:hover, .theme-dark .card--interactive:focus-visible { box-shadow: var(--shadow-accent); border-color: transparent; }
+/* Technology in dark mode */
 .theme-dark .tool-why { border: 1px solid var(--color-border-strong); }
 .theme-dark .tool-why svg { color: var(--color-link); }
-.theme-dark .library-filter[aria-pressed="true"], .theme-dark .library-filter[aria-pressed="true"] .library-filter__count { color: var(--color-text-on-brand); }
 .theme-dark .big-five.is-done { box-shadow: var(--shadow-accent); }
-
-/* Two-tone headline: the key phrase in the accent colour, on a line of its own. */
-.headline-accent { display: block; color: var(--color-link); }
-
-/* Outlined rounded squares, the brand's quiet dark-page decoration. */
-.tech-shapes { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.tech-shapes span { position: absolute; border: 1.5px solid var(--pattern-line); border-radius: var(--radius-xl); }
-.tech-shapes span:nth-child(1) { width: 22rem; height: 22rem; right: -6rem; top: -8rem; transform: rotate(14deg); }
-.tech-shapes span:nth-child(2) { width: 15rem; height: 15rem; right: 2rem; top: -3rem; transform: rotate(14deg); }
-.tech-shapes span:nth-child(3) { width: 9rem; height: 9rem; right: 8rem; top: 2rem; transform: rotate(14deg); }
-.tech-shapes span:nth-child(4) { width: 30rem; height: 30rem; left: -16rem; bottom: -22rem; transform: rotate(-10deg); }
-@media (prefers-reduced-motion: no-preference) { .tech-shapes span:nth-child(-n+3) { animation: shapes-drift 14s ease-in-out infinite alternate; } }
-@keyframes shapes-drift { to { transform: rotate(20deg) translateY(10px); } }
-
-/* Stat tiles: big numbers in Inter, as on the brand collateral. */
-.stat-tiles { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-3); margin: var(--space-5) 0 0; padding: 0; }
-.stat-tile { flex: 1 1 0; min-width: 6rem; max-width: 10rem; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--surface-card); border: 1px solid var(--color-border); }
-.stat-tile__number { display: block; font-family: var(--font-body); font-size: var(--text-2xl); font-weight: var(--weight-extrabold); line-height: 1; color: var(--color-link); font-variant-numeric: tabular-nums; }
-.stat-tile__label { display: block; margin-top: var(--space-1); font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--color-text-muted); }

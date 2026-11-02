@@ -26,7 +26,7 @@ export default function LibraryPage() {
 
   return (
     <>
-      <PageHero eyebrow="Stott and May" title={data.page?.title ?? "Library"} intro={data.page?.intro} photo={placeholderPhotos.values}>
+      <PageHero eyebrow="Stott and May" title={data.page?.title ?? "Library"} intro={data.page?.intro} photo={placeholderPhotos.library} photoShape="frame">
         <p className="library-count">
           <Icon name="library" size={18} /> {items.length} {items.length === 1 ? "file" : "files"} to download
         </p>

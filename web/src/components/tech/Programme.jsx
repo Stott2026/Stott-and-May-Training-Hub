@@ -13,7 +13,7 @@ export default function Programme({ page }) {
   return (
     <section className="programme" aria-labelledby="programme-title">
       <Eyebrow>The programme</Eyebrow>
-      <h2 id="programme-title" className="section-title">{phases.length} phases, each with a gate</h2>
+      <h2 id="programme-title" className="section-title" tabIndex={-1}>{phases.length} phases, each with a gate</h2>
       {programmeIntro && <p className="section-lead">{programmeIntro}</p>}
       <ol className="programme__phases">
         {phases.map((ph, i) => (

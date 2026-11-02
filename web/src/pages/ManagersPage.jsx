@@ -23,7 +23,7 @@ export default function ManagersPage() {
   const files = data.library ?? [];
   return (
     <>
-      <PageHero eyebrow="For managers" title={data.page?.title ?? "For managers"} intro={data.page?.intro} photo={placeholderPhotos.moduleHeroes[1]}>
+      <PageHero eyebrow="For managers" title={data.page?.title ?? "For managers"} intro={data.page?.intro} photo={placeholderPhotos.managers} photoShape="frame">
         {(data.modules.length > 0 || files.length > 0) && (
           <p className="managers-count">
             <Icon name="briefcase" size={18} />

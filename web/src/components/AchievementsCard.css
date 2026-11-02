@@ -50,3 +50,10 @@
   .achievements__streak-number { font-size: var(--text-lg); }
   .achievements__streak-label { font-size: var(--text-sm); }
 }
+
+/* The trophy cabinet (Achievements page, dark mode): earned badges glow, locked ones wait in the dark. */
+.theme-dark .achievements { background: var(--surface-card); }
+.theme-dark .badge-tile.is-earned { border-color: transparent; box-shadow: var(--shadow-accent); }
+.theme-dark .badge-tile:not(.is-earned) { background: transparent; }
+.theme-dark .badge-tile:not(.is-earned) .badge-tile__locked { background: var(--color-tint); }
+.theme-dark .achievements__streak.is-on { background: var(--gradient-brand-soft); }

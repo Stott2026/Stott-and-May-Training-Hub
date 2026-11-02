@@ -18,7 +18,7 @@ export default function CapabilityMap({ tools = [], note }) {
   return (
     <section className="cap-map" aria-labelledby="cap-map-title">
       <Eyebrow>Which tool does what</Eyebrow>
-      <h2 id="cap-map-title" className="section-title">What do you need to do?</h2>
+      <h2 id="cap-map-title" className="section-title" tabIndex={-1}>What do you need to do?</h2>
       <div className="library-filters cap-map__jobs" role="group" aria-label="Show the tools that">
         {caps.map((c) => (
           <button key={c.value} type="button" className="library-filter" aria-pressed={job === c.value} onClick={() => setJob(job === c.value ? null : c.value)}>

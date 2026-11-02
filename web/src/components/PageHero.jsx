@@ -4,8 +4,9 @@ import Wave from "./Wave.jsx";
 import "./PageHero.css";
 
 // The gradient header at the top of the Library and Managers pages.
-// decoration: optional background shapes behind the content.
-export default function PageHero({ eyebrow, title, intro, photo, decoration, children }) {
+// decoration: optional background shapes behind the content. photoShape: "squircle" (a cut-out
+// person) or "frame" (an office photo); see ShapeImage.
+export default function PageHero({ eyebrow, title, intro, photo, photoShape = "squircle", decoration, children }) {
   return (
     <section className="page-hero" aria-labelledby="page-hero-title">
       {decoration}
@@ -17,7 +18,7 @@ export default function PageHero({ eyebrow, title, intro, photo, decoration, chi
           {intro && <p className="page-hero__lead">{intro}</p>}
           {children}
         </div>
-        {photo && <ShapeImage src={photo} shape="squircle" className="page-hero__person" />}
+        {photo && <ShapeImage src={photo} shape={photoShape} className="page-hero__person" />}
       </div>
     </section>
   );

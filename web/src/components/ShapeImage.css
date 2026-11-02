@@ -31,3 +31,10 @@
   border-bottom-right-radius: 30%;
 }
 .shape-image--diamond .shape-image__photo { border-radius: 0 0 40% 40%; }
+
+/* "frame": a photo in a rounded frame, its lower edge cut by a gradient wave. */
+.shape-image--frame { display: block; overflow: hidden; border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); }
+.shape-image__framed { display: block; width: 100%; height: 100%; object-fit: cover; }
+.shape-image__wave { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 22%; }
+.shape-image__wave-start { stop-color: var(--sm-teal); }
+.shape-image__wave-end { stop-color: var(--sm-aqua); }

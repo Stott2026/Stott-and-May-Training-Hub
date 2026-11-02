@@ -18,7 +18,7 @@ export default function BigFiveCheck({ tools = [], intro }) {
       <div className="big-five__head">
         <div>
           <Eyebrow>Every morning</Eyebrow>
-          <h2 id="big-five-title" className="section-title">The daily Big {checks.length} check</h2>
+          <h2 id="big-five-title" className="section-title" tabIndex={-1}>The daily Big {checks.length} check</h2>
           {intro && <p className="section-lead">{intro}</p>}
         </div>
         <div className="big-five__score">
