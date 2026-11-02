@@ -1,7 +1,7 @@
 // The icon set for the hub. Content editors will pick icons by these names in Sanity,
 // so add new ones here (from https://lucide.dev/icons) rather than using emoji.
 import {
-  ArrowRight, BadgeCheck, BookOpen, Brain, Check, ChevronDown, CircleCheck, CircleUserRound,
+  ArrowRight, BadgeCheck, BookOpen, Brain, Check, ChevronDown, ChevronUp, CircleCheck, CircleUserRound,
   FileText, FolderKanban, GraduationCap, Handshake, HeartHandshake, Lightbulb, MessageCircle,
   MessagesSquare, Mic, Play, Puzzle, Rocket, Scale, Search, Sparkles, Target, Timer,
   TrendingUp, Trophy, UserRound, Users, X, Megaphone, Compass, ShieldCheck, Clock,
@@ -22,6 +22,7 @@ export const icons = {
   brain: Brain,
   check: Check,
   "chevron-down": ChevronDown,
+  "chevron-up": ChevronUp,
   "chevron-left": ChevronLeft,
   "chevron-right": ChevronRight,
   "circle-x": CircleX,

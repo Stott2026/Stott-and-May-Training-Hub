@@ -17,6 +17,8 @@ import { useApi } from "../lib/api.js";
 import { useProgress } from "../lib/progress.jsx";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import { groupModules } from "../lib/groupModules.js";
+import LibraryCard from "../components/library/LibraryCard.jsx";
+import "./LibraryPage.css";
 import "./HomePage.css";
 
 const VALUE_ACCENTS = ["brand", "sky", "lime"];
@@ -58,7 +60,7 @@ export default function HomePage() {
             <h1 id="hero-title" className="hero__title">{heroTitle}</h1>
             <p className="hero__lead">{heroIntro}</p>
             <div className="hero__actions">
-              <SearchField value={search} onChange={setSearch} label="Search the hub" placeholder="Search tactics, phrases, scenarios…" />
+              <SearchField value={search} onChange={setSearch} label="Search the hub" placeholder="Search training, forms and decks…" />
               <Button variant="dark" size="lg" icon="brain" to="/quiz">Take the quiz</Button>
             </div>
           </div>
@@ -166,28 +168,82 @@ function useDebounced(value, ms = 250) {
 function SearchResults({ search }) {
   const q = useDebounced(search.trim());
   const { data, error, loading } = useApi(`/search?q=${encodeURIComponent(q)}`);
+  const { forms = [], files = [], sections = [] } = data ?? {};
+  const total = forms.length + files.length + sections.length;
 
   return (
     <section aria-labelledby="results-title" className="search-results">
       <Eyebrow>Search</Eyebrow>
       <h2 id="results-title" className="section-title" aria-live="polite">
-        {loading || !data ? "Searching…" : `${data.length} ${data.length === 1 ? "result" : "results"} for “${q}”`}
+        {loading || !data ? "Searching…" : `${total} ${total === 1 ? "result" : "results"} for “${q}”`}
       </h2>
       {error && <p className="section-lead">{error.message}</p>}
-      {data?.length === 0 && <p className="section-lead">Nothing matches that. Try a shorter word, like “IR35” or “counter”.</p>}
-      {data?.length > 0 && (
-        <ul className="search-results__list">
-          {data.map((r) => (
-            <li key={`${r.module.slug}-${r.section.index}`}>
-              <Card as={Link} to={`/modules/${r.module.slug}?section=${r.section.index + 1}`} interactive accent={r.module.accent} className="search-result">
-                <Eyebrow>{r.module.title} · {r.kind}</Eyebrow>
-                <h3 className="search-result__title">{r.section.title}</h3>
-                <p className="search-result__extract">{r.extract}</p>
-                <span className="search-result__go">Open section <Icon name="arrow-right" size={14} /></span>
-              </Card>
-            </li>
-          ))}
-        </ul>
+      {data && total === 0 && <p className="section-lead">Nothing matches that. Try a shorter word, like “IR35”, “offer” or “counter”.</p>}
+
+      {forms.length > 0 && (
+        <ResultGroup id="results-forms" icon="clipboard-list" title="Forms" noun="forms" items={forms} show={4} q={q}>
+          {(shown) => <ul className="search-results__list">
+            {shown.map((f) => (
+              <li key={f._id}>
+                <Card as={Link} to={`/documents/${f.slug}`} interactive className="search-result search-result--form">
+                  <IconBadge name={f.icon || "clipboard-list"} size="sm" accent="sky" />
+                  <span className="search-result__body">
+                    <Eyebrow>{f.group} · {f.kind}</Eyebrow>
+                    <h4 className="search-result__title">{f.title}</h4>
+                    {f.extract && <p className="search-result__extract">{f.extract}</p>}
+                    <span className="search-result__go">Open form <Icon name="arrow-right" size={14} /></span>
+                  </span>
+                </Card>
+              </li>
+            ))}
+          </ul>}
+        </ResultGroup>
+      )}
+
+      {files.length > 0 && (
+        <ResultGroup id="results-library" icon="library" title="Library" noun="Library files" items={files} show={3} q={q}>
+          {(shown) => <ul className="library-grid search-results__files">
+            {shown.map((item) => <li key={item._id}><LibraryCard item={item} headingLevel={4} /></li>)}
+          </ul>}
+        </ResultGroup>
+      )}
+
+      {sections.length > 0 && (
+        <ResultGroup id="results-training" icon="graduation-cap" title="Training" noun="training sections" items={sections} show={6} q={q}>
+          {(shown) => <ul className="search-results__list">
+            {shown.map((r) => (
+              <li key={`${r.module.slug}-${r.section.index}`}>
+                <Card as={Link} to={`/modules/${r.module.slug}?section=${r.section.index + 1}`} interactive accent={r.module.accent} className="search-result">
+                  <Eyebrow>{r.module.title} · {r.kind}</Eyebrow>
+                  <h4 className="search-result__title">{r.section.title}</h4>
+                  <p className="search-result__extract">{r.extract}</p>
+                  <span className="search-result__go">Open section <Icon name="arrow-right" size={14} /></span>
+                </Card>
+              </li>
+            ))}
+          </ul>}
+        </ResultGroup>
+      )}
+    </section>
+  );
+}
+
+// One group of search results (Forms, Library or Training) under its own heading. Shows the
+// best few, with a button for the rest; a new search starts short again.
+function ResultGroup({ id, icon, title, noun, items, show, q, children }) {
+  const [allFor, setAllFor] = useState(null);
+  const all = allFor === q;
+  const hidden = items.length - show;
+  return (
+    <section className="search-results__group" aria-labelledby={id}>
+      <h3 id={id} className="search-results__group-title">
+        <Icon name={icon} size={20} /> {title} <span className="search-results__count">{items.length}</span>
+      </h3>
+      {children(all ? items : items.slice(0, show))}
+      {hidden > 0 && (
+        <Button variant="secondary" size="sm" className="search-results__more" icon={all ? "chevron-up" : "chevron-down"} onClick={() => setAllFor(all ? null : q)} aria-expanded={all}>
+          {all ? `Show fewer ${noun}` : `Show all ${items.length} ${noun}`}
+        </Button>
       )}
     </section>
   );

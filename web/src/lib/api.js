@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { searchModules } from "../../../server/content.js";
+import { searchHub } from "../../../server/content.js";
 
 // In the preview build (npm run preview:build) there is no server: content comes from a
 // snapshot taken at build time. In the real hub this is empty and everything goes to /api.
@@ -7,7 +7,7 @@ const snapshot = Object.values(import.meta.glob("../preview/snapshot.json", { ea
 
 function fromSnapshot(path) {
   const [route, query] = path.split("?");
-  if (route === "/search") return searchModules(snapshot.searchable, new URLSearchParams(query).get("q"));
+  if (route === "/search") return searchHub(snapshot.searchable, new URLSearchParams(query).get("q"));
   if (route in snapshot.routes) return snapshot.routes[route];
   throw Object.assign(new Error("Not found"), { status: 404 });
 }

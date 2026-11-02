@@ -88,8 +88,16 @@ export const queries = {
   libraryFile: `*[_type == "libraryItem" && _id == $id][0].file.asset->{ url, originalFilename, mimeType, size }`,
 
   // Everything search looks through.
-  searchable: `*[_type == "trainingModule" && !(${FOR_MANAGERS})] | order(order asc){
-    title, "slug": slug.current, accent,
-    sections[]{ title, content, framework, tables, tip, tactics, phrases, mistakes, scenario }
+  // Everything the hub's search looks through: training sections, forms and Library files.
+  // Manager-only modules and files stay out, as on the consultant pages.
+  searchable: `{
+    "modules": *[_type == "trainingModule" && !(${FOR_MANAGERS})] | order(order asc){
+      title, "slug": slug.current, accent,
+      sections[]{ title, content, framework, tables, tip, tactics, phrases, mistakes, scenario }
+    },
+    "forms": *[_type == "formDocument"] | order(order asc){ _id, title, "slug": slug.current, group, summary, intro, icon, blocks },
+    "library": *[_type == "libraryItem" && area != "managers" && defined(file.asset)] | order(order asc){
+      ${LIBRARY_ITEM}, "module": module->{ title, "slug": slug.current, accent }
+    }
   }`,
 };

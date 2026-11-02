@@ -2,7 +2,7 @@
 import { Readable } from "node:stream";
 import { Router } from "express";
 import { sanity, queries } from "./sanity.js";
-import { searchModules, withQuickChecks } from "./content.js";
+import { searchHub, withQuickChecks } from "./content.js";
 
 export const api = Router();
 
@@ -34,8 +34,8 @@ api.get("/quiz", async (req, res) => {
 
 api.get("/search", async (req, res) => {
   const q = String(req.query.q ?? "").trim();
-  if (q.length < 2) return res.json([]);
-  res.json(searchModules(await sanity.fetch(queries.searchable), q));
+  if (q.length < 2) return res.json(searchHub({}, q));
+  res.json(searchHub(await sanity.fetch(queries.searchable), q));
 });
 
 api.get("/managers", async (req, res) => {

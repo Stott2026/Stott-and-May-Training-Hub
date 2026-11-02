@@ -7,7 +7,9 @@ import { canDownload, downloadUrl, fileDetails, kindOf } from "../../lib/library
 import "./LibraryCard.css";
 
 // One file in the Library: what it is, the session facts, and a download button.
-export default function LibraryCard({ item }) {
+// headingLevel lets the card sit under a deeper heading, as in the search results.
+export default function LibraryCard({ item, headingLevel = 3 }) {
+  const Heading = `h${headingLevel}`;
   const kind = kindOf(item.kind);
   const accent = item.module?.accent ?? "brand";
   return (
@@ -16,7 +18,7 @@ export default function LibraryCard({ item }) {
         <IconBadge name={kind.icon} accent={accent} />
         <Eyebrow>{[item.label, kind.label].filter(Boolean).join(" · ")}</Eyebrow>
       </div>
-      <h3 className="library-card__title">{item.title}</h3>
+      <Heading className="library-card__title">{item.title}</Heading>
       <p className="library-card__summary">{item.summary}</p>
       {(item.duration || item.audience) && (
         <ul className="library-card__facts">
