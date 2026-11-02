@@ -21,6 +21,9 @@ const RULES = {
   "quick-checks": (s) => s.quickChecks >= 10,
   "first-activity": (s) => s.activities >= 1,
   "five-activities": (s) => s.activities >= 5,
+  "tool-setup": (s) => s.toolsSetUp >= 1,
+  "core-setup": (s) => s.coreCount > 0 && s.coreSetUp >= s.coreCount,
+  "big-five": (s) => s.bigFiveDays >= 5,
   "quiz-taken": (s) => s.quizRounds >= 1,
   "quiz-ace": (s) => s.quizAce,
   "streak-3": (s) => s.bestStreak >= 3,
@@ -68,6 +71,9 @@ export function AchievementsProvider({ children }) {
   // The modules and the Start here path, to know when a module or step is finished.
   const modules = useApi(enabled ? "/modules" : null);
   const home = useApi(enabled ? "/home" : null);
+  // The tech tools, to know which are core systems. Not needed for anything else, so a
+  // failure here just leaves the tool badges unearned.
+  const tech = useApi(enabled ? "/tech" : null);
   const ready = enabled && !!modules.data && !!home.data;
 
   const result = useMemo(() => {
@@ -84,17 +90,21 @@ export function AchievementsProvider({ children }) {
       pathStepCount: steps.length,
       quickChecks: progress.quickChecksRight,
       activities: progress.activitiesDone,
+      toolsSetUp: progress.toolsSetUp.length,
+      coreCount: (tech.data?.tools ?? []).filter((t) => t.core && t.setupCount > 0).length,
+      coreSetUp: (tech.data?.tools ?? []).filter((t) => t.core && t.setupCount > 0 && progress.toolsSetUp.includes(t.slug)).length,
+      bigFiveDays: progress.bigFiveDays,
       quizRounds: progress.quizScores.length,
       quizAce: progress.quizScores.some((q) => q.total > 0 && q.score === q.total),
       bestStreak: streak.best,
     };
     const p = rewards.points ?? {};
-    const points = stats.sections * (p.section ?? 0) + stats.modules * (p.module ?? 0) + stats.quickChecks * (p.quickCheck ?? 0) + best * (p.quizAnswer ?? 0) + stats.activities * (p.activity ?? 0);
+    const points = stats.sections * (p.section ?? 0) + stats.modules * (p.module ?? 0) + stats.quickChecks * (p.quickCheck ?? 0) + best * (p.quizAnswer ?? 0) + stats.activities * (p.activity ?? 0) + stats.toolsSetUp * (p.toolSetup ?? 0);
     const levels = [...rewards.levels].sort((a, b) => (a.points ?? 0) - (b.points ?? 0));
     const levelIndex = Math.max(0, levels.findLastIndex((l) => points >= (l.points ?? 0)));
     const badges = (rewards.badges ?? []).filter((b) => RULES[b.rule]).map((b) => ({ ...b, earned: RULES[b.rule](stats) }));
     return { points, levels, levelIndex, level: levels[levelIndex], next: levels[levelIndex + 1] ?? null, badges, streak: streak.current, stats };
-  }, [ready, rewards, modules.data, home.data, progress]);
+  }, [ready, rewards, modules.data, home.data, tech.data, progress]);
 
   // Spot anything new since last time and queue a celebration. The very first time, everything
   // already earned is noted quietly, so nobody gets a flood of pop-ups.

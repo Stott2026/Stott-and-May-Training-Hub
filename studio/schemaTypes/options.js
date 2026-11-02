@@ -35,6 +35,7 @@ export const ICON_OPTIONS = [
   { title: "Graduation cap", value: "graduation-cap" },
   { title: "Presentation", value: "presentation" },
   { title: "Clipboard", value: "clipboard-list" },
+  { title: "Document", value: "file-text" },
   { title: "Checklist", value: "list-checks" },
   { title: "Library", value: "library" },
   { title: "Briefcase", value: "briefcase" },
@@ -80,4 +81,18 @@ export const BADGE_RULES = [
   { title: "Full marks in a round of the quiz", value: "quiz-ace" },
   { title: "Learn on three working days in a row", value: "streak-3" },
   { title: "Learn on five working days in a row", value: "streak-5" },
+  { title: "Set up a first tool (every item on its checklist)", value: "tool-setup" },
+  { title: "Set up all the core systems", value: "core-setup" },
+  { title: "Do the daily Big 5 check on five days", value: "big-five" },
+];
+
+// The jobs a tool can do, for the "Which tool does what" map on the Technology page.
+export const TOOL_CAPABILITIES = [
+  { title: "Find contacts", value: "contacts" },
+  { title: "Find candidates", value: "candidates" },
+  { title: "Find jobs", value: "jobs" },
+  { title: "Numbers or emails", value: "numbers" },
+  { title: "Market intel", value: "intel" },
+  { title: "Outreach", value: "outreach" },
+  { title: "Daily alerts", value: "alerts" },
 ];

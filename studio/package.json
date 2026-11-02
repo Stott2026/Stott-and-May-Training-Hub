@@ -20,7 +20,8 @@
     "link:forms": "dotenv -e ../.env -- node migrations/link-forms.js",
     "import:start-here": "dotenv -e ../.env -- node migrations/import-start-here.js",
     "import:rewards": "dotenv -e ../.env -- node migrations/import-rewards.js",
-    "import:activities": "dotenv -e ../.env -- node migrations/import-activities.js"
+    "import:activities": "dotenv -e ../.env -- node migrations/import-activities.js",
+    "import:tech": "dotenv -e ../.env -- node migrations/import-tech.js"
   },
   "dependencies": {
     "@sanity/client": "^8.9.0",

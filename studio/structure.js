@@ -9,6 +9,8 @@ import { HomeIcon } from "@sanity/icons/Home";
 import { RocketIcon } from "@sanity/icons/Rocket";
 import { StarIcon } from "@sanity/icons/Star";
 import { TagIcon } from "@sanity/icons/Tag";
+import { DesktopIcon } from "@sanity/icons/Desktop";
+import { PlugIcon } from "@sanity/icons/Plug";
 
 // The menu editors see down the left of the Studio.
 export const structure = (S) =>
@@ -26,6 +28,10 @@ export const structure = (S) =>
       S.documentTypeListItem("quizQuestion").title("Quiz questions").icon(HelpCircleIcon),
       S.documentTypeListItem("value").title("Company values").icon(HeartIcon)
         .child(S.documentTypeList("value").title("Company values").defaultOrdering([{ field: "order", direction: "asc" }])),
+      S.divider(),
+      S.listItem().title("Technology page").icon(DesktopIcon).child(S.document().schemaType("techPage").documentId("techPage")),
+      S.documentTypeListItem("techTool").title("Tech tools").icon(PlugIcon)
+        .child(S.documentTypeList("techTool").title("Tech tools").defaultOrdering([{ field: "order", direction: "asc" }])),
       S.divider(),
       S.listItem().title("Documents & Forms page").icon(ClipboardIcon).child(S.document().schemaType("formsPage").documentId("formsPage")),
       S.documentTypeListItem("formDocument").title("Forms").icon(ClipboardIcon)

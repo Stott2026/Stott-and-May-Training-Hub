@@ -120,10 +120,16 @@
   --content-width: 72rem;
   --reading-width: 46rem;
   --nav-max-width: 90rem; /* the top bar on very wide screens */
-  --nav-height: 4rem;
+  --nav-row-height: 4rem;     /* the top bar row with the logo and buttons */
+  --nav-tabs-height: 2.75rem; /* the row of tabs under it, from 600px */
+  --nav-height: var(--nav-row-height); /* the whole top bar, for sticky offsets */
 
   --duration-fast: 150ms;
   --duration-medium: 300ms;
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* a little overshoot, for celebrations */
+}
+
+@media (min-width: 600px) {
+  :root { --nav-height: calc(var(--nav-row-height) + var(--nav-tabs-height)); }
 }

@@ -14,6 +14,8 @@ import {
 
 export const icons = {
   "arrow-left": ArrowLeft,
+  minus: Minus,
+  plus: Plus,
   "arrow-down": ArrowDown,
   "arrow-up": ArrowUp,
   "grip-vertical": GripVertical,

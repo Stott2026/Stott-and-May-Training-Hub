@@ -42,6 +42,16 @@ api.get("/managers", async (req, res) => {
   res.json(await sanity.fetch(queries.managers));
 });
 
+api.get("/tech", async (req, res) => {
+  res.json(await sanity.fetch(queries.tech));
+});
+
+api.get("/tech/:slug", async (req, res) => {
+  const tool = await sanity.fetch(queries.tool, { slug: req.params.slug });
+  if (!tool) return res.status(404).json({ error: "Tool not found" });
+  res.json(tool);
+});
+
 api.get("/forms", async (req, res) => {
   res.json(await sanity.fetch(queries.forms));
 });

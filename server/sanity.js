@@ -21,6 +21,9 @@ export const sanity = createClient({
 
 const image = (field) => `${field}{ alt, "url": asset->url }`;
 
+// What a tool's card needs (Technology tab, tool pages and search).
+const TOOL_SUMMARY = `_id, name, "slug": slug.current, role, summary, core, family, week, icon, ${image("logo")}, accent, order, capabilities`;
+
 // What a module card needs. Section keys let the browser work out progress.
 const MODULE_SUMMARY = `
   _id, title, "slug": slug.current, eyebrow, subtitle, icon, accent, order,
@@ -98,7 +101,6 @@ export const queries = {
   // Only the server ever sees this address.
   libraryFile: `*[_type == "libraryItem" && _id == $id][0].file.asset->{ url, originalFilename, mimeType, size }`,
 
-  // Everything search looks through.
   // Everything the hub's search looks through: training sections, forms and Library files.
   // Manager-only modules and files stay out, as on the consultant pages.
   searchable: `{
@@ -109,6 +111,26 @@ export const queries = {
     "forms": *[_type == "formDocument"] | order(order asc){ _id, title, "slug": slug.current, group, summary, intro, icon, blocks },
     "library": *[_type == "libraryItem" && area != "managers" && defined(file.asset)] | order(order asc){
       ${LIBRARY_ITEM}, "module": module->{ title, "slug": slug.current, accent }
-    }
+    },
+    "tools": *[_type == "techTool"] | order(order asc){ ${TOOL_SUMMARY}, why, learn, bestPractice, setup, dailyCheck }
+  }`,
+
+  // The Technology tab: its page and every tool, with what the page's daily check and map need.
+  tech: `{
+    "page": *[_id == "techPage"][0]{
+      title, intro, ruleTitle, ruleText, "ruleTool": ruleTool->{ name, "slug": slug.current },
+      bigFiveIntro, mapNote, programmeIntro, rhythm, tracks,
+      "workflow": workflow[]{ _key, title, text, stage, "tools": tools[]->{ name, "slug": slug.current, icon, ${image("logo")} } },
+      "phases": phases[]{ _key, weeks, title, text, gate, "tools": tools[]->{ name, "slug": slug.current } },
+      "relatedModule": relatedModule->{ title, "slug": slug.current }
+    },
+    "tools": *[_type == "techTool"] | order(order asc){ ${TOOL_SUMMARY}, dailyCheck, "setupCount": count(setup) }
+  }`,
+
+  // One tool's page, with the tools either side of it.
+  tool: `*[_type == "techTool" && slug.current == $slug][0]{
+    ${TOOL_SUMMARY}, why, learn, bestPractice, links, setup, dailyCheck, measures,
+    "previous": *[_type == "techTool" && order < ^.order] | order(order desc)[0]{ name, "slug": slug.current },
+    "next": *[_type == "techTool" && order > ^.order] | order(order asc)[0]{ name, "slug": slug.current }
   }`,
 };

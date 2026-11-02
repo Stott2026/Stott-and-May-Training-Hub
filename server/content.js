@@ -13,10 +13,31 @@ export function withQuickChecks({ quiz = [], ...module }) {
 }
 
 // Search the whole hub: forms, Library files and training sections, each in its own group.
-export function searchHub({ modules = [], forms = [], library = [] } = {}, query) {
+export function searchHub({ modules = [], forms = [], library = [], tools = [] } = {}, query) {
   const q = String(query ?? "").trim().toLowerCase();
-  if (q.length < 2) return { forms: [], files: [], sections: [] };
-  return { forms: searchForms(forms, q), files: searchLibrary(library, q), sections: searchModules(modules, q) };
+  if (q.length < 2) return { forms: [], files: [], tools: [], sections: [] };
+  return { forms: searchForms(forms, q), files: searchLibrary(library, q), tools: searchTools(tools, q), sections: searchModules(modules, q) };
+}
+
+// A tech tool matches on its name and description, or anything in its learning, best practice and set-up.
+function searchTools(tools, q) {
+  const results = [];
+  for (const t of tools) {
+    const places = [
+      ["Tool", [t.name, t.role, t.summary, t.family]],
+      ["Best practice", (t.bestPractice ?? []).flatMap((b) => [b.title, b.text])],
+      ["Set-up", [...(t.setup ?? []), t.dailyCheck]],
+      ["About", [t.why, ...(t.learn ?? [])]],
+    ];
+    for (const [kind, texts] of places) {
+      const hit = texts.find((x) => typeof x === "string" && x.toLowerCase().includes(q));
+      if (hit) {
+        results.push({ _id: t._id, slug: t.slug, name: t.name, role: t.role, icon: t.icon, logo: t.logo, accent: t.accent, kind, extract: kind === "Tool" ? t.summary : extract(hit, q), rank: places.findIndex((p) => p[0] === kind) });
+        break;
+      }
+    }
+  }
+  return results.sort((a, b) => a.rank - b.rank);
 }
 
 // A form matches on its title, description or any wording inside it (questions, options, checklists).

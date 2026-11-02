@@ -12,5 +12,7 @@ import { formDocument } from "./formDocument.js";
 import { formsPage } from "./formsPage.js";
 import { startHere } from "./startHere.js";
 import { rewards } from "./rewards.js";
+import { techTool } from "./techTool.js";
+import { techPage } from "./techPage.js";
 
-export const schemaTypes = [trainingModule, section, quizQuestion, value, category, homePage, libraryItem, libraryPage, managersPage, siteSettings, formDocument, formsPage, startHere, rewards];
+export const schemaTypes = [trainingModule, section, quizQuestion, value, category, homePage, libraryItem, libraryPage, managersPage, siteSettings, formDocument, formsPage, startHere, rewards, techTool, techPage];

@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from "react";
 import { Link } from "react-router";
 import Logo from "./Logo.jsx";
 import Avatar from "./Avatar.jsx";
@@ -9,10 +10,30 @@ import "./AppShell.css";
 // quickLinks: [{ label, url }] from Site settings, always shown as buttons that open in a new tab.
 // level: { title, points } for the chip that opens the achievements page (none until switched on).
 export default function AppShell({ navItems = [], quickLinks = [], level, current, user, children }) {
+  // The tabs show their names when they fit. If not, only the current tab keeps its name, and
+  // if that still doesn't fit, every tab is an icon (names show on hover and are read out).
+  const header = useRef(null);
+  useLayoutEffect(() => {
+    const el = header.current;
+    const nav = el?.querySelector(".topnav__nav");
+    if (!nav) return;
+    const fit = () => {
+      for (const mode of ["full", "compact", "icons"]) {
+        el.dataset.fit = mode;
+        if (nav.scrollWidth <= nav.clientWidth + 1) break;
+      }
+    };
+    fit();
+    document.fonts?.ready.then(fit);
+    const watch = new ResizeObserver(fit);
+    watch.observe(el);
+    return () => watch.disconnect();
+  }, [navItems, current, quickLinks.length, level?.title, user?.name]);
+
   return (
     <>
       <a href="#main" className="skip-link">Skip to main content</a>
-      <header className="topnav">
+      <header className="topnav" ref={header}>
         <div className="container topnav__inner">
           <Link to="/" className="topnav__brand">
             <Logo size={36} />
@@ -30,6 +51,7 @@ export default function AppShell({ navItems = [], quickLinks = [], level, curren
               ))}
             </ul>
           </nav>
+          <div className="topnav__tools">
           {quickLinks.map((l) => (
             <a key={l._key ?? l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="topnav__quick" aria-label={`${l.label} (opens in a new tab)`}>
               <Icon name="folder-open" size={18} />
@@ -52,6 +74,7 @@ export default function AppShell({ navItems = [], quickLinks = [], level, curren
               {user.canSignOut && <a href="/auth/signout" className="topnav__signout">Sign out</a>}
             </div>
           )}
+          </div>
         </div>
       </header>
       <main id="main" className="app-main">{children}</main>

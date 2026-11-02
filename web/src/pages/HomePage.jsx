@@ -188,8 +188,8 @@ function useDebounced(value, ms = 250) {
 function SearchResults({ search }) {
   const q = useDebounced(search.trim());
   const { data, error, loading } = useApi(`/search?q=${encodeURIComponent(q)}`);
-  const { forms = [], files = [], sections = [] } = data ?? {};
-  const total = forms.length + files.length + sections.length;
+  const { forms = [], files = [], tools = [], sections = [] } = data ?? {};
+  const total = forms.length + files.length + tools.length + sections.length;
 
   return (
     <section aria-labelledby="results-title" className="search-results">
@@ -212,6 +212,26 @@ function SearchResults({ search }) {
                     <h4 className="search-result__title">{f.title}</h4>
                     {f.extract && <p className="search-result__extract">{f.extract}</p>}
                     <span className="search-result__go">Open form <Icon name="arrow-right" size={14} /></span>
+                  </span>
+                </Card>
+              </li>
+            ))}
+          </ul>}
+        </ResultGroup>
+      )}
+
+      {tools.length > 0 && (
+        <ResultGroup id="results-tools" icon="laptop" title="Technology" noun="tools" items={tools} show={4} q={q}>
+          {(shown) => <ul className="search-results__list">
+            {shown.map((t) => (
+              <li key={t._id}>
+                <Card as={Link} to={`/tech/${t.slug}`} interactive accent={t.accent || "brand"} className="search-result search-result--form">
+                  <IconBadge name={t.icon || "laptop"} size="sm" accent={t.accent || "brand"} />
+                  <span className="search-result__body">
+                    <Eyebrow>{t.role} · {t.kind}</Eyebrow>
+                    <h4 className="search-result__title">{t.name}</h4>
+                    {t.extract && <p className="search-result__extract">{t.extract}</p>}
+                    <span className="search-result__go">Open tool <Icon name="arrow-right" size={14} /></span>
                   </span>
                 </Card>
               </li>

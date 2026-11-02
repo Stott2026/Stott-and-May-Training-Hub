@@ -11,6 +11,8 @@ import FormsPage from "./pages/FormsPage.jsx";
 import FormPage from "./pages/FormPage.jsx";
 import StartPage from "./pages/StartPage.jsx";
 import AchievementsPage from "./pages/AchievementsPage.jsx";
+import TechPage from "./pages/TechPage.jsx";
+import ToolPage from "./pages/ToolPage.jsx";
 import { ProgressProvider } from "./lib/progress.jsx";
 import { NavAreaProvider, useNavArea } from "./lib/navArea.jsx";
 import { SiteProvider, useSite } from "./lib/site.jsx";
@@ -21,6 +23,7 @@ import { useApi } from "./lib/api.js";
 const NAV = [
   { id: "training", label: "Training", icon: "graduation-cap", href: "/" },
   { id: "start", label: "New to the desk", icon: "rocket", href: "/start" },
+  { id: "tech", label: "Technology", icon: "laptop", href: "/tech" },
   { id: "library", label: "Library", icon: "library", href: "/library" },
   { id: "managers", label: "Managers", icon: "briefcase", href: "/managers" },
   { id: "documents", label: "Documents & Forms", icon: "file-text", href: "/documents" },
@@ -52,7 +55,7 @@ function Shell({ user, children }) {
   const ach = useAchievements();
   // The level and points chip in the top bar, once badges and levels are switched on.
   const level = ach.enabled ? { title: ach.level.title, points: ach.points } : null;
-  const current = pathname.startsWith("/start") ? "start" : pathname.startsWith("/achievements") ? "achievements" : pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : pathname.startsWith("/documents") ? "documents" : "training";
+  const current = pathname.startsWith("/tech") ? "tech" : pathname.startsWith("/start") ? "start" : pathname.startsWith("/achievements") ? "achievements" : pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : pathname.startsWith("/documents") ? "documents" : "training";
   return <AppShell navItems={NAV} quickLinks={quickLinks ?? []} level={level} current={current} user={user}>{children}</AppShell>;
 }
 
@@ -72,6 +75,8 @@ export default function App() {
               <Route path="/modules/:slug" element={<ModulePage />} />
               <Route path="/start" element={<StartPage />} />
               <Route path="/achievements" element={<AchievementsPage />} />
+              <Route path="/tech" element={<TechPage />} />
+              <Route path="/tech/:slug" element={<ToolPage />} />
               <Route path="/quiz" element={<QuizPage />} />
               <Route path="/library" element={<LibraryPage />} />
               <Route path="/managers" element={<ManagersPage />} />
