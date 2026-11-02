@@ -60,7 +60,7 @@ export const queries = {
 
   module: `*[_type == "trainingModule" && slug.current == $slug][0]{
     ${MODULE_SUMMARY}, estimatedMinutes, ${image("heroImage")},
-    sections[]{ _key, title, takeaway, content, ${image("image")}, framework, tables, tip, tactics, phrases, mistakes, scenario, lookHere,
+    sections[]{ _key, title, takeaway, content, ${image("image")}, framework, tables, tip, tactics, phrases, mistakes, scenario, lookHere, activities,
       "forms": forms[]->{ _id, title, "slug": slug.current, summary, icon } },
     "quiz": *[_type == "quizQuestion" && references(^._id)]{ _id, question, options, correct, explanation, afterSection },
     // Library files for this module, such as its classroom deck.
@@ -104,7 +104,7 @@ export const queries = {
   searchable: `{
     "modules": *[_type == "trainingModule" && !(${FOR_MANAGERS})] | order(order asc){
       title, "slug": slug.current, accent,
-      sections[]{ title, content, framework, tables, tip, tactics, phrases, mistakes, scenario }
+      sections[]{ title, content, framework, tables, tip, tactics, phrases, mistakes, scenario, activities }
     },
     "forms": *[_type == "formDocument"] | order(order asc){ _id, title, "slug": slug.current, group, summary, intro, icon, blocks },
     "library": *[_type == "libraryItem" && area != "managers" && defined(file.asset)] | order(order asc){

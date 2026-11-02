@@ -2,7 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 // Learner progress, kept in this browser only (as in the prototype). Phase 2 moves it to the database.
 // Sections are stored by module address and section key, so reordering sections in Sanity keeps progress.
-// Also kept: quick checks answered right (by question), and the days someone learnt something,
+// Also kept: quick checks answered right (by question), activities finished (by module, section
+// and activity), and the days someone learnt something,
 // for points, badges and streaks.
 const STORAGE_KEY = "sm-hub-progress";
 const ProgressContext = createContext(null);
@@ -10,9 +11,9 @@ const ProgressContext = createContext(null);
 function load() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    return { completed: saved?.completed ?? {}, quizScores: saved?.quizScores ?? [], quickChecks: saved?.quickChecks ?? {}, days: saved?.days ?? [] };
+    return { completed: saved?.completed ?? {}, quizScores: saved?.quizScores ?? [], quickChecks: saved?.quickChecks ?? {}, activities: saved?.activities ?? {}, days: saved?.days ?? [] };
   } catch {
-    return { completed: {}, quizScores: [], quickChecks: {}, days: [] };
+    return { completed: {}, quizScores: [], quickChecks: {}, activities: {}, days: [] };
   }
 }
 
@@ -40,6 +41,9 @@ export function ProgressProvider({ children }) {
     addQuizScore: (score, total) => setProgress((p) => ({ ...p, quizScores: [...p.quizScores, { score, total, date: new Date().toISOString() }], days: withToday(p.days) })),
     quickChecksRight: Object.keys(progress.quickChecks).length,
     markQuickCheck: (id) => setProgress((p) => (p.quickChecks[id] ? p : { ...p, quickChecks: { ...p.quickChecks, [id]: true }, days: withToday(p.days) })),
+    isActivityDone: (id) => !!progress.activities[id],
+    activitiesDone: Object.keys(progress.activities).length,
+    markActivity: (id) => setProgress((p) => (p.activities[id] ? p : { ...p, activities: { ...p.activities, [id]: true }, days: withToday(p.days) })),
     days: progress.days,
   };
   return <ProgressContext.Provider value={value}>{children}</ProgressContext.Provider>;

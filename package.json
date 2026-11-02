@@ -32,6 +32,7 @@
     "link:forms": "npm run link:forms -w studio --",
     "import:start-here": "npm run import:start-here -w studio --",
     "import:rewards": "npm run import:rewards -w studio --",
+    "import:activities": "npm run import:activities -w studio --",
     "decks:install": "npm install --prefix scripts/decks",
     "decks": "node --env-file-if-exists=.env scripts/decks/build.mjs"
   },

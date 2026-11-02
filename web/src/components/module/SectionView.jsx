@@ -10,11 +10,16 @@ import InfoTable from "./InfoTable.jsx";
 import TipCallout from "./TipCallout.jsx";
 import LookHere from "./LookHere.jsx";
 import SectionForms from "./SectionForms.jsx";
+import OrderActivity from "./OrderActivity.jsx";
+import FlipCards from "./FlipCards.jsx";
+import { useProgress } from "../../lib/progress.jsx";
 import "./ModuleContent.css";
+import "./Activities.css";
 
 // One section of a module, shown on its own so the learner can focus on it.
-export default function SectionView({ section, index, total, completed, avatar, onComplete, onPrevious, onNext }) {
+export default function SectionView({ moduleSlug, section, index, total, completed, avatar, onComplete, onPrevious, onNext }) {
   const isLast = index === total - 1;
+  const { isActivityDone, markActivity } = useProgress();
   return (
     <article className="section-view" aria-labelledby="section-title">
       <header className="section-view__header">
@@ -32,6 +37,12 @@ export default function SectionView({ section, index, total, completed, avatar, 
       {section.phrases?.length > 0 && <PhraseList phrases={section.phrases} avatar={avatar} />}
       {section.mistakes?.length > 0 && <MistakeCards mistakes={section.mistakes} />}
       {section.tip && <TipCallout tip={section.tip} />}
+      {(section.activities ?? []).map((a) => {
+        // Keyed by section and activity, so a new section or reshuffle starts fresh.
+        const id = `${moduleSlug}/${section._key}/${a._key}`;
+        const Activity = a._type === "flipCards" ? FlipCards : a._type === "orderActivity" ? OrderActivity : null;
+        return Activity && <Activity key={id} activity={a} done={isActivityDone(id)} onDone={() => markActivity(id)} />;
+      })}
       {section.forms?.length > 0 && <SectionForms forms={section.forms} />}
       {section.lookHere?.length > 0 && <LookHere items={section.lookHere} />}
       {section.scenario && <ScenarioChallenge key={`s${index}`} scenario={section.scenario} />}

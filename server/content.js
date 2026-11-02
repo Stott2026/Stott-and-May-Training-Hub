@@ -64,6 +64,7 @@ export function searchModules(modules, query) {
         ["Phrase", s.phrases],
         ["Mistake", s.mistakes],
         ["Scenario", [s.scenario?.title, s.scenario?.weak, s.scenario?.strong]],
+        ["Activity", (s.activities ?? []).flatMap((a) => [a.title, ...(a.items ?? []), ...(a.cards ?? []).flatMap((c) => [c.front, c.back])])],
       ];
       for (const [kind, texts] of places) {
         const hit = (texts ?? []).find((t) => t?.toLowerCase().includes(q));

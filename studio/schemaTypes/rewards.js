@@ -24,6 +24,7 @@ export const rewards = defineType({
         { name: "module", title: "Finishing a whole module (bonus)", type: "number", initialValue: 50, validation: (r) => r.required().min(0).integer() },
         { name: "quickCheck", title: "A quick check answered right", type: "number", initialValue: 5, validation: (r) => r.required().min(0).integer() },
         { name: "quizAnswer", title: "Each right answer in the best quiz round", type: "number", initialValue: 5, validation: (r) => r.required().min(0).integer() },
+        { name: "activity", title: "Finishing an activity (Put it in order or Flip cards)", type: "number", initialValue: 15, validation: (r) => r.min(0).integer() },
       ],
     }),
     defineField({

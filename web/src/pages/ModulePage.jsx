@@ -94,6 +94,7 @@ function ModuleView({ module, startAt, completed, onToggleComplete }) {
             <ModuleComplete module={module} nextModule={module.next} onReview={() => goTo(0)} />
           ) : (
             <SectionView
+              moduleSlug={module.slug}
               section={module.sections[current]}
               index={current}
               total={total}

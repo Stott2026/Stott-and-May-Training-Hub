@@ -19,6 +19,8 @@ const RULES = {
   "path-step": (s) => s.pathSteps >= 1,
   "path-complete": (s) => s.pathStepCount > 0 && s.pathSteps >= s.pathStepCount,
   "quick-checks": (s) => s.quickChecks >= 10,
+  "first-activity": (s) => s.activities >= 1,
+  "five-activities": (s) => s.activities >= 5,
   "quiz-taken": (s) => s.quizRounds >= 1,
   "quiz-ace": (s) => s.quizAce,
   "streak-3": (s) => s.bestStreak >= 3,
@@ -81,12 +83,13 @@ export function AchievementsProvider({ children }) {
       pathSteps: steps.filter((s) => s.modules.filter(Boolean).every(finished)).length,
       pathStepCount: steps.length,
       quickChecks: progress.quickChecksRight,
+      activities: progress.activitiesDone,
       quizRounds: progress.quizScores.length,
       quizAce: progress.quizScores.some((q) => q.total > 0 && q.score === q.total),
       bestStreak: streak.best,
     };
     const p = rewards.points ?? {};
-    const points = stats.sections * (p.section ?? 0) + stats.modules * (p.module ?? 0) + stats.quickChecks * (p.quickCheck ?? 0) + best * (p.quizAnswer ?? 0);
+    const points = stats.sections * (p.section ?? 0) + stats.modules * (p.module ?? 0) + stats.quickChecks * (p.quickCheck ?? 0) + best * (p.quizAnswer ?? 0) + stats.activities * (p.activity ?? 0);
     const levels = [...rewards.levels].sort((a, b) => (a.points ?? 0) - (b.points ?? 0));
     const levelIndex = Math.max(0, levels.findLastIndex((l) => points >= (l.points ?? 0)));
     const badges = (rewards.badges ?? []).filter((b) => RULES[b.rule]).map((b) => ({ ...b, earned: RULES[b.rule](stats) }));

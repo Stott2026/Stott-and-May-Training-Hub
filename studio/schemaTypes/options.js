@@ -74,6 +74,8 @@ export const BADGE_RULES = [
   { title: "Finish a Start here step", value: "path-step" },
   { title: "Finish the whole Start here path", value: "path-complete" },
   { title: "Get ten quick checks right", value: "quick-checks" },
+  { title: "Finish a first activity", value: "first-activity" },
+  { title: "Finish five activities", value: "five-activities" },
   { title: "Finish a round of the quiz", value: "quiz-taken" },
   { title: "Full marks in a round of the quiz", value: "quiz-ace" },
   { title: "Learn on three working days in a row", value: "streak-3" },

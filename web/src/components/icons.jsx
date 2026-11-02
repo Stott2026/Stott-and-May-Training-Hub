@@ -9,10 +9,17 @@ import {
   Presentation, Download, LayoutTemplate, ClipboardList, Library, Briefcase, ExternalLink, FolderOpen,
   Phone, Calendar, FileCheck, ChartColumn, Banknote, Printer, RotateCcw, Minus, Plus,
   Award, Crown, Flame, Footprints, Lock, Medal, Star, Zap,
+  ArrowDown, ArrowUp, GripVertical, Layers, ListOrdered, Repeat,
 } from "lucide-react";
 
 export const icons = {
   "arrow-left": ArrowLeft,
+  "arrow-down": ArrowDown,
+  "arrow-up": ArrowUp,
+  "grip-vertical": GripVertical,
+  layers: Layers,
+  "list-ordered": ListOrdered,
+  repeat: Repeat,
   award: Award,
   crown: Crown,
   flame: Flame,

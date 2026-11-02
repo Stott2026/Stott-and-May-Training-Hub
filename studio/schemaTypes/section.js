@@ -13,6 +13,7 @@ export const section = defineType({
     { name: "practice", title: "Tactics, phrases and mistakes" },
     { name: "structure", title: "Steps, tables and tips" },
     { name: "scenario", title: "Scenario" },
+    { name: "activities", title: "Activities" },
     { name: "resources", title: "Look here and forms" },
   ],
   fields: [
@@ -119,6 +120,48 @@ export const section = defineType({
       rows: 2,
       group: "structure",
       description: "One memorable line, shown in a highlighted box. For example: 'Ask a question back before you answer.'",
+    }),
+    defineField({
+      name: "activities",
+      title: "Activities (optional)",
+      type: "array",
+      group: "activities",
+      description: "Hands-on practice for this section. Learners earn points for finishing each one.",
+      of: [
+        {
+          type: "object",
+          name: "orderActivity",
+          title: "Put it in order",
+          fields: [
+            { name: "title", title: "Title", type: "string", initialValue: "Put it in order", validation: (r) => r.required().max(60) },
+            { name: "instructions", title: "Instructions", type: "string", description: "For example: Drag the seven stages into the order they happen.", validation: (r) => r.max(160) },
+            { name: "items", title: "Items, in the right order", type: "array", of: [{ type: "string" }], description: "Add them in the correct order: the hub shuffles them for the learner. Three to eight work best.", validation: (r) => r.required().min(3).max(8).unique() },
+            { name: "explanation", title: "When they get it right (optional)", type: "text", rows: 2, description: "Shown once the order is right: why it goes this way." },
+          ],
+          preview: { select: { title: "title", items: "items" }, prepare: ({ title, items = [] }) => ({ title, subtitle: `Put it in order · ${items.length} items` }) },
+        },
+        {
+          type: "object",
+          name: "flipCards",
+          title: "Flip cards",
+          fields: [
+            { name: "title", title: "Title", type: "string", initialValue: "Flip cards", validation: (r) => r.required().max(60) },
+            { name: "instructions", title: "Instructions", type: "string", description: "For example: Say your answer out loud, then flip the card to check.", validation: (r) => r.max(160) },
+            {
+              name: "cards", title: "Cards", type: "array", validation: (r) => r.required().min(2).max(12),
+              of: [{
+                type: "object", name: "flipCard",
+                fields: [
+                  { name: "front", title: "Front", type: "text", rows: 2, description: "The prompt, for example an objection a client raises.", validation: (r) => r.required() },
+                  { name: "back", title: "Back", type: "text", rows: 3, description: "The answer, for example how to reframe it.", validation: (r) => r.required() },
+                ],
+                preview: { select: { title: "front", subtitle: "back" } },
+              }],
+            },
+          ],
+          preview: { select: { title: "title", cards: "cards" }, prepare: ({ title, cards = [] }) => ({ title, subtitle: `Flip cards · ${cards.length} cards` }) },
+        },
+      ],
     }),
     defineField({
       name: "lookHere",
