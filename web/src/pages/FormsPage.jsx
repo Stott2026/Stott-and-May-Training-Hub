@@ -35,7 +35,7 @@ export default function FormsPage() {
 
   return (
     <>
-      <PageHero eyebrow="Stott and May" title={data.page?.title ?? "Documents & Forms"} intro={data.page?.intro} photo={placeholderPhotos.forms} photoShape="frame">
+      <PageHero eyebrow="Stott and May" tone="light" title={data.page?.title ?? "Documents & Forms"} titleAccent={data.page?.titleAccent} intro={data.page?.intro} photo={placeholderPhotos.forms} photoShape="frame">
         <div className="forms-search">
           <SearchField value={params.get("q") ?? ""} onChange={(v) => update({ q: v })} label="Search forms" placeholder="Search forms, e.g. offer, reference, BD…" />
         </div>

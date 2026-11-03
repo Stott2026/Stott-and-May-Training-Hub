@@ -9,6 +9,7 @@ export const formsPage = defineType({
   icon: ClipboardIcon,
   fields: [
     defineField({ name: "title", title: "Main heading", type: "string", initialValue: "Documents & Forms", validation: (r) => r.required() }),
+    defineField({ name: "titleAccent", title: "Heading, second line (optional)", type: "string", description: "Shown under the main heading in the accent colour, the brand's two-tone headline. Keep it short.", validation: (r) => r.max(60) }),
     defineField({ name: "intro", title: "Introduction", type: "text", rows: 3, description: "The paragraph under the main heading." }),
   ],
   preview: { prepare: () => ({ title: "Documents & Forms page" }) },

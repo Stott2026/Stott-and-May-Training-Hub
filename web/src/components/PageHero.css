@@ -13,3 +13,10 @@
 .page-hero__person { max-width: 13rem; justify-self: center; }
 .page-hero__person .shape-image__shape { background: var(--color-glass); backdrop-filter: blur(6px); }
 @media (max-width: 759px) { .page-hero__person { display: none; } }
+
+/* Light header: white into the page colour, outlined shapes, the accent line in teal. */
+.page-hero--light { background: var(--gradient-hero-light); }
+.page-hero--light .page-hero__lead { color: var(--color-text-muted); }
+.page-hero--light .page-hero__person .shape-image__shape { background: var(--gradient-brand); backdrop-filter: none; }
+/* Dark header (inside a theme-dark wrapper): the dark hero background comes from the tokens. */
+.page-hero--dark .page-hero__lead { color: var(--color-text-muted); }

@@ -4,7 +4,6 @@ import LoadState from "../components/LoadState.jsx";
 import ModuleCard from "../components/ModuleCard.jsx";
 import PageHero from "../components/PageHero.jsx";
 import LibraryCard from "../components/library/LibraryCard.jsx";
-import { Icon } from "../components/icons.jsx";
 import { useApi } from "../lib/api.js";
 import { groupModules } from "../lib/groupModules.js";
 import { useProgress } from "../lib/progress.jsx";
@@ -21,17 +20,18 @@ export default function ManagersPage() {
 
   const groups = groupModules(data.modules ?? []);
   const files = data.library ?? [];
+  const stats = [
+    [data.modules.length, data.modules.length === 1 ? "module" : "modules"],
+    [groups.length > 1 && groups.length, "programmes"],
+    [files.length, files.length === 1 ? "file to download" : "files to download"],
+  ].filter(([n]) => n);
   return (
-    <>
-      <PageHero eyebrow="For managers" title={data.page?.title ?? "For managers"} intro={data.page?.intro} photo={placeholderPhotos.managers} photoShape="frame">
-        {(data.modules.length > 0 || files.length > 0) && (
-          <p className="managers-count">
-            <Icon name="briefcase" size={18} />
-            {[
-              data.modules.length && `${data.modules.length} ${data.modules.length === 1 ? "module" : "modules"}`,
-              files.length && `${files.length} ${files.length === 1 ? "file" : "files"} to download`,
-            ].filter(Boolean).join(" · ")}
-          </p>
+    <div className="theme-dark" data-theme="dark">
+      <PageHero eyebrow="For managers" tone="dark" title={data.page?.title ?? "For managers"} titleAccent={data.page?.titleAccent} intro={data.page?.intro} photo={placeholderPhotos.managers} photoShape="frame">
+        {stats.length > 0 && (
+          <ul className="stat-tiles">
+            {stats.map(([n, label]) => <li key={label} className="stat-tile"><span className="stat-tile__number">{n}</span><span className="stat-tile__label">{label}</span></li>)}
+          </ul>
         )}
       </PageHero>
 
@@ -59,6 +59,6 @@ export default function ManagersPage() {
           </section>
         )}
       </div>
-    </>
+    </div>
   );
 }

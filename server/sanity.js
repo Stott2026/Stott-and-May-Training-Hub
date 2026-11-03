@@ -75,14 +75,14 @@ export const queries = {
   quiz: `*[_type == "quizQuestion" && !(module->${FOR_MANAGERS})]{ _id, question, options, correct, explanation }`,
 
   library: `{
-    "page": *[_id == "libraryPage"][0]{ title, intro },
+    "page": *[_id == "libraryPage"][0]{ title, titleAccent, intro },
     "items": *[_type == "libraryItem" && area != "managers" && defined(file.asset)] | order(order asc){
       ${LIBRARY_ITEM}, "module": module->{ title, "slug": slug.current, accent }
     }
   }`,
 
   managers: `{
-    "page": *[_id == "managersPage"][0]{ title, intro },
+    "page": *[_id == "managersPage"][0]{ title, titleAccent, intro },
     "modules": *[_type == "trainingModule" && ${FOR_MANAGERS}] | order(order asc){ ${MODULE_SUMMARY} },
     "library": *[_type == "libraryItem" && area == "managers" && defined(file.asset)] | order(order asc){
       ${LIBRARY_ITEM}, "module": module->{ title, "slug": slug.current, accent }
@@ -90,7 +90,7 @@ export const queries = {
   }`,
 
   forms: `{
-    "page": *[_id == "formsPage"][0]{ title, intro },
+    "page": *[_id == "formsPage"][0]{ title, titleAccent, intro },
     "items": *[_type == "formDocument"] | order(order asc){ _id, title, "slug": slug.current, group, summary, icon }
   }`,
 
