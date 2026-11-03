@@ -13,8 +13,9 @@ export const sanity = createClient({
   dataset: process.env.SANITY_STUDIO_DATASET || "production",
   token,
   apiVersion: "2025-02-19",
-  // No caching, so a change published in the Studio shows after a refresh.
-  useCdn: false,
+  // Sanity's fast cache (about four times quicker). It is cleared when something is published,
+  // so a change made in the Studio shows in the hub within a few seconds.
+  useCdn: true,
   // Only published content: editors' unpublished drafts never appear in the hub.
   perspective: "published",
 });

@@ -19,7 +19,7 @@
   --sm-white: #ffffff;       /* card surfaces */
 
   /* Accessible text versions of brand colours (pass WCAG AA on white) */
-  --sm-teal-ink: #007a7a;    /* teal for small text and links on light surfaces */
+  --sm-teal-ink: #007373;    /* teal for small text and links on light surfaces */
   --sm-slate-ink: #5b6675;   /* muted body text on light surfaces */
   --sm-danger: #c93838;      /* "common mistakes" and "weak approach" labels */
 

@@ -15,7 +15,7 @@ const web = path.join(root, "web");
 const snapshotFile = path.join(web, "src/preview/snapshot.json");
 const outDir = path.join(web, "dist-preview");
 const withDrafts = process.argv.includes("--drafts");
-const sanity = withDrafts ? published.withConfig({ perspective: "drafts" }) : published;
+const sanity = withDrafts ? published.withConfig({ perspective: "drafts", useCdn: false }) : published;
 
 // 1. Take a snapshot of the content, in the same shape the /api routes return.
 const [home, values, modules, quiz, searchable, library, managers, site, forms] = await Promise.all(

@@ -1,3 +1,4 @@
+import compression from "compression";
 import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -14,6 +15,9 @@ const app = express();
 
 // Railway sits in front of the app, so trust it to say whether the visitor used HTTPS.
 app.set("trust proxy", 1);
+// Squeeze everything the hub sends (pages, scripts, content) to about a third of its size.
+// May's replies are left alone so they still arrive word by word.
+app.use(compression({ filter: (req, res) => !req.path.startsWith("/api/may") && compression.filter(req, res) }));
 app.use(session);
 
 // Used by Railway to check the app is up. Returns no data, so it is the one route open to all.
@@ -55,6 +59,9 @@ app.use("/api", (err, req, res, next) => {
 if (isProduction) {
   // Production: serve the built files from web/dist (created by `npm run build`).
   const dist = path.join(webRoot, "dist");
+  // Built scripts and styles have a fingerprint in their name, so browsers can keep them for a year;
+  // a new deploy gives them new names. Everything else is checked for changes on each visit.
+  app.use("/assets", express.static(path.join(dist, "assets"), { maxAge: "1y", immutable: true, index: false }));
   app.use(express.static(dist, { index: false }));
   app.get("/{*splat}", (req, res) => {
     res.sendFile(path.join(dist, "index.html"));

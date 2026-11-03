@@ -47,9 +47,12 @@ export default function LibraryPage() {
           </div>
         )}
         {shown.length ? (
-          <ul className="library-grid" aria-live="polite">
-            {shown.map((item) => <li key={item._id}><LibraryCard item={item} /></li>)}
-          </ul>
+          <>
+            <h2 className="visually-hidden">Files to download</h2>
+            <ul className="library-grid" aria-live="polite">
+              {shown.map((item) => <li key={item._id}><LibraryCard item={item} /></li>)}
+            </ul>
+          </>
         ) : (
           <p className="library-empty">Nothing in the Library yet. Files appear here once they're published in the Studio.</p>
         )}

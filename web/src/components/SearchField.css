@@ -11,7 +11,7 @@
   padding: 0 var(--space-2) 0 var(--space-5);
   transition: border-color var(--duration-fast);
 }
-.search-field:focus-within { border-color: var(--color-focus); }
+.search-field:focus-within { border-color: var(--color-focus); outline: 3px solid var(--color-focus); outline-offset: 2px; }
 .search-field__icon { color: var(--color-link); flex-shrink: 0; }
 .search-field input {
   flex: 1;

@@ -71,6 +71,7 @@ function QuizRound({ bank, onRestart }) {
 
   return (
     <div className="container quiz">
+      <h1 className="visually-hidden">Quiz</h1>
       <Card className="quiz__card">
         <div className="quiz__top">
           <Eyebrow>Question {index + 1} of {questions.length}</Eyebrow>

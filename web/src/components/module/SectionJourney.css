@@ -67,6 +67,7 @@
   .journey__item { flex: 0 0 auto; }
   .journey__item:not(:last-child)::after { display: none; }
   .journey__item button { width: auto; align-items: center; padding: var(--space-2) var(--space-3); }
-  .journey__title { display: none; }
-  .journey__item--current .journey__title { display: inline; max-width: 12rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0; }
+  /* Only the current step shows its title; the others keep theirs for screen readers. */
+  .journey__title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+  .journey__item--current .journey__title { position: static; width: auto; height: auto; clip: auto; display: inline; max-width: 12rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0; }
 }

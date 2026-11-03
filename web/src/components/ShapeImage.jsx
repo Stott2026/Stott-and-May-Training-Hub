@@ -6,12 +6,14 @@ import "./ShapeImage.css";
 // shape: "squircle", "diamond" or "rings" for a cut-out person rising out of a brand shape
 // (transparent-background photos), or "frame" for an ordinary photo in a rounded frame whose
 // lower edge is cut by a gradient wave.
-export default function ShapeImage({ src, alt = "", shape = "squircle", accent = "brand", className = "" }) {
+export default function ShapeImage({ src: original, alt = "", shape = "squircle", accent = "brand", className = "" }) {
   const id = useId();
+  // Photos uploaded to Sanity are fetched at the size they're shown, in the lightest format.
+  const src = original?.startsWith("https://cdn.sanity.io/") ? `${original}?w=800&fit=max&auto=format` : original;
   if (shape === "frame") {
     return (
       <figure className={`shape-image shape-image--frame ${className}`} data-accent={accent}>
-        <img className="shape-image__framed" src={src} alt={alt} />
+        <img className="shape-image__framed" src={src} alt={alt} decoding="async" />
         <svg className="shape-image__wave" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
           <defs>
             <linearGradient id={id} x1="0" y1="0" x2="1" y2="0">
@@ -28,7 +30,7 @@ export default function ShapeImage({ src, alt = "", shape = "squircle", accent =
     <figure className={`shape-image shape-image--${shape} ${className}`} data-accent={accent}>
       <span className="shape-image__shape" aria-hidden="true" />
       {shape === "rings" && <span className="shape-image__rings" aria-hidden="true" />}
-      <img className="shape-image__photo" src={src} alt={alt} />
+      <img className="shape-image__photo" src={src} alt={alt} decoding="async" />
     </figure>
   );
 }
