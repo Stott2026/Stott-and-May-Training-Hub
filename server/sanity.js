@@ -48,7 +48,7 @@ export const queries = {
     "rewards": *[_id == "rewards"][0]{ title, intro, points, levels[]{ _key, title, points }, badges[]{ _key, rule, title, description, icon } }
   }`,
 
-  home: `*[_id == "homePage"][0]{ heroTitle, heroIntro, ${image("heroImage")}, philosophyTitle, philosophyText,
+  home: `*[_id == "homePage"][0]{ heroTitle, heroTitleAccent, heroIntro, ${image("heroImage")}, philosophyTitle, philosophyText,
     // The "Start here" path for new starters (its own document in the Studio).
     "startHere": *[_id == "startHere"][0]{ title, intro, steps[]{
       _key, timing, title, note,

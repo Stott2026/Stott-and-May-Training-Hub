@@ -2,34 +2,24 @@
 .hero {
   position: relative;
   overflow: hidden;
-  background: var(--gradient-hero);
+  /* The light header, as on the Library: white into the page colour, with outlined brand squares. */
+  background: var(--gradient-hero-light);
   padding: var(--space-12) 0 var(--space-16);
   isolation: isolate;
-}
-.hero__pattern {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(var(--color-glass-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-glass-line) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: linear-gradient(to bottom, black, transparent 85%);
-  -webkit-mask-image: linear-gradient(to bottom, black, transparent 85%);
-  opacity: 0.6;
 }
 .hero__wave { position: absolute; left: 0; right: 0; bottom: 0; height: 120px; z-index: -1; }
 .hero__inner { display: grid; gap: var(--space-8); align-items: center; }
 @media (min-width: 900px) { .hero__inner { grid-template-columns: 1.15fr 0.85fr; } }
 
 .hero__title { font-size: var(--text-display); font-weight: var(--weight-extrabold); letter-spacing: -0.02em; margin-bottom: var(--space-4); }
-.hero__lead { font-size: var(--text-lg); max-width: 34rem; margin-bottom: var(--space-6); }
+.hero__lead { font-size: var(--text-lg); color: var(--color-text-muted); max-width: 34rem; margin-bottom: var(--space-6); }
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-6); }
 
 .hero__visual { position: relative; max-width: 24rem; width: 100%; justify-self: center; }
 @media (max-width: 899px) { .hero__visual { max-width: 17rem; } }
 @media (max-width: 599px) { .hero__visual { max-width: 11rem; } }
-.hero__person .shape-image__shape { background: var(--color-glass); backdrop-filter: blur(6px); }
+/* The person rises out of the brand gradient, which keeps the light header energetic. */
+.hero__person .shape-image__shape { background: var(--gradient-brand); }
 .float-card {
   position: absolute;
   display: flex;

@@ -9,6 +9,7 @@ export const homePage = defineType({
   icon: HomeIcon,
   fields: [
     defineField({ name: "heroTitle", title: "Main heading", type: "string", initialValue: "Training Hub", validation: (r) => r.required() }),
+    defineField({ name: "heroTitleAccent", title: "Heading, second line (optional)", type: "string", description: "Shown under the main heading in the accent colour, the brand's two-tone headline. Keep it short.", validation: (r) => r.max(60) }),
     defineField({ name: "heroIntro", title: "Introduction", type: "text", rows: 3, description: "The paragraph under the main heading.", validation: (r) => r.required() }),
     defineField({ name: "heroImage", title: "Header photo", type: "image", options: { hotspot: true }, description: "A cut-out person photo with a transparent background looks best.", fields: [{ name: "alt", title: "Image description", type: "string" }] }),
     defineField({ name: "philosophyTitle", title: "Philosophy heading", type: "string", initialValue: "The Stott and May Way" }),

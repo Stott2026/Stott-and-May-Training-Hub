@@ -47,7 +47,7 @@ export default function HomePage() {
   const error = home.error || modules.error;
   if (error || !home.data || !modules.data) return <LoadState error={error} />;
 
-  const { heroTitle, heroIntro, heroImage } = home.data;
+  const { heroTitle, heroTitleAccent, heroIntro, heroImage } = home.data;
   const total = modules.data.reduce((n, m) => n + (m.sectionKeys?.length ?? 0), 0);
   const done = modules.data.reduce((n, m) => n + countDone(m.slug, m.sectionKeys), 0);
   const overall = total ? (done / total) * 100 : 0;
@@ -62,12 +62,12 @@ export default function HomePage() {
     <>
       {/* ── Hero ── */}
       <section className="hero" aria-labelledby="hero-title">
-        <div className="hero__pattern" aria-hidden="true" />
+        <div className="brand-shapes" aria-hidden="true"><span /><span /><span /><span /></div>
         <div className="hero__wave" aria-hidden="true"><Wave variant="glow" /></div>
         <div className="container hero__inner">
           <div className="hero__copy">
-            <Eyebrow tone="ink">Stott and May</Eyebrow>
-            <h1 id="hero-title" className="hero__title">{heroTitle}</h1>
+            <Eyebrow>Stott and May</Eyebrow>
+            <h1 id="hero-title" className="hero__title">{heroTitle}{heroTitleAccent && <span className="headline-accent">{heroTitleAccent}</span>}</h1>
             <p className="hero__lead">{heroIntro}</p>
             <div className="hero__actions">
               <SearchField value={search} onChange={setSearch} label="Search the hub" placeholder="Search training, forms and decks…" />
