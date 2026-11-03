@@ -78,6 +78,33 @@
     linear-gradient(180deg, var(--sm-white), var(--sm-cloud));
   --pattern-line: rgba(0, 122, 122, 0.14); /* outlined squares on light pages */
 
+  /* ── Illustrations (compliance drawings) ─────────
+     Everyday colours, outside the brand palette, so scenes read as real rooms and people. */
+  --ill-wall: #f4efe6;
+  --ill-floor: #d9c7aa;
+  --ill-floor-line: #c4ae8c;
+  --ill-wood: #b98552;
+  --ill-wood-dark: #8a5d33;
+  --ill-sky: #cfe8f7;
+  --ill-sun: #ffe08a;
+  --ill-frame: #ffffff;
+  --ill-screen: #2d3a4a;
+  --ill-screen-glow: #6f8fb3;
+  --ill-metal: #9aa5b1;
+  --ill-dark: #3b4048;
+  --ill-skin: #c98e6b;
+  --ill-hair: #3a2a20;
+  --ill-shirt: #4f7cac;
+  --ill-trousers: #39424e;
+  --ill-chair: #59616c;
+  --ill-plant: #5c9e5a;
+  --ill-pot: #c76b4a;
+  --ill-mug: #e46a5b;
+  --ill-lamp: #f2c14e;
+  --ill-cable: #222222;
+  --ill-box: #c9a36b;
+  --ill-guide: #e0473b; /* dashed guide lines and angle marks */
+
   /* ── Typography ────────────────────────────────── */
   --font-heading: "Manrope", "Segoe UI", system-ui, sans-serif;
   --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
@@ -135,8 +162,8 @@
   --reading-width: 46rem;
   --nav-max-width: 90rem; /* the top bar on very wide screens */
   --nav-row-height: 4rem;     /* the top bar row with the logo and buttons */
-  --nav-tabs-height: 2.75rem; /* the row of tabs under it, from 600px */
-  --nav-height: var(--nav-row-height); /* the whole top bar, for sticky offsets */
+  --nav-tabs-height: 2.75rem; /* the row of tabs under it */
+  --nav-height: calc(var(--nav-row-height) + var(--nav-tabs-height)); /* the whole top bar, for sticky offsets */
 
   --duration-fast: 150ms;
   --duration-medium: 300ms;
@@ -144,9 +171,6 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* a little overshoot, for celebrations */
 }
 
-@media (min-width: 600px) {
-  :root { --nav-height: calc(var(--nav-row-height) + var(--nav-tabs-height)); }
-}
 
 /*
  * Dark mode: the brand's flagship look (#111314 page, glowing wave, cards that fade towards

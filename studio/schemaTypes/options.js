@@ -47,6 +47,21 @@ export const ICON_OPTIONS = [
   { title: "Bar chart", value: "chart-column" },
   { title: "Banknote", value: "banknote" },
   { title: "Triangle warning", value: "triangle-alert" },
+  { title: "House", value: "house" },
+  { title: "Screen", value: "monitor" },
+  { title: "Plug", value: "plug-zap" },
+  { title: "Heart with pulse", value: "heart-pulse" },
+  { title: "Gavel", value: "gavel" },
+  { title: "Coffee cup", value: "coffee" },
+  { title: "Globe", value: "globe" },
+  { title: "Fingerprint", value: "fingerprint" },
+  { title: "Warning email", value: "mail-warning" },
+  { title: "Raised hand", value: "hand" },
+  { title: "Person with tick", value: "user-check" },
+  { title: "Eye", value: "eye" },
+  { title: "Shield with warning", value: "shield-alert" },
+  { title: "Padlock", value: "lock-keyhole" },
+  { title: "Accessibility", value: "accessibility" },
 ];
 
 export const ACCENT_OPTIONS = [
@@ -96,3 +111,33 @@ export const TOOL_CAPABILITIES = [
   { title: "Outreach", value: "outreach" },
   { title: "Daily alerts", value: "alerts" },
 ];
+
+// Groups on the Compliance page, in this order (headings as in the 5Mins.ai compliance catalogue).
+export const COMPLIANCE_CATEGORIES = [
+  { title: "Cybersecurity & Data Protection", value: "data" },
+  { title: "Financial & Business Integrity", value: "integrity" },
+  { title: "Ethics & Responsible Business Practices", value: "ethics" },
+  { title: "Workplace Conduct & Diversity", value: "conduct" },
+  { title: "Health, Safety & Well-being", value: "safety" },
+  { title: "International & US Compliance", value: "us" },
+];
+
+// Where a compliance course applies.
+export const REGION_OPTIONS = [
+  { title: "Global (everyone)", value: "global" },
+  { title: "UK", value: "uk" },
+  { title: "US (New York)", value: "us-ny" },
+];
+
+// The drawings the hub can show in a compliance lesson. They are drawn in the hub's code
+// (web/src/components/compliance/drawings.jsx), so add new ones there too. Each drawing has
+// numbered or named points that labels and "spot it" items attach to.
+export const DRAWING_OPTIONS = [
+  { title: "Good posture at a desk (side view)", value: "desk-posture" },
+  { title: "A home workspace with things to check", value: "home-desk" },
+];
+export const DRAWING_SPOTS = {
+  "desk-posture": ["screen-height", "distance", "back", "elbows", "wrists", "feet", "light"],
+  "home-desk": ["laptop", "window", "cable", "socket", "chair", "box", "drink", "lamp", "plant"],
+};
+export const SPOT_OPTIONS = Object.entries(DRAWING_SPOTS).flatMap(([drawing, spots]) => spots.map((s) => ({ title: `${drawing}: ${s}`, value: s })));

@@ -14,5 +14,7 @@ import { startHere } from "./startHere.js";
 import { rewards } from "./rewards.js";
 import { techTool } from "./techTool.js";
 import { techPage } from "./techPage.js";
+import { complianceCourse } from "./complianceCourse.js";
+import { compliancePage } from "./compliancePage.js";
 
-export const schemaTypes = [trainingModule, section, quizQuestion, value, category, homePage, libraryItem, libraryPage, managersPage, siteSettings, formDocument, formsPage, startHere, rewards, techTool, techPage];
+export const schemaTypes = [trainingModule, section, quizQuestion, value, category, homePage, libraryItem, libraryPage, managersPage, siteSettings, formDocument, formsPage, startHere, rewards, techTool, techPage, complianceCourse, compliancePage];

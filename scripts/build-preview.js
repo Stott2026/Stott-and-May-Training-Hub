@@ -25,6 +25,8 @@ const routes = { "/me": { name: "Preview", preview: true }, "/home": home ?? {},
 for (const f of forms.items) routes[`/forms/${f.slug}`] = await sanity.fetch(queries.form, { slug: f.slug });
 routes["/tech"] = await sanity.fetch(queries.tech);
 for (const t of routes["/tech"].tools) routes[`/tech/${t.slug}`] = await sanity.fetch(queries.tool, { slug: t.slug });
+routes["/compliance"] = await sanity.fetch(queries.compliance);
+for (const c of routes["/compliance"].courses) routes[`/compliance/${c.slug}`] = await sanity.fetch(queries.course, { slug: c.slug });
 for (const m of [...modules, ...managers.modules]) {
   routes[`/modules/${m.slug}`] = withQuickChecks(await sanity.fetch(queries.module, { slug: m.slug }));
 }

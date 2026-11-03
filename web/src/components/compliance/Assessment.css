@@ -1,0 +1,27 @@
+/* The final assessment */
+.assessment { display: grid; gap: var(--space-5); background: var(--surface-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: var(--space-8); }
+@media (max-width: 599px) { .assessment { padding: var(--space-5); } }
+.assessment__top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--space-2); }
+.assessment__mark { font-size: var(--text-sm); font-weight: var(--weight-bold); color: var(--color-text-muted); }
+.assessment__set { gap: var(--space-3); }
+.assessment__question:focus-visible, .assessment__score:focus-visible { outline: none; }
+.assessment__question { font-family: var(--font-heading); font-weight: var(--weight-extrabold); font-size: var(--text-xl); line-height: 1.3; margin-bottom: var(--space-4); padding: 0; }
+.assessment__option { padding: var(--space-4); font-size: var(--text-md); }
+.assessment__option.is-chosen { border-color: var(--color-link); background: var(--gradient-brand-soft); box-shadow: inset 0 0 0 1px var(--color-link); }
+.assessment__option.is-chosen .quick-check__letter { background: var(--gradient-brand); }
+.assessment__option.is-chosen .quick-check__mark { color: var(--color-link); }
+.assessment__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: space-between; }
+.assessment__note { font-size: var(--text-xs); color: var(--color-text-muted); }
+
+.assessment__result { display: grid; justify-items: center; text-align: center; gap: var(--space-2); padding: var(--space-6); border-radius: var(--radius-lg); }
+.assessment__result.is-pass { background: var(--gradient-brand-soft); color: var(--color-success); }
+.assessment__result.is-fail { background: var(--sm-danger-50); color: var(--color-danger); }
+.assessment__result p { color: var(--color-text); }
+.assessment__score { font-family: var(--font-body); font-size: var(--text-display); font-weight: var(--weight-extrabold); line-height: 1; color: var(--color-text); }
+.assessment__verdict { font-weight: var(--weight-semibold); }
+.assessment__review h3 { font-size: var(--text-lg); font-weight: var(--weight-extrabold); margin-bottom: var(--space-3); }
+.assessment__review ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+.assessment__review li { padding: var(--space-4); border-radius: var(--radius-md); border: 1px solid var(--color-border); font-size: var(--text-sm); line-height: 1.55; }
+.assessment__review-q { font-weight: var(--weight-bold); }
+.assessment__review-a { display: flex; gap: var(--space-2); align-items: center; margin-top: var(--space-1); color: var(--color-danger); }
+.assessment__review-why { margin-top: var(--space-2); color: var(--color-text-muted); }

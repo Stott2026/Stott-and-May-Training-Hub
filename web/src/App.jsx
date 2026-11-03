@@ -13,6 +13,9 @@ import StartPage from "./pages/StartPage.jsx";
 import AchievementsPage from "./pages/AchievementsPage.jsx";
 import TechPage from "./pages/TechPage.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
+import CompliancePage from "./pages/CompliancePage.jsx";
+import CoursePage from "./pages/CoursePage.jsx";
+import { ComplianceProvider } from "./lib/compliance.jsx";
 import { ProgressProvider } from "./lib/progress.jsx";
 import { NavAreaProvider, useNavArea } from "./lib/navArea.jsx";
 import { SiteProvider, useSite } from "./lib/site.jsx";
@@ -30,6 +33,7 @@ const NAV = [
   { id: "library", label: "Library", icon: "library", href: "/library" },
   { id: "managers", label: "Managers", icon: "briefcase", href: "/managers" },
   { id: "documents", label: "Documents & Forms", icon: "file-text", href: "/documents" },
+  { id: "compliance", label: "Compliance", icon: "shield-check", href: "/compliance" },
 ];
 
 // Back to the top of the page whenever the page (not just the search words) changes.
@@ -58,7 +62,7 @@ function Shell({ user, children }) {
   const ach = useAchievements();
   // The level and points chip in the top bar, once badges and levels are switched on.
   const level = ach.enabled ? { title: ach.level.title, points: ach.points } : null;
-  const current = pathname.startsWith("/tech") ? "tech" : pathname.startsWith("/start") ? "start" : pathname.startsWith("/achievements") ? "achievements" : pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : pathname.startsWith("/documents") ? "documents" : "training";
+  const current = pathname.startsWith("/tech") ? "tech" : pathname.startsWith("/start") ? "start" : pathname.startsWith("/achievements") ? "achievements" : pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : pathname.startsWith("/documents") ? "documents" : pathname.startsWith("/compliance") ? "compliance" : "training";
   return <AppShell navItems={NAV} quickLinks={quickLinks ?? []} level={level} current={current} user={user}>{children}</AppShell>;
 }
 
@@ -76,6 +80,7 @@ export default function App() {
     <Router>
       <SiteProvider>
       <ProgressProvider>
+      <ComplianceProvider>
       <AchievementsProvider>
         <MayProvider>
         <NavAreaProvider>
@@ -93,6 +98,9 @@ export default function App() {
               <Route path="/managers" element={<ManagersPage />} />
               <Route path="/documents" element={<FormsPage />} />
               <Route path="/documents/:slug" element={<FormPage />} />
+              <Route path="/compliance" element={<CompliancePage />} />
+              <Route path="/compliance/:slug" element={<CoursePage />} />
+              <Route path="/compliance/:slug/:step" element={<CoursePage />} />
               <Route path="*" element={<LoadState error={{ status: 404 }} />} />
             </Routes>
           </Shell>
@@ -101,6 +109,7 @@ export default function App() {
         </NavAreaProvider>
         </MayProvider>
       </AchievementsProvider>
+      </ComplianceProvider>
       </ProgressProvider>
       </SiteProvider>
     </Router>

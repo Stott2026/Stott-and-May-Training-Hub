@@ -20,6 +20,7 @@
     "link:forms": "dotenv -e ../.env -- node migrations/link-forms.js",
     "import:start-here": "dotenv -e ../.env -- node migrations/import-start-here.js",
     "import:headline-accents": "dotenv -e ../.env -- node migrations/set-headline-accents.js",
+    "import:compliance": "dotenv -e ../.env -- node migrations/import-compliance.js",
     "import:rewards": "dotenv -e ../.env -- node migrations/import-rewards.js",
     "import:activities": "dotenv -e ../.env -- node migrations/import-activities.js",
     "import:tech": "dotenv -e ../.env -- node migrations/import-tech.js"

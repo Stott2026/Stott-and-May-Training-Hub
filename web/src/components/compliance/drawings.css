@@ -1,0 +1,59 @@
+/* Compliance drawings. Colours are the illustration tokens in tokens.css. */
+.drawing { position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--ill-wall); box-shadow: var(--shadow-sm); }
+.drawing svg { display: block; width: 100%; height: auto; }
+
+.d-wall { fill: var(--ill-wall); }
+.d-floor { fill: var(--ill-floor); }
+.d-floor-line { stroke: var(--ill-floor-line); stroke-width: 2; fill: none; }
+.d-wood { fill: var(--ill-wood); }
+.d-wood-dark { fill: var(--ill-wood-dark); }
+.d-frame { fill: var(--ill-frame); }
+.d-outline { stroke: var(--ill-dark); stroke-width: 2; }
+.d-sky { fill: var(--ill-sky); }
+.d-sun { fill: var(--ill-sun); }
+.d-screen { fill: var(--ill-screen); }
+.d-screen-glow { fill: var(--ill-screen-glow); }
+.d-metal { fill: var(--ill-metal); }
+.d-metal-line { stroke: var(--ill-metal); stroke-width: 6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.d-dark { fill: var(--ill-dark); }
+.d-skin { fill: var(--ill-skin); }
+.d-hair { fill: var(--ill-hair); }
+.d-shirt { fill: var(--ill-shirt); }
+.d-trousers { fill: var(--ill-trousers); }
+.d-shoe { fill: var(--ill-dark); }
+.d-limb { fill: none; stroke-linecap: round; }
+.d-skin.d-limb { stroke: var(--ill-skin); }
+.d-shirt.d-limb { stroke: var(--ill-shirt); }
+.d-trousers.d-limb { stroke: var(--ill-trousers); }
+.d-chair { fill: var(--ill-chair); }
+.d-plant { fill: var(--ill-plant); }
+.d-pot { fill: var(--ill-pot); }
+.d-mug { fill: var(--ill-mug); }
+.d-mug-line { stroke: var(--ill-mug); stroke-width: 4; fill: none; }
+.d-lamp { fill: var(--ill-lamp); }
+.d-light { fill: var(--ill-sun); opacity: 0.35; }
+.d-cable { stroke: var(--ill-cable); stroke-width: 3.5; fill: none; stroke-linecap: round; }
+.d-box { fill: var(--ill-box); }
+.d-box-line { stroke: var(--ill-wood-dark); stroke-width: 2; fill: none; opacity: 0.5; }
+.d-guide { stroke: var(--ill-guide); stroke-width: 2.5; stroke-dasharray: 8 6; fill: none; }
+.d-guide-solid { stroke: var(--ill-guide); stroke-width: 2.5; fill: none; }
+
+/* Markers laid over a drawing (numbered labels and spot-it buttons). */
+.drawing__marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--sm-white);
+  background: var(--sm-ink);
+  color: var(--sm-white);
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-sm);
+  box-shadow: var(--shadow-md);
+}
+@media (max-width: 520px) { .drawing__marker { min-width: 1.6rem; height: 1.6rem; font-size: var(--text-xs); } }

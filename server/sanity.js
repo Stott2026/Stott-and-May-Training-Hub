@@ -128,6 +128,23 @@ export const queries = {
     "tools": *[_type == "techTool"] | order(order asc){ ${TOOL_SUMMARY}, dailyCheck, "setupCount": count(setup) }
   }`,
 
+  // The Compliance tab: its page and a card's worth of each course.
+  compliance: `{
+    "page": *[_id == "compliancePage"][0]{ title, titleAccent, intro, note },
+    "courses": *[_type == "complianceCourse"] | order(order asc){
+      _id, title, "slug": slug.current, category, region, summary, minutes, renewMonths, icon, accent, approved,
+      passMark, "lessonKeys": lessons[]._key, "lessonCount": count(lessons)
+    }
+  }`,
+
+  // One compliance course, with everything needed to take it (lessons and the question bank).
+  // The reviewers' notes stay in the Studio.
+  course: `*[_type == "complianceCourse" && slug.current == $slug][0]{
+    _id, title, "slug": slug.current, category, region, summary, intro, outcomes, minutes, renewMonths, icon, accent,
+    approved, approvedBy, approvedOn, passMark, questionsPerAttempt, questions, sources,
+    "lessons": lessons[]{ _key, title, summary, "blocks": blocks[]{ ..., image{ alt, "url": asset->url } } }
+  }`,
+
   // One tool's page, with the tools either side of it.
   tool: `*[_type == "techTool" && slug.current == $slug][0]{
     ${TOOL_SUMMARY}, why, learn, bestPractice, links, setup, dailyCheck, measures,

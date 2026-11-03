@@ -32,6 +32,7 @@
     "link:forms": "npm run link:forms -w studio --",
     "import:start-here": "npm run import:start-here -w studio --",
     "import:headline-accents": "npm run import:headline-accents -w studio --",
+    "import:compliance": "npm run import:compliance -w studio --",
     "import:rewards": "npm run import:rewards -w studio --",
     "import:activities": "npm run import:activities -w studio --",
     "import:tech": "npm run import:tech -w studio --",

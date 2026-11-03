@@ -19,17 +19,12 @@
   -webkit-backdrop-filter: saturate(160%) blur(14px);
   border-bottom: 1px solid var(--color-border);
 }
-/* Phones: one row (logo, tab icons, buttons). From 600px: two rows, with every tab and its name
-   on the second row. --nav-height (tokens.css) is the total height, for sticky offsets. */
-.topnav__inner { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "brand nav tools"; align-items: center; column-gap: var(--space-4); min-height: var(--nav-height); }
+/* Two rows: the logo and buttons, then every tab on the row below (icons only when the names
+   don't fit). --nav-height (tokens.css) is the total height, for sticky offsets. */
+.topnav__inner { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "brand tools" "nav nav"; grid-template-rows: var(--nav-row-height) var(--nav-tabs-height); align-items: center; column-gap: var(--space-4); min-height: var(--nav-height); }
 .topnav__brand { grid-area: brand; }
-.topnav__nav { grid-area: nav; }
-.topnav__tools { grid-area: tools; display: flex; align-items: center; gap: var(--space-3); }
-@media (min-width: 600px) {
-  .topnav__inner { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "brand tools" "nav nav"; grid-template-rows: var(--nav-row-height) var(--nav-tabs-height); }
-  .topnav__tools { justify-self: end; }
-  .topnav__nav { align-self: start; margin-inline: calc(var(--space-3) * -1); }
-}
+.topnav__nav { grid-area: nav; align-self: start; margin-inline: calc(var(--space-3) * -1); }
+.topnav__tools { grid-area: tools; display: flex; align-items: center; gap: var(--space-3); justify-self: end; }
 /* The top bar may run a little wider than the page on big screens, so every tab name fits. */
 @media (min-width: 1600px) { .topnav .topnav__inner { max-width: var(--nav-max-width); } }
 .topnav__brand { display: flex; align-items: center; gap: var(--space-3); text-decoration: none; color: var(--color-text); }
@@ -81,8 +76,8 @@
 @media (max-width: 767px) { .topnav__level-title { display: none; } }
 
 /* The top bar narrows in stages. By screen width: the user name goes, then the Marketing Hub
-   button and level name become icons, and on phones (one row) the product name and then the level
-   chip go (points still show on the Training page). The tab names are fitted by AppShell.jsx, which
+   button and level name become icons, and on small phones the level chip goes (points still show
+   on the Training page). The tab names are fitted by AppShell.jsx, which
    sets data-fit: "compact" keeps only the current tab's name, "icons" shows icons only. */
 .topnav__link-label { white-space: nowrap; }
 .topnav__link { padding: var(--space-2) var(--space-3); }
@@ -94,8 +89,8 @@
   .topnav__quick { padding: var(--space-2); }
 }
 @media (max-width: 599px) {
-  .topnav__product { display: none; }
-  .topnav__inner { gap: var(--space-2); }
+  .topnav__inner { column-gap: var(--space-2); }
+  .topnav__nav { margin-inline: calc(var(--space-2) * -1); }
   .topnav__nav ul { gap: 0; }
 }
 @media (max-width: 479px) {

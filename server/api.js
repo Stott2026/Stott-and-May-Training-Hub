@@ -54,6 +54,16 @@ api.get("/tech/:slug", async (req, res) => {
   res.json(tool);
 });
 
+api.get("/compliance", async (req, res) => {
+  res.json(await sanity.fetch(queries.compliance));
+});
+
+api.get("/compliance/:slug", async (req, res) => {
+  const course = await sanity.fetch(queries.course, { slug: req.params.slug });
+  if (!course) return res.status(404).json({ error: "Course not found" });
+  res.json(course);
+});
+
 api.get("/forms", async (req, res) => {
   res.json(await sanity.fetch(queries.forms));
 });
