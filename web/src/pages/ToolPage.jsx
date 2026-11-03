@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, useParams } from "react-router";
 import Eyebrow from "../components/Eyebrow.jsx";
 import LoadState from "../components/LoadState.jsx";
@@ -14,6 +13,7 @@ import { TOOL_CAPABILITIES } from "../../../studio/schemaTypes/options.js";
 import "../components/module/ModuleContent.css";
 import "../components/module/Activities.css";
 import "./Tech.css";
+import { usePageTitle } from "../lib/site.jsx";
 
 // One tool: what it's for, what you'll learn, the best practice (with flip cards to practise it),
 // the set-up checklist, the daily check and what we track. All from the tool in Sanity.
@@ -22,7 +22,7 @@ export default function ToolPage() {
   const { data: tool, error } = useApi(`/tech/${slug}`);
   const progress = useProgress();
   useMayPlace(tool?.slug === slug ? { type: "tool", slug, name: tool.name, label: `Technology · ${tool.name}` } : null);
-  useEffect(() => { if (tool) document.title = `${tool.name} · Technology · Stott and May Training Hub`; }, [tool]);
+  usePageTitle(tool ? `${tool.name} · Technology` : null);
   if (error || !tool || tool.slug !== slug) return <LoadState error={error} notFoundText="We couldn't find that tool" />;
 
   const setup = tool.setup ?? [];

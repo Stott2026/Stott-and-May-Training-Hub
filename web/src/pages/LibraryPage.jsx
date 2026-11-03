@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSearchParams } from "react-router";
 import LoadState from "../components/LoadState.jsx";
 import PageHero from "../components/PageHero.jsx";
@@ -8,13 +7,14 @@ import { useApi } from "../lib/api.js";
 import { LIBRARY_KINDS, kindOf } from "../lib/library.js";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import "./LibraryPage.css";
+import { usePageTitle } from "../lib/site.jsx";
 
 // The Library: classroom decks, guides and templates to download. Content comes from Sanity.
 // ?type=deck shows one type only, so the filter survives Back.
 export default function LibraryPage() {
   const { data, error } = useApi("/library");
   const [params, setParams] = useSearchParams();
-  useEffect(() => { document.title = "Library · Stott and May Training Hub"; }, []);
+  usePageTitle("Library");
   if (error || !data) return <LoadState error={error} />;
 
   const items = data.items ?? [];

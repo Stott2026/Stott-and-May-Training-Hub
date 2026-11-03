@@ -1,16 +1,16 @@
-import { useEffect } from "react";
 import LoadState from "../components/LoadState.jsx";
 import PageHero from "../components/PageHero.jsx";
 import AchievementsCard from "../components/AchievementsCard.jsx";
 import { useAchievements } from "../lib/achievements.jsx";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import "./StartPage.css";
+import { usePageTitle } from "../lib/site.jsx";
 
 // Your achievements: level, points, streak and every badge. Opened from the chip in the top bar.
 // A dark "trophy cabinet" (the brand's dark mode, as on the Technology tab).
 export default function AchievementsPage() {
   const a = useAchievements();
-  useEffect(() => { document.title = "Your achievements · Stott and May Training Hub"; }, []);
+  usePageTitle("Your achievements");
   if (!a.enabled) return <LoadState error={{ status: 404 }} notFoundText="Badges and levels aren't switched on yet" />;
   const earned = a.badges.filter((b) => b.earned).length;
   return (

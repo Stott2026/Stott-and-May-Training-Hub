@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import { useId, useState } from "react";
 import { Link, useParams } from "react-router";
 import Button from "../components/Button.jsx";
 import Eyebrow from "../components/Eyebrow.jsx";
@@ -9,6 +9,7 @@ import { Icon } from "../components/icons.jsx";
 import { useApi } from "../lib/api.js";
 import { useFormDraft } from "../lib/formDrafts.js";
 import "./FormPage.css";
+import { usePageTitle } from "../lib/site.jsx";
 
 // One fillable form. What people type stays in their own browser, and the page prints cleanly
 // (or saves as a PDF from the print dialogue).
@@ -17,7 +18,7 @@ export default function FormPage() {
   const { data: form, error } = useApi(`/forms/${slug}`);
   const draft = useFormDraft(slug);
   const [confirming, setConfirming] = useState(false);
-  useEffect(() => { if (form) document.title = `${form.title} · Stott and May Training Hub`; }, [form]);
+  usePageTitle(form ? `${form.title}` : null);
   if (error || !form || form.slug !== slug) return <LoadState error={error} notFoundText="We couldn't find that form" />;
 
   return (

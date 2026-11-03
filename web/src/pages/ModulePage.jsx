@@ -13,6 +13,7 @@ import { useMayPlace } from "../lib/may.jsx";
 import { useSetNavArea } from "../lib/navArea.jsx";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import "./ModulePage.css";
+import { usePageTitle } from "../lib/site.jsx";
 
 // The page at /modules/<address>. Loads the module from the server.
 // ?section=3 opens the third section (used by search results).
@@ -23,7 +24,7 @@ export default function ModulePage() {
   const progress = useProgress();
   useSetNavArea(module?.slug === slug && module.category?.area === "managers" ? "managers" : null);
 
-  useEffect(() => { if (module) document.title = `${module.title} · Stott and May Training Hub`; }, [module]);
+  usePageTitle(module ? `${module.title}` : null);
   if (error || !module || module.slug !== slug) return <LoadState error={error} notFoundText="We couldn't find that module" />;
 
   // The module view works with section numbers; progress is stored by section key.

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import LoadState from "../components/LoadState.jsx";
 import PageHero from "../components/PageHero.jsx";
 import StartHerePath, { usePathProgress } from "../components/StartHerePath.jsx";
@@ -7,6 +6,7 @@ import Button from "../components/Button.jsx";
 import { useApi } from "../lib/api.js";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import "./StartPage.css";
+import { usePageTitle } from "../lib/site.jsx";
 
 // "New to the desk": the Start here path and The Stott and May Way, in one place for new starters.
 // The words come from Sanity (Start here path, Home page and Company values).
@@ -14,7 +14,7 @@ export default function StartPage() {
   const home = useApi("/home");
   const values = useApi("/values");
   const path = usePathProgress(home.data?.startHere);
-  useEffect(() => { document.title = "New to the desk · Stott and May Training Hub"; }, []);
+  usePageTitle("New to the desk");
   const error = home.error || values.error;
   if (error || !home.data || !values.data) return <LoadState error={error} />;
   const { startHere, philosophyTitle, philosophyText } = home.data;

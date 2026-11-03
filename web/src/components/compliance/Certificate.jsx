@@ -2,19 +2,21 @@ import Button from "../Button.jsx";
 import Logo from "../Logo.jsx";
 import { Icon } from "../icons.jsx";
 import { addMonths, longDate } from "../../lib/compliance.jsx";
+import { useHubName } from "../../lib/site.jsx";
 import "./Certificate.css";
 
 // A certificate for a passed course, ready to print or save as a PDF. Until records are kept on
 // the server, it says plainly that it is a practice record.
 export default function Certificate({ course, pass, name }) {
   const renewBy = addMonths(pass.date, course.renewMonths ?? 12);
+  const { fullName } = useHubName();
   return (
     <div className="certificate-wrap">
       <article className="certificate" aria-labelledby="certificate-title">
         <div className="certificate__band" aria-hidden="true" />
         <div className="certificate__top">
           <Logo size={44} />
-          <span className="certificate__org">Stott and May Training Hub</span>
+          <span className="certificate__org">{fullName}</span>
         </div>
         <p className="certificate__eyebrow">Certificate of completion</p>
         <p className="certificate__lead">This is to confirm that</p>

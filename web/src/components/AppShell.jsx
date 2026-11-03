@@ -9,7 +9,7 @@ import "./AppShell.css";
 // navItems: [{ id, label, icon, href }]. user: { name, initials, canSignOut } for the signed-in person.
 // quickLinks: [{ label, url }] from Site settings, always shown as buttons that open in a new tab.
 // level: { title, points } for the chip that opens the achievements page (none until switched on).
-export default function AppShell({ navItems = [], quickLinks = [], level, current, user, children }) {
+export default function AppShell({ productName = "Training Hub", navItems = [], quickLinks = [], level, current, user, children }) {
   // The tabs show their names when they fit. If not, only the current tab keeps its name, and
   // if that still doesn't fit, every tab is an icon (names show on hover and are read out).
   const header = useRef(null);
@@ -28,7 +28,7 @@ export default function AppShell({ navItems = [], quickLinks = [], level, curren
     const watch = new ResizeObserver(fit);
     watch.observe(el);
     return () => watch.disconnect();
-  }, [navItems, current, quickLinks.length, level?.title, user?.name]);
+  }, [navItems, current, quickLinks.length, level?.title, user?.name, productName]);
 
   return (
     <>
@@ -37,7 +37,7 @@ export default function AppShell({ navItems = [], quickLinks = [], level, curren
         <div className="container topnav__inner">
           <Link to="/" className="topnav__brand">
             <Logo size={36} />
-            <span className="topnav__product">Training Hub</span>
+            <span className="topnav__product">{productName}</span>
           </Link>
           <nav aria-label="Main" className="topnav__nav">
             <ul>

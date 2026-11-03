@@ -9,6 +9,14 @@ export const siteSettings = defineType({
   icon: CogIcon,
   fields: [
     defineField({
+      name: "hubName",
+      title: "Hub name",
+      type: "string",
+      initialValue: "Training Hub",
+      description: "The hub's name, shown in the top bar, browser tabs, certificates and sign-in pages, and used by May. Leave it empty for \"Training Hub\". Where a full name is needed, \"Stott and May\" goes in front, unless the name already includes \"Stott\".",
+      validation: (r) => r.max(30),
+    }),
+    defineField({
       name: "quickLinks",
       title: "Quick links",
       type: "array",

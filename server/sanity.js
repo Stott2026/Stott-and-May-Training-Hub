@@ -20,6 +20,23 @@ export const sanity = createClient({
   perspective: "published",
 });
 
+// The hub's name from Site settings ("Training Hub" if it isn't set), for the sign-in pages and May.
+// Kept for five minutes, then refreshed in the background, so it never slows a request down.
+export const DEFAULT_HUB_NAME = "Training Hub";
+let hubNameCache = { value: DEFAULT_HUB_NAME, at: 0 };
+export function hubName() {
+  if (Date.now() - hubNameCache.at > 5 * 60 * 1000) {
+    hubNameCache.at = Date.now();
+    sanity.fetch(`*[_id == "siteSettings"][0].hubName`)
+      .then((name) => { hubNameCache = { value: name?.trim() || DEFAULT_HUB_NAME, at: Date.now() }; })
+      .catch(() => { /* keep the last known name */ });
+  }
+  return hubNameCache.value;
+}
+// "Training Hub" → "Stott and May Training Hub"; a name that already mentions Stott (such as
+// "Stottership Academy" or "Stott and May Hub") is kept as it is.
+export const fullHubName = (name = hubName()) => (/stott/i.test(name) ? name : `Stott and May ${name}`);
+
 const image = (field) => `${field}{ alt, "url": asset->url }`;
 
 // What a tool's card needs (Technology tab, tool pages and search).
@@ -44,6 +61,7 @@ const LIBRARY_ITEM = `
 
 export const queries = {
   site: `{
+    "hubName": *[_id == "siteSettings"][0].hubName,
     "quickLinks": *[_id == "siteSettings"][0].quickLinks[]{ _key, label, url },
     // Badges, levels and points (Badges and levels in the Studio). Missing means no gamification.
     "rewards": *[_id == "rewards"][0]{ title, intro, points, levels[]{ _key, title, points }, badges[]{ _key, rule, title, description, icon } }

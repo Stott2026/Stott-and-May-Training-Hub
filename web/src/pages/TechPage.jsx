@@ -12,6 +12,7 @@ import Programme from "../components/tech/Programme.jsx";
 import { useApi } from "../lib/api.js";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import "./Tech.css";
+import { usePageTitle } from "../lib/site.jsx";
 
 // A bar of links to the page's sections, which stays in view under the top bar and shows the
 // section you're in.
@@ -48,7 +49,7 @@ function JumpBar({ links }) {
 // which tool does what, and the 12-week programme. All of it comes from Sanity.
 export default function TechPage() {
   const { data, error } = useApi("/tech");
-  useEffect(() => { document.title = "Technology · Stott and May Training Hub"; }, []);
+  usePageTitle("Technology");
   // Links such as "Part of the daily Big 5 check" end in #big-five-title: scroll there once loaded.
   const { hash } = useLocation();
   useEffect(() => {

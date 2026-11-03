@@ -12,6 +12,7 @@ import { Icon } from "../components/icons.jsx";
 import { useApi } from "../lib/api.js";
 import { REGIONS, STATUS_LABELS, longDate, useCompliance } from "../lib/compliance.jsx";
 import "./Compliance.css";
+import { usePageTitle } from "../lib/site.jsx";
 
 // One compliance course. /compliance/:slug is the overview; /compliance/:slug/1 (and so on) a lesson;
 // /compliance/:slug/assessment the final assessment; /compliance/:slug/certificate the certificate.
@@ -22,7 +23,7 @@ export default function CoursePage() {
   const { data: me } = useApi("/me");
   const c = useCompliance();
   const navigate = useNavigate();
-  useEffect(() => { if (course?.title) document.title = `${course.title} · Compliance · Stott and May Training Hub`; }, [course?.title]);
+  usePageTitle(course?.title ? `${course.title} · Compliance` : null);
   if (error || !course) return <LoadState error={error} notFoundText="Course not found" />;
 
   const lessons = course.lessons ?? [];

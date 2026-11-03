@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, useSearchParams } from "react-router";
 import Card from "../components/Card.jsx";
 import Eyebrow from "../components/Eyebrow.jsx";
@@ -11,6 +10,7 @@ import { useApi } from "../lib/api.js";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import "./LibraryPage.css";
 import "./FormsPage.css";
+import { usePageTitle } from "../lib/site.jsx";
 
 const ACCENTS = ["brand", "sky", "lime"];
 
@@ -19,7 +19,7 @@ const ACCENTS = ["brand", "sky", "lime"];
 export default function FormsPage() {
   const { data, error } = useApi("/forms");
   const [params, setParams] = useSearchParams();
-  useEffect(() => { document.title = "Documents & Forms · Stott and May Training Hub"; }, []);
+  usePageTitle("Documents & Forms");
   if (error || !data) return <LoadState error={error} />;
 
   const items = data.items ?? [];

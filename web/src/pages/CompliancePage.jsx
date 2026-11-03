@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router";
 import Card from "../components/Card.jsx";
 import Eyebrow from "../components/Eyebrow.jsx";
@@ -12,6 +12,7 @@ import { CATEGORIES, OFFICES, REGIONS, STATUS_LABELS, isForOffice, longDate, use
 import "./LibraryPage.css";
 import "../components/module/Activities.css";
 import "./Compliance.css";
+import { usePageTitle } from "../lib/site.jsx";
 
 const STATUS_ICONS = { "not-started": "circle-user", "in-progress": "clock", ready: "list-checks", passed: "badge-check", due: "triangle-alert" };
 
@@ -21,7 +22,7 @@ export default function CompliancePage() {
   const c = useCompliance();
   // "mine": Global courses plus those for the chosen office. "all": every course.
   const [view, setView] = useState("mine");
-  useEffect(() => { document.title = "Compliance · Stott and May Training Hub"; }, []);
+  usePageTitle("Compliance");
   if (error || !data) return <LoadState error={error} />;
 
   const allCourses = data.courses ?? [];

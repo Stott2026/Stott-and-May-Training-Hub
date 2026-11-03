@@ -12,7 +12,7 @@
 // is stored by the hub. May is switched off unless ANTHROPIC_API_KEY is set.
 import Anthropic from "@anthropic-ai/sdk";
 import { Router } from "express";
-import { sanity, queries } from "./sanity.js";
+import { sanity, queries, fullHubName } from "./sanity.js";
 import { searchHub } from "./content.js";
 
 export const mayEnabled = Boolean(process.env.ANTHROPIC_API_KEY);
@@ -22,7 +22,8 @@ const DAILY_LIMIT = Number(process.env.MAY_DAILY_LIMIT) || 60;
 const client = mayEnabled ? new Anthropic() : null;
 
 // ── May's instructions (the same for everyone, so Anthropic can cache them) ──
-const INSTRUCTIONS = `You are May, the training coach in the Stott and May Training Hub. Stott and May is a recruitment company working across permanent, contract and statement-of-work (SOW) hiring. You coach its consultants and managers.
+// The hub's name comes from Site settings; it changes rarely, so the cache still works.
+const instructions = (hub) => `You are May, the training coach in the ${hub}. Stott and May is a recruitment company working across permanent, contract and statement-of-work (SOW) hiring. You coach its consultants and managers.
 
 Who you are: warm, direct and practical, like a top-billing senior consultant who enjoys helping people get better. Encourage, but be honest when an answer is weak. Write in British English.
 
@@ -108,9 +109,9 @@ async function loadContext(context) {
 
 // The search_hub tool: finds matching sections, forms, Library files and tools, and returns their
 // full text (not just the extract), each labelled R1, R2… so May can cite them.
-const SEARCH_TOOL = {
+const searchTool = (hub) => ({
   name: "search_hub",
-  description: "Search the Stott and May Training Hub: every training module section, fillable form, Library file and technology tool. Returns the matching content in full, labelled R1, R2 and so on for citing. Use one or two key words, for example \"counteroffer\", \"IR35\" or \"Sourcewhale\", and search again with other words if nothing useful comes back.",
+  description: `Search the ${hub}: every training module section, fillable form, Library file and technology tool. Returns the matching content in full, labelled R1, R2 and so on for citing. Use one or two key words, for example \"counteroffer\", \"IR35\" or \"Sourcewhale\", and search again with other words if nothing useful comes back.`,
   input_schema: {
     type: "object",
     properties: { query: { type: "string", description: "One or two key words to search for." } },
@@ -118,7 +119,7 @@ const SEARCH_TOOL = {
     additionalProperties: false,
   },
   strict: true,
-};
+});
 
 async function searchForMay(query, sources) {
   const hub = await cached("searchable", () => sanity.fetch(queries.searchable));
@@ -215,10 +216,10 @@ may.post("/", async (req, res) => {
         // makes each message much cheaper. The conversation so far is cached too.
         cache_control: { type: "ephemeral" },
         system: [
-          { type: "text", text: INSTRUCTIONS, cache_control: { type: "ephemeral" } },
+          { type: "text", text: instructions(fullHubName()), cache_control: { type: "ephemeral" } },
           { type: "text", text: situation, cache_control: { type: "ephemeral" } },
         ],
-        tools: [SEARCH_TOOL],
+        tools: [searchTool(fullHubName())],
         // On the last round May must answer with what she has found.
         ...(lastRound && { tool_choice: { type: "none" } }),
         messages,

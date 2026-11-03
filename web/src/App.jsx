@@ -18,7 +18,7 @@ import CoursePage from "./pages/CoursePage.jsx";
 import { ComplianceProvider } from "./lib/compliance.jsx";
 import { ProgressProvider } from "./lib/progress.jsx";
 import { NavAreaProvider, useNavArea } from "./lib/navArea.jsx";
-import { SiteProvider, useSite } from "./lib/site.jsx";
+import { SiteProvider, useHubName, useSite } from "./lib/site.jsx";
 import { AchievementsProvider, useAchievements } from "./lib/achievements.jsx";
 import Celebration from "./components/Celebration.jsx";
 import AskMay from "./components/AskMay.jsx";
@@ -39,12 +39,16 @@ const NAV = [
 // Back to the top of the page whenever the page (not just the search words) changes.
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
+  const { fullName } = useHubName();
   useEffect(() => {
     if (hash) return;
     window.scrollTo(0, 0);
-    if (pathname === "/") document.title = "Stott and May Training Hub";
-    if (pathname === "/quiz") document.title = "Quiz · Stott and May Training Hub";
   }, [pathname, hash]);
+  // The home page and quiz set no title of their own.
+  useEffect(() => {
+    if (pathname === "/") document.title = fullName;
+    if (pathname === "/quiz") document.title = `Quiz · ${fullName}`;
+  }, [pathname, fullName]);
   return null;
 }
 
@@ -59,11 +63,12 @@ function Shell({ user, children }) {
   const { pathname } = useLocation();
   const area = useNavArea();
   const { quickLinks } = useSite();
+  const { name } = useHubName();
   const ach = useAchievements();
   // The level and points chip in the top bar, once badges and levels are switched on.
   const level = ach.enabled ? { title: ach.level.title, points: ach.points } : null;
   const current = pathname.startsWith("/tech") ? "tech" : pathname.startsWith("/start") ? "start" : pathname.startsWith("/achievements") ? "achievements" : pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : pathname.startsWith("/documents") ? "documents" : pathname.startsWith("/compliance") ? "compliance" : "training";
-  return <AppShell navItems={NAV} quickLinks={quickLinks ?? []} level={level} current={current} user={user}>{children}</AppShell>;
+  return <AppShell productName={name} navItems={NAV} quickLinks={quickLinks ?? []} level={level} current={current} user={user}>{children}</AppShell>;
 }
 
 // The real Ask May, when it's switched on (the server has an Anthropic API key). The preview

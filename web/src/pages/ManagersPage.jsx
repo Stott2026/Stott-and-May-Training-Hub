@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Eyebrow from "../components/Eyebrow.jsx";
 import LoadState from "../components/LoadState.jsx";
 import ModuleCard from "../components/ModuleCard.jsx";
@@ -9,13 +8,14 @@ import { groupModules } from "../lib/groupModules.js";
 import { useProgress } from "../lib/progress.jsx";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import "./ManagersPage.css";
+import { usePageTitle } from "../lib/site.jsx";
 
 // The Managers page: modules and downloads marked "Managers" in the Studio, kept apart from
 // the consultants' training.
 export default function ManagersPage() {
   const { data, error } = useApi("/managers");
   const { countDone } = useProgress();
-  useEffect(() => { document.title = "Managers · Stott and May Training Hub"; }, []);
+  usePageTitle("Managers");
   if (error || !data) return <LoadState error={error} />;
 
   const groups = groupModules(data.modules ?? []);

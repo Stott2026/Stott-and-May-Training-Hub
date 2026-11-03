@@ -11,6 +11,7 @@ import crypto from "node:crypto";
 import { Router } from "express";
 import cookieSession from "cookie-session";
 import { ConfidentialClientApplication, CryptoProvider } from "@azure/msal-node";
+import { hubName, fullHubName } from "./sanity.js";
 
 const { ENTRA_CLIENT_ID, ENTRA_TENANT_ID, ENTRA_CLIENT_SECRET, SESSION_SECRET, DEV_SIGNIN_AS, NODE_ENV } = process.env;
 
@@ -98,7 +99,7 @@ auth.get("/callback", async (req, res) => {
 
   if (req.query.error) {
     console.warn("Sign-in refused by Microsoft:", req.query.error, req.query.error_description);
-    return res.status(401).send(page("Sign-in didn't complete", "Microsoft didn't sign you in. You may have cancelled, or your account may not have access to the Training Hub.", "Try again"));
+    return res.status(401).send(page("Sign-in didn't complete", `Microsoft didn't sign you in. You may have cancelled, or your account may not have access to the ${hubName()}.`, "Try again"));
   }
   if (!pending || !req.query.code || req.query.state !== pending.state) {
     return res.status(400).send(page("Sign-in timed out", "Your sign-in took too long or was started in another tab.", "Try again"));
@@ -134,7 +135,7 @@ auth.get("/signout", (req, res) => {
 });
 
 auth.get("/signed-out", (req, res) => {
-  res.send(page("You've signed out", "You've signed out of the Stott and May Training Hub.", "Sign in again"));
+  res.send(page("You've signed out", `You've signed out of the ${fullHubName()}.`, "Sign in again"));
 });
 
 // If anything goes wrong talking to Microsoft, log it and show a plain message.
@@ -164,14 +165,14 @@ export function requireSignIn(req, res, next) {
 }
 
 function notSetUp(res) {
-  res.status(503).send(page("Sign-in isn't set up yet", "The Training Hub opens once Microsoft sign-in has been set up. Please try again later."));
+  res.status(503).send(page("Sign-in isn't set up yet", `The ${hubName()} opens once Microsoft sign-in has been set up. Please try again later.`));
 }
 
 // A plain page for sign-in messages. Kept simple: these show before the hub itself loads.
 function page(title, message, action) {
   return `<!doctype html>
 <html lang="en-GB">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${title} · Stott and May Training Hub</title>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${title} · ${fullHubName()}</title>
 <style>body{font-family:system-ui,sans-serif;max-width:32rem;margin:15vh auto;padding:0 1rem;line-height:1.6}a{font-weight:700}</style></head>
 <body><h1>${title}</h1><p>${message}</p>${action ? `<p><a href="/auth/signin">${action}</a></p>` : ""}</body>
 </html>`;
