@@ -6,8 +6,15 @@ import modernSlavery from "./modern-slavery.js";
 import hsWorkplace from "./hs-workplace.js";
 import neurodiversityAwareness from "./neurodiversity-awareness.js";
 import preventingHarassmentNy from "./preventing-harassment-ny.js";
+import preventingSexualHarassmentUk from "./preventing-sexual-harassment-uk.js";
+import antiBribery from "./anti-bribery.js";
+import whistleblowing from "./whistleblowing.js";
+import cybersecurityEssentials from "./cybersecurity-essentials.js";
+import equalityDiversityInclusion from "./equality-diversity-inclusion.js";
+import fireSafety from "./fire-safety.js";
 
-export const COURSES = [hsWorkingFromHome, gdprEssentials, dataPrivacyEssentials, modernSlavery, hsWorkplace, neurodiversityAwareness, preventingHarassmentNy];
+export const COURSES = [hsWorkingFromHome, gdprEssentials, dataPrivacyEssentials, modernSlavery, hsWorkplace, neurodiversityAwareness, preventingHarassmentNy,
+  preventingSexualHarassmentUk, antiBribery, whistleblowing, cybersecurityEssentials, equalityDiversityInclusion, fireSafety];
 
 export const PAGE = {
   title: "Compliance",
