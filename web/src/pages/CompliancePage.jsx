@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import Card from "../components/Card.jsx";
 import Eyebrow from "../components/Eyebrow.jsx";
@@ -8,7 +8,9 @@ import PageHero from "../components/PageHero.jsx";
 import ProgressBar from "../components/ProgressBar.jsx";
 import { Icon } from "../components/icons.jsx";
 import { useApi } from "../lib/api.js";
-import { CATEGORIES, REGIONS, STATUS_LABELS, longDate, useCompliance } from "../lib/compliance.jsx";
+import { CATEGORIES, OFFICES, REGIONS, STATUS_LABELS, isForOffice, longDate, useCompliance } from "../lib/compliance.jsx";
+import "./LibraryPage.css";
+import "../components/module/Activities.css";
 import "./Compliance.css";
 
 const STATUS_ICONS = { "not-started": "circle-user", "in-progress": "clock", ready: "list-checks", passed: "badge-check", due: "triangle-alert" };
@@ -17,10 +19,15 @@ const STATUS_ICONS = { "not-started": "circle-user", "in-progress": "clock", rea
 export default function CompliancePage() {
   const { data, error } = useApi("/compliance");
   const c = useCompliance();
+  // "mine": Global courses plus those for the chosen office. "all": every course.
+  const [view, setView] = useState("mine");
   useEffect(() => { document.title = "Compliance · Stott and May Training Hub"; }, []);
   if (error || !data) return <LoadState error={error} />;
 
-  const courses = data.courses ?? [];
+  const allCourses = data.courses ?? [];
+  const showingAll = view === "all" || !c.office;
+  const courses = showingAll ? allCourses : allCourses.filter((course) => isForOffice(course, c.office));
+  const officeName = OFFICES.find((o) => o.value === c.office)?.title;
   const page = data.page ?? {};
   const statuses = Object.fromEntries(courses.map((course) => [course.slug, c.status(course)]));
   const passed = courses.filter((course) => statuses[course.slug].id === "passed").length;
@@ -34,7 +41,7 @@ export default function CompliancePage() {
       <PageHero eyebrow="Mandatory training" tone="light" title={page.title || "Compliance"} titleAccent={page.titleAccent} intro={page.intro}>
         {courses.length > 0 && (
           <ul className="stat-tiles">
-            <li className="stat-tile"><span className="stat-tile__number">{courses.length}</span><span className="stat-tile__label">{courses.length === 1 ? "course" : "courses"}</span></li>
+            <li className="stat-tile"><span className="stat-tile__number">{courses.length}</span><span className="stat-tile__label">{showingAll ? (courses.length === 1 ? "course" : "courses") : "for you"}</span></li>
             <li className="stat-tile"><span className="stat-tile__number">{passed}</span><span className="stat-tile__label">passed</span></li>
             <li className="stat-tile"><span className="stat-tile__number">{toDo}</span><span className="stat-tile__label">to do or renew</span></li>
           </ul>
@@ -43,7 +50,41 @@ export default function CompliancePage() {
 
       <div className="container compliance-stack">
         <p className="compliance-practice"><Icon name="triangle-alert" size={16} /> For now, your progress and results are saved in this browser only. They aren't yet an official company training record.</p>
-        {!courses.length && <p className="compliance-empty">No courses yet. They appear here once they're published in the Studio.</p>}
+        {allCourses.length > 0 && (
+          <div className="compliance-view">
+            {!c.office ? (
+              <div className="compliance-office" role="group" aria-labelledby="office-question">
+                <p id="office-question" className="compliance-office__question"><Icon name="globe" size={18} /> Where do you work? We'll show the courses you need.</p>
+                <div className="library-filters">
+                  {OFFICES.map((o) => (
+                    <button key={o.value} type="button" className="library-filter" onClick={() => { c.setOffice(o.value); setView("mine"); }}>{o.title}</button>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="library-filters" role="group" aria-label="Show">
+                  <button type="button" className="library-filter" aria-pressed={view === "mine"} onClick={() => setView("mine")}>
+                    <span>My courses</span><span className="library-filter__count">{allCourses.filter((course) => isForOffice(course, c.office)).length}</span>
+                  </button>
+                  <button type="button" className="library-filter" aria-pressed={view === "all"} onClick={() => setView("all")}>
+                    <span>All courses</span><span className="library-filter__count">{allCourses.length}</span>
+                  </button>
+                </div>
+                <p className="compliance-office__note">
+                  Showing courses for {view === "mine" ? <>everyone and the <strong>{officeName}</strong> office</> : "every office"}.{" "}
+                  <span className="compliance-office__change">
+                    Not in {officeName}?{" "}
+                    {OFFICES.filter((o) => o.value !== c.office).map((o) => (
+                      <button key={o.value} type="button" className="activity-link" onClick={() => c.setOffice(o.value)}>Switch to {o.title}</button>
+                    ))}
+                  </span>
+                </p>
+              </>
+            )}
+          </div>
+        )}
+        {!allCourses.length && <p className="compliance-empty">No courses yet. They appear here once they're published in the Studio.</p>}
         {groups.map((g) => (
           <section key={g.value} aria-labelledby={`cc-group-${g.value}`}>
             <Eyebrow>{g.courses.length} {g.courses.length === 1 ? "course" : "courses"}</Eyebrow>

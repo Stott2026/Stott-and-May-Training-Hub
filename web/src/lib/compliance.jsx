@@ -19,8 +19,21 @@ export function addMonths(iso, months) {
   return d.toISOString();
 }
 
+// Where someone works ("uk" or "us-ny"), to show their courses. Chosen once on the Compliance page
+// and remembered in this browser, until sign-in can tell us. Global courses are for everyone.
+const OFFICE_KEY = "sm-hub-office";
+function loadOffice() {
+  try { return localStorage.getItem(OFFICE_KEY) || null; } catch { return null; }
+}
+export const isForOffice = (course, office) => !office || course.region === "global" || course.region === office;
+
 export function ComplianceProvider({ children }) {
   const [state, setState] = useState(load);
+  const [office, setOfficeState] = useState(loadOffice);
+  const setOffice = (value) => {
+    setOfficeState(value);
+    try { localStorage.setItem(OFFICE_KEY, value); } catch { /* storage blocked: remembered for this visit only */ }
+  };
   useEffect(() => {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { /* storage full or blocked */ }
   }, [state]);
@@ -29,6 +42,8 @@ export function ComplianceProvider({ children }) {
   const update = (slug, change) => setState((s) => ({ ...s, [slug]: change(s[slug] ?? { lessons: {}, attempts: [] }) }));
 
   const value = {
+    office,
+    setOffice,
     lessonsDone: (slug, keys = []) => keys.filter((k) => course(slug).lessons[k]).length,
     isLessonDone: (slug, key) => !!course(slug).lessons[key],
     completeLesson: (slug, key) => update(slug, (c) => ({ ...c, lessons: { ...c.lessons, [key]: new Date().toISOString() } })),
@@ -56,6 +71,8 @@ export function ComplianceProvider({ children }) {
 export const useCompliance = () => useContext(ComplianceContext);
 
 export const REGIONS = { global: "Global", uk: "UK", "us-ny": "US (New York)" };
+// The offices someone can choose (every region except Global).
+export const OFFICES = Object.entries(REGIONS).filter(([v]) => v !== "global").map(([value, title]) => ({ value, title }));
 export const STATUS_LABELS = { "not-started": "Not started", "in-progress": "In progress", ready: "Ready for the assessment", passed: "Passed", due: "Renewal due" };
 
 // Groups on the Compliance page, in order. Mirrors COMPLIANCE_CATEGORIES in studio/schemaTypes/options.js.
