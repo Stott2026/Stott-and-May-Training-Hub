@@ -1,6 +1,6 @@
 // Small helpers for writing compliance courses as data, in the shape the Studio expects
 // (studio/schemaTypes/complianceCourse.js). import-compliance.js adds the _key values.
-export const text = (heading, body, bullets) => ({ _type: "ccText", ...(heading && { heading }), body, ...(bullets && { bullets }) });
+export const text = (heading, body, bullets) => ({ _type: "ccText", ...(heading && { heading }), ...(body && { body }), ...(bullets && { bullets }) });
 export const keyPoints = (title, points) => ({ _type: "ccKeyPoints", title, points });
 export const law = (name, summary) => ({ _type: "ccLaw", name, summary });
 export const doDont = (dos, donts) => ({ _type: "ccDoDont", dos, donts });

@@ -2,8 +2,12 @@
 import hsWorkingFromHome from "./hs-working-from-home.js";
 import gdprEssentials from "./gdpr-essentials.js";
 import dataPrivacyEssentials from "./data-privacy-essentials.js";
+import modernSlavery from "./modern-slavery.js";
+import hsWorkplace from "./hs-workplace.js";
+import neurodiversityAwareness from "./neurodiversity-awareness.js";
+import preventingHarassmentNy from "./preventing-harassment-ny.js";
 
-export const COURSES = [hsWorkingFromHome, gdprEssentials, dataPrivacyEssentials];
+export const COURSES = [hsWorkingFromHome, gdprEssentials, dataPrivacyEssentials, modernSlavery, hsWorkplace, neurodiversityAwareness, preventingHarassmentNy];
 
 export const PAGE = {
   title: "Compliance",

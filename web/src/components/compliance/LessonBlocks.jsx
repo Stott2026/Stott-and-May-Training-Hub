@@ -11,7 +11,7 @@ import "./LessonBlocks.css";
 // until they have.
 export const INTERACTIVE = ["ccSpotIt", "ccSorter", "ccScenario"];
 
-const paragraphs = (text = "") => text.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+const paragraphs = (text) => (text ?? "").split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
 
 function TextBlock({ block }) {
   return (
