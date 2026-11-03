@@ -3,8 +3,9 @@
 //
 // Run from the project root:  npm run import:compliance -- --dry-run   (check only)
 //                             npm run import:compliance                (import)
-//                             npm run import:compliance -- --replace   (overwrite the drafts)
-// Without --replace, a course that already exists (draft or published) is left alone.
+//                             npm run import:compliance -- --replace gdpr-essentials   (overwrite the named courses' drafts)
+// Without --replace, a course that already exists (draft or published) is left alone. --replace
+// needs the course addresses to overwrite, so a reviewer's edits to other courses are never lost.
 import { randomUUID } from "node:crypto";
 import { createClient } from "@sanity/client";
 import { projectId, dataset } from "../env.js";
@@ -12,6 +13,11 @@ import { COURSES, PAGE } from "./data/compliance/index.js";
 
 const dryRun = process.argv.includes("--dry-run");
 const replace = process.argv.includes("--replace");
+const named = process.argv.slice(2).filter((a) => !a.startsWith("--"));
+if (replace && !named.length) {
+  console.error("Name the courses to replace, for example: npm run import:compliance -- --replace gdpr-essentials");
+  process.exit(1);
+}
 const client = createClient({ projectId, dataset, token: process.env.SANITY_WRITE_TOKEN, apiVersion: "2025-02-19", useCdn: false, perspective: "raw" });
 
 // Every object in an array needs a _key in Sanity.
@@ -30,6 +36,7 @@ if (!(await exists("compliancePage"))) {
 
 for (const course of COURSES) {
   const id = `course-${course.slug}`;
+  if (named.length && !named.includes(course.slug)) continue;
   if ((await exists(id)) && !replace) { console.log(`${course.title}: already there, left alone (add -- --replace to overwrite the draft)`); continue; }
   const { slug, sources = [], ...rest } = course;
   const doc = withKeys({

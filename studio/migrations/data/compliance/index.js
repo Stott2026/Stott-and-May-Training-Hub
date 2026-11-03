@@ -1,7 +1,9 @@
 // Every compliance course to import, in the order they were written.
 import hsWorkingFromHome from "./hs-working-from-home.js";
+import gdprEssentials from "./gdpr-essentials.js";
+import dataPrivacyEssentials from "./data-privacy-essentials.js";
 
-export const COURSES = [hsWorkingFromHome];
+export const COURSES = [hsWorkingFromHome, gdprEssentials, dataPrivacyEssentials];
 
 export const PAGE = {
   title: "Compliance",

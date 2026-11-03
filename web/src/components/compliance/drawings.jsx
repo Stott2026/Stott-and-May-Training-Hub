@@ -103,11 +103,123 @@ function HomeDesk() {
   );
 }
 
+// An open-plan office corner: a fire exit, a desk with a screen, a printer and filing.
+// Used for workplace hazards and for clean-desk checks.
+function Office() {
+  return (
+    <>
+      <rect className="d-wall" x="0" y="0" width="720" height="340" />
+      <rect className="d-floor" x="0" y="340" width="720" height="100" />
+      <path className="d-floor-line" d="M0 372 H720 M0 404 H720" />
+      {/* Fire exit door, sign above, boxes stacked in front of it */}
+      <rect className="d-ui-line-fill" x="28" y="106" width="104" height="236" rx="3" />
+      <rect className="d-frame" x="34" y="112" width="92" height="230" />
+      <rect className="d-metal" x="104" y="220" width="14" height="6" rx="2" />
+      <rect className="d-green" x="42" y="78" width="76" height="22" rx="3" />
+      <path className="d-sign-mark" d="M54 89 H72 M66 84 L72 89 L66 94 M86 84 a4 4 0 1 0 0.1 0 M86 90 L82 97 M86 90 L92 96" />
+      <rect className="d-box" x="40" y="292" width="62" height="50" rx="3" />
+      <rect className="d-box" x="56" y="250" width="56" height="42" rx="3" />
+      <path className="d-box-line" d="M40 308 H102 M56 264 H112" />
+      {/* First aid sign and fire extinguisher */}
+      <rect className="d-green" x="150" y="150" width="34" height="34" rx="4" />
+      <path className="d-sign-cross" d="M167 157 V177 M157 167 H177" />
+      <rect className="d-metal" x="160" y="236" width="14" height="6" rx="2" />
+      <rect className="d-red" x="156" y="242" width="22" height="70" rx="8" />
+      <path className="d-dark-line" d="M178 252 Q192 262 186 290" />
+      {/* Filing cabinet, bottom drawer left open, boxes piled high on top */}
+      <rect className="d-metal" x="204" y="214" width="76" height="128" rx="3" />
+      <path className="d-ui-line" d="M204 256 H280 M204 298 H280" />
+      <rect className="d-dark" x="232" y="232" width="20" height="5" rx="2" />
+      <rect className="d-dark" x="232" y="274" width="20" height="5" rx="2" />
+      <rect className="d-metal-dark" x="212" y="304" width="96" height="34" rx="2" />
+      <rect className="d-paper" x="222" y="296" width="70" height="12" />
+      <rect className="d-box" x="210" y="176" width="64" height="38" rx="3" />
+      <rect className="d-box" x="218" y="140" width="54" height="36" rx="3" transform="rotate(6 245 158)" />
+      <rect className="d-box" x="206" y="104" width="50" height="36" rx="3" transform="rotate(-8 231 122)" />
+      {/* Desk, screen with a spreadsheet of names showing, sticky note, keyboard, phone */}
+      <rect className="d-wood" x="320" y="252" width="250" height="12" rx="3" />
+      <rect className="d-wood-dark" x="334" y="264" width="10" height="78" />
+      <rect className="d-wood-dark" x="546" y="264" width="10" height="78" />
+      <rect className="d-dark" x="372" y="150" width="128" height="88" rx="6" />
+      <rect className="d-paper" x="379" y="157" width="114" height="74" rx="2" />
+      <path className="d-ui-line" d="M379 170 H493 M379 183 H493 M379 196 H493 M379 209 H493 M379 222 H493 M415 157 V231 M455 157 V231" />
+      <rect className="d-link-fill" x="379" y="157" width="114" height="13" />
+      <rect className="d-metal" x="428" y="238" width="16" height="10" />
+      <rect className="d-metal" x="410" y="246" width="52" height="6" rx="2" />
+      <rect className="d-note" x="484" y="140" width="26" height="24" transform="rotate(8 497 152)" />
+      <path className="d-dark-line" d="M488 148 H504 M488 155 H500" transform="rotate(8 497 152)" />
+      <rect className="d-dark" x="340" y="244" width="58" height="8" rx="2" />
+      <rect className="d-dark" x="512" y="236" width="34" height="16" rx="4" />
+      {/* Printer on a side table, pages left in the tray */}
+      <rect className="d-wood" x="590" y="282" width="112" height="10" rx="3" />
+      <rect className="d-wood-dark" x="600" y="292" width="8" height="50" />
+      <rect className="d-wood-dark" x="684" y="292" width="8" height="50" />
+      <rect className="d-metal" x="604" y="236" width="86" height="46" rx="6" />
+      <rect className="d-dark" x="616" y="246" width="62" height="6" rx="2" />
+      <rect className="d-paper" x="620" y="226" width="54" height="22" transform="rotate(-6 647 237)" />
+      <path className="d-ui-line" d="M626 232 H664 M626 238 H660" transform="rotate(-6 647 237)" />
+      {/* Confidential waste bin with a lock */}
+      <rect className="d-dark" x="616" y="300" width="58" height="42" rx="4" />
+      <rect className="d-metal" x="614" y="296" width="62" height="8" rx="3" />
+      <rect className="d-note" x="638" y="312" width="14" height="12" rx="2" />
+      {/* Coffee spilt on the floor, and a cable trailing across it to the wall socket */}
+      <ellipse className="d-coffee" cx="372" cy="396" rx="44" ry="9" />
+      <path className="d-mug" d="M396 384 L414 380 L418 396 L400 400 Z" />
+      <path className="d-cable" d="M560 256 Q566 300 540 350 Q520 390 580 398 Q650 404 704 330" />
+      <rect className="d-frame d-outline" x="696" y="316" width="18" height="20" rx="2" />
+    </>
+  );
+}
+
+// A phishing email, with the warning signs to find.
+function PhishingEmail() {
+  return (
+    <>
+      <rect className="d-ui" x="0" y="0" width="640" height="440" />
+      <rect className="d-paper" x="20" y="20" width="600" height="400" rx="10" />
+      <rect className="d-ui" x="20" y="20" width="600" height="34" rx="10" />
+      <rect className="d-ui" x="20" y="40" width="600" height="14" />
+      <circle className="d-red" cx="42" cy="37" r="6" />
+      <circle className="d-note" cx="62" cy="37" r="6" />
+      <circle className="d-green" cx="82" cy="37" r="6" />
+      <text className="d-email-subject" x="44" y="92">URGENT: Your account locks in 2 hours</text>
+      <circle className="d-red" cx="58" cy="124" r="14" />
+      <text className="d-email-avatar" x="58" y="129">IT</text>
+      <text className="d-email-strong" x="82" y="120">IT Service Desk</text>
+      <text className="d-email-soft" x="82" y="137">it-support@stottandmay-helpdesk.co</text>
+      <text className="d-email-soft" x="600" y="120" textAnchor="end">Today, 07:52</text>
+      <path className="d-ui-line" d="M44 156 H596" />
+      <text className="d-email" x="44" y="186">Dear user,</text>
+      <text className="d-email" x="44" y="214">We detected unusual sign-in activity on your account. To avoid</text>
+      <text className="d-email" x="44" y="234">losing access, confirm your password and Bullhorn login now.</text>
+      <rect className="d-link-fill" x="44" y="254" width="200" height="38" rx="6" />
+      <text className="d-email-button" x="144" y="278">Verify my account</text>
+      <text className="d-email-link" x="256" y="278">http://stottandmay.secure-login.ru/verify</text>
+      <rect className="d-ui" x="44" y="310" width="210" height="40" rx="6" />
+      <path className="d-dark-line" d="M58 320 h12 l6 6 v14 h-18 z" />
+      <text className="d-email-strong" x="86" y="327">Payroll_Update.zip</text>
+      <text className="d-email-soft" x="86" y="343">1.2 MB</text>
+      <text className="d-email" x="44" y="380">Failure to act will result in permanent account closure.</text>
+      <text className="d-email-soft" x="44" y="404">IT Security Team</text>
+    </>
+  );
+}
+
 export const DRAWINGS = {
   "desk-posture": {
     title: "A person sitting at a desk, seen from the side",
     width: 600, height: 420, Art: DeskPosture,
     points: { "screen-height": [495, 96], distance: [370, 100], back: [168, 212], elbows: [240, 232], wrists: [384, 214], feet: [346, 398], light: [540, 150] },
+  },
+  office: {
+    title: "An office corner: a fire exit door, signs, a filing cabinet, a desk with a computer, a printer and a confidential waste bin",
+    width: 720, height: 440, Art: Office,
+    points: { "fire-exit": [80, 200], "first-aid": [167, 167], extinguisher: [167, 276], drawer: [292, 322], "high-stack": [238, 122], screen: [396, 206], "sticky-note": [516, 140], phone: [529, 220], printer: [647, 212], "shred-bin": [645, 356], spill: [360, 396], cable: [612, 400] },
+  },
+  "phishing-email": {
+    title: "An email from \"IT Service Desk\" asking you to verify your account, with a link and an attachment",
+    width: 640, height: 440, Art: PhishingEmail,
+    points: { subject: [520, 86], sender: [350, 133], time: [508, 116], greeting: [138, 181], request: [520, 232], link: [566, 273], attachment: [282, 330], threat: [478, 375] },
   },
   "home-desk": {
     title: "A home workspace: a table under a window with a laptop, a chair, a lamp and a few other things",

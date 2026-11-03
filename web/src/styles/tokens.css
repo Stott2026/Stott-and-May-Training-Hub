@@ -104,6 +104,16 @@
   --ill-cable: #222222;
   --ill-box: #c9a36b;
   --ill-guide: #e0473b; /* dashed guide lines and angle marks */
+  --ill-red: #d8382f;     /* fire extinguisher, warning text */
+  --ill-green: #1f9a55;   /* fire exit and first aid signs */
+  --ill-paper: #ffffff;
+  --ill-note: #ffe36e;    /* sticky note */
+  --ill-coffee: #7a4a2a;
+  --ill-ui: #eef1f5;      /* email window chrome */
+  --ill-ui-line: #d3d9e1;
+  --ill-text: #3b4048;
+  --ill-text-soft: #8a929c;
+  --ill-link: #2563c9;
 
   /* ── Typography ────────────────────────────────── */
   --font-heading: "Manrope", "Segoe UI", system-ui, sans-serif;

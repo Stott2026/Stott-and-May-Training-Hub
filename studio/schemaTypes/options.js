@@ -135,9 +135,17 @@ export const REGION_OPTIONS = [
 export const DRAWING_OPTIONS = [
   { title: "Good posture at a desk (side view)", value: "desk-posture" },
   { title: "A home workspace with things to check", value: "home-desk" },
+  { title: "An office corner (fire exit, desk, printer, filing)", value: "office" },
+  { title: "A phishing email", value: "phishing-email" },
 ];
 export const DRAWING_SPOTS = {
   "desk-posture": ["screen-height", "distance", "back", "elbows", "wrists", "feet", "light"],
   "home-desk": ["laptop", "window", "cable", "socket", "chair", "box", "drink", "lamp", "plant"],
+  office: ["fire-exit", "first-aid", "extinguisher", "drawer", "high-stack", "screen", "sticky-note", "phone", "printer", "shred-bin", "spill", "cable"],
+  "phishing-email": ["subject", "sender", "time", "greeting", "request", "link", "attachment", "threat"],
 };
-export const SPOT_OPTIONS = Object.entries(DRAWING_SPOTS).flatMap(([drawing, spots]) => spots.map((s) => ({ title: `${drawing}: ${s}`, value: s })));
+// Each point once, with the drawings it appears in, e.g. "cable (home-desk, office)".
+export const SPOT_OPTIONS = [...new Set(Object.values(DRAWING_SPOTS).flat())].map((spot) => ({
+  title: `${spot} (${Object.keys(DRAWING_SPOTS).filter((d) => DRAWING_SPOTS[d].includes(spot)).join(", ")})`,
+  value: spot,
+}));

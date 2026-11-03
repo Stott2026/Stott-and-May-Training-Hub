@@ -38,6 +38,27 @@
 .d-guide { stroke: var(--ill-guide); stroke-width: 2.5; stroke-dasharray: 8 6; fill: none; }
 .d-guide-solid { stroke: var(--ill-guide); stroke-width: 2.5; fill: none; }
 
+.d-red { fill: var(--ill-red); }
+.d-green { fill: var(--ill-green); }
+.d-paper { fill: var(--ill-paper); }
+.d-note { fill: var(--ill-note); }
+.d-coffee { fill: var(--ill-coffee); opacity: 0.8; }
+.d-ui { fill: var(--ill-ui); }
+.d-ui-line { stroke: var(--ill-ui-line); stroke-width: 1.5; fill: none; }
+.d-ui-line-fill { fill: var(--ill-ui-line); }
+.d-link-fill { fill: var(--ill-link); }
+.d-metal-dark { fill: var(--ill-dark); opacity: 0.75; }
+.d-dark-line { stroke: var(--ill-dark); stroke-width: 2.5; fill: none; stroke-linecap: round; }
+.d-sign-mark, .d-sign-cross { stroke: var(--ill-paper); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.d-sign-cross { stroke-width: 6; stroke-linecap: butt; }
+.d-email, .d-email-strong, .d-email-soft, .d-email-subject, .d-email-link, .d-email-button, .d-email-avatar { font-family: var(--font-body); fill: var(--ill-text); font-size: 15px; }
+.d-email-strong { font-weight: 700; }
+.d-email-soft { fill: var(--ill-text-soft); font-size: 13px; }
+.d-email-subject { font-size: 19px; font-weight: 800; }
+.d-email-link { fill: var(--ill-link); font-size: 12px; text-decoration: underline; }
+.d-email-button { fill: var(--ill-paper); font-weight: 700; text-anchor: middle; }
+.d-email-avatar { fill: var(--ill-paper); font-weight: 800; font-size: 12px; text-anchor: middle; }
+
 /* Markers laid over a drawing (numbered labels and spot-it buttons). */
 .drawing__marker {
   position: absolute;
