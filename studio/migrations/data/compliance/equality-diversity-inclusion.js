@@ -1,12 +1,13 @@
-// Equality, Diversity & Inclusion (UK). Written from the Equality Act 2010, EHRC guidance for
-// employment service providers and Acas guidance. For review and sign-off by HR and Compliance.
+// Equality, Diversity & Inclusion, for UK and US staff. Written from the Equality Act 2010, EHRC
+// guidance for employment service providers and Acas guidance, with US notes from federal, New York
+// State and New York City law. For review and sign-off by HR and Compliance.
 import { text, keyPoints, law, doDont, sorter, scenario, q } from "./kit.js";
 
 export default {
   slug: "equality-diversity-inclusion",
-  title: "Equality, Diversity & Inclusion (UK)",
+  title: "Equality, Diversity & Inclusion",
   category: "conduct",
-  region: "uk",
+  region: "global",
   order: 42,
   icon: "heart-handshake",
   accent: "brand",
@@ -14,8 +15,8 @@ export default {
   renewMonths: 12,
   passMark: 80,
   questionsPerAttempt: 10,
-  summary: "The Equality Act 2010 for recruiters: protected characteristics, the forms of discrimination, handling discriminatory client requests, fair and inclusive hiring, and everyday inclusion.",
-  intro: "Recruiters open, and sometimes close, the door to people's careers. That gives us a big responsibility, and a legal one: as an employment agency, we must not discriminate, or help a client to. This course covers the Equality Act 2010, what to do when a client asks for something discriminatory, how to keep bias out of hiring, and how to make Stott and May an inclusive place to work. It takes about 35 minutes and ends with an assessment: you need 80% to pass.",
+  summary: "Equality law for recruiters in the UK and US: protected characteristics, the forms of discrimination, handling discriminatory client requests, fair and inclusive hiring, and everyday inclusion.",
+  intro: "Recruiters open, and sometimes close, the door to people's careers. That gives us a big responsibility, and a legal one: as an employment agency, we must not discriminate, or help a client to. This course covers the law in the UK (the Equality Act 2010) and the US, what to do when a client asks for something discriminatory, how to keep bias out of hiring, and how to make Stott and May an inclusive place to work. It takes about 35 minutes and ends with an assessment: you need 80% to pass.",
   outcomes: [
     "Name the nine protected characteristics and the main forms of discrimination",
     "Explain why recruitment agencies are directly responsible under the Equality Act",
@@ -29,7 +30,8 @@ export default {
       summary: "What the words mean, and why they matter in recruitment.",
       blocks: [
         text(null, "Equality means everyone has a fair chance, and nobody is treated worse because of who they are. Diversity means the range of people and perspectives in a team. Inclusion means everyone feels they belong and can contribute.\n\nFor a recruitment business, these aren't just values. Clients want diverse shortlists. Candidates choose recruiters who treat them fairly. And the law holds us responsible for our part in every hiring decision."),
-        law("Equality Act 2010: the nine protected characteristics", "It's unlawful to discriminate because of: age, disability, gender reassignment, marriage and civil partnership, pregnancy and maternity, race (including colour, nationality and ethnic or national origin), religion or belief, sex, and sexual orientation.\n\nThe Act also protects people who are thought to have a characteristic, or who are linked to someone who has one, such as a parent of a disabled child."),
+        law("UK: Equality Act 2010, the nine protected characteristics", "It's unlawful to discriminate because of: age, disability, gender reassignment, marriage and civil partnership, pregnancy and maternity, race (including colour, nationality and ethnic or national origin), religion or belief, sex, and sexual orientation.\n\nThe Act also protects people who are thought to have a characteristic, or who are linked to someone who has one, such as a parent of a disabled child."),
+        law("If you work in the US", "Federal law prohibits employment discrimination because of race, colour, religion, sex (including pregnancy, sexual orientation and gender identity), national origin, age (40 and over), disability and genetic information. It's enforced by the Equal Employment Opportunity Commission (EEOC), and it applies to employment agencies as well as employers.\n\nNew York State and New York City law protect more characteristics, such as marital status, citizenship or immigration status, caregiver status, criminal record in many cases, and in New York City, height and weight. The principles in this course apply in both countries."),
       ],
     },
     {
@@ -56,7 +58,7 @@ export default {
       title: "When a client asks for something discriminatory",
       summary: "Our legal responsibility, and how to handle the conversation.",
       blocks: [
-        law("Recruitment agencies and the Equality Act", "As an employment service provider, Stott and May must not discriminate against candidates in the services we provide (section 55). It's also unlawful to instruct, cause or induce discrimination (section 111), or to knowingly help someone else to discriminate (section 112).\n\nSo if we follow a client's discriminatory instruction, for example by only sending younger candidates, Stott and May and the individual recruiter can be liable as well as the client."),
+        law("UK: recruitment agencies and the Equality Act", "As an employment service provider, Stott and May must not discriminate against candidates in the services we provide (section 55). It's also unlawful to instruct, cause or induce discrimination (section 111), or to knowingly help someone else to discriminate (section 112).\n\nSo if we follow a client's discriminatory instruction, for example by only sending younger candidates, Stott and May and the individual recruiter can be liable as well as the client.\n\nIn the US, federal and New York law also prohibit employment agencies from discriminating, or from acting on a client's discriminatory request."),
         keyPoints("How to handle it", [
           "Don't agree, even informally, or \"just this once\".",
           "Bring it back to the job: ask what the role actually needs (\"What skills and experience does the person need?\").",
@@ -93,7 +95,8 @@ export default {
           ["Agree clear, job-related criteria with the client before shortlisting", "Assess every candidate against the same criteria", "Ask every candidate if they need any adjustments", "Challenge feedback that isn't about the job (\"not a culture fit\", \"too old\", \"strong accent\")", "Keep diversity monitoring data separate and confidential"],
           ["Ask about age, marital status, children, religion or health in screening", "Make assumptions from a name, photo, accent or address", "Let a candidate's background count for or against them unless it's genuinely job-related", "Share diversity monitoring data with clients"],
         ),
-        text("Positive action, not positive discrimination", "The law allows positive action: for example, encouraging applications from under-represented groups, or, when two candidates are equally qualified, choosing the one from an under-represented group. Positive discrimination, such as choosing someone less qualified because of a protected characteristic, or setting quotas that exclude others, is unlawful."),
+        law("If you recruit in New York", "New York has extra rules that affect recruiters directly:\n\nPay transparency: job adverts for roles in New York must include a good-faith pay range.\n\nSalary history ban: you must not ask candidates about their current or past pay, or rely on it to set pay.\n\nFair Chance Act (New York City): don't ask about criminal records until after a conditional offer, and then follow the required process.\n\nAutomated hiring tools (New York City): AI or automated tools used to screen candidates for New York City roles must have an annual bias audit, and candidates must be told they're used."),
+        text("Positive action, not positive discrimination", "UK law allows positive action: for example, encouraging applications from under-represented groups, or, when two candidates are equally qualified, choosing the one from an under-represented group. Positive discrimination, such as choosing someone less qualified because of a protected characteristic, or setting quotas that exclude others, is unlawful."),
       ],
     },
     {
@@ -120,7 +123,7 @@ export default {
     },
   ],
   questions: [
-    q("How many protected characteristics are there under the Equality Act 2010?", ["Nine", "Five", "Twelve", "Three"], 1, "Age, disability, gender reassignment, marriage and civil partnership, pregnancy and maternity, race, religion or belief, sex, and sexual orientation."),
+    q("In the UK, how many protected characteristics are there under the Equality Act 2010?", ["Nine", "Five", "Twelve", "Three"], 1, "Age, disability, gender reassignment, marriage and civil partnership, pregnancy and maternity, race, religion or belief, sex, and sexual orientation."),
     q("Which of these is a protected characteristic?", ["Pregnancy and maternity", "Political party membership", "Hair colour", "Football team"], 1, "Pregnancy and maternity is one of the nine."),
     q("What is indirect discrimination?", ["A rule applied to everyone that disadvantages people with a protected characteristic, unless objectively justified", "Discrimination that happens by email", "Discrimination by a third party", "Any unfair treatment"], 1, "It's about the effect of a rule or practice."),
     q("A client says, \"Don't send me anyone over 50.\" What is this?", ["Direct age discrimination", "Indirect discrimination", "Positive action", "Acceptable if it's the client's choice"], 1, "Treating people less favourably because of age."),
@@ -131,6 +134,7 @@ export default {
     q("Which job advert phrase is most inclusive?", ["\"3 years' experience in B2B sales, or equivalent skills\"", "\"Digital native\"", "\"Recent graduate\"", "\"Sales ninja\""], 1, "Clear, job-related and open."),
     q("What is affinity bias?", ["Favouring people who are like ourselves", "Preferring candidates with the most experience", "Choosing the first candidate interviewed", "Liking a particular client"], 1, "One of the most common unconscious biases in hiring."),
     q("Which of these questions should you NOT ask in candidate screening?", ["\"Do you have children?\"", "\"What's your notice period?\"", "\"What salary are you looking for?\"", "\"Do you need any adjustments for interview?\""], 1, "Questions about family plans can lead to discrimination."),
+    q("You're advertising a role based in New York. What must the advert include?", ["A good-faith pay range", "The candidate's required age range", "A photo of the team", "The client's turnover"], 1, "New York requires pay ranges in job adverts."),
     q("Is positive discrimination lawful in the UK?", ["No, but positive action, such as encouraging applications from under-represented groups, is allowed", "Yes, always", "Yes, for quotas", "Only for large companies"], 1, "Positive action is allowed; positive discrimination isn't."),
     q("Can you share a candidate's diversity monitoring data with a client?", ["No: keep it separate and confidential", "Yes, if they ask", "Yes, to show a diverse shortlist", "Only for senior roles"], 1, "Monitoring data is special category data and mustn't affect hiring decisions."),
     q("A colleague is repeatedly talked over and teased about their accent in meetings. What's a good response?", ["Make space for them to finish, and raise the pattern with the meeting lead or your manager", "Laugh along", "Tell them to speak more clearly", "Do nothing"], 1, "Small interventions and raising patterns both help."),
@@ -142,11 +146,15 @@ export default {
     ["Acas: Discrimination and the law", "https://www.acas.org.uk/discrimination-and-the-law"],
     ["Acas: Recruitment, avoiding discrimination", "https://www.acas.org.uk/hiring-someone/avoiding-discrimination-in-recruitment"],
     ["Equality Act 2010, sections 55, 111 and 112", "https://www.legislation.gov.uk/ukpga/2010/15/contents"],
+    ["US EEOC: Prohibited employment practices", "https://www.eeoc.gov/prohibited-employment-policiespractices"],
+    ["NYC Commission on Human Rights: Salary history, Fair Chance Act and pay transparency", "https://www.nyc.gov/site/cchr/law/the-law.page"],
+    ["New York State Department of Labor: Pay transparency", "https://dol.ny.gov/pay-transparency"],
   ],
   reviewNotes: `Please check or fill in before sign-off:
 1. Lesson 3: confirm how discriminatory client requests are escalated (manager, Compliance, a director), and whether we record them.
 2. Lesson 4: link to Stott and May's equal opportunities and diversity policies, and describe how we collect diversity monitoring data from candidates, if we do.
 3. Lesson 4: any client diversity commitments or shortlist targets we work to, and how to meet them lawfully (positive action, not quotas).
 4. Lesson 5: any employee networks or inclusion initiatives to mention.
-5. Assessment: 10 questions drawn from 15, pass mark 80%, renew every 12 months.`,
+5. This course is now for UK and US staff. Lessons 1, 3 and 4 have US notes (federal, New York State and New York City law, pay transparency, the salary history ban, the Fair Chance Act and automated hiring tools). Ask US counsel or a New York HR adviser to check them.
+6. Assessment: 10 questions drawn from 16, pass mark 80%, renew every 12 months.`,
 };

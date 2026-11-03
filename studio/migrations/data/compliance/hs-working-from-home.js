@@ -1,12 +1,12 @@
-// Health & Safety: Working From Home (UK). Written from HSE guidance and the regulations listed
+// Health & Safety: Working From Home, for UK and US staff. Written from HSE guidance (UK) and OSHA guidance (US), and the regulations listed
 // in "sources". For review and sign-off by HR and Compliance before it counts.
 import { text, keyPoints, law, doDont, stat, figure, spotIt, sorter, scenario, checklist, q } from "./kit.js";
 
 export default {
   slug: "hs-working-from-home",
-  title: "Health & Safety: Working From Home (UK)",
+  title: "Health & Safety: Working From Home",
   category: "safety",
-  region: "uk",
+  region: "global",
   order: 50,
   icon: "house",
   accent: "brand",
@@ -15,7 +15,7 @@ export default {
   passMark: 80,
   questionsPerAttempt: 10,
   summary: "Set up and work safely at home: your workstation, breaks and eyes, electrical and fire safety, wellbeing, and what to report.",
-  intro: "Working from home is still work, so the same health and safety law applies at your kitchen table as in the office. This course shows you how to set up a safe, comfortable workspace, look after your body, eyes and mind, and what to tell us if something changes or goes wrong. It takes about 30 minutes and ends with a short assessment: you need 80% to pass.",
+  intro: "Working from home is still work, so the same care for your health and safety applies at your kitchen table as in the office. This course shows you how to set up a safe, comfortable workspace, look after your body, eyes and mind, and what to tell us if something changes or goes wrong. It takes about 30 minutes and ends with a short assessment: you need 80% to pass.",
   outcomes: [
     "Explain what Stott and May is responsible for, and what you are responsible for, when you work at home",
     "Set up a screen, chair, keyboard and lighting so you can work comfortably",
@@ -34,6 +34,7 @@ export default {
         law("Health and Safety at Work etc. Act 1974", "Employers must, so far as is reasonably practicable, protect the health, safety and welfare of their employees, wherever they work.\n\nEmployees must take reasonable care of their own health and safety and that of others, and co-operate with their employer on health and safety."),
         law("Management of Health and Safety at Work Regulations 1999", "Employers must assess the risks of the work people do, including work done at home, and put sensible measures in place. That's why we ask you to check your home set-up and tell us about problems."),
         law("Health and Safety (Display Screen Equipment) Regulations 1992", "If you use a screen daily, for continuous spells of an hour or more, you're a display screen equipment (DSE) user. Your workstation must be assessed, your work should include breaks or changes of activity, and you can ask for an eye test, paid for by your employer."),
+        law("If you work in the US", "The UK laws above apply to our UK staff. In the US, the Occupational Safety and Health Administration (OSHA) sets workplace safety rules. OSHA doesn't inspect home offices, but the same good practice in this course applies, and injuries you suffer while working at home may be covered by workers' compensation, so they still need reporting. US law doesn't require employers to pay for eye tests: ask HR what Stott and May offers."),
         sorter("Whose job is it?", "Decide who is responsible for each one.", ["Stott and May", "You", "Both of us"], [
           ["Carrying out a risk assessment of home working", "Stott and May", "It's the employer's duty under the 1999 Regulations. You help by answering honestly about your set-up."],
           ["Setting up your desk, chair and screen the way this course shows", "You", "You're at the desk every day. This course and the checklist show you how."],
@@ -149,7 +150,7 @@ export default {
           ["A cable running under the hallway rug", "Needs fixing", "Damage under a rug goes unseen, and the cable can overheat. Re-route it."],
         ]),
         keyPoints("If there's a fire", [
-          "Get out, stay out and call 999.",
+          "Get out, stay out and call 999 (911 in the US).",
           "Don't stop to save equipment or work.",
           "Test your smoke alarms regularly.",
         ]),
@@ -182,7 +183,10 @@ export default {
           ["Message them privately, ask how they are and listen. If you're worried about them, let your manager know", true, "Right. A private, low-pressure check-in shows you've noticed and you care. You don't have to fix anything, just listen and point them to support."],
           ["Mention it in the team chat so everyone can check in", false, "Well meant, but raising it in front of the team can embarrass them. Keep it private."],
         ]),
-        text("Where to get support", "Talk to your manager or HR about the support Stott and May offers. If you need to talk to someone straight away, Samaritans are free to call on 116 123, any time, day or night. For health worries, contact your GP or NHS 111."),
+        text("Where to get support", "Talk to your manager or HR about the support Stott and May offers. If you need to talk to someone straight away:", [
+          "UK: Samaritans are free to call on 116 123, any time, day or night. For health worries, contact your GP or NHS 111",
+          "US: call or text 988, the Suicide and Crisis Lifeline, any time, day or night. For health worries, contact your doctor",
+        ]),
       ],
     },
     {
@@ -211,14 +215,14 @@ export default {
     },
   ],
   questions: [
-    q("When you work from home, does health and safety law still apply?", ["Yes: employers have the same duty to protect employees wherever they work", "No: it only applies on company premises", "Only if you work from home more than three days a week", "Only for people with a home-working contract"], 1, "The Health and Safety at Work etc. Act 1974 protects employees wherever they work, including at home."),
+    q("In the UK, does health and safety law still apply when you work from home?", ["Yes: employers have the same duty to protect employees wherever they work", "No: it only applies on company premises", "Only if you work from home more than three days a week", "Only for people with a home-working contract"], 1, "The Health and Safety at Work etc. Act 1974 protects employees wherever they work, including at home."),
     q("Who counts as a display screen equipment (DSE) user?", ["Anyone who uses a screen daily, for continuous spells of an hour or more", "Only people who use two screens", "Only people who work in IT", "Anyone who owns a computer"], 1, "If you use a screen daily for continuous spells of an hour or more, you're a DSE user and the DSE Regulations apply."),
     q("Where should the top of your screen be?", ["At or slightly below eye level", "Well below eye level, so you look down", "Well above eye level, so you look up", "It doesn't matter if the text is big enough"], 1, "With the top of the screen at or just below eye level, you look straight ahead or slightly down, which is easiest on your neck."),
     q("About how far away should your screen be?", ["Roughly an arm's length", "As close as possible", "At least two metres", "Half an arm's length"], 1, "Roughly an arm's length lets you read comfortably without leaning in."),
     q("You work on a laptop for most of the day. What's the best set-up?", ["Raise the laptop so the screen is at eye level, and use a separate keyboard and mouse", "Use it on your lap so it's close to you", "Keep it flat on the table and lean forward", "Tilt the screen back as far as it goes"], 1, "Raising the screen and using a separate keyboard and mouse fixes the laptop's built-in posture problem."),
     q("Where should a window be in relation to your screen?", ["To the side of the screen", "Directly behind the screen", "Directly behind you", "It makes no difference"], 1, "Side-on light avoids glare in your eyes (a window behind the screen) and reflections on the screen (a window behind you)."),
     q("What's the best way to take breaks from screen work?", ["Short, frequent breaks or changes of activity", "One long break at the end of the day", "No breaks, to finish sooner", "Breaks only once your eyes hurt"], 1, "HSE's guidance is that short, frequent breaks are better than longer, less frequent ones."),
-    q("You're a DSE user and would like an eye test. Who pays?", ["Stott and May, as your employer", "You do", "The NHS, always", "No one: eye tests aren't covered"], 1, "Under the DSE Regulations, your employer arranges and pays for an eye test when you ask, and for basic glasses if you need them specifically for screen work."),
+    q("In the UK, you're a DSE user and would like an eye test. Who pays?", ["Stott and May, as your employer", "You do", "The NHS, always", "No one: eye tests aren't covered"], 1, "Under the DSE Regulations, your employer arranges and pays for an eye test when you ask, and for basic glasses if you need them specifically for screen work."),
     q("Which of these is a fire risk?", ["An adaptor plugged into an extension lead", "One extension lead powering a laptop and a monitor", "A charger on a hard desk surface", "Switching equipment off at night"], 1, "Adaptors in extension leads, and leads plugged into each other, make overloading and fire more likely."),
     q("Your laptop charger cable has split. What should you do?", ["Stop using it, and report it to get a replacement", "Wrap it in tape and carry on", "Only use it during the day", "Use it until it stops working"], 1, "Damaged cables can give shocks or start fires. Stop using it and report it."),
     q("You nearly trip over a cable while working at home, but you're not hurt. Should you report it?", ["Yes: near misses should be reported too", "No: only injuries need reporting", "Only if it happens twice", "Only if it happened in the office"], 1, "Near misses show where an accident could happen, so the cause can be fixed first."),
@@ -226,7 +230,7 @@ export default {
     q("A colleague who works from home seems withdrawn and has missed several calls. What's the best first step?", ["Check in with them privately, ask how they are and listen", "Ignore it: it's their business", "Ask about it in the team chat", "Report them for missing calls"], 1, "A private, friendly check-in shows you care without putting them on the spot."),
     q("When should you check your home workstation set-up again?", ["When you move, change equipment, or your health or circumstances change", "Never: once is enough", "Only if your manager asks", "Every five years"], 1, "Changes in where you work, what you use or your health can change the risks."),
     q("What's the right way to run a cable from your desk to the socket?", ["Along the wall, out of the walkway", "Across the middle of the room", "Under a rug, so it's hidden", "Through a doorway, so the door holds it in place"], 1, "Cables in walkways are trip hazards, and cables under rugs can be damaged without anyone seeing."),
-    q("What is your own duty as an employee under health and safety law?", ["To take reasonable care of your own health and safety and that of others, and co-operate with your employer", "None: health and safety is only the employer's job", "To carry out the company's risk assessments yourself", "To buy all your own equipment"], 1, "The 1974 Act gives employees duties too: take reasonable care, and co-operate."),
+    q("Under UK health and safety law, what is your own duty as an employee?", ["To take reasonable care of your own health and safety and that of others, and co-operate with your employer", "None: health and safety is only the employer's job", "To carry out the company's risk assessments yourself", "To buy all your own equipment"], 1, "The 1974 Act gives employees duties too: take reasonable care, and co-operate."),
   ],
   sources: [
     ["HSE: Protecting home workers", "https://www.hse.gov.uk/home-working/"],
@@ -235,6 +239,8 @@ export default {
     ["HSE: Health and safety statistics", "https://www.hse.gov.uk/statistics/"],
     ["The Health and Safety (Display Screen Equipment) Regulations 1992", "https://www.legislation.gov.uk/uksi/1992/2792/contents"],
     ["Electrical Safety First: safety in the home", "https://www.electricalsafetyfirst.org.uk/"],
+    ["OSHA: Computer workstations eTool", "https://www.osha.gov/etools/computer-workstations"],
+    ["988 Suicide and Crisis Lifeline (US)", "https://988lifeline.org/"],
   ],
   reviewNotes: `Please check or fill in before sign-off:
 1. Figures in lessons 1 and 6 (543,000 musculoskeletal disorders; 776,000 stress, depression or anxiety) are HSE's 2023/24 figures. HSE publishes new figures each November: update to the latest.
@@ -243,5 +249,6 @@ export default {
 4. Wellbeing support (lesson 6, "Where to get support"): add Stott and May's Employee Assistance Programme or other support, if there is one.
 5. Reporting (lesson 7): confirm who accidents and near misses go to (manager, HR, a health and safety lead) and whether there's an accident book or online form to link to.
 6. Home-working risk assessment: if there's a company DSE or home-working self-assessment form, we can link to it from lesson 2.
-7. Assessment: 10 questions drawn from 16, pass mark 80%, renew every 12 months. Confirm these settings.`,
+7. Assessment: 10 questions drawn from 16, pass mark 80%, renew every 12 months. Confirm these settings.
+8. This course is now for UK and US staff. Lesson 1 has a US note (OSHA, workers' compensation, eye tests) and lesson 6 has US support numbers. Ask a US HR adviser to check them, and add what Stott and May Inc offers (equipment, eye care benefits, an Employee Assistance Programme).`,
 };

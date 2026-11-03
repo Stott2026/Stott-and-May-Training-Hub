@@ -1,13 +1,14 @@
-// Neurodiversity Awareness (UK). Written from Acas guidance on neurodiversity at work, the Equality
-// Act 2010 and the UK Government's Access to Work scheme. For review and sign-off by HR and
+// Neurodiversity Awareness, for UK and US staff. Written from Acas guidance on neurodiversity at work,
+// the Equality Act 2010, the UK Government's Access to Work scheme and, for the US, the Americans with
+// Disabilities Act and New York State and City human rights law. For review and sign-off by HR and
 // Compliance before it counts.
 import { text, keyPoints, law, doDont, stat, sorter, scenario, q } from "./kit.js";
 
 export default {
   slug: "neurodiversity-awareness",
-  title: "Neurodiversity Awareness (UK)",
+  title: "Neurodiversity Awareness",
   category: "conduct",
-  region: "uk",
+  region: "global",
   order: 40,
   icon: "brain",
   accent: "brand",
@@ -21,7 +22,7 @@ export default {
     "Explain what neurodiversity is, and name common neurodivergent conditions",
     "Separate the common myths from the facts",
     "Communicate clearly and respectfully with neurodivergent colleagues and candidates",
-    "Explain the duty to make reasonable adjustments under the Equality Act 2010",
+    "Explain the duty to make reasonable adjustments (in the US, reasonable accommodations)",
     "Run a neuroinclusive recruitment process, and advise clients on one",
   ],
   lessons: [
@@ -82,7 +83,7 @@ export default {
       title: "The law and reasonable adjustments",
       summary: "What the Equality Act requires, and the kinds of support that help.",
       blocks: [
-        law("Equality Act 2010", "A person is disabled under the Act if they have a physical or mental impairment that has a substantial and long-term (12 months or more) adverse effect on their ability to carry out normal day-to-day activities. Many neurodivergent people meet this definition.\n\nEmployers must make reasonable adjustments to remove disadvantages disabled people face, including job applicants. It's unlawful to discriminate against, harass or victimise someone because of a disability."),
+        law("UK: Equality Act 2010", "A person is disabled under the Act if they have a physical or mental impairment that has a substantial and long-term (12 months or more) adverse effect on their ability to carry out normal day-to-day activities. Many neurodivergent people meet this definition.\n\nEmployers must make reasonable adjustments to remove disadvantages disabled people face, including job applicants. It's unlawful to discriminate against, harass or victimise someone because of a disability."),
         keyPoints("What you need to know", [
           "Someone doesn't need a formal diagnosis to ask for support. Focus on what they need.",
           "Adjustments should be agreed with the person, and reviewed if things change.",
@@ -103,13 +104,14 @@ export default {
           ["Thank them for telling you, keep it confidential, and encourage them to talk to their manager or HR about adjustments, offering to help them prepare if they'd like", true, "Right. Respect their privacy, and point them towards the support they're entitled to ask for."],
           ["Suggest they don't mention it to anyone, in case it affects their career", false, "Asking for adjustments is their right, and Stott and May must consider them fairly."],
         ]),
+        law("If you work in the US", "The Americans with Disabilities Act (ADA) protects qualified people with disabilities from discrimination, and requires employers to provide reasonable accommodations, the US term for reasonable adjustments, unless that would cause undue hardship. Many neurodivergent conditions can be disabilities under the ADA.\n\nNew York State and New York City human rights law go further. In New York City, employers must engage in a \"cooperative dialogue\" with anyone who asks for an accommodation, or who they know may need one, and confirm the outcome in writing. The UK's Access to Work scheme doesn't apply in the US: ask HR what support is available."),
       ],
     },
     {
       title: "Neuroinclusive recruitment",
       summary: "Giving neurodivergent candidates a fair chance, and helping clients do the same.",
       blocks: [
-        text(null, "Traditional recruitment can unfairly screen out neurodivergent candidates: vague job ads, unexpected questions, judging on eye contact and small talk, and \"culture fit\". As recruiters, we can change that for our candidates, and advise our clients on how to do the same.\n\nJob applicants are protected by the Equality Act too, so employers must make reasonable adjustments in the hiring process."),
+        text(null, "Traditional recruitment can unfairly screen out neurodivergent candidates: vague job ads, unexpected questions, judging on eye contact and small talk, and \"culture fit\". As recruiters, we can change that for our candidates, and advise our clients on how to do the same.\n\nJob applicants are protected too, by the Equality Act in the UK and the ADA and New York law in the US, so employers must make reasonable adjustments (accommodations) in the hiring process."),
         doDont(
           ["Ask every candidate: \"Is there anything that would help you at interview?\"", "Share the interview format, who'll be there and how long it'll take", "Suggest clients share questions in advance, or allow written answers", "Separate essential requirements from nice-to-haves in job ads", "Judge candidates on their skills and what they can do"],
           ["Mark candidates down for limited eye contact, fidgeting or a direct manner", "Use vague phrases like \"excellent communication skills\" unless the role really needs them", "Share a candidate's condition with a client without the candidate's clear agreement", "Assume a candidate can't do a role because of their condition"],
@@ -134,7 +136,7 @@ export default {
     q("Is dyslexia linked to intelligence?", ["No: it affects processing written language, not intelligence", "Yes, always", "Only in adults", "Only when undiagnosed"], 1, "Dyslexia isn't related to intelligence."),
     q("What's the best way to know which language someone prefers about their neurodivergence?", ["Listen to how they describe themselves, and use the same words", "Always use person-first language", "Always use identity-first language", "Avoid the subject entirely"], 1, "Preferences vary, so follow the person's lead."),
     q("Which of these helps communication with neurodivergent colleagues?", ["Putting key points and actions in writing", "Relying on hints and unspoken expectations", "Changing plans at the last minute", "Using sarcasm to keep things light"], 1, "Clear, written communication helps many people, and often everyone."),
-    q("Under the Equality Act 2010, what makes an impairment a disability?", ["A substantial and long-term adverse effect on normal day-to-day activities", "Any condition with a diagnosis", "Only physical impairments", "Only conditions that started in childhood"], 1, "Substantial, long-term (12 months or more) effect on day-to-day activities."),
+    q("In the UK, under the Equality Act 2010, what makes an impairment a disability?", ["A substantial and long-term adverse effect on normal day-to-day activities", "Any condition with a diagnosis", "Only physical impairments", "Only conditions that started in childhood"], 1, "Substantial, long-term (12 months or more) effect on day-to-day activities."),
     q("Does someone need a formal diagnosis to ask for support at work?", ["No: focus on what they need", "Yes, always", "Only for physical adjustments", "Only after six months' service"], 1, "Support can be discussed without a formal diagnosis."),
     q("Which of these is a reasonable adjustment?", ["Noise-cancelling headphones or a quieter place to work", "Moving the person to a different team without asking", "Giving them less important work", "Telling the team about their condition"], 1, "Adjustments are agreed with the person to remove a disadvantage."),
     q("A colleague tells you about their diagnosis in confidence. What should you do?", ["Keep it confidential, and encourage them to talk to their manager or HR about support if they'd like", "Tell the team so they understand", "Tell your manager straight away", "Write it in their record"], 1, "It's their information to share."),
@@ -142,6 +144,7 @@ export default {
     q("What should you ask every candidate before an interview?", ["\"Is there anything that would help you at interview?\"", "\"Do you have a disability?\"", "\"Are you neurodivergent?\"", "Nothing: it's up to them to raise it"], 1, "Asking everyone makes it easy to request adjustments without having to disclose a condition."),
     q("A client wants to mark a candidate down for not making eye contact. What do you do?", ["Steer the feedback back to the role's actual requirements", "Agree: eye contact shows confidence", "Tell the candidate to practise eye contact", "Withdraw the candidate"], 1, "Judging on eye contact can be biased against neurodivergent candidates."),
     q("Can you tell a client about a candidate's autism without asking the candidate?", ["No: only share what the candidate agrees to", "Yes, if it helps the client", "Yes, if the client asks", "Yes, if it's in the CV"], 1, "Health information is sensitive. Share only with the candidate's agreement."),
+    q("What is the US term for a reasonable adjustment under the Americans with Disabilities Act?", ["A reasonable accommodation", "A special exemption", "A disability allowance", "A performance plan"], 1, "Under the ADA, employers must provide reasonable accommodations unless that causes undue hardship."),
     q("What is Access to Work?", ["A UK Government scheme that can help fund support at work", "A type of employment contract", "A building accessibility standard", "A recruitment job board"], 1, "Access to Work can fund equipment, coaching and other support."),
   ],
   sources: [
@@ -151,11 +154,14 @@ export default {
     ["National Autistic Society: employing autistic people", "https://www.autism.org.uk/what-we-do/employment"],
     ["British Dyslexia Association: workplace", "https://www.bdadyslexia.org.uk/advice/employers"],
     ["ADHD UK", "https://adhduk.co.uk/"],
+    ["US EEOC: Disability discrimination and reasonable accommodation", "https://www.eeoc.gov/disability-discrimination-and-employment-decisions"],
+    ["NYC Commission on Human Rights: Cooperative dialogue", "https://www.nyc.gov/site/cchr/law/cooperative-dialogue.page"],
   ],
   reviewNotes: `Please check or fill in before sign-off:
 1. Lesson 4: how staff ask for reasonable adjustments at Stott and May (manager, HR, a form), and any internal neurodiversity network or support.
 2. Lesson 5: does Stott and May have a standard adjustments question in our candidate process (for example, in the interview confirmation email)? If so, refer to it.
 3. The figure in lesson 1 (1 in 7) is from Acas. Check it's still Acas's current wording.
 4. Language guidance (lesson 3): consider asking any neurodivergent colleagues willing to review it.
-5. Assessment: 10 questions drawn from 15, pass mark 80%, renew every 12 months.`,
+5. This course is now for UK and US staff. The US notes (lesson 4) are a short overview: ask US counsel or a New York HR adviser to check them, and add how US staff ask for accommodations.
+6. Assessment: 10 questions drawn from 16, pass mark 80%, renew every 12 months.`,
 };

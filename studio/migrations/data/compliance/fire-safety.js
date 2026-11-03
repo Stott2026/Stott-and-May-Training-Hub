@@ -1,12 +1,12 @@
-// Fire Safety (UK). Written from the Regulatory Reform (Fire Safety) Order 2005, UK Government fire
-// safety guidance and fire and rescue service advice. For review and sign-off by HR and Compliance.
+// Fire Safety, for UK and US staff. Written from the Regulatory Reform (Fire Safety) Order 2005, UK
+// Government fire safety guidance and fire and rescue service advice, with US notes from OSHA and NFPA. For review and sign-off by HR and Compliance.
 import { text, keyPoints, law, doDont, sorter, scenario, spotIt, q } from "./kit.js";
 
 export default {
   slug: "fire-safety",
-  title: "Fire Safety (UK)",
+  title: "Fire Safety",
   category: "safety",
-  region: "uk",
+  region: "global",
   order: 52,
   icon: "flame",
   accent: "brand",
@@ -28,7 +28,8 @@ export default {
       title: "Fire safety law, and how fires start",
       summary: "Who's responsible, the fire triangle and the main causes.",
       blocks: [
-        law("Regulatory Reform (Fire Safety) Order 2005", "The \"responsible person\" for a building (usually the employer, landlord or building manager) must carry out a fire risk assessment, provide fire alarms, escape routes, signs, lighting and firefighting equipment, and make sure everyone knows what to do in a fire.\n\nEmployees must take reasonable care of themselves and others, co-operate with the fire safety arrangements, and report anything that could be a fire risk."),
+        law("UK: Regulatory Reform (Fire Safety) Order 2005", "The \"responsible person\" for a building (usually the employer, landlord or building manager) must carry out a fire risk assessment, provide fire alarms, escape routes, signs, lighting and firefighting equipment, and make sure everyone knows what to do in a fire.\n\nEmployees must take reasonable care of themselves and others, co-operate with the fire safety arrangements, and report anything that could be a fire risk."),
+        law("If you work in the US", "OSHA requires employers to have an emergency action plan and a fire prevention plan, and to train staff on them. Local fire codes apply too: in New York City, the Fire Department (FDNY) sets the rules for office buildings, including fire drills run by the building's fire safety director. In an emergency, call 911."),
         text("The fire triangle", "A fire needs three things: heat, fuel and oxygen. Take any one away and it can't burn. Fire prevention is about keeping heat sources and fuel apart. Firefighting is about removing one side of the triangle: water cools (heat), a fire blanket smothers (oxygen)."),
         text("Common causes of fire in offices", null, [
           "Faulty, damaged or overloaded electrical equipment, sockets and extension leads",
@@ -74,6 +75,7 @@ export default {
           "Dry powder (blue label): many types of fire, but rarely used indoors because the powder is hard to breathe and see through",
           "Wet chemical (yellow label): cooking oil and fat fires",
         ]),
+        text("In the US", "US extinguishers are labelled by the class of fire they're for: A (ordinary materials such as paper and wood), B (flammable liquids), C (electrical equipment) and K (kitchen oils and fats). Most US offices have \"ABC\" multipurpose dry chemical extinguishers, which work on the first three. Use a class K extinguisher, or a fire blanket, for cooking oil."),
         sorter("Which extinguisher?", "Choose the right type for each fire.", ["Water or foam", "CO2", "Wet chemical"], [
           ["Paper burning in a waste bin", "Water or foam", "A fire in ordinary solid materials."],
           ["A photocopier with smoke coming out", "CO2", "Electrical equipment: CO2 doesn't conduct electricity or leave residue."],
@@ -83,7 +85,7 @@ export default {
         ]),
         keyPoints("Before you ever use an extinguisher", [
           "Only use one if you've been trained, the fire is small, and it's safe.",
-          "Raise the alarm first, and make sure someone has called 999.",
+          "Raise the alarm first, and make sure someone has called 999 (911 in the US).",
           "Keep your escape route behind you.",
           "If the fire doesn't go out quickly, leave, close the door and get out.",
         ]),
@@ -95,7 +97,7 @@ export default {
       blocks: [
         keyPoints("If you discover a fire", [
           "Raise the alarm straight away: shout \"Fire!\" and press the nearest fire alarm call point.",
-          "Call 999, or make sure someone has.",
+          "Call 999 (911 in the US), or make sure someone has.",
           "Leave by the nearest safe exit, closing doors behind you.",
           "Only tackle the fire if you're trained, it's small and it's safe.",
         ]),
@@ -106,10 +108,10 @@ export default {
           "Go to the assembly point and report to the fire marshal, so they know you're out.",
           "Don't go back in until the fire service or fire marshal says it's safe.",
         ]),
-        text("If you're trapped", "Get into a room with a window, close the door and put towels or clothing along the bottom to keep smoke out. Call 999 and say exactly where you are. Stay low, where the air is clearer, and open the window to signal for help. If your clothes catch fire: stop, drop to the ground, and roll."),
+        text("If you're trapped", "Get into a room with a window, close the door and put towels or clothing along the bottom to keep smoke out. Call 999 (911 in the US) and say exactly where you are. Stay low, where the air is clearer, and open the window to signal for help. If your clothes catch fire: stop, drop to the ground, and roll."),
         scenario("You go into the office kitchen and see smoke and flames coming from the waste bin. Nobody else is around. What do you do first?", [
           ["Fill a cup with water and try to put it out quietly", false, "Raise the alarm first. Fires grow quickly, and others need to know."],
-          ["Shout \"Fire!\", press the nearest call point and make sure 999 is called. Only tackle it if you're trained and it's small and safe; otherwise close the door and leave", true, "Right. Raise the alarm first, then decide whether it's safe to tackle, with your escape route behind you."],
+          ["Shout \"Fire!\", press the nearest call point and make sure 999 (911 in the US) is called. Only tackle it if you're trained and it's small and safe; otherwise close the door and leave", true, "Right. Raise the alarm first, then decide whether it's safe to tackle, with your escape route behind you."],
           ["Open the windows to let the smoke out", false, "Fresh air feeds the fire. Close the door, raise the alarm and get out."],
         ]),
       ],
@@ -138,17 +140,18 @@ export default {
   ],
   questions: [
     q("What three things does a fire need?", ["Heat, fuel and oxygen", "Heat, water and paper", "Electricity, smoke and wind", "Fuel, carbon dioxide and heat"], 1, "Remove any one, and the fire can't burn."),
-    q("Under the Fire Safety Order, what must employees do?", ["Take reasonable care, co-operate with fire safety arrangements, and report fire risks", "Carry out the fire risk assessment", "Buy their own extinguisher", "Nothing: it's the landlord's job"], 1, "Employees have duties too."),
+    q("Under the UK Fire Safety Order, what must employees do?", ["Take reasonable care, co-operate with fire safety arrangements, and report fire risks", "Carry out the fire risk assessment", "Buy their own extinguisher", "Nothing: it's the landlord's job"], 1, "Employees have duties too."),
     q("Which of these is a common cause of office fires?", ["Faulty or overloaded electrical equipment", "Indoor plants", "Water coolers", "Open-plan desks"], 1, "Electrical faults and overloading are a leading cause."),
     q("Why are lithium-ion batteries a fire risk?", ["They can overheat and catch fire, especially when damaged or charged with the wrong charger", "They're never a risk", "Only when they're cold", "Only in cars"], 1, "Use the right charger, and report damaged batteries."),
     q("Why must fire doors be kept shut?", ["They hold back fire and smoke while people escape", "They keep the office warm", "They stop people getting lost", "They're heavy"], 1, "Never prop them open."),
-    q("Which extinguisher should be used on a computer fire?", ["CO2 (black label)", "Water (red label)", "Wet chemical (yellow label)", "None: always use water"], 1, "CO2 is safe on electrical equipment."),
-    q("Which extinguisher is used for cooking oil fires?", ["Wet chemical (yellow label)", "Water (red label)", "CO2 (black label)", "Any type"], 1, "Wet chemical, or a fire blanket for a small pan. Never water."),
+    q("In the UK, which extinguisher should be used on a computer fire?", ["CO2 (black label)", "Water (red label)", "Wet chemical (yellow label)", "None: always use water"], 1, "CO2 is safe on electrical equipment."),
+    q("Which extinguisher is used for cooking oil fires?", ["Wet chemical (class K in the US), or a fire blanket for a small pan", "Water", "Whatever is nearest", "Any type"], 1, "Wet chemical (class K), or a fire blanket for a small pan. Never water."),
+    q("In the US, what does a class C fire involve?", ["Electrical equipment", "Cooking oil", "Paper and wood", "Metals"], 1, "A is ordinary materials, B flammable liquids, C electrical, K kitchen oils."),
     q("Why should you never use water on burning cooking oil?", ["It can cause an explosion of burning oil", "It's a waste of water", "It makes the fire smell", "It stains the kitchen"], 1, "Water on burning oil turns to steam instantly and throws the oil out."),
-    q("You discover a fire. What should you do first?", ["Raise the alarm and make sure 999 is called", "Try to put it out before telling anyone", "Collect your belongings", "Open the windows"], 1, "Raising the alarm comes first."),
+    q("You discover a fire. What should you do first?", ["Raise the alarm and make sure 999 (911 in the US) is called", "Try to put it out before telling anyone", "Collect your belongings", "Open the windows"], 1, "Raising the alarm comes first."),
     q("When should you use a fire extinguisher?", ["Only if you're trained, the fire is small, and it's safe, with your escape route behind you", "On any fire, before leaving", "Never", "Only if a manager tells you to"], 1, "Your safety comes first."),
     q("The fire alarm sounds. Which is right?", ["Leave by the nearest safe exit without using the lifts, and go to the assembly point", "Take the lift to get out faster", "Finish your call first", "Collect your laptop and coat"], 1, "Leave straight away, by the stairs."),
-    q("You're trapped in a room by a fire. What should you do?", ["Close the door, block the gaps with towels or clothing, call 999 and signal from the window", "Open the door to look for a way out through the smoke", "Hide under a desk", "Stand on a chair to avoid the smoke"], 1, "Keep the smoke out, call for help and stay low."),
+    q("You're trapped in a room by a fire. What should you do?", ["Close the door, block the gaps with towels or clothing, call 999 (911 in the US) and signal from the window", "Open the door to look for a way out through the smoke", "Hide under a desk", "Stand on a chair to avoid the smoke"], 1, "Keep the smoke out, call for help and stay low."),
     q("What is a PEEP?", ["A personal emergency evacuation plan for someone who may need help to get out", "A type of fire alarm", "A fire drill", "A fire extinguisher"], 1, "It sets out how someone will be alerted and helped."),
     q("What do fire marshals do?", ["Help with evacuation, check areas are clear and take the roll call", "Put out every fire", "Carry out the fire risk assessment", "Test the extinguishers every day"], 1, "Follow their instructions during an alarm."),
     q("How often should fire drills be held?", ["Regularly, at least once a year", "Only after a real fire", "Every five years", "Never: alarms are enough"], 1, "Drills test the plan, so treat them as real."),
@@ -159,6 +162,8 @@ export default {
     ["London Fire Brigade: Fire safety at work", "https://www.london-fire.gov.uk/safety/the-workplace/"],
     ["London Fire Brigade: E-bike and e-scooter fire safety", "https://www.london-fire.gov.uk/safety/lithium-batteries/"],
     ["UK Government: Fire safety risk assessment, offices and shops", "https://www.gov.uk/government/publications/fire-safety-risk-assessment-offices-and-shops"],
+    ["OSHA: Emergency action plans", "https://www.osha.gov/etools/evacuation-plans-procedures/eap"],
+    ["FDNY: Fire safety for office buildings", "https://www.nyc.gov/site/fdny/index.page"],
   ],
   reviewNotes: `Please check or fill in before sign-off:
 1. For each UK office: the assembly point, fire marshals, and whether the building is managed by a landlord (for example, Regus) who runs the alarms and drills. These could go in a short "Your office" part of lesson 5.
@@ -166,5 +171,6 @@ export default {
 3. Lesson 3: which extinguisher types are actually in our offices, so the course can say which ones people will see.
 4. Lesson 5: how to ask for a PEEP (manager, HR or office manager).
 5. Lesson 5: how often drills are held in each office, if more often than once a year.
-6. Assessment: 10 questions drawn from 15, pass mark 80%, renew every 12 months.`,
+6. This course is now for UK and US staff. Lessons 1 and 3 have US notes (OSHA, FDNY, extinguisher classes, 911). Add the New York office's evacuation arrangements (building fire safety director, floor wardens, assembly point).
+7. Assessment: 10 questions drawn from 16, pass mark 80%, renew every 12 months.`,
 };
