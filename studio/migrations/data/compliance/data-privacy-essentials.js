@@ -56,7 +56,7 @@ export default {
           ["sender", "The sender's address", true, "\"stottandmay-helpdesk.co\" isn't our domain. Lookalike addresses are a key sign. Check the actual address, not just the display name."],
           ["time", "The time it was sent", false, "Fine on its own: emails arrive at all hours. Judge the rest of the message."],
           ["greeting", "\"Dear user\"", true, "Our IT team knows your name. Generic greetings suggest a mass mailing."],
-          ["request", "Asking for your password and Bullhorn login", true, "No genuine IT team will ever ask you for your password by email. This is the biggest warning sign."],
+          ["request", "Asking for your password and login", true, "No genuine IT team will ever ask you for your password by email. This is the biggest warning sign."],
           ["link", "The button and the address under it", true, "The address goes to a .ru website, not ours. Hover over a link (or press and hold on a phone) to see where it really goes, and don't click."],
           ["attachment", "Payroll_Update.zip", true, "Zip files and unexpected attachments are a common way to deliver malware. Don't open them."],
           ["threat", "\"Permanent account closure\"", true, "Threats of something bad happening are another pressure tactic."],
