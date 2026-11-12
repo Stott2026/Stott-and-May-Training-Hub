@@ -1,0 +1,48 @@
+# Publishes the hosted Sanity Studio (https://stottandmay-training.sanity.studio) automatically,
+# so nobody needs the project on their own computer to run `npm run studio:deploy`.
+#
+# It runs when anything in studio/ changes on the live branch, and by hand from GitHub:
+# Actions → Deploy the Studio → Run workflow.
+#
+# Needs one repository secret, SANITY_AUTH_TOKEN: a Sanity API token with the "Deploy Studio"
+# permission (sanity.io/manage → the project → API → Tokens). Set in GitHub under
+# Settings → Secrets and variables → Actions.
+name: Deploy the Studio
+
+on:
+  push:
+    branches: [claude/training-hub-platform-a9e704]
+    paths: ["studio/**"]
+  workflow_dispatch:
+
+# Only one deploy at a time; a newer one replaces one still waiting.
+concurrency:
+  group: deploy-studio
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SANITY_STUDIO_PROJECT_ID: hhtep62l
+      SANITY_STUDIO_DATASET: production
+      SANITY_STUDIO_HOSTNAME: stottandmay-training
+      SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Check the token is set
+        run: |
+          if [ -z "$SANITY_AUTH_TOKEN" ]; then
+            echo "::error::The SANITY_AUTH_TOKEN secret isn't set. Add it under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+      - name: Install
+        run: npm ci --workspace studio --include-workspace-root
+      - name: Build and publish the Studio
+        working-directory: studio
+        run: npx sanity deploy --yes
