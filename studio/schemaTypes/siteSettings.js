@@ -17,6 +17,21 @@ export const siteSettings = defineType({
       validation: (r) => r.max(30),
     }),
     defineField({
+      name: "houseUrl",
+      title: "The House: web address",
+      type: "url",
+      description: "The House, the front door to every Stott and May tool. When there's an address here, a button in the top bar takes people back to the House's hallway. Leave it empty to hide the button.",
+      validation: (r) => r.uri({ scheme: ["https"] }),
+    }),
+    defineField({
+      name: "houseLabel",
+      title: "The House: button text",
+      type: "string",
+      initialValue: "The House",
+      description: "Leave it empty for \"The House\".",
+      validation: (r) => r.max(24),
+    }),
+    defineField({
       name: "quickLinks",
       title: "Quick links",
       type: "array",

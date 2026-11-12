@@ -62,13 +62,13 @@ const initialsOf = (name = "") => name.split(/\s+/).filter(Boolean).map((w) => w
 function Shell({ user, children }) {
   const { pathname } = useLocation();
   const area = useNavArea();
-  const { quickLinks } = useSite();
+  const { quickLinks, house } = useSite();
   const { name } = useHubName();
   const ach = useAchievements();
   // The level and points chip in the top bar, once badges and levels are switched on.
   const level = ach.enabled ? { title: ach.level.title, points: ach.points } : null;
   const current = pathname.startsWith("/tech") ? "tech" : pathname.startsWith("/start") ? "start" : pathname.startsWith("/achievements") ? "achievements" : pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : pathname.startsWith("/documents") ? "documents" : pathname.startsWith("/compliance") ? "compliance" : "training";
-  return <AppShell productName={name} navItems={NAV} quickLinks={quickLinks ?? []} level={level} current={current} user={user}>{children}</AppShell>;
+  return <AppShell productName={name} navItems={NAV} quickLinks={quickLinks ?? []} house={house} level={level} current={current} user={user}>{children}</AppShell>;
 }
 
 // The real Ask May, when it's switched on (the server has an Anthropic API key). The preview

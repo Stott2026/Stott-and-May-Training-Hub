@@ -8,8 +8,11 @@ import "./AppShell.css";
 // The page frame: skip link, top navigation and the main content area.
 // navItems: [{ id, label, icon, href }]. user: { name, initials, canSignOut } for the signed-in person.
 // quickLinks: [{ label, url }] from Site settings, always shown as buttons that open in a new tab.
+// house: { url, label } from Site settings: a button back to the House's hallway, in the same tab.
 // level: { title, points } for the chip that opens the achievements page (none until switched on).
-export default function AppShell({ productName = "Training Hub", navItems = [], quickLinks = [], level, current, user, children }) {
+export default function AppShell({ productName = "Training Hub", navItems = [], quickLinks = [], house, level, current, user, children }) {
+  const houseHref = hallwayAddress(house?.url);
+  const houseLabel = house?.label?.trim() || "The House";
   // The tabs show their names when they fit. If not, only the current tab keeps its name, and
   // if that still doesn't fit, every tab is an icon (names show on hover and are read out).
   const header = useRef(null);
@@ -28,7 +31,7 @@ export default function AppShell({ productName = "Training Hub", navItems = [], 
     const watch = new ResizeObserver(fit);
     watch.observe(el);
     return () => watch.disconnect();
-  }, [navItems, current, quickLinks.length, level?.title, user?.name, productName]);
+  }, [navItems, current, quickLinks.length, houseHref, level?.title, user?.name, productName]);
 
   return (
     <>
@@ -52,6 +55,12 @@ export default function AppShell({ productName = "Training Hub", navItems = [], 
             </ul>
           </nav>
           <div className="topnav__tools">
+          {houseHref && (
+            <a href={houseHref} className="topnav__quick topnav__house" aria-label={`Back to ${houseLabel}`} title={`Back to ${houseLabel}`}>
+              <Icon name="house" size={18} />
+              <span>{houseLabel}</span>
+            </a>
+          )}
           {quickLinks.map((l) => (
             <a key={l._key ?? l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="topnav__quick" aria-label={`${l.label} (opens in a new tab)`}>
               <Icon name="folder-open" size={18} />
@@ -80,4 +89,17 @@ export default function AppShell({ productName = "Training Hub", navItems = [], 
       <main id="main" className="app-main">{children}</main>
     </>
   );
+}
+
+// The House's address with ?hallway on the end, so people go straight to the hallway rather than
+// walking through the front door again. Nothing if the address is missing or not a web address.
+function hallwayAddress(url) {
+  if (!url) return null;
+  try {
+    const address = new URL(url);
+    address.search = "hallway";
+    return address.toString();
+  } catch {
+    return null;
+  }
 }
