@@ -26,6 +26,15 @@ export const houseSettings = defineType({
     { ...line("doorIntro", "Introduction", "A sentence or two under the heading.", 240), group: "door" },
     { ...line("doorButton", "Button", "For example: Step inside.", 24), group: "door" },
 
+    defineField({
+      name: "hallTheme",
+      title: "Hallway look",
+      type: "string",
+      group: "hallway",
+      description: "Light matches the Training Hub. Dark carries on the night-time look of the front door. Changes show in the House within a minute or so of publishing.",
+      options: { list: [{ title: "Light", value: "light" }, { title: "Dark", value: "dark" }], layout: "radio", direction: "horizontal" },
+      initialValue: "light",
+    }),
     { ...line("hallEyebrow", "Small label above the heading", "For example: Welcome home.", 30), group: "hallway" },
     { ...line("hallHeading", "Heading", "For example: Everything you need,", 40), group: "hallway" },
     { ...line("hallHeadingAccent", "Heading, second line", "Shown in teal, for example: under one roof.", 40), group: "hallway" },
