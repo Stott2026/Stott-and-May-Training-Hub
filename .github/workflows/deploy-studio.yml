@@ -15,10 +15,11 @@ on:
     paths: ["studio/**"]
   workflow_dispatch:
 
-# Only one deploy at a time; a newer one replaces one still waiting.
+# Only one deploy at a time. A run that's already publishing always finishes; a newer one waits
+# its turn (and replaces any other run still waiting), so the Studio is never stopped part-way.
 concurrency:
   group: deploy-studio
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
