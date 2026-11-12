@@ -36,6 +36,13 @@ export const houseSettings = defineType({
       initialValue: "light",
     }),
     { ...line("hallEyebrow", "Small label above the heading", "For example: Welcome home.", 30), group: "hallway" },
+    defineField({
+      name: "hallImage",
+      title: "Person beside the rooms (optional)",
+      type: "image",
+      group: "hallway",
+      description: "A cut-out photo of a person (on a clear background, PNG or WebP), shown rising out of a brand shape behind the doorways, as in the brand guidelines. Only shown on wider screens, and treated as decoration (screen readers skip it). Leave it empty to show no one.",
+    }),
     { ...line("hallHeading", "Heading", "For example: Everything you need,", 40), group: "hallway" },
     { ...line("hallHeadingAccent", "Heading, second line", "Shown in teal, for example: under one roof.", 40), group: "hallway" },
     { ...line("hallIntro", "Introduction", "A sentence under the heading.", 200), group: "hallway" },
