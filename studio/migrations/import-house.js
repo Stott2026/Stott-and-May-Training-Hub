@@ -29,12 +29,12 @@ const settings = {
 };
 
 // [id, room name, tool name, what it does, icon, colour, web address]
-// Only the Training Hub's address is known so far; the others are added in step 6 of the build plan.
+// Addresses are each tool's live Railway address (November 2026). Change them in the Studio when a tool moves.
 const ROOMS = [
   ["study", "The Study", "Training Hub", "Modules, videos, quizzes and forms across perm, contract and SOW.", "graduation-cap", "brand", "https://server-production-fc323.up.railway.app"],
-  ["map-room", "The Map Room", "Intelligence Brief Generator", "Gathers the intelligence you need before an outreach call or meeting, all in one brief.", "compass", "sky", null],
-  ["reading-room", "The Reading Room", "Terms Reviewer", "Checks a client's terms against our standard legal terms, so you can see where they differ.", "file-check", "lime", null],
-  ["records-room", "The Records Room", "Terms of Business Tracker", "See which clients have signed terms, spot recruitment signals and check which are due for renewal.", "clipboard-list", "brand", null],
+  ["map-room", "The Map Room", "Intelligence Brief Generator", "Gathers the intelligence you need before an outreach call or meeting, all in one brief.", "compass", "sky", "https://stott-and-may-ibg.up.railway.app"],
+  ["reading-room", "The Reading Room", "Terms Reviewer", "Checks a client's terms against our standard legal terms, so you can see where they differ.", "file-check", "lime", "https://stott-may-terms-reviewer-production.up.railway.app"],
+  ["records-room", "The Records Room", "Terms of Business Tracker", "See which clients have signed terms, spot recruitment signals and check which are due for renewal.", "clipboard-list", "brand", "https://client-radar-production.up.railway.app"],
 ];
 
 const rooms = ROOMS.map(([id, roomName, toolName, description, icon, accent, url], i) => ({
