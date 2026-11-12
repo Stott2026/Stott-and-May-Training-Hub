@@ -1,0 +1,38 @@
+import { defineField, defineType } from "sanity";
+import { CogIcon } from "@sanity/icons/Cog";
+
+// The words on the House's front door and in its hallway. There is only one of these.
+// Used by the House (a separate app, stott2026/the-house), not by the Training Hub.
+const line = (name, title, description, max, initialValue) =>
+  defineField({ name, title, type: "string", description, initialValue, validation: (r) => r.required().max(max) });
+
+export const houseSettings = defineType({
+  name: "houseSettings",
+  title: "House settings",
+  type: "document",
+  icon: CogIcon,
+  groups: [
+    { name: "general", title: "General", default: true },
+    { name: "door", title: "Front door" },
+    { name: "hallway", title: "Hallway" },
+  ],
+  fields: [
+    { ...line("houseName", "House name", "Shown in the top bar, browser tabs and sign-in pages.", 30, "The House"), group: "general" },
+
+    { ...line("doorEyebrow", "Small label above the heading", "For example: Welcome to.", 30), group: "door" },
+    { ...line("doorHeading", "Heading", "For example: The House.", 30), group: "door" },
+    { ...line("doorHeadingAccent", "Heading, second line", "Shown in aquamarine, for example: that Stott built.", 40), group: "door" },
+    { ...line("doorIntro", "Introduction", "A sentence or two under the heading.", 240), group: "door" },
+    { ...line("doorButton", "Button", "For example: Step inside.", 24), group: "door" },
+
+    { ...line("hallEyebrow", "Small label above the heading", "For example: Welcome home.", 30), group: "hallway" },
+    { ...line("hallHeading", "Heading", "For example: Everything you need,", 40), group: "hallway" },
+    { ...line("hallHeadingAccent", "Heading, second line", "Shown in teal, for example: under one roof.", 40), group: "hallway" },
+    { ...line("hallIntro", "Introduction", "A sentence under the heading.", 200), group: "hallway" },
+    { ...line("roomsEyebrow", "Rooms: small label", "For example: The rooms.", 30), group: "hallway" },
+    { ...line("roomsHeading", "Rooms: heading", "For example: Where would you like to go?", 60), group: "hallway" },
+    { ...line("extensionName", "Coming soon card: name", "The card for tools still to come, for example: The Extension.", 30), group: "hallway" },
+    { ...line("extensionText", "Coming soon card: text", "For example: New tools move in here as soon as they're built.", 120), group: "hallway" },
+  ],
+  preview: { prepare: () => ({ title: "House settings" }) },
+});

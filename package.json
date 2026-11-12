@@ -36,6 +36,7 @@
     "import:rewards": "npm run import:rewards -w studio --",
     "import:activities": "npm run import:activities -w studio --",
     "import:tech": "npm run import:tech -w studio --",
+    "import:house": "npm run import:house -w studio --",
     "decks:install": "npm install --prefix scripts/decks",
     "decks": "node --env-file-if-exists=.env scripts/decks/build.mjs"
   },

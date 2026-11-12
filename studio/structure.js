@@ -46,4 +46,13 @@ export const structure = (S) =>
       S.listItem().title("Library page").icon(DocumentsIcon).child(S.document().schemaType("libraryPage").documentId("libraryPage")),
       S.documentTypeListItem("libraryItem").title("Library").icon(DocumentsIcon)
         .child(S.documentTypeList("libraryItem").title("Library").defaultOrdering([{ field: "order", direction: "asc" }])),
+      S.divider(),
+      // The House: the front door to every Stott and May tool (a separate app, stott2026/the-house).
+      S.listItem().title("The House").icon(HomeIcon).child(
+        S.list().title("The House").items([
+          S.listItem().title("House settings").icon(CogIcon).child(S.document().schemaType("houseSettings").documentId("houseSettings")),
+          S.documentTypeListItem("houseRoom").title("Rooms").icon(HomeIcon)
+            .child(S.documentTypeList("houseRoom").title("Rooms").defaultOrdering([{ field: "order", direction: "asc" }])),
+        ])
+      ),
     ]);

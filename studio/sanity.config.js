@@ -5,7 +5,7 @@ import { schemaTypes } from "./schemaTypes/index.js";
 import { projectId, dataset } from "./env.js";
 import { structure } from "./structure.js";
 
-const SINGLETONS = ["homePage", "libraryPage", "managersPage", "siteSettings", "formsPage", "startHere", "rewards", "techPage", "compliancePage"];
+const SINGLETONS = ["homePage", "libraryPage", "managersPage", "siteSettings", "formsPage", "startHere", "rewards", "techPage", "compliancePage", "houseSettings"];
 
 export default defineConfig({
   name: "default",
