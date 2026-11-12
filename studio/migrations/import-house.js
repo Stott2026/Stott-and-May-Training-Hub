@@ -26,6 +26,8 @@ const settings = {
   roomsHeading: "Where would you like to go?",
   extensionName: "The Extension",
   extensionText: "New tools move in here as soon as they're built.",
+  mayRole: "Lives here. Knows every room.",
+  mayGreeting: "Hi, I'm May. Tell me what you need to do and I'll point you to the right room, or ask me anything about the tools here.",
 };
 
 // [id, room name, tool name, what it does, icon, colour, web address]

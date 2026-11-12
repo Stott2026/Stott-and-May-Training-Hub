@@ -15,6 +15,7 @@ export const houseSettings = defineType({
     { name: "general", title: "General", default: true },
     { name: "door", title: "Front door" },
     { name: "hallway", title: "Hallway" },
+    { name: "may", title: "May" },
   ],
   fields: [
     { ...line("houseName", "House name", "Shown in the top bar, browser tabs and sign-in pages.", 30, "The House"), group: "general" },
@@ -33,6 +34,10 @@ export const houseSettings = defineType({
     { ...line("roomsHeading", "Rooms: heading", "For example: Where would you like to go?", 60), group: "hallway" },
     { ...line("extensionName", "Coming soon card: name", "The card for tools still to come, for example: The Extension.", 30), group: "hallway" },
     { ...line("extensionText", "Coming soon card: text", "For example: New tools move in here as soon as they're built.", 120), group: "hallway" },
+
+    // May's card in the hallway. It only shows when May is switched on (an Anthropic key on the House's server).
+    { ...line("mayRole", "May: subtitle", "Under her name, for example: Lives here. Knows every room.", 50), group: "may" },
+    { ...line("mayGreeting", "May: greeting", "What she says first.", 240), group: "may" },
   ],
   preview: { prepare: () => ({ title: "House settings" }) },
 });
