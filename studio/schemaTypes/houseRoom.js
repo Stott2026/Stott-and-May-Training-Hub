@@ -14,6 +14,7 @@ export const houseRoom = defineType({
     defineField({ name: "toolName", title: "Tool name", type: "string", description: "The tool's own name, shown just above the room name, for example: Training Hub.", validation: (r) => r.required().max(40) }),
     defineField({ name: "description", title: "What it does", type: "string", description: "One line on the room's card.", validation: (r) => r.required().max(120) }),
     defineField({ name: "url", title: "Web address", type: "url", description: "Where \"Go in\" takes people. Open the tool in your browser and copy the address from the address bar. Leave it empty while the tool isn't ready, and the room shows as coming soon.", validation: (r) => r.uri({ scheme: ["https"] }) }),
+    defineField({ name: "comingSoon", title: "Coming soon", type: "boolean", initialValue: false, description: "Tick to show this room's door as coming soon, even though it has a web address (for example while its content is being checked). Untick to open the door." }),
     defineField({ name: "icon", title: "Icon", type: "string", options: { list: ICON_OPTIONS }, initialValue: "house", validation: (r) => r.required() }),
     defineField({ name: "accent", title: "Doorway colour", type: "string", options: { list: ACCENT_OPTIONS, layout: "radio" }, initialValue: "brand" }),
     defineField({ name: "order", title: "Display order", type: "number", description: "Rooms are shown smallest number first.", validation: (r) => r.integer() }),

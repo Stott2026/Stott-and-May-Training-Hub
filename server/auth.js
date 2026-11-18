@@ -31,6 +31,12 @@ export const signInConfigured = missing.length === 0;
 // and SESSION_SECRET are set; it takes over from Microsoft sign-in, which is no longer planned.
 export const houseSignIn = houseReady && Boolean(SESSION_SECRET);
 
+// Before the hub opens to everyone (agreed with Ian, November 2026): while EARLY_ACCESS lists email
+// addresses (comma-separated, a Railway variable), only those people can use the hub; everyone else
+// signed in sees "coming soon". Remove the variable to open the hub to everyone.
+const earlyAccess = new Set((process.env.EARLY_ACCESS || "").split(",").map((e) => e.trim().toLowerCase()).filter(Boolean));
+if (earlyAccess.size) console.warn(`Sign-in: early access only (${earlyAccess.size} ${earlyAccess.size === 1 ? "person" : "people"}); everyone else sees "coming soon".`);
+
 // For local development before IT's details arrive: DEV_SIGNIN_AS="Your Name" signs you in as that
 // name without Microsoft. Only works when NODE_ENV is exactly "development" and Microsoft sign-in
 // isn't set up, so it can never switch on in production.
@@ -180,6 +186,11 @@ export function requireSignIn(req, res, next) {
   const signedInAt = req.session?.signedInAt ?? 0;
   const limit = req.session?.via === "house" ? SIGN_IN_AGAIN_AFTER_HOUSE : SIGN_IN_AGAIN_AFTER;
   if (user && Date.now() - signedInAt < limit) {
+    if (earlyAccess.size && !devUser && !earlyAccess.has(String(user.email || "").toLowerCase())) {
+      if (req.path.startsWith("/api/")) return res.status(403).json({ error: "The hub is coming soon." });
+      const house = houseSignIn ? `<p><a href="${HOUSE_URL}/?hallway">Back to the House</a></p>` : "";
+      return res.status(403).send(page("Coming soon", `The ${hubName()} is being got ready and opens soon. Thanks for your patience.`).replace("</body>", `${house}</body>`));
+    }
     req.user = user;
     // Renew the 7 days. Changing the session makes the browser keep the cookie for another 7 days;
     // doing it once an hour is plenty and keeps the cookie quiet the rest of the time.
