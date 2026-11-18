@@ -37,6 +37,7 @@ const ROOMS = [
   ["map-room", "The Map Room", "Intelligence Brief Generator", "Gathers the intelligence you need before an outreach call or meeting, all in one brief.", "compass", "sky", "https://stott-and-may-ibg.up.railway.app"],
   ["reading-room", "The Reading Room", "Terms Reviewer", "Checks a client's terms against our standard legal terms, so you can see where they differ.", "file-check", "lime", "https://stott-may-terms-reviewer-production.up.railway.app"],
   ["records-room", "The Records Room", "Terms of Business Tracker", "See which clients have signed terms, spot recruitment signals and check which are due for renewal.", "clipboard-list", "brand", "https://client-radar-production.up.railway.app"],
+  ["gallery", "The Gallery", "CV Intelligence", "Turns a candidate's CV into target companies, live vacancies, a pitch and an intro email.", "user-check", "sky", "https://cv-intelligence-production-afb09260.up.railway.app"],
 ];
 
 const rooms = ROOMS.map(([id, roomName, toolName, description, icon, accent, url], i) => ({
