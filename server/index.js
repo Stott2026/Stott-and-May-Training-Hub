@@ -3,7 +3,7 @@ import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { api } from "./api.js";
-import { auth, requireSignIn, session } from "./auth.js";
+import { acceptHousePass, auth, requireSignIn, session } from "./auth.js";
 import { may } from "./may.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -26,8 +26,9 @@ app.get("/api/health", (req, res) => {
 });
 
 // ── Sign-in ─────────────────────────────────────────────
-// Microsoft sign-in pages. Everything below requireSignIn needs a signed-in Stott and May account.
+// Sign-in: through the House (Microsoft sign-in if ever set up instead). Everything below requireSignIn needs a signed-in Stott and May account.
 app.use("/auth", auth);
+app.use(acceptHousePass); // arriving through the House's door, the Study (server/house.js)
 app.use(requireSignIn);
 
 // ── API routes ──────────────────────────────────────────

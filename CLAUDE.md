@@ -24,7 +24,7 @@ The project owner is Ian. He is not a developer, but he has shipped React and Ex
 | Content | Sanity, with the Studio in `/studio` (hosted Studio via `sanity deploy`) |
 | Database | Postgres on Railway (from Phase 2: progress, quiz scores, form drafts) |
 | Video | Mux (Phase 2) |
-| Sign-in | Microsoft Entra ID (work accounts), handled server-side with MSAL Node |
+| Sign-in | Through the House (agreed with Ian, November 2026): people sign in once at the House (`stott2026/the-house`, an emailed 6-digit code) and the Study's door arrives with `?house_pass=…`, a pass signed by the House (Ed25519), naming the person and the hub's address, valid 60 seconds, once only. `server/house.js` checks it with the House's public key (`<HOUSE_URL>/auth/pass-key`); `acceptHousePass` in `server/auth.js` signs the person in (7 days). Opening the hub without being signed in goes to `<HOUSE_URL>/pass?for=<this address>` and straight back to the same page; sign out goes to the House's hallway; a pass that has run out shows "Try again". On whenever `HOUSE_URL` and `SESSION_SECRET` are set. The Microsoft (MSAL Node) code is still there but no longer planned; the House takes over if both are set |
 | AI Coach | Anthropic API, called from the server only (Phase 3) |
 | Hosting | Railway, deployed from GitHub |
 
@@ -48,7 +48,7 @@ Ian chose a **light, welcoming design** (October 2026), moving on from the proto
 
 - **Secrets**: all keys and tokens go in environment variables. Never commit `.env`. Keep `.env.example` up to date with every variable name and a comment on what it is.
 - **No hard-coded content**: modules, sections, quiz questions, values and categories all come from Sanity. Content owners must be able to change anything they can see without touching code.
-- **Sign-in on everything**: every page and every API route requires a signed-in Stott and May Microsoft account, except the sign-in route itself.
+- **Sign-in on everything**: every page and every API route requires a signed-in Stott and May Group account (through the House), except the sign-in routes. Don't change sign-in from another chat without checking with Ian: it's shared with the House and the other tools.
 - **Candidate data**: do not store any candidate personal data in the database until Ian confirms the compliance-approved data policy. Until then, form drafts stay in the browser only, as in the prototype.
 - **Accessibility**: real buttons and links, visible focus states, labels on every input, sensible heading order, works on mobile.
 - **Keep it simple**: prefer well-known libraries and the official Sanity, Mux and Microsoft guides over clever custom solutions. Ian has to be able to maintain this.
@@ -94,7 +94,7 @@ Run all of these from the project root. Needs Node 22.12 or newer.
 
 ### Deploying (Railway)
 
-Live address: https://server-production-fc323.up.railway.app (Railway service "server"). Railway deploys the `claude/training-hub-platform-a9e704` branch from GitHub automatically on every push. `railway.json` sets the build (`npm run build`), start (`npm start`) and health check (`/api/health`). Railway variables: `NODE_ENV=production`, `BASE_URL` (the Railway address, https), `SANITY_STUDIO_PROJECT_ID`, `SANITY_STUDIO_DATASET`, `SANITY_READ_TOKEN`, `SESSION_SECRET`, the three `ENTRA_*` sign-in values, and (to switch on Ask May) `ANTHROPIC_API_KEY`, optionally with `MAY_DAILY_LIMIT`. The Sanity write and deploy tokens are never needed on Railway. IT registers `<BASE_URL>/auth/callback` and `<BASE_URL>/auth/signed-out` as redirect URIs.
+Live address: https://server-production-fc323.up.railway.app (Railway service "server"). Railway deploys the `claude/training-hub-platform-a9e704` branch from GitHub automatically on every push. `railway.json` sets the build (`npm run build`), start (`npm start`) and health check (`/api/health`). Railway variables: `NODE_ENV=production`, `BASE_URL` (the Railway address, https), `SANITY_STUDIO_PROJECT_ID`, `SANITY_STUDIO_DATASET`, `SANITY_READ_TOKEN`, `SESSION_SECRET`, `HOUSE_URL` (the House's address: sign-in goes through it), and (to switch on Ask May) `ANTHROPIC_API_KEY`, optionally with `MAY_DAILY_LIMIT`. The Sanity write and deploy tokens are never needed on Railway. IT registers `<BASE_URL>/auth/callback` and `<BASE_URL>/auth/signed-out` as redirect URIs.
 
 ### Project layout
 

@@ -12,6 +12,7 @@ import { Router } from "express";
 import cookieSession from "cookie-session";
 import { ConfidentialClientApplication, CryptoProvider } from "@azure/msal-node";
 import { hubName, fullHubName } from "./sanity.js";
+import { HOUSE_URL, houseReady, checkHousePass } from "./house.js";
 
 const { ENTRA_CLIENT_ID, ENTRA_TENANT_ID, ENTRA_CLIENT_SECRET, SESSION_SECRET, DEV_SIGNIN_AS, NODE_ENV } = process.env;
 
@@ -25,12 +26,18 @@ const REQUIRED = { ENTRA_CLIENT_ID, ENTRA_TENANT_ID, ENTRA_CLIENT_SECRET, SESSIO
 const missing = Object.keys(REQUIRED).filter((name) => !REQUIRED[name]);
 export const signInConfigured = missing.length === 0;
 
+// Signing in through the House (agreed with Ian, November 2026): people sign in once at the House
+// (stott2026/the-house) and the Study's door brings a pass (server/house.js). On whenever HOUSE_URL
+// and SESSION_SECRET are set; it takes over from Microsoft sign-in, which is no longer planned.
+export const houseSignIn = houseReady && Boolean(SESSION_SECRET);
+
 // For local development before IT's details arrive: DEV_SIGNIN_AS="Your Name" signs you in as that
 // name without Microsoft. Only works when NODE_ENV is exactly "development" and Microsoft sign-in
 // isn't set up, so it can never switch on in production.
-const devUser = !signInConfigured && NODE_ENV === "development" && DEV_SIGNIN_AS ? { name: DEV_SIGNIN_AS, email: "" } : null;
+const devUser = !signInConfigured && !houseSignIn && NODE_ENV === "development" && DEV_SIGNIN_AS ? { name: DEV_SIGNIN_AS, email: "" } : null;
 
-if (devUser) console.warn(`Sign-in: DEVELOPMENT ONLY, everyone is signed in as "${devUser.name}".`);
+if (houseSignIn) console.warn(`Sign-in: through the House (${HOUSE_URL}).`);
+else if (devUser) console.warn(`Sign-in: DEVELOPMENT ONLY, everyone is signed in as "${devUser.name}".`);
 else if (!signInConfigured) console.warn(`Sign-in is not set up, so the hub is closed. Missing: ${missing.join(", ")}. See .env.example.`);
 
 const msal = signInConfigured
@@ -71,8 +78,30 @@ function safeReturnTo(value) {
 
 export const auth = Router();
 
+// Where to sign in through the House: it sends you back here (returnTo) with a pass.
+const houseSignInUrl = (returnTo) => `${HOUSE_URL}/pass?for=${encodeURIComponent(baseUrl + returnTo)}`;
+const SIGN_IN_AGAIN_AFTER_HOUSE = 7 * DAY; // the same as the House
+
+// A House pass in the address: sign in, then tidy the address. Runs before requireSignIn.
+export async function acceptHousePass(req, res, next) {
+  if (!houseSignIn || req.method !== "GET" || !req.query.house_pass) return next();
+  const clean = new URL(req.originalUrl, baseUrl);
+  clean.searchParams.delete("house_pass");
+  const returnTo = safeReturnTo(clean.pathname + clean.search);
+  const person = await checkHousePass(req.query.house_pass, new URL(baseUrl).origin);
+  if (!person) {
+    // Run out or used already: offer to try again, rather than bouncing back to the House.
+    return res.status(401).send(page("We couldn't sign you in", "The link from the House had run out or was already used.").replace("</body>", `<p><a href="${houseSignInUrl(returnTo).replace(/"/g, "&quot;")}">Try again</a></p></body>`));
+  }
+  const name = person.name || person.email.split("@")[0].split(/[._-]+/).filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(" ");
+  req.session = { user: { name, email: person.email }, signedInAt: Date.now(), via: "house" };
+  console.log(JSON.stringify({ event: "house_sign_in", domain: person.email.split("@")[1] }));
+  res.redirect(returnTo);
+}
+
 auth.get("/signin", async (req, res) => {
   const returnTo = safeReturnTo(req.query.returnTo);
+  if (houseSignIn) return res.redirect(houseSignInUrl(returnTo));
   if (devUser) {
     req.session = { user: devUser, signedInAt: Date.now() };
     return res.redirect(returnTo);
@@ -129,6 +158,7 @@ auth.get("/callback", async (req, res) => {
 
 auth.get("/signout", (req, res) => {
   req.session = null;
+  if (houseSignIn) return res.redirect(`${HOUSE_URL}/?hallway`); // back to the House's hallway
   if (!signInConfigured) return res.redirect("/auth/signed-out");
   // Also sign out of Microsoft, then come back to the "signed out" page.
   res.redirect(`https://login.microsoftonline.com/${ENTRA_TENANT_ID}/oauth2/v2.0/logout?post_logout_redirect_uri=${encodeURIComponent(signedOutUrl)}`);
@@ -148,7 +178,8 @@ auth.use((err, req, res, next) => {
 export function requireSignIn(req, res, next) {
   const user = req.session?.user;
   const signedInAt = req.session?.signedInAt ?? 0;
-  if (user && Date.now() - signedInAt < SIGN_IN_AGAIN_AFTER) {
+  const limit = req.session?.via === "house" ? SIGN_IN_AGAIN_AFTER_HOUSE : SIGN_IN_AGAIN_AFTER;
+  if (user && Date.now() - signedInAt < limit) {
     req.user = user;
     // Renew the 7 days. Changing the session makes the browser keep the cookie for another 7 days;
     // doing it once an hour is plenty and keeps the cookie quiet the rest of the time.
@@ -160,7 +191,7 @@ export function requireSignIn(req, res, next) {
   // rather than getting the "please sign in" message the hub's own requests get.
   const download = /^\/api\/library\/[^/]+\/download$/.test(req.path);
   if (req.path.startsWith("/api/") && !download) return res.status(401).json({ error: "Please sign in." });
-  if (!signInConfigured && !devUser) return notSetUp(res);
+  if (!signInConfigured && !devUser && !houseSignIn) return notSetUp(res);
   res.redirect(`/auth/signin?returnTo=${encodeURIComponent(download ? "/library" : req.originalUrl)}`);
 }
 
