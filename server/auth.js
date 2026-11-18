@@ -85,19 +85,21 @@ function safeReturnTo(value) {
 export const auth = Router();
 
 // Where to sign in through the House: it sends you back here (returnTo) with a pass.
-const houseSignInUrl = (returnTo) => `${HOUSE_URL}/pass?for=${encodeURIComponent(baseUrl + returnTo)}`;
+// The hub's own address, from the visit itself (Railway says it was https), so a stale BASE_URL can't break it.
+const ownOrigin = (req) => `${req.protocol}://${req.get("host")}`;
+const houseSignInUrl = (req, returnTo) => `${HOUSE_URL}/pass?for=${encodeURIComponent(ownOrigin(req) + returnTo)}`;
 const SIGN_IN_AGAIN_AFTER_HOUSE = 7 * DAY; // the same as the House
 
 // A House pass in the address: sign in, then tidy the address. Runs before requireSignIn.
 export async function acceptHousePass(req, res, next) {
   if (!houseSignIn || req.method !== "GET" || !req.query.house_pass) return next();
-  const clean = new URL(req.originalUrl, baseUrl);
+  const clean = new URL(req.originalUrl, ownOrigin(req));
   clean.searchParams.delete("house_pass");
   const returnTo = safeReturnTo(clean.pathname + clean.search);
-  const person = await checkHousePass(req.query.house_pass, new URL(baseUrl).origin);
+  const person = await checkHousePass(req.query.house_pass, ownOrigin(req));
   if (!person) {
     // Run out or used already: offer to try again, rather than bouncing back to the House.
-    return res.status(401).send(page("We couldn't sign you in", "The link from the House had run out or was already used.").replace("</body>", `<p><a href="${houseSignInUrl(returnTo).replace(/"/g, "&quot;")}">Try again</a></p></body>`));
+    return res.status(401).send(page("We couldn't sign you in", "The link from the House had run out or was already used.").replace("</body>", `<p><a href="${houseSignInUrl(req, returnTo).replace(/"/g, "&quot;")}">Try again</a></p></body>`));
   }
   const name = person.name || person.email.split("@")[0].split(/[._-]+/).filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(" ");
   req.session = { user: { name, email: person.email }, signedInAt: Date.now(), via: "house" };
@@ -107,7 +109,7 @@ export async function acceptHousePass(req, res, next) {
 
 auth.get("/signin", async (req, res) => {
   const returnTo = safeReturnTo(req.query.returnTo);
-  if (houseSignIn) return res.redirect(houseSignInUrl(returnTo));
+  if (houseSignIn) return res.redirect(houseSignInUrl(req, returnTo));
   if (devUser) {
     req.session = { user: devUser, signedInAt: Date.now() };
     return res.redirect(returnTo);
@@ -207,7 +209,7 @@ export function requireSignIn(req, res, next) {
 }
 
 function notSetUp(res) {
-  res.status(503).send(page("Sign-in isn't set up yet", `The ${hubName()} opens once Microsoft sign-in has been set up. Please try again later.`));
+  res.status(503).send(page("Sign-in isn't set up yet", `The ${hubName()} isn't open yet. Please try again later.`));
 }
 
 // A plain page for sign-in messages. Kept simple: these show before the hub itself loads.
