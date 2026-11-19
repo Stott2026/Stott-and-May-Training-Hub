@@ -51,7 +51,7 @@
 .d-dark-line { stroke: var(--ill-dark); stroke-width: 2.5; fill: none; stroke-linecap: round; }
 .d-sign-mark, .d-sign-cross { stroke: var(--ill-paper); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .d-sign-cross { stroke-width: 6; stroke-linecap: butt; }
-.d-email, .d-email-strong, .d-email-soft, .d-email-subject, .d-email-link, .d-email-button, .d-email-avatar { font-family: var(--font-body); fill: var(--ill-text); font-size: 15px; }
+.d-email, .d-email-strong, .d-email-soft, .d-email-subject, .d-email-link, .d-email-button, .d-email-avatar { font-family: var(--font-ui); fill: var(--ill-text); font-size: 15px; }
 .d-email-strong { font-weight: 700; }
 .d-email-soft { fill: var(--ill-text-soft); font-size: 13px; }
 .d-email-subject { font-size: 19px; font-weight: 800; }
@@ -72,7 +72,7 @@
   border: 2px solid var(--sm-white);
   background: var(--sm-ink);
   color: var(--sm-white);
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-weight: var(--weight-bold);
   font-size: var(--text-sm);
   box-shadow: var(--shadow-md);

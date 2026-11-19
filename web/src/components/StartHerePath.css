@@ -13,7 +13,7 @@
 .path-step--current .path-step__marker { border: none; background: var(--gradient-brand); color: var(--color-text); box-shadow: var(--shadow-glow); }
 .path-step--done .path-step__marker { border: none; background: var(--gradient-brand-soft); color: var(--color-success); }
 
-.path-step__card { position: relative; overflow: hidden; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: var(--space-5); }
+.path-step__card { position: relative; overflow: hidden; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: var(--space-5); }
 .path-step--current .path-step__card { box-shadow: var(--shadow-md); border-color: var(--color-accent); }
 .path-step--current .path-step__card::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: var(--gradient-brand); }
 .path-step__top { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); }

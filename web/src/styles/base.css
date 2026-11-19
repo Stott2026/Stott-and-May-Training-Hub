@@ -96,3 +96,10 @@ a {
 .section-title { font-size: var(--text-xl); font-weight: var(--weight-extrabold); margin-bottom: var(--space-3); }
 .section-lead { color: var(--color-text-muted); max-width: 40rem; margin-bottom: var(--space-4); }
 .section-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--space-4); margin-bottom: var(--space-5); }
+
+/* The brand: page text is Manrope, text inside cards is Inter (headings inside stay Manrope). */
+.card, .content-block, .section-view__header, .journey, .path-step__card, .module-library, .section-forms, .section-block,
+.cc-text, .cc-keypoints, .cc-interactive, .cc-checklist, .cc-dodont, .cc-figure, .cc-stat, .assessment,
+.course-panel, .course-nav, .compliance-office, .form-sheet,
+.big-five, .workflow__step, .rhythm-card, .practice-card, .tool-side-card, .stat-tile, .achievements,
+.may-live, .may-panel { font-family: var(--font-ui); }
