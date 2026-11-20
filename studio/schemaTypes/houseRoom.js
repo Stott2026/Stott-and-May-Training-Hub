@@ -18,6 +18,17 @@ export const houseRoom = defineType({
     defineField({ name: "icon", title: "Icon", type: "string", options: { list: ICON_OPTIONS }, initialValue: "house", validation: (r) => r.required() }),
     defineField({ name: "accent", title: "Doorway colour", type: "string", options: { list: ACCENT_OPTIONS, layout: "radio" }, initialValue: "brand" }),
     defineField({ name: "order", title: "Display order", type: "number", description: "Rooms are shown smallest number first.", validation: (r) => r.integer() }),
+    // May, the guide in the House's hallway, reads this to explain the room and send people to it
+    // (agreed with Ian, 20 November 2026). Not shown on the doorway card.
+    defineField({
+      name: "mayNotes",
+      title: "What May knows",
+      type: "text",
+      rows: 12,
+      description:
+        "Optional. What May, the guide in the hallway, should know about this tool: what it does, what people use it for, its main features and any limits. Plain sentences or short lines starting with \"- \". She uses it to answer questions and send people to the right room. Not shown on the doorway card.",
+      validation: (r) => r.max(3000),
+    }),
   ],
   orderings: [{ title: "Display order", name: "orderAsc", by: [{ field: "order", direction: "asc" }] }],
   preview: { select: { title: "roomName", subtitle: "toolName" } },
