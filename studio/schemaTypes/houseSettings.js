@@ -3,6 +3,9 @@ import { CogIcon } from "@sanity/icons/Cog";
 
 // The words on the House's front door and in its hallway. There is only one of these.
 // Used by the House (a separate app, stott2026/the-house), not by the Training Hub.
+// Optional words (the wings): an empty one is simply left out.
+const optional = (name, title, description, max) =>
+  defineField({ name, title, type: "string", description, validation: (r) => r.max(max) });
 const line = (name, title, description, max, initialValue) =>
   defineField({ name, title, type: "string", description, initialValue, validation: (r) => r.required().max(max) });
 
@@ -15,6 +18,7 @@ export const houseSettings = defineType({
     { name: "general", title: "General", default: true },
     { name: "door", title: "Front door" },
     { name: "hallway", title: "Hallway" },
+    { name: "wings", title: "Wings" },
     { name: "may", title: "May" },
   ],
   fields: [
@@ -50,6 +54,17 @@ export const houseSettings = defineType({
     { ...line("roomsHeading", "Rooms: heading", "For example: Where would you like to go?", 60), group: "hallway" },
     { ...line("extensionName", "Coming soon card: name", "The card for tools still to come, for example: The Extension.", 30), group: "hallway" },
     { ...line("extensionText", "Coming soon card: text", "For example: New tools move in here as soon as they're built.", 120), group: "hallway" },
+
+    // The hallway is grouped into the main house and two wings. Each room's wing is chosen on the room.
+    { ...optional("mainEyebrow", "Main house: small label", "For example: The main house.", 30), group: "wings" },
+    { ...optional("mainHeading", "Main house: heading", "For example: For everyone.", 40), group: "wings" },
+    { ...optional("mainText", "Main house: line", "Optional, a short line under the heading.", 100), group: "wings" },
+    { ...optional("westEyebrow", "West Wing: small label", "For example: West Wing.", 30), group: "wings" },
+    { ...optional("westHeading", "West Wing: heading", "For example: Client wing.", 40), group: "wings" },
+    { ...optional("westText", "West Wing: line", "For example: Research, win and look after clients.", 100), group: "wings" },
+    { ...optional("eastEyebrow", "East Wing: small label", "For example: East Wing.", 30), group: "wings" },
+    { ...optional("eastHeading", "East Wing: heading", "For example: Candidate wing.", 40), group: "wings" },
+    { ...optional("eastText", "East Wing: line", "For example: Market, compare and prepare candidates.", 100), group: "wings" },
 
     // May's card in the hallway. It only shows when May is switched on (an Anthropic key on the House's server).
     { ...line("mayRole", "May: subtitle", "Under her name, for example: Lives here. Knows every room.", 50), group: "may" },

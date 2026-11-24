@@ -17,6 +17,21 @@ export const houseRoom = defineType({
     defineField({ name: "comingSoon", title: "Coming soon", type: "boolean", initialValue: false, description: "Tick to show this room's door as coming soon, even though it has a web address (for example while its content is being checked). Untick to open the door." }),
     defineField({ name: "icon", title: "Icon", type: "string", options: { list: ICON_OPTIONS }, initialValue: "house", validation: (r) => r.required() }),
     defineField({ name: "accent", title: "Doorway colour", type: "string", options: { list: ACCENT_OPTIONS, layout: "radio" }, initialValue: "brand" }),
+    defineField({
+      name: "wing",
+      title: "Wing",
+      type: "string",
+      description: "Which part of the House this room is in. The West and East Wings' names are in House settings, under Wings. Rooms with nothing chosen go in the main house.",
+      options: {
+        list: [
+          { title: "Main house (for everyone)", value: "main" },
+          { title: "West Wing (clients)", value: "west" },
+          { title: "East Wing (candidates)", value: "east" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "main",
+    }),
     defineField({ name: "order", title: "Display order", type: "number", description: "Rooms are shown smallest number first.", validation: (r) => r.integer() }),
     // May, the guide in the House's hallway, reads this to explain the room and send people to it
     // (agreed with Ian, 20 November 2026). Not shown on the doorway card.
