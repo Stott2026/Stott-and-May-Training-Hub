@@ -83,10 +83,16 @@ export default function HomePage() {
                 <p className="float-card__value">{done} of {total} sections</p>
               </div>
             </div>
-            <div className="float-card float-card--badge" aria-hidden="true">
-              <IconBadge name="trophy" variant="solid" size="sm" shape="circle" />
-              <p className="float-card__value">Module complete!</p>
-            </div>
+            {/* A live card, never a made-up one: your level and points, or your next module. */}
+            {(ach.enabled || resume) && (
+              <Link to={ach.enabled ? "/achievements" : `/modules/${resume.slug}`} className="float-card float-card--badge">
+                <IconBadge name={ach.enabled ? "crown" : "rocket"} variant="solid" size="sm" shape="circle" />
+                <span>
+                  <span className="float-card__label">{ach.enabled ? `Level ${ach.levelIndex + 1} · ${ach.level.title}` : "Next up"}</span>
+                  <span className="float-card__value">{ach.enabled ? `${ach.points.toLocaleString("en-GB")} points` : resume.title}</span>
+                </span>
+              </Link>
+            )}
           </div>
         </div>
       </section>

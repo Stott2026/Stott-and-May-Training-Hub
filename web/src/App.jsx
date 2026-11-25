@@ -16,6 +16,7 @@ import ToolPage from "./pages/ToolPage.jsx";
 import CompliancePage from "./pages/CompliancePage.jsx";
 import CoursePage from "./pages/CoursePage.jsx";
 import { ComplianceProvider } from "./lib/compliance.jsx";
+import { ToastProvider } from "./lib/toast.jsx";
 import { ProgressProvider } from "./lib/progress.jsx";
 import { NavAreaProvider, useNavArea } from "./lib/navArea.jsx";
 import { SiteProvider, useHubName, useSite } from "./lib/site.jsx";
@@ -86,6 +87,7 @@ export default function App() {
       <SiteProvider>
       <ProgressProvider>
       <ComplianceProvider>
+      <ToastProvider>
       <AchievementsProvider>
         <MayProvider>
         <NavAreaProvider>
@@ -114,6 +116,7 @@ export default function App() {
         </NavAreaProvider>
         </MayProvider>
       </AchievementsProvider>
+      </ToastProvider>
       </ComplianceProvider>
       </ProgressProvider>
       </SiteProvider>

@@ -96,3 +96,7 @@ a {
 .section-title { font-size: var(--text-xl); font-weight: var(--weight-extrabold); margin-bottom: var(--space-3); }
 .section-lead { color: var(--color-text-muted); max-width: 40rem; margin-bottom: var(--space-4); }
 .section-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--space-4); margin-bottom: var(--space-5); }
+
+/* Areas the hub moves focus to for screen readers (tabindex="-1", such as a module's content or a
+   lesson heading) aren't controls, so they don't need a focus ring. Real controls keep theirs. */
+[tabindex="-1"]:focus, [tabindex="-1"]:focus-visible { outline: none; }

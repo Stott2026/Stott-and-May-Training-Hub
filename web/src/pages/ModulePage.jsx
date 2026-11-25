@@ -13,7 +13,8 @@ import { useMayPlace } from "../lib/may.jsx";
 import { useSetNavArea } from "../lib/navArea.jsx";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import "./ModulePage.css";
-import { usePageTitle } from "../lib/site.jsx";
+import { usePageTitle, useSite } from "../lib/site.jsx";
+import { useToast } from "../lib/toast.jsx";
 
 // The page at /modules/<address>. Loads the module from the server.
 // ?section=3 opens the third section (used by search results).
@@ -62,6 +63,8 @@ function ModuleView({ module, startAt, completed, onToggleComplete }) {
   const [current, setCurrent] = useState(startAt ?? (firstOpen === -1 ? 0 : firstOpen));
   const [celebrate, setCelebrate] = useState(false);
   const contentRef = useRef(null);
+  const toast = useToast();
+  const sectionPoints = useSite().rewards?.points?.section;
   const total = module.sections.length;
   const done = module.sections.filter((_, i) => completed[i]).length;
 
@@ -76,7 +79,11 @@ function ModuleView({ module, startAt, completed, onToggleComplete }) {
   useMayPlace(here && { type: "section", module: module.slug, section: here._key, label: `${module.title} · ${here.title}`, scenario: !!here.scenario?.title });
 
   const completeAndContinue = () => {
-    if (!completed[current]) onToggleComplete(current);
+    if (!completed[current]) {
+      onToggleComplete(current);
+      // A little lift: the points this section earned (or just "Section complete" if points are off).
+      toast(sectionPoints ? `+${sectionPoints} points` : "Section complete", sectionPoints ? "star" : "circle-check");
+    }
     const remaining = module.sections.findIndex((_, i) => i !== current && !completed[i]);
     if (remaining === -1) {
       setCelebrate(true);

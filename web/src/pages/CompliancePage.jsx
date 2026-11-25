@@ -13,6 +13,7 @@ import "./LibraryPage.css";
 import "../components/module/Activities.css";
 import "./Compliance.css";
 import { usePageTitle } from "../lib/site.jsx";
+import CountUp from "../components/CountUp.jsx";
 
 const STATUS_ICONS = { "not-started": "circle-user", "in-progress": "clock", ready: "list-checks", passed: "badge-check", due: "triangle-alert" };
 
@@ -42,9 +43,9 @@ export default function CompliancePage() {
       <PageHero eyebrow="Mandatory training" tone="light" title={page.title || "Compliance"} titleAccent={page.titleAccent} intro={page.intro}>
         {courses.length > 0 && (
           <ul className="stat-tiles">
-            <li className="stat-tile"><span className="stat-tile__number">{courses.length}</span><span className="stat-tile__label">{showingAll ? (courses.length === 1 ? "course" : "courses") : "for you"}</span></li>
-            <li className="stat-tile"><span className="stat-tile__number">{passed}</span><span className="stat-tile__label">passed</span></li>
-            <li className="stat-tile"><span className="stat-tile__number">{toDo}</span><span className="stat-tile__label">to do or renew</span></li>
+            <li className="stat-tile"><span className="stat-tile__number"><CountUp value={courses.length} /></span><span className="stat-tile__label">{showingAll ? (courses.length === 1 ? "course" : "courses") : "for you"}</span></li>
+            <li className="stat-tile"><span className="stat-tile__number"><CountUp value={passed} /></span><span className="stat-tile__label">passed</span></li>
+            <li className="stat-tile"><span className="stat-tile__number"><CountUp value={toDo} /></span><span className="stat-tile__label">to do or renew</span></li>
           </ul>
         )}
       </PageHero>

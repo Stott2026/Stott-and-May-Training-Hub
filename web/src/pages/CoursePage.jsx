@@ -13,6 +13,8 @@ import { useApi } from "../lib/api.js";
 import { REGIONS, STATUS_LABELS, longDate, useCompliance } from "../lib/compliance.jsx";
 import "./Compliance.css";
 import { usePageTitle } from "../lib/site.jsx";
+import { useToast } from "../lib/toast.jsx";
+import CountUp from "../components/CountUp.jsx";
 
 // One compliance course. /compliance/:slug is the overview; /compliance/:slug/1 (and so on) a lesson;
 // /compliance/:slug/assessment the final assessment; /compliance/:slug/certificate the certificate.
@@ -23,6 +25,7 @@ export default function CoursePage() {
   const { data: me } = useApi("/me");
   const c = useCompliance();
   const navigate = useNavigate();
+  const toast = useToast();
   usePageTitle(course?.title ? `${course.title} · Compliance` : null);
   if (error || !course) return <LoadState error={error} notFoundText="Course not found" />;
 
@@ -67,7 +70,7 @@ export default function CoursePage() {
             index={i}
             total={lessons.length}
             done={c.isLessonDone(slug, lessons[i]._key)}
-            onComplete={() => c.completeLesson(slug, lessons[i]._key)}
+            onComplete={() => { c.completeLesson(slug, lessons[i]._key); toast(i + 1 < lessons.length ? `Lesson ${i + 1} complete` : "All lessons complete", "circle-check"); }}
             onNext={() => navigate(i + 1 < lessons.length ? `${base}/${i + 2}` : `${base}/assessment`)}
             onPrevious={() => navigate(i > 0 ? `${base}/${i}` : base)}
             draft={draft}
@@ -105,9 +108,9 @@ export default function CoursePage() {
     <>
       <PageHero eyebrow={`Compliance · ${REGIONS[course.region] ?? "Global"}`} tone="light" title={course.title} intro={course.intro || course.summary}>
         <ul className="stat-tiles">
-          <li className="stat-tile"><span className="stat-tile__number">{lessons.length}</span><span className="stat-tile__label">lessons</span></li>
-          <li className="stat-tile"><span className="stat-tile__number">{course.minutes}</span><span className="stat-tile__label">minutes, about</span></li>
-          <li className="stat-tile"><span className="stat-tile__number">{course.passMark ?? 80}%</span><span className="stat-tile__label">to pass</span></li>
+          <li className="stat-tile"><span className="stat-tile__number"><CountUp value={lessons.length} /></span><span className="stat-tile__label">lessons</span></li>
+          <li className="stat-tile"><span className="stat-tile__number"><CountUp value={course.minutes} /></span><span className="stat-tile__label">minutes, about</span></li>
+          <li className="stat-tile"><span className="stat-tile__number"><CountUp value={course.passMark ?? 80} />%</span><span className="stat-tile__label">to pass</span></li>
         </ul>
         <div className="course-hero__actions">
           <Button size="lg" iconAfter="arrow-right" to={next}>{nextLabel}</Button>

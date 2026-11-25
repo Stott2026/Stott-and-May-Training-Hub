@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import BlockHeading from "./BlockHeading.jsx";
 import { Icon } from "../icons.jsx";
 import { useProgress } from "../../lib/progress.jsx";
+import { shuffleAnswers } from "../../lib/shuffle.js";
 
 // One multiple-choice question with instant feedback.
-export default function QuickCheck({ question }) {
+export default function QuickCheck({ question: original }) {
+  // The answers come in a new order each time, so the right one isn't always in the same place.
+  const question = useMemo(() => shuffleAnswers(original), [original]);
   const [chosen, setChosen] = useState(null);
   const answered = chosen !== null;
   const right = chosen === question.correct;

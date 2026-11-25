@@ -10,6 +10,7 @@ import { useApi } from "../lib/api.js";
 import { useProgress } from "../lib/progress.jsx";
 import "../components/module/ModuleContent.css";
 import "./QuizPage.css";
+import { shuffle, shuffleAnswers } from "../lib/shuffle.js";
 
 const QUESTIONS_PER_ROUND = 10;
 
@@ -23,7 +24,8 @@ export default function QuizPage() {
 }
 
 function QuizRound({ bank, onRestart }) {
-  const questions = useMemo(() => shuffle(bank).slice(0, QUESTIONS_PER_ROUND), [bank]);
+  // A new set of questions each round, each with its answers in a new order.
+  const questions = useMemo(() => shuffle(bank).slice(0, QUESTIONS_PER_ROUND).map(shuffleAnswers), [bank]);
   const [index, setIndex] = useState(0);
   const [chosen, setChosen] = useState(null);
   const [score, setScore] = useState(0);
@@ -106,13 +108,4 @@ function QuizRound({ bank, onRestart }) {
       </Card>
     </div>
   );
-}
-
-function shuffle(list) {
-  const a = [...list];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
 }

@@ -13,6 +13,7 @@ import { useApi } from "../lib/api.js";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import "./Tech.css";
 import { usePageTitle } from "../lib/site.jsx";
+import CountUp from "../components/CountUp.jsx";
 
 // A bar of links to the page's sections, which stays in view under the top bar and shows the
 // section you're in.
@@ -81,9 +82,9 @@ export default function TechPage() {
         decoration={<div className="brand-shapes" aria-hidden="true"><span /><span /><span /><span /></div>}
       >
         <ul className="stat-tiles">
-          {core.length > 0 && <li className="stat-tile"><span className="stat-tile__number">{core.length}</span><span className="stat-tile__label">core systems</span></li>}
-          {page.phases?.length > 0 && <li className="stat-tile"><span className="stat-tile__number">{page.phases.length}</span><span className="stat-tile__label">gated phases</span></li>}
-          {tools.length > 0 && <li className="stat-tile"><span className="stat-tile__number">{tools.length}</span><span className="stat-tile__label">tools to master</span></li>}
+          {core.length > 0 && <li className="stat-tile"><span className="stat-tile__number"><CountUp value={core.length} /></span><span className="stat-tile__label">core systems</span></li>}
+          {page.phases?.length > 0 && <li className="stat-tile"><span className="stat-tile__number"><CountUp value={page.phases.length} /></span><span className="stat-tile__label">gated phases</span></li>}
+          {tools.length > 0 && <li className="stat-tile"><span className="stat-tile__number"><CountUp value={tools.length} /></span><span className="stat-tile__label">tools to master</span></li>}
         </ul>
       </PageHero>
 

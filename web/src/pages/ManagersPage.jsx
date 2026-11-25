@@ -9,6 +9,7 @@ import { useProgress } from "../lib/progress.jsx";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import "./ManagersPage.css";
 import { usePageTitle } from "../lib/site.jsx";
+import CountUp from "../components/CountUp.jsx";
 
 // The Managers page: modules and downloads marked "Managers" in the Studio, kept apart from
 // the consultants' training.
@@ -30,7 +31,7 @@ export default function ManagersPage() {
       <PageHero eyebrow="For managers" tone="dark" title={data.page?.title ?? "For managers"} titleAccent={data.page?.titleAccent} intro={data.page?.intro} photo={placeholderPhotos.managers} photoShape="frame">
         {stats.length > 0 && (
           <ul className="stat-tiles">
-            {stats.map(([n, label]) => <li key={label} className="stat-tile"><span className="stat-tile__number">{n}</span><span className="stat-tile__label">{label}</span></li>)}
+            {stats.map(([n, label]) => <li key={label} className="stat-tile"><span className="stat-tile__number"><CountUp value={n} /></span><span className="stat-tile__label">{label}</span></li>)}
           </ul>
         )}
       </PageHero>

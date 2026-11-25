@@ -8,6 +8,7 @@ import { LIBRARY_KINDS, kindOf } from "../lib/library.js";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import "./LibraryPage.css";
 import { usePageTitle } from "../lib/site.jsx";
+import CountUp from "../components/CountUp.jsx";
 
 // The Library: classroom decks, guides and templates to download. Content comes from Sanity.
 // ?type=deck shows one type only, so the filter survives Back.
@@ -28,11 +29,11 @@ export default function LibraryPage() {
     <>
       <PageHero eyebrow="Stott and May" tone="light" title={data.page?.title ?? "Library"} titleAccent={data.page?.titleAccent} intro={data.page?.intro} photo={placeholderPhotos.library} photoShape="frame">
         <ul className="stat-tiles">
-          <li className="stat-tile"><span className="stat-tile__number">{items.length}</span><span className="stat-tile__label">{items.length === 1 ? "file" : "files"} to download</span></li>
-          {items.some((i) => i.module) && <li className="stat-tile"><span className="stat-tile__number">{items.filter((i) => i.module).length}</span><span className="stat-tile__label">linked to a module</span></li>}
+          <li className="stat-tile"><span className="stat-tile__number"><CountUp value={items.length} /></span><span className="stat-tile__label">{items.length === 1 ? "file" : "files"} to download</span></li>
+          {items.some((i) => i.module) && <li className="stat-tile"><span className="stat-tile__number"><CountUp value={items.filter((i) => i.module).length} /></span><span className="stat-tile__label">linked to a module</span></li>}
           {kinds.length > 1 && kinds.map((k) => {
             const n = items.filter((i) => i.kind === k).length;
-            return <li key={k} className="stat-tile"><span className="stat-tile__number">{n}</span><span className="stat-tile__label">{(n === 1 ? kindOf(k).label : kindOf(k).plural).toLowerCase()}</span></li>;
+            return <li key={k} className="stat-tile"><span className="stat-tile__number"><CountUp value={n} /></span><span className="stat-tile__label">{(n === 1 ? kindOf(k).label : kindOf(k).plural).toLowerCase()}</span></li>;
           })}
         </ul>
       </PageHero>

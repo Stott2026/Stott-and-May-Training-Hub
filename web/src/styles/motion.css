@@ -1,0 +1,79 @@
+/*
+ * Motion across the hub: small, quick movements that make pages feel alive without getting in the way.
+ * Everything here is off for anyone whose device asks for reduced motion (see also base.css).
+ *
+ * - Pages fade up gently when they open.
+ * - Tiles and cards rise into place as they scroll into view (browsers that can't do this simply show
+ *   them straight away).
+ * - Interactive cards lift, their icon tile pops and their gradient top bar thickens on hover.
+ * - The brand wave in page headers glows softly.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  /* Each new page fades up as it opens. */
+  .app-main > * { animation: page-in 360ms var(--ease-out) both; }
+
+  /* Tiles and list items rise in as they scroll into view. */
+  @supports (animation-timeline: view()) {
+    .app-main :is(
+      .module-grid, .compliance-grid, .library-grid, .forms-grid, .managers-grid, .tool-grid, .values__grid,
+      .start-here__steps, .achievements__badges, .workflow__steps, .programme__phases, .big-five__list,
+      .course-lessons, .stat-tiles
+    ) > *,
+    .app-main :is(.lesson, .section-view) > :is(.cc-block, .content-block, .cc-figure) {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+
+  /* Cards that open something: the icon tile pops and the top bar thickens. */
+  .card--interactive .icon-badge { transition: transform var(--duration-medium) var(--ease-spring); }
+  .card--interactive:hover .icon-badge, .card--interactive:focus-visible .icon-badge { transform: rotate(-6deg) scale(1.1); }
+  .card--bar::before { transition: height var(--duration-fast) var(--ease-out); }
+  .card--interactive.card--bar:hover::before { height: calc(var(--accent-bar) * 2); }
+
+  /* The brand wave at the foot of page headers glows softly. */
+  .wave--glow .wave__glow-line { animation: wave-glow 5s ease-in-out infinite alternate; }
+
+  /* Numbers that count up (CountUp.jsx) settle with a tiny bounce. */
+  .count-up.is-done { animation: count-settle 360ms var(--ease-spring); }
+}
+
+@keyframes page-in { from { opacity: 0; transform: translateY(0.75rem); } to { opacity: 1; transform: none; } }
+@keyframes reveal-up { from { opacity: 0; transform: translateY(1.5rem) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes wave-glow { from { opacity: 0.55; } to { opacity: 1; } }
+@keyframes count-settle { 50% { transform: scale(1.08); } }
+
+/* A short "+10 points" or "Lesson complete" message that pops in under the top bar and fades
+   (lib/toast.jsx). It sits at the top so it never covers badge pop-ups or Ask May at the bottom. */
+.toast {
+  position: fixed;
+  left: 50%;
+  top: calc(var(--nav-height) + var(--space-4));
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  background: var(--gradient-brand);
+  color: var(--color-text-on-brand);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-extrabold);
+  box-shadow: var(--shadow-lg);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .toast { animation: toast-up 1800ms var(--ease-out) both; }
+}
+@keyframes toast-up {
+  0% { opacity: 0; transform: translate(-50%, -0.75rem) scale(0.9); }
+  15% { opacity: 1; transform: translate(-50%, 0) scale(1.04); }
+  25% { transform: translate(-50%, 0) scale(1); }
+  80% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -0.75rem); }
+}
+
+/* Printing shows everything as it is, with no half-finished movement. */
+@media print { *, *::before, *::after { animation: none !important; transition: none !important; } }

@@ -42,6 +42,7 @@ Ian chose a **light, welcoming design** (October 2026), moving on from the proto
 - Icons are Lucide line icons (closest match to the brand iconography), registered by name in `web/src/components/icons.jsx`. Editors pick from the list in `studio/schemaTypes/options.js`, so add any new icon to both. No emoji in the UI
 - All colours, gradients, fonts, spacing and shadows are tokens in `web/src/styles/tokens.css`. Nothing outside that file may contain a hex or rgba value. Components live in `web/src/components/`
 - **Module pages are the heart of the hub** and must be engaging and good to look at, not walls of text: give each type of content (tactics, phrases, mistakes, scenarios) its own visual treatment, show progress through the module, add small interactive moments, and always offer a clear next step
+- Motion lives in `web/src/styles/motion.css` (page fade-in, tiles rising into view, card hover, the glowing wave, the toast) plus `CountUp.jsx` for numbers and `useToast()` (`web/src/lib/toast.jsx`) for "+10 points"-style messages. Keep it quick and subtle, and always inside `prefers-reduced-motion: no-preference`. Quiz, quick-check and scenario answers are shuffled with `web/src/lib/shuffle.js`, so the right answer is never always in the same place
 - Photos in `web/public/placeholders/` were extracted from the brand guidelines for design review only. Real images will be uploaded to Sanity
 
 ## Rules

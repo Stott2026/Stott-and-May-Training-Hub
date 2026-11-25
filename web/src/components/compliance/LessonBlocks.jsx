@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { shuffle } from "../../lib/shuffle.js";
 import BlockHeading from "../module/BlockHeading.jsx";
 import { Icon } from "../icons.jsx";
 import { Drawing } from "./drawings.jsx";
@@ -205,7 +206,8 @@ function Sorter({ block, done, onDone }) {
 // What would you do? Pick a choice, see the feedback; finished once the best choice is found.
 function ScenarioChoice({ block, done, onDone }) {
   const [picked, setPicked] = useState([]);
-  const options = block.options ?? [];
+  // Choices in a new order each time, so the best one isn't always in the same place.
+  const options = useMemo(() => shuffle(block.options ?? []), [block.options]);
   const last = picked.at(-1);
   const foundBest = picked.some((i) => options[i]?.best);
   const pick = (i) => {
