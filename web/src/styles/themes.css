@@ -27,7 +27,7 @@
 /* Stat tiles: big numbers in Inter, as on the brand collateral. */
 .stat-tiles { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-3); margin: var(--space-5) 0 0; padding: 0; }
 .stat-tile { flex: 1 1 0; min-width: 6rem; max-width: 10rem; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--surface-card); border: 1px solid var(--color-border); }
-.stat-tile__number { display: block; font-family: var(--font-body); font-size: var(--text-2xl); font-weight: var(--weight-extrabold); line-height: 1; color: var(--color-link); font-variant-numeric: tabular-nums; }
+.stat-tile__number { display: block; font-family: var(--font-ui); font-size: var(--text-2xl); font-weight: var(--weight-extrabold); line-height: 1; color: var(--color-link); font-variant-numeric: tabular-nums; }
 .stat-tile__label { display: block; margin-top: var(--space-1); font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--color-text-muted); }
 
 /* Cut-out people rise out of a gradient shape on dark pages. */

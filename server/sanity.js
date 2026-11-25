@@ -63,6 +63,8 @@ export const queries = {
   site: `{
     "hubName": *[_id == "siteSettings"][0].hubName,
     "quickLinks": *[_id == "siteSettings"][0].quickLinks[]{ _key, label, url },
+    // The button back to the House (the front door to every Stott and May tool), when it has an address.
+    "house": *[_id == "siteSettings" && defined(houseUrl)][0]{ "url": houseUrl, "label": houseLabel },
     // Badges, levels and points (Badges and levels in the Studio). Missing means no gamification.
     "rewards": *[_id == "rewards"][0]{ title, intro, points, levels[]{ _key, title, points }, badges[]{ _key, rule, title, description, icon } }
   }`,

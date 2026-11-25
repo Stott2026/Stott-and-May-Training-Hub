@@ -4,7 +4,7 @@
 .compliance-practice svg { color: var(--color-danger); flex-shrink: 0; }
 .compliance-view { display: grid; gap: var(--space-2); }
 .compliance-view .library-filters { margin-bottom: 0; }
-.compliance-office { display: grid; gap: var(--space-3); padding: var(--space-5) var(--space-6); border-radius: var(--radius-lg); background: var(--surface-card); border: 1px solid var(--color-border); box-shadow: var(--shadow-sm); }
+.compliance-office { display: grid; gap: var(--space-3); padding: var(--space-5) var(--space-6); border-radius: var(--radius-lg); background: var(--surface-card); border: 1px solid var(--color-border); box-shadow: var(--shadow-card); }
 .compliance-office__question { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: var(--text-md); }
 .compliance-office__question svg { color: var(--color-link); flex-shrink: 0; }
 .compliance-office__note { font-size: var(--text-sm); color: var(--color-text-muted); }

@@ -3,7 +3,8 @@
  * ----------------------------------------
  * This is the ONLY file allowed to contain colour values.
  * Change a value here and it changes everywhere in the app.
- * Source: Stott and May Group Brand System (reference/brand/).
+ * Source: Stott and May Group Brand System (reference/brand/) and the stott-and-may-brand skill
+ * (assets/brand.css), re-checked for light and dark with Ian, November 2026.
  */
 
 :root {
@@ -117,7 +118,9 @@
 
   /* ── Typography ────────────────────────────────── */
   --font-heading: "Manrope", "Segoe UI", system-ui, sans-serif;
-  --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  /* The brand: Manrope for headings and page text, Inter only inside cards, data, stat numbers and small labels. */
+  --font-body: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-ui: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
 
   --text-eyebrow: 0.6875rem;  /* 11px */
   --text-xs: 0.75rem;         /* 12px */
@@ -155,13 +158,14 @@
   /* ── Shape, depth and motion ───────────────────── */
   --radius-sm: 8px;
   --radius-md: 12px;
-  --radius-lg: 20px;
+  --radius-lg: 20px;          /* cards (the brand's card radius) */
   --radius-xl: 28px;
   --radius-pill: 999px;
 
   --shadow-sm: 0 1px 2px rgba(17, 19, 20, 0.05), 0 2px 8px rgba(17, 19, 20, 0.04);
   --shadow-md: 0 4px 12px rgba(17, 19, 20, 0.06), 0 12px 32px rgba(17, 19, 20, 0.06);
   --shadow-lg: 0 12px 40px rgba(17, 19, 20, 0.12);
+  --shadow-card: 0 6px 24px rgba(17, 19, 20, 0.08);  /* the brand's light card: white on the page with a soft shadow */
   --shadow-glow: 0 8px 28px rgba(0, 200, 200, 0.35);
 
   /* Tick shown in a checked form checkbox (ink on teal) */
@@ -210,7 +214,7 @@
   --color-track: rgba(255, 255, 255, 0.12);
   --color-glass-line: rgba(255, 255, 255, 0.12);
   --color-tint: rgba(0, 200, 200, 0.14);
-  --surface-card: linear-gradient(135deg, var(--sm-carbon), var(--sm-carbon-deep));
+  --surface-card: linear-gradient(135deg, #1b1e20 0%, #050606 100%);  /* the brand's dark card */
   --color-glass-strong: rgba(17, 19, 20, 0.88);
 
   --gradient-sky: var(--gradient-brand);
@@ -229,7 +233,9 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
   --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
-  --shadow-accent: 0 0 0 1px rgba(115, 247, 187, 0.55), 0 8px 28px rgba(0, 200, 200, 0.25); /* accent glow on a card's border */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
+  /* the brand's card glow, for emphasis and hover: an aquamarine ring and a soft aquamarine glow */
+  --shadow-accent: 0 0 0 1px rgba(115, 247, 187, 0.45), 0 0 24px rgba(115, 247, 187, 0.25);
   --pattern-line: rgba(255, 255, 255, 0.07); /* outlined squares and grid lines */
 }
 /* Module and tool colours all become the Stott and May gradient in dark mode. */

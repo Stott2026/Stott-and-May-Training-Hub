@@ -100,3 +100,10 @@ a {
 /* Areas the hub moves focus to for screen readers (tabindex="-1", such as a module's content or a
    lesson heading) aren't controls, so they don't need a focus ring. Real controls keep theirs. */
 [tabindex="-1"]:focus, [tabindex="-1"]:focus-visible { outline: none; }
+
+/* The brand: page text is Manrope, text inside cards is Inter (headings inside stay Manrope). */
+.card, .content-block, .section-view__header, .journey, .path-step__card, .module-library, .section-forms, .section-block,
+.cc-text, .cc-keypoints, .cc-interactive, .cc-checklist, .cc-dodont, .cc-figure, .cc-stat, .assessment,
+.course-panel, .course-nav, .compliance-office, .form-sheet,
+.big-five, .workflow__step, .rhythm-card, .practice-card, .tool-side-card, .stat-tile, .achievements,
+.may-live, .may-panel { font-family: var(--font-ui); }

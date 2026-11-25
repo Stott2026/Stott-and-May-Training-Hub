@@ -1,13 +1,13 @@
 /* Styles for the content blocks inside a section. Tokens only. */
 .section-view { display: grid; gap: var(--space-6); min-width: 0; }
-.section-view__header { background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-border); padding: var(--space-6); }
+.section-view__header { background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); border: 1px solid var(--color-border); padding: var(--space-6); }
 .section-view__title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: var(--weight-extrabold); margin-bottom: var(--space-4); text-wrap: balance; }
 .section-view__takeaway { font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: var(--text-lg); margin-bottom: var(--space-3); }
 .section-view__intro { font-size: var(--text-lg); line-height: 1.7; color: var(--color-text-muted); max-width: 62ch; }
 .section-view__image { display: block; width: 100%; margin-top: var(--space-5); border-radius: var(--radius-md); }
 .section-view__footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-3); padding-top: var(--space-2); }
 
-.content-block { min-width: 0; background: var(--surface-card); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-border); padding: var(--space-6); }
+.content-block { min-width: 0; background: var(--surface-card); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); border: 1px solid var(--color-border); padding: var(--space-6); }
 @media (max-width: 640px) { .content-block, .section-view__header { padding: var(--space-5) var(--space-4); } }
 
 .block-heading { display: flex; gap: var(--space-3); align-items: center; margin-bottom: var(--space-5); }
@@ -181,7 +181,7 @@
 .look-here__go { color: var(--color-link); flex-shrink: 0; }
 
 /* ── Use this form ── */
-.section-forms { position: relative; overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); box-shadow: var(--shadow-sm); padding: var(--space-5); }
+.section-forms { position: relative; overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); box-shadow: var(--shadow-card); padding: var(--space-5); }
 .section-forms::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: var(--gradient-sky); }
 .section-forms__head { display: flex; gap: var(--space-3); align-items: center; margin-bottom: var(--space-4); }
 .section-forms__icon { display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border-radius: var(--radius-md); background: var(--gradient-sky); flex-shrink: 0; }

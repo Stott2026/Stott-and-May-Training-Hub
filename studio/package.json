@@ -23,7 +23,8 @@
     "import:compliance": "dotenv -e ../.env -- node migrations/import-compliance.js",
     "import:rewards": "dotenv -e ../.env -- node migrations/import-rewards.js",
     "import:activities": "dotenv -e ../.env -- node migrations/import-activities.js",
-    "import:tech": "dotenv -e ../.env -- node migrations/import-tech.js"
+    "import:tech": "dotenv -e ../.env -- node migrations/import-tech.js",
+    "import:house": "dotenv -e ../.env -- node migrations/import-house.js"
   },
   "dependencies": {
     "@sanity/client": "^8.9.0",
