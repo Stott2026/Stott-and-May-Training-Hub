@@ -143,7 +143,7 @@
     "label": "Reason for looking",
     "lines": 2,
     "width": "full",
-    "placeholder": "Push factors — what is driving them to consider a move?"
+    "placeholder": "Push factors - what is driving them to consider a move?"
    },
    {
     "_type": "formField",
@@ -151,7 +151,7 @@
     "label": "What they want next",
     "lines": 2,
     "width": "full",
-    "placeholder": "Pull factors — what does the ideal next role look like?"
+    "placeholder": "Pull factors - what does the ideal next role look like?"
    },
    {
     "_type": "formField",
@@ -233,7 +233,7 @@
     "label": "Consultant notes",
     "lines": 3,
     "width": "full",
-    "placeholder": "Anything else relevant — personality, culture fit, concerns"
+    "placeholder": "Anything else relevant - personality, culture fit, concerns"
    }
   ]
  },
@@ -352,7 +352,7 @@
     "label": "Likely questions to prepare for",
     "lines": 3,
     "width": "full",
-    "placeholder": "Based on the role and interviewer — what questions should the candidate prepare for?"
+    "placeholder": "Based on the role and interviewer - what questions should the candidate prepare for?"
    },
    {
     "_type": "formField",
@@ -391,7 +391,7 @@
     "label": "Concerns to address before interview",
     "lines": 2,
     "width": "full",
-    "placeholder": "Any worries the candidate has raised — address these before the interview"
+    "placeholder": "Any worries the candidate has raised - address these before the interview"
    }
   ]
  },
@@ -595,7 +595,7 @@
   },
   "group": "Candidates",
   "summary": "Structure and deliver client feedback after interviews",
-  "intro": "Structure client feedback before delivering it — every time, after every stage",
+  "intro": "Structure client feedback before delivering it - every time, after every stage",
   "icon": "message-circle",
   "order": 50,
   "blocks": [
@@ -720,7 +720,7 @@
     "label": "Fit observations",
     "lines": 3,
     "width": "full",
-    "placeholder": "How did the interviewer feel about the candidate as a person — energy, style, team fit?"
+    "placeholder": "How did the interviewer feel about the candidate as a person - energy, style, team fit?"
    },
    {
     "_type": "formHeading",
@@ -730,7 +730,7 @@
    {
     "_type": "formField",
     "_key": "b130",
-    "label": "What to tell the candidate — script it out",
+    "label": "What to tell the candidate - script it out",
     "lines": 4,
     "width": "full",
     "placeholder": "Write out exactly what you will say. The candidate deserves specific, useful feedback."
@@ -759,9 +759,9 @@
     "items": [
      "Called the candidate same day where possible",
      "Started with what went well before moving to the gap",
-     "Kept it specific — no vague platitudes",
+     "Kept it specific - no vague platitudes",
      "Asked how the candidate is feeling before diving in",
-     "Ended on a positive — kept the relationship intact"
+     "Ended on a positive - kept the relationship intact"
     ]
    },
    {
@@ -813,15 +813,15 @@
     "_type": "formChecklist",
     "_key": "b138",
     "items": [
-     "CV is up to date — current role, dates, and responsibilities are accurate",
-     "No unexplained employment gaps — or gaps can be explained",
-     "Formatting is clean and professional — consistent fonts, readable layout",
+     "CV is up to date - current role, dates, and responsibilities are accurate",
+     "No unexplained employment gaps - or gaps can be explained",
+     "Formatting is clean and professional - consistent fonts, readable layout",
      "Contact details are present and correct",
      "No spelling errors or obvious grammatical mistakes",
-     "Dates are consistent and chronological — no overlapping roles",
+     "Dates are consistent and chronological - no overlapping roles",
      "Most recent role is described in sufficient detail",
      "Key skills relevant to THIS role are visible and prominent",
-     "CV length is appropriate — 2 pages for most, 3 max for very senior"
+     "CV length is appropriate - 2 pages for most, 3 max for very senior"
     ]
    },
    {
@@ -833,7 +833,7 @@
     "_type": "formChecklist",
     "_key": "b140",
     "items": [
-     "The CV speaks directly to the brief — I have mentally mapped it against the must-haves",
+     "The CV speaks directly to the brief - I have mentally mapped it against the must-haves",
      "I have confirmed with the candidate that the experience described is accurate",
      "I have flagged any gaps or concerns to the candidate before submitting",
      "The candidate knows which role this is being submitted for and has given explicit consent",
@@ -851,7 +851,7 @@
     "label": "Headline summary (2-3 sentences)",
     "lines": 3,
     "width": "full",
-    "placeholder": "Why is this person right for this role? Not a CV summary — a specific reason they fit this brief."
+    "placeholder": "Why is this person right for this role? Not a CV summary - a specific reason they fit this brief."
    },
    {
     "_type": "formField",
@@ -882,7 +882,7 @@
      "Candidate has confirmed their CV is accurate and up to date",
      "Right to work confirmed: authorised to work, and whether sponsorship is needed",
      "Candidate is aware of the role, company, and salary range",
-     "GDPR consent — candidate is aware their CV will be shared with a third party"
+     "GDPR consent - candidate is aware their CV will be shared with a third party"
     ]
    },
    {
@@ -890,9 +890,9 @@
     "_key": "b147",
     "label": "Submission confidence level",
     "options": [
-     "High — strong fit",
-     "Medium — good fit, minor gaps",
-     "Low — stretch",
+     "High - strong fit",
+     "Medium - good fit, minor gaps",
+     "Low - stretch",
      "Do not submit"
     ]
    }
@@ -908,7 +908,7 @@
   },
   "group": "Candidates",
   "summary": "Structured professional reference questions",
-  "intro": "Take structured references before every permanent placement — ideally two per candidate",
+  "intro": "Take structured references before every permanent placement - ideally two per candidate",
   "icon": "search",
   "order": 70,
   "blocks": [
@@ -966,7 +966,7 @@
     "label": "Dates worked together",
     "lines": 1,
     "width": "half",
-    "placeholder": "From — To"
+    "placeholder": "From - To"
    },
    {
     "_type": "formField",
@@ -984,7 +984,7 @@
    {
     "_type": "formField",
     "_key": "b157",
-    "label": "Opening — referee response",
+    "label": "Opening - referee response",
     "lines": 3,
     "width": "full",
     "placeholder": "Can you start by describing the candidate's role and what they were responsible for when you worked together?"
@@ -1005,7 +1005,7 @@
     "label": "Greatest strengths",
     "lines": 3,
     "width": "full",
-    "placeholder": "What were the candidate's greatest strengths — where did they really stand out?"
+    "placeholder": "What were the candidate's greatest strengths - where did they really stand out?"
    },
    {
     "_type": "formField",
@@ -1044,7 +1044,7 @@
     "label": "Working style",
     "lines": 3,
     "width": "full",
-    "placeholder": "How would you describe the candidate's working style — how did they fit into the team?"
+    "placeholder": "How would you describe the candidate's working style - how did they fit into the team?"
    },
    {
     "_type": "formField",
@@ -1076,14 +1076,14 @@
     "label": "Any conduct or disciplinary issues?",
     "options": [
      "None",
-     "Minor — resolved",
-     "Yes — details below"
+     "Minor - resolved",
+     "Yes - details below"
     ]
    },
    {
     "_type": "formField",
     "_key": "b171",
-    "label": "If yes — please detail",
+    "label": "If yes - please detail",
     "lines": 2,
     "width": "full",
     "placeholder": "What happened and how was it resolved?"
@@ -1098,8 +1098,8 @@
     "_key": "b173",
     "label": "Would you rehire this candidate if the opportunity arose?",
     "options": [
-     "Yes — without hesitation",
-     "Yes — with reservations",
+     "Yes - without hesitation",
+     "Yes - with reservations",
      "Probably not",
      "No"
     ]
@@ -1107,7 +1107,7 @@
    {
     "_type": "formField",
     "_key": "b174",
-    "label": "If with reservations or no — why?",
+    "label": "If with reservations or no - why?",
     "lines": 3,
     "width": "full",
     "placeholder": "This is the most important question on the form. If they hesitate or qualify, explore it fully."
@@ -1134,13 +1134,13 @@
     "label": "Key themes and anything to flag",
     "lines": 3,
     "width": "full",
-    "placeholder": "Summarise the 3-4 most important things you heard — strengths, concerns, and overall picture"
+    "placeholder": "Summarise the 3-4 most important things you heard - strengths, concerns, and overall picture"
    },
    {
     "_type": "formChecklist",
     "_key": "b178",
     "items": [
-     "Reference obtained verbally — not just by email",
+     "Reference obtained verbally - not just by email",
      "Referee confirmed they managed or worked directly with the candidate",
      "No material concerns raised that have not been addressed",
      "Reference summary shared internally before placement proceeds"
@@ -1157,8 +1157,8 @@
    "current": "client-brief"
   },
   "group": "Clients",
-  "summary": "New client meetings and job briefs — perm, contract and SOW",
-  "intro": "Use for new client meetings and job briefs — perm, contract and SOW",
+  "summary": "New client meetings and job briefs - perm, contract and SOW",
+  "intro": "Use for new client meetings and job briefs - perm, contract and SOW",
   "icon": "handshake",
   "order": 80,
   "blocks": [
@@ -1276,7 +1276,7 @@
     "label": "Must-have skills",
     "lines": 3,
     "width": "full",
-    "placeholder": "Non-negotiables — what they absolutely need"
+    "placeholder": "Non-negotiables - what they absolutely need"
    },
    {
     "_type": "formField",
@@ -1305,7 +1305,7 @@
     "label": "What makes a great hire here",
     "lines": 3,
     "width": "full",
-    "placeholder": "Beyond the spec — what does brilliant look like?"
+    "placeholder": "Beyond the spec - what does brilliant look like?"
    },
    {
     "_type": "formField",
@@ -1318,7 +1318,7 @@
    {
     "_type": "formHeading",
     "_key": "b199",
-    "title": "Qualification — MEDDPICC"
+    "title": "Qualification - MEDDPICC"
    },
    {
     "_type": "formField",
@@ -1467,7 +1467,7 @@
     "label": "Recent triggers / news",
     "lines": 2,
     "width": "full",
-    "placeholder": "Funding, hiring surge, product launch, leadership change — what is the hook?"
+    "placeholder": "Funding, hiring surge, product launch, leadership change - what is the hook?"
    },
    {
     "_type": "formField",
@@ -1504,7 +1504,7 @@
     "label": "Value proposition",
     "lines": 2,
     "width": "full",
-    "placeholder": "In one sentence — why should they work with Stott and May?"
+    "placeholder": "In one sentence - why should they work with Stott and May?"
    },
    {
     "_type": "formHeading",
@@ -1537,9 +1537,9 @@
     "_key": "b226",
     "label": "Call result",
     "options": [
-     "Positive — next step agreed",
-     "Warm — follow up",
-     "Cold — not now",
+     "Positive - next step agreed",
+     "Warm - follow up",
+     "Cold - not now",
      "Dead"
     ]
    },
@@ -1571,7 +1571,7 @@
   },
   "group": "Clients",
   "summary": "Quarterly business review for key accounts",
-  "intro": "Use with key accounts every quarter — review, add value, and plan forward together",
+  "intro": "Use with key accounts every quarter - review, add value, and plan forward together",
   "icon": "chart-column",
   "order": 100,
   "blocks": [
@@ -1618,7 +1618,7 @@
    {
     "_type": "formHeading",
     "_key": "b234",
-    "title": "Account performance — this quarter"
+    "title": "Account performance - this quarter"
    },
    {
     "_type": "formNumbers",
@@ -1677,7 +1677,7 @@
    {
     "_type": "formField",
     "_key": "b236",
-    "label": "Roles not filled — and why",
+    "label": "Roles not filled - and why",
     "lines": 2,
     "width": "full",
     "placeholder": "What did not close? Brief or process issues, market challenges, budget changes?"
@@ -1747,7 +1747,7 @@
    {
     "_type": "formHeading",
     "_key": "b247",
-    "title": "Forward plan — next quarter"
+    "title": "Forward plan - next quarter"
    },
    {
     "_type": "formField",
@@ -1870,7 +1870,7 @@
      "Budget has been formally approved",
      "Salary range confirmed and is market-rate",
      "I am speaking to the decision-maker",
-     "Interview process is defined — stages, timeline, decision-makers",
+     "Interview process is defined - stages, timeline, decision-makers",
      "No internal candidate being benchmarked",
      "Client has committed to a response time on CVs submitted",
      "Counter-offer risk has been discussed with candidate",
@@ -1890,7 +1890,7 @@
      "Day rate is approved and within market range",
      "Start date is confirmed, not just ASAP",
      "Contract duration and extension likelihood discussed",
-     "Shortlist SLA agreed — client commits to respond within 24-48hrs",
+     "Shortlist SLA agreed - client commits to respond within 24-48hrs",
      "Number of CVs required agreed (2-3, not 10)",
      "Contractor availability and notice period confirmed",
      "IR35 payment method discussed with candidate"
@@ -1907,7 +1907,7 @@
     "items": [
      "Deliverable and success criteria clearly defined",
      "Client understands SOW means buying an outcome, not a resource",
-     "Budget envelope confirmed — fixed price or T and M",
+     "Budget envelope confirmed - fixed price or T and M",
      "Milestones and payment schedule agreed",
      "Governance structure and stakeholders identified",
      "Procurement and legal are aware and aligned",
@@ -1924,9 +1924,9 @@
     "_key": "b263",
     "label": "Likelihood to close",
     "options": [
-     "Green — Hot",
-     "Amber — Possible",
-     "Red — Unlikely"
+     "Green - Hot",
+     "Amber - Possible",
+     "Red - Unlikely"
     ]
    },
    {
@@ -2133,7 +2133,7 @@
   },
   "group": "Jobs and offers",
   "summary": "Capture structured client feedback after every interview stage",
-  "intro": "Capture structured client feedback after every interview stage — call within 2 hours",
+  "intro": "Capture structured client feedback after every interview stage - call within 2 hours",
   "icon": "messages",
   "order": 130,
   "blocks": [
@@ -2204,7 +2204,7 @@
    {
     "_type": "formField",
     "_key": "b294",
-    "label": "If unsuccessful — primary reason",
+    "label": "If unsuccessful - primary reason",
     "lines": 1,
     "width": "full",
     "placeholder": "e.g. Strong technically but not as commercially driven as they need"
@@ -2276,7 +2276,7 @@
     "label": "What the client liked (direct quotes where possible)",
     "lines": 3,
     "width": "full",
-    "placeholder": "The more specific the better — these are gold for briefing the candidate before the next stage"
+    "placeholder": "The more specific the better - these are gold for briefing the candidate before the next stage"
    },
    {
     "_type": "formField",
@@ -2371,7 +2371,7 @@
     "label": "The problem being solved",
     "lines": 3,
     "width": "full",
-    "placeholder": "In the client's own words — what business problem does this SOW address?"
+    "placeholder": "In the client's own words - what business problem does this SOW address?"
    },
    {
     "_type": "formField",
@@ -2480,9 +2480,9 @@
     "_type": "formChecklist",
     "_key": "b332",
     "items": [
-     "IP ownership agreed — all work product belongs to client on payment",
+     "IP ownership agreed - all work product belongs to client on payment",
      "Confidentiality / NDA in place",
-     "IR35 assessment completed — SOW is genuinely outcome-based",
+     "IR35 assessment completed - SOW is genuinely outcome-based",
      "Indemnity and liability clauses reviewed",
      "Data protection / GDPR obligations identified",
      "Procurement and legal aligned on contract timeline",
@@ -2501,7 +2501,7 @@
   },
   "group": "Commercial and compliance",
   "summary": "Pre-placement compliance gate",
-  "intro": "Complete in full before any candidate starts — perm, contract or SOW. No exceptions.",
+  "intro": "Complete in full before any candidate starts - perm, contract or SOW. No exceptions.",
   "icon": "badge-check",
   "order": 150,
   "blocks": [
@@ -2560,7 +2560,7 @@
     "items": [
      "Right to work confirmed (UK: our Home Office check; US: the employer completes Form I-9)",
      "Document type verified (passport, or eVisa checked with a share code)",
-     "Document expiry date checked — not expired",
+     "Document expiry date checked - not expired",
      "Copy of document obtained and stored securely",
      "For share codes: verified via gov.uk employer checking service",
      "For non-UK nationals: visa type and work restrictions confirmed",
@@ -2622,9 +2622,9 @@
     "_key": "b346",
     "label": "References required?",
     "options": [
-     "Yes — perm placement",
-     "Yes — contract (client requires)",
-     "No — not required"
+     "Yes - perm placement",
+     "Yes - contract (client requires)",
+     "No - not required"
     ]
    },
    {
@@ -2696,9 +2696,9 @@
     "_key": "b355",
     "label": "All compliance items complete?",
     "options": [
-     "Yes — cleared to start",
-     "No — outstanding items below",
-     "Partial — approved exception below"
+     "Yes - cleared to start",
+     "No - outstanding items below",
+     "Partial - approved exception below"
     ]
    },
    {
@@ -2813,7 +2813,7 @@
     "label": "What was the trigger?",
     "lines": 2,
     "width": "full",
-    "placeholder": "e.g. funding announcement, job ad spotted, mutual connection — what made you reach out now?"
+    "placeholder": "e.g. funding announcement, job ad spotted, mutual connection - what made you reach out now?"
    },
    {
     "_type": "formHeading",
@@ -2866,7 +2866,7 @@
     "label": "Recent trigger / news",
     "lines": 2,
     "width": "full",
-    "placeholder": "Raised Series B, new CTO hired, 2x headcount plan — what is happening that creates a hiring need?"
+    "placeholder": "Raised Series B, new CTO hired, 2x headcount plan - what is happening that creates a hiring need?"
    },
    {
     "_type": "formField",
@@ -2879,7 +2879,7 @@
    {
     "_type": "formHeading",
     "_key": "b376",
-    "title": "Opportunity assessment — BANT"
+    "title": "Opportunity assessment - BANT"
    },
    {
     "_type": "formPrompts",
@@ -3009,9 +3009,9 @@
     "_key": "b384",
     "label": "Overall lead rating",
     "options": [
-     "Hot — work now",
-     "Warm — nurture",
-     "Cold — long-term pipeline",
+     "Hot - work now",
+     "Warm - nurture",
+     "Cold - long-term pipeline",
      "Dead"
     ]
    },
@@ -3058,8 +3058,8 @@
     "_key": "b390",
     "label": "First contact result",
     "options": [
-     "Positive — meeting booked",
-     "Warm — follow up agreed",
+     "Positive - meeting booked",
+     "Warm - follow up agreed",
      "No response",
      "Not interested"
     ]

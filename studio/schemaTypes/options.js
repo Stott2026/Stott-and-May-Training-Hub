@@ -66,8 +66,8 @@ export const ICON_OPTIONS = [
 
 export const ACCENT_OPTIONS = [
   { title: "Teal to aquamarine (main brand)", value: "brand" },
-  { title: "Teal to sky blue", value: "sky" },
-  { title: "Teal to lime", value: "lime" },
+  { title: "Aquamarine to teal", value: "sky" },
+  { title: "Soft aquamarine", value: "lime" },
 ];
 
 // A list of short text items, e.g. tactics or phrases. Editors can drag to reorder.

@@ -66,7 +66,7 @@ const TOOLS = [
     links: [link("Paiger training", "https://content-app.com/?action=dashboard&method=training")],
   },
   {
-    slug: "sourcewhale", name: "Sourcewhale", role: "Outreach", core: true, week: "Week 3, then in depth in weeks 5–8", icon: "message-circle", accent: "sky",
+    slug: "sourcewhale", name: "Sourcewhale", role: "Outreach", core: true, week: "Week 3, then in depth in weeks 5 to 8", icon: "message-circle", accent: "sky",
     summary: "Sequences, follow-up and pipeline nurture.",
     capabilities: ["contacts", "candidates", "numbers", "intel", "outreach", "alerts"],
     learn: ["Setting up a first sequence", "Logging replies in Bullhorn", "Sequence design", "Messaging quality", "Tracking replies", "Handoff to Bullhorn"],
@@ -75,7 +75,7 @@ const TOOLS = [
       ["Candidate campaigns", "Ongoing", "Stay in touch long term, run quick job campaigns, request updates."],
       ["Asset campaigns", "Ongoing", "Use salary guides, case studies and research to engage clients."],
       ["To-do list", "Daily", "Work calls, InMails and connection requests, all coded to Bullhorn."],
-      ["Steps", "Every campaign", "Use 7–9 touches across email, calls and LinkedIn."],
+      ["Steps", "Every campaign", "Use 7 to 9 touches across email, calls and LinkedIn."],
     ],
     setup: ["1 candidate campaign running", "1 asset campaign running", "1 solutions campaign running"],
     dailyCheck: "Check to-do list actions and responses",
@@ -217,9 +217,9 @@ const page = {
   mapNote: "Where several tools tick the same box, agree one primary tool per signal.",
   programmeIntro: "A 12-week programme in three gated phases. Each system gets one week of structured learning, then goes straight into your daily work. Progress is marked by what you can show, not by attendance.",
   phases: keyed([
-    { _type: "phase", weeks: "Weeks 1–4", title: "Foundation", text: "Bullhorn, LinkedIn Recruiter and Paiger, plus the start of Sourcewhale.", tools: ["bullhorn", "linkedin-recruiter", "paiger", "sourcewhale"].map(ref), gate: "Build a shortlist for a live role, fully recorded in Bullhorn to standard." },
-    { _type: "phase", weeks: "Weeks 5–8", title: "Application", text: "Woo.io and Cognism join, and all six systems run as end-to-end workflows.", tools: ["sourcewhale", "woo", "cognism"].map(ref), gate: "Run one workflow end to end, from sourcing through outreach to a recorded submission, observed by a team leader." },
-    { _type: "phase", weeks: "Weeks 9–12", title: "Embed", text: "Daily and weekly routines, peer teaching (each consultant teaches one tool to a peer) and performance linkage.", gate: "Final review against the KPIs, then certification." },
+    { _type: "phase", weeks: "Weeks 1 to 4", title: "Foundation", text: "Bullhorn, LinkedIn Recruiter and Paiger, plus the start of Sourcewhale.", tools: ["bullhorn", "linkedin-recruiter", "paiger", "sourcewhale"].map(ref), gate: "Build a shortlist for a live role, fully recorded in Bullhorn to standard." },
+    { _type: "phase", weeks: "Weeks 5 to 8", title: "Application", text: "Woo.io and Cognism join, and all six systems run as end-to-end workflows.", tools: ["sourcewhale", "woo", "cognism"].map(ref), gate: "Run one workflow end to end, from sourcing through outreach to a recorded submission, observed by a team leader." },
+    { _type: "phase", weeks: "Weeks 9 to 12", title: "Embed", text: "Daily and weekly routines, peer teaching (each consultant teaches one tool to a peer) and performance linkage.", gate: "Final review against the KPIs, then certification." },
   ], "phase"),
   rhythm: keyed([
     { _type: "touchpoint", label: "Learn", title: "One structured block", text: "A self-paced module followed by a short live session." },

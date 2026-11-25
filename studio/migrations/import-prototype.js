@@ -104,10 +104,10 @@ const homePage = {
   _type: "homePage",
   heroTitle: "Training Hub",
   heroIntro:
-    "Your complete guide to recruitment excellence — perm, contract and SOW. Each module includes tactics, phrases, common mistakes and real-world scenarios.",
+    "Your complete guide to recruitment excellence - perm, contract and SOW. Each module includes tactics, phrases, common mistakes and real-world scenarios.",
   philosophyTitle: "The Stott and May Way",
   philosophyText:
-    "We exist to make great hires. Not average hires. Not fast hires for the sake of it. Great ones — where the right person lands in the right role, and both sides feel it was worth it. That standard runs through everything we do.",
+    "We exist to make great hires. Not average hires. Not fast hires for the sake of it. Great ones - where the right person lands in the right role, and both sides feel it was worth it. That standard runs through everything we do.",
 };
 
 // Check the content against the limits set in the Studio, so nothing arrives already failing validation.

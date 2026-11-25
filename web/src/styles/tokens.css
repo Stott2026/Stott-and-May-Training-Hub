@@ -11,8 +11,6 @@
   /* ── Brand colours ─────────────────────────────── */
   --sm-teal: #00c8c8;        /* shared group root */
   --sm-aqua: #73f7bb;        /* Stott and May gradient end */
-  --sm-sky: #44b3f4;         /* sister gradient end (sky blue) */
-  --sm-lime: #7eff2c;        /* sister gradient end (electric lime) */
   --sm-ink: #111314;         /* near-black from the brand neutrals */
   --sm-slate: #7a8798;       /* secondary UI labels */
   --sm-mist: #c3cad2;        /* borders and dividers */
@@ -28,8 +26,6 @@
   --sm-teal-50: #e6fafa;
   --sm-teal-100: #ccf4f4;
   --sm-aqua-50: #ebfdf5;
-  --sm-sky-50: #e8f5fd;
-  --sm-lime-50: #f0ffe4;
   --sm-danger-50: #fdeeee;
 
   /* ── Roles (use these in components) ──────────── */
@@ -60,16 +56,20 @@
 
   /* Parts of the day in the Technology workflow */
   --stage-plan: var(--gradient-brand);
-  --stage-prospect: var(--gradient-sky);
-  --stage-cover: var(--gradient-lime);
+  --stage-prospect: var(--sm-teal);
+  --stage-cover: var(--sm-aqua);
 
   /* ── Gradients ─────────────────────────────────── */
   --gradient-brand: linear-gradient(135deg, var(--sm-teal), var(--sm-aqua));
-  --gradient-sky: linear-gradient(135deg, var(--sm-teal), var(--sm-sky));
-  --gradient-lime: linear-gradient(135deg, var(--sm-teal), var(--sm-lime));
+  /* The other two accents are aquamarine variants (Ian's choice, November 2026): the sister
+     brands' sky blue and lime belong to Stott and May Consulting and Evergreen, so this hub uses
+     the Stott and May gradient only. The names "sky" and "lime" stay so existing content keeps
+     working. */
+  --gradient-sky: linear-gradient(135deg, var(--sm-aqua), var(--sm-teal));        /* aquamarine to teal */
+  --gradient-lime: linear-gradient(135deg, var(--sm-aqua), var(--sm-teal-100));   /* soft aquamarine */
   --gradient-brand-soft: linear-gradient(135deg, var(--sm-teal-50), var(--sm-aqua-50));
-  --gradient-sky-soft: linear-gradient(135deg, var(--sm-teal-50), var(--sm-sky-50));
-  --gradient-lime-soft: linear-gradient(135deg, var(--sm-teal-50), var(--sm-lime-50));
+  --gradient-sky-soft: linear-gradient(135deg, var(--sm-aqua-50), var(--sm-teal-50));
+  --gradient-lime-soft: linear-gradient(135deg, var(--sm-aqua-50), var(--sm-teal-100));
   --gradient-hero:
     radial-gradient(60% 80% at 30% 20%, rgba(255, 255, 255, 0.55), transparent 70%),
     linear-gradient(120deg, var(--sm-aqua), var(--sm-teal) 70%);

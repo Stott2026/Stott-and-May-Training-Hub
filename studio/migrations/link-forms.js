@@ -34,7 +34,7 @@ const PLAN = {
   "contract-consulting": { "Six questions that find the budget": ["client-brief"], "When they need an outcome": ["sow-scope-checklist"] },
   "customer-candidate-management": { "Practise it": ["candidate-pipeline"] },
   // Core skills
-  "client": { "Taking a Quality Brief — Perm": ["client-brief"], "Taking a Quality Brief — Contract": ["client-brief"], "Account Development": ["client-qbr"] },
+  "client": { "Taking a Quality Brief - Perm": ["client-brief"], "Taking a Quality Brief - Contract": ["client-brief"], "Account Development": ["client-qbr"] },
   "job": { "Qualifying a Job": ["job-qualification"], "Contract and SOW": ["sow-scope-checklist", "pre-placement-compliance"] },
   "candidate": { "Screening and Qualifying": ["candidate-registration"] },
   "interview": { "The Pre-Interview Brief": ["interview-prep-sheet"], "Post-Interview Debrief": ["interview-feedback", "candidate-feedback"] },

@@ -131,7 +131,7 @@ const standards = {
     {
       title: "Without Limits: the job is the vehicle, not the destination",
       takeaway: "Standards keep you going when motivation dips. A real goal is what makes the standards worth holding.",
-      content: "Our 2026 theme is Without Limits. The earning potential here removes limits most jobs never touch, so use it on purpose. What are you working toward outside work this year? You don't have to share numbers, but write it down.",
+      content: "Our 2026 theme is Without Limits. The earning potential here removes limits most jobs never touch, so use it on purpose. What are you working towards outside work this year? You don't have to share numbers, but write it down.",
       framework: { title: "Set a goal that matters", steps: steps([
         [null, "Attach your target to something real", "A deposit, a trip, tuition, a parent's retirement: not just a number on a screen."],
         [null, "Set a target that stretches you", "Make it uncomfortable, then work backward to the daily activity that gets you there."],
@@ -219,7 +219,7 @@ const counteroffers = {
       takeaway: "The strongest argument is always their own push factors: does this offer change why they wanted to leave?",
       content: "Present these as things to help the candidate think through, not threats.",
       framework: { title: "Four things to think through", steps: steps([
-        [null, "A band-aid, not a fix", "A knee-jerk reaction that rarely solves why they wanted to leave."],
+        [null, "A sticking plaster, not a fix", "A knee-jerk reaction that rarely solves why they wanted to leave."],
         [null, "Not part of the plan", "It sits outside the company's strategy for the short or long term."],
         [null, "Trust has shifted", "Their loyalty has been questioned, which can count in a downturn or restructure."],
         [null, "Bridges burned", "It damages the relationship with the company they were joining, and their reputation."],
