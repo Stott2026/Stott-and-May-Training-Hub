@@ -48,15 +48,15 @@ const sourcing = {
     },
     {
       title: "Ask it the right way",
-      takeaway: "Ask for target package and work authorisation, never salary history or visa type.",
-      content: "New York City and many US states ban salary-history questions, and federal law restricts questions about citizenship status. One wrong question can put the client, the candidate and us at risk. The target package gives you everything you need to submit at the right number. This isn't legal advice: if in doubt, check with your manager or HR before asking.",
+      takeaway: "Lead with target package and work authorisation, know the salary-history rules where you're recruiting, and never ask visa type.",
+      content: "Salary-history questions are banned in New York and many other US states and cities, though allowed in the UK, and US federal law restricts questions about citizenship status. Know the rules where the role and the candidate are based. One wrong question can put the client, the candidate and us at risk. The target package gives you everything you need to submit at the right number. This isn't legal advice: if in doubt, check with your manager or HR before asking.",
       tables: [table("Don't ask, ask instead", ["Topic", "Don't ask", "Ask instead"], [
         ["Pay", "\"What are you earning now?\"", "\"What package are you targeting for your next role?\""],
         ["Right to work", "\"Are you a citizen? Green card, H-1B, OPT?\"", "\"Are you legally authorised to work in the US? Will you now or in future need visa sponsorship?\""],
         ["Personal", "Age, family plans, religion, health, nationality", "Only what the job needs: availability, travel, location"],
       ])],
       mistakes: [
-        "Recording current salary or immigration details in Bullhorn when a candidate volunteers them. Note the target package and \"sponsorship required: yes / no\" only",
+        "Recording current salary where salary-history rules apply, or immigration details anywhere, when a candidate volunteers them. Note the target package and \"sponsorship required: yes / no\"",
       ],
     },
     {
@@ -144,13 +144,13 @@ const sourcing = {
       scenario: {
         title: "Ten minutes into a great call, the candidate says: \"I'm on $140k now, and I'm on an H-1B, so I'll need a transfer.\" Then they ask about next steps. What do you do?",
         weak: "Note their current salary and visa type in Bullhorn, promise to send them to the client today, and hang up without booking anything.",
-        strong: "Thank them, and steer to what you need: \"What package are you targeting for your next role?\" and \"Will you now or in the future need visa sponsorship?\" Record only the target package and \"sponsorship required: yes\" in Bullhorn, not their current salary or visa details. Ask \"What would stop you accepting an offer?\", book two client intro slots before you hang up, ask for a referral, and send the representation email within the hour.",
+        strong: "Thank them, and steer to what you need: \"What package are you targeting for your next role?\" and \"Will you now or in the future need visa sponsorship?\" Record the target package and \"sponsorship required: yes\" in Bullhorn, not their visa details, and not their current salary where salary-history rules apply. Ask \"What would stop you accepting an offer?\", book two client intro slots before you hang up, ask for a referral, and send the representation email within the hour.",
       },
     },
     {
       title: "Takeaways and actions for your desk",
       takeaway: "Every placement starts with the first call.",
-      content: "The same seven-step call, every time. Motivation predicts acceptance. Ask for target package and work authorisation, never salary history or visa type. No \"Confirmed\", no submission. Most great candidates are passive: multi-touch wins. Tick off each action below as you do it this week.",
+      content: "The same seven-step call, every time. Motivation predicts acceptance. Lead with target package and work authorisation, know the salary-history rules where you're recruiting, and never ask visa type. No \"Confirmed\", no submission. Most great candidates are passive: multi-touch wins. Tick off each action below as you do it this week.",
       tactics: [
         "Do a paired cold-call role-play with your manager, with structured feedback",
         "Learn your desk's five domain questions",

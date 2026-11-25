@@ -249,7 +249,7 @@ const reverseHeadhunting = {
     },
     {
       title: "Question bank 1: the leader as a candidate",
-      takeaway: "Ask for their target package, never their current salary.",
+      takeaway: "Start with their target package, and know the salary-history rules where you're recruiting.",
       content: "The more you learn here, the more ways you have to position Stott and May as a partner. Don't interrogate: pick the questions that fit the conversation and note the rest for next time.",
       tables: [table("The leader as a candidate", ["Where they are now", "Where they want to go"], [
         ["Current role and responsibilities", "What would make them open to a move"],
@@ -259,7 +259,7 @@ const reverseHeadhunting = {
         ["Technologies they specialise in", "Other leaders they'd recommend"],
       ])],
       mistakes: [
-        "Asking for current or past salary. Salary-history questions are banned in New York City and many US states, and that applies to senior leaders too",
+        "Leading with current or past salary. Salary-history questions are banned in New York and many other US states and cities, though allowed in the UK, and that applies to senior leaders too. Start with their target package",
       ],
     },
     {
@@ -350,7 +350,7 @@ const quiz = quizDrafts([
     question: "On a reverse headhunt, what should you ask about pay?",
     options: ["Their current salary", "Their salary history for the last three roles", "Their target package for the next role", "Nothing: never discuss pay"],
     correct: 2,
-    explanation: "Ask for their target package, never their current salary. Salary-history questions are banned in New York City and many US states, and that applies to senior leaders too.",
+    explanation: "Start with their target package, and know the salary-history rules where you're recruiting. Salary-history questions are banned in New York City and many US states, and that applies to senior leaders too.",
   },
   {
     _id: "drafts.quiz-playbook-06-02", module: "module-reverse-headhunting", afterSection: 9,

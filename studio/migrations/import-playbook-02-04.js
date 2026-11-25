@@ -74,7 +74,7 @@ const lifecycle = {
         "Keep the list live: drop candidates who cool off so they don't clog the pipeline",
       ],
       mistakes: [
-        "Asking for current or past salary. Ask for the target or expected package: salary-history questions are banned in New York City and many US states",
+        "Leading with current or past salary. Ask for the target or expected package first. Salary-history questions are banned in New York and many other US states and cities, though allowed in the UK, so know the rules where you're recruiting",
         "Asking about citizenship or visa type. Ask \"Are you legally authorised to work in the US?\" and \"Will you now or in the future need visa sponsorship?\"",
       ],
     },
@@ -306,7 +306,7 @@ const quiz = quizDrafts([
     question: "When you screen a candidate, what should you ask about pay?",
     options: ["Their current salary", "Their target or expected package", "Their salary history", "Nothing until the offer stage"],
     correct: 1,
-    explanation: "Ask for the target or expected package, never current or past salary. Salary-history questions are banned in New York City and many US states.",
+    explanation: "Ask for the target or expected package: it's what you need to submit at the right number. Salary-history questions are banned in New York and many other US states and cities, though allowed in the UK, so lead with the target package everywhere.",
   },
   {
     _id: "drafts.quiz-playbook-02-02", module: "module-recruitment-lifecycle", afterSection: 6,
