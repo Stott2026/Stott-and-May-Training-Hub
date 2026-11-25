@@ -194,7 +194,7 @@ const forecasting = {
       takeaway: "Forecast = committed + the likely deals you'd bet on. Upside is a bonus, never the plan.",
       content: "Sort every deal into one of three buckets before you call the month. For each likely deal, name the risk out loud: if you can't, you haven't tested it yet.",
       framework: { title: "Three buckets", steps: steps([
-        ["Committed", "Will land", "Accepted offers and started placements. Bet your credibility on it."],
+        ["Committed", "Will land", "Offers accepted in writing with the resignation done and a start date confirmed, plus started placements. Bet your credibility on it."],
         ["Likely", "Should land", "Offers out and strong finals. Name the risk on each."],
         ["Upside", "Could land", "Earlier-stage deals that could close this month."],
       ]) },

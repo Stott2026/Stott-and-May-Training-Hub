@@ -462,8 +462,8 @@
    "current": "counter-offer-guide"
   },
   "group": "Candidates",
-  "summary": "Have this conversation at screening, not at offer stage",
-  "intro": "Use at screening stage — not at offer stage. Have this conversation early.",
+  "summary": "Start this conversation at screening, and come back to it at offer stage",
+  "intro": "Start at screening, and come back to it at offer stage. Have this conversation early.",
   "icon": "shield-check",
   "order": 40,
   "blocks": [
@@ -495,7 +495,7 @@
      "Counter-offers are reactive: they rarely fix the reasons someone wanted to leave",
      "Accepting one can change how the current employer sees them, for good",
      "The strongest argument is always the candidate's own reasons for moving",
-     "Have this conversation at screening, not at offer stage"
+     "Start this conversation at screening, and come back to it at offer stage"
     ]
    },
    {
@@ -2558,8 +2558,8 @@
     "_type": "formChecklist",
     "_key": "b339",
     "items": [
-     "Right to work in the UK confirmed",
-     "Document type verified (passport / biometric / share code)",
+     "Right to work confirmed (UK: our Home Office check; US: the employer completes Form I-9)",
+     "Document type verified (passport, or eVisa checked with a share code)",
      "Document expiry date checked — not expired",
      "Copy of document obtained and stored securely",
      "For share codes: verified via gov.uk employer checking service",
@@ -2573,7 +2573,7 @@
     "label": "Document type",
     "lines": 1,
     "width": "half",
-    "placeholder": "e.g. UK Passport, BRP, Share Code"
+    "placeholder": "e.g. UK passport, eVisa (share code)"
    },
    {
     "_type": "formField",

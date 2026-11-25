@@ -57,7 +57,7 @@ const TOOLS = [
       ["Social assistant", "Ongoing", "Tune it to your desk, writing style and personality."],
       ["Daily alerts", "Daily", "Get daily news, funding, market and hiring content to post."],
       ["Job leads", "Daily", "Alert on key job titles, skills, locations and industries."],
-      ["Post S&M jobs", "Ongoing", "Share your live jobs using the Marketing team's tiles."],
+      ["Post Stott and May jobs", "Ongoing", "Share your live jobs using the Marketing team's tiles."],
       ["Intel", "Daily", "Use the intel and insights to research clients and the market."],
     ],
     setup: ["Daily news alerts to post", "Job lead alerts set up", "Daily use of Intel capability"],
@@ -133,12 +133,12 @@ const TOOLS = [
     capabilities: ["contacts", "candidates", "jobs", "numbers", "intel", "alerts"],
     bestPractice: [
       ["Build searches", "Daily", "Use Boolean across Bullhorn and job boards for leads and candidates."],
-      ["Search criteria", "Ongoing", "Save searches for key companies, S&M placements and terms signed."],
+      ["Search criteria", "Ongoing", "Save searches for key companies, Stott and May placements and terms signed."],
       ["Sourcebots", "Daily", "Build 10+ Sourcebots for candidates, leads, funding and companies."],
       ["Intel", "Ongoing", "Use funding, salaries, news and the email finder."],
       ["Companies", "Ongoing", "Save key target companies to track moves, leads and candidates."],
     ],
-    setup: ["Sourcebots for job leads", "Sourcebots for funding", "Sourcebots for S&M clients/terms"],
+    setup: ["Sourcebots for job leads", "Sourcebots for funding", "Sourcebots for Stott and May clients and terms"],
     dailyCheck: "Check Sourcebot alert emails for leads and candidates",
   },
   {
@@ -214,7 +214,7 @@ const page = {
     step("Every new vacancy", "Job description, website post, Woo agent set off, findings reviewed.", "cover", ["woo", "bullhorn-ai-assistant"]),
     step("Log everything", "Log all calls and interactions in Bullhorn.", "cover", ["bullhorn"]),
   ], "step"),
-  mapNote: "Where several tools tick the same box, agree one primary tool per signal. To be validated by the team.",
+  mapNote: "Where several tools tick the same box, agree one primary tool per signal.",
   programmeIntro: "A 12-week programme in three gated phases. Each system gets one week of structured learning, then goes straight into your daily work. Progress is marked by what you can show, not by attendance.",
   phases: keyed([
     { _type: "phase", weeks: "Weeks 1–4", title: "Foundation", text: "Bullhorn, LinkedIn Recruiter and Paiger, plus the start of Sourcewhale.", tools: ["bullhorn", "linkedin-recruiter", "paiger", "sourcewhale"].map(ref), gate: "Build a shortlist for a live role, fully recorded in Bullhorn to standard." },
