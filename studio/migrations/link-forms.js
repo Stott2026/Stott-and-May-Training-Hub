@@ -39,9 +39,9 @@ const PLAN = {
   "candidate": { "Screening and Qualifying": ["candidate-registration"] },
   "interview": { "The Pre-Interview Brief": ["interview-prep-sheet"], "Post-Interview Debrief": ["interview-feedback", "candidate-feedback"] },
   "offer": { "Setting Up the Offer": ["offer-tracker"], "Handling Counteroffers": ["counter-offer-guide"] },
-  "onboarding": { "Pre-Start Aftercare": ["pre-placement-compliance"] },
+  "onboarding": { "Aftercare before day one": ["pre-placement-compliance"] },
   "bd": { "Warm BD Tactics": ["lead-generation"], "Winning on a BD Call": ["bd-call-prep"] },
-  "time": { "Structuring Your Day": ["weekly-activity-planner"], "Managing Your Pipeline": ["candidate-pipeline"] },
+  "time": { "Structuring your day": ["weekly-activity-planner"], "Managing your pipeline": ["candidate-pipeline"] },
   // Management Programme
   "managing-clients-manager": { "Run a client review": ["client-qbr"] },
   "forecasting-pipeline": { "The pipeline, stage by stage": ["candidate-pipeline"] },
