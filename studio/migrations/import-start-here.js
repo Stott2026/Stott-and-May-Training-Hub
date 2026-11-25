@@ -11,7 +11,7 @@ const dryRun = process.argv.includes("--dry-run");
 const ref = (id, i) => ({ _key: `ref-${i + 1}`, _type: "reference", _ref: id });
 
 const STEPS = [
-  ["Week 1", "Know how we work", "Our values, the standard we hold ourselves to, the seven stages of a placement and the tools you'll use every day.",
+  ["Week 1", "Know how we work", "Our values, the seven stages of a placement, the tools you'll use every day, and your GDPR, cyber and data privacy courses.",
     ["module-standards-expectations", "module-recruitment-lifecycle", "module-systems-rectech"], ["form-weekly-activity-planner"]],
   ["Weeks 2 to 4", "Find and qualify", "Qualify candidates and roles properly before you spend time on them.",
     ["module-candidate-sourcing", "module-job-specification"], ["form-candidate-registration", "form-job-qualification", "form-client-brief"]],

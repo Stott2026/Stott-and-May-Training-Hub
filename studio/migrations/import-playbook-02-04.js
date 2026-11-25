@@ -49,7 +49,7 @@ const lifecycle = {
     },
     {
       title: "Stage 2: a weak brief creates a weak shortlist",
-      takeaway: "Most failed searches trace back to a ten-minute intake call that should have been forty.",
+      takeaway: "Most failed searches trace back to a ten-minute intake call that needed thirty to forty-five.",
       content: "Garbage in, garbage out. Test the last brief you took against the six boxes below. Which one was empty? That gap is usually where the search stalled. Practise by running a mock qualification call and naming the three most important open questions you still have at the end.",
       framework: { title: "Six things every brief needs", steps: steps([
         [null, "The real reason", "Backfill, growth or restructure: each changes how you sell it."],

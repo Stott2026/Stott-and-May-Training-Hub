@@ -186,8 +186,8 @@ const clientControl = {
     },
     {
       title: "Takeaways and actions for your desk",
-      takeaway: "Sell in with outcome, context, proof and risk. Agree the timeline at the brief.",
-      content: "Sell in with outcome, context, proof and risk. Prepare the top three objections before every pitch. Agree the timeline at the brief and book feedback at submission. Two or more warning signs means it's time to reset. Tick off each action below as you do it this week.",
+      takeaway: "Sell in with outcome, context, proof and logistics. Agree the timeline at the brief.",
+      content: "Sell in with outcome, context, proof and logistics. Prepare the top three objections before every pitch. Agree the timeline at the brief and book feedback at submission. Two or more warning signs means it's time to reset. Tick off each action below as you do it this week.",
       tactics: [
         "Pre-empt your next submission's top three objections in writing",
         "Set and confirm a written process timeline on your next live job",

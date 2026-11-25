@@ -378,7 +378,7 @@ const motivation = {
       scenario: {
         title: "Your top biller has gone quiet over the last month. You hear that a competitor has been in touch with them. What do you do?",
         weak: "Wait to see if they resign, then try to match the offer with more money.",
-        strong: "Book a stay conversation this week, before an offer lands. Ask what they enjoy most, what they'd change, what might tempt them to leave, and what they need from you, then listen. Act on one thing quickly: a bigger account, more say over their desk, a chance to mentor, or recognition in front of senior leaders. Write the agreed next step into their CPP, and check in every month, not just when there's a problem.",
+        strong: "Book a stay conversation this week, before an offer lands. Ask what they enjoy most, what they'd change, what might tempt them to leave, and what they need from you, then listen. Act on one thing quickly: a bigger account, more say over their desk, a chance to mentor, or recognition in front of senior leaders. Write the agreed next step into their CPP, and hold a stay conversation every quarter, not just when there's a problem.",
       },
     },
     {

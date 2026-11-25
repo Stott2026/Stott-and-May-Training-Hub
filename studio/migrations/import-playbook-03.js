@@ -111,7 +111,7 @@ const sourcing = {
     {
       title: "SourceWhale: sequences keep passive talent warm",
       takeaway: "Each step adds something new. The break-up email often gets the highest reply rate.",
-      content: "SourceWhale is the most credit-efficient way to run multi-touch outreach: one credit covers a whole 3 to 10 step sequence, so run 5 to 10 follow-ups per prospect. Most passive candidates won't reply to step 1. Each step should add something new: the role, then proof, then a market insight, then a polite break-up, which works because it's low-pressure. The spacing is a guide: adjust it to your market. Keep warm with check-ins, market updates and value-add touches, not just roles.",
+      content: "SourceWhale is the most credit-efficient way to run multi-touch outreach: one credit covers a whole sequence, so plan four to six steps per prospect, and always give them an easy way to opt out. Most passive candidates won't reply to step 1. Each step should add something new: the role, then proof, then a market insight, then a polite break-up, which works because it's low-pressure. The spacing is a guide: adjust it to your market. Keep warm with check-ins, market updates and value-add touches, not just roles.",
       tables: [table("A four-step sequence", ["Step", "Day", "What it adds", "Example"], [
         ["1", "Day 1", "The role", "\"[Client] is hiring a [Role] to [build X]. Here's why I thought of you…\""],
         ["2", "Day 3", "The proof", "\"Quick follow-up: they just [raised / launched / hired]. Brief attached.\""],
@@ -121,9 +121,9 @@ const sourcing = {
       tip: "Build one four-step sequence for a live role this week, and review it with your manager.",
     },
     {
-      title: "One profile is ten leads, if you check everything",
+      title: "One profile, many leads, if you check everything",
       takeaway: "Think like a market specialist, headhunter and adviser on every profile you open.",
-      content: "Most consultants read a profile for the one role they're working on and move on. The best treat every profile as a map: past employers give you target companies, their leaders give you business development leads, and a layoff tells you a whole team may be on the market. Hotlist the companies in Bullhorn so the whole team benefits.",
+      content: "Most consultants read a profile for the one role they're working on and move on. The best treat every profile as a map: past employers give you target companies, their leaders give you business development leads, and a layoff tells you a whole team may be on the market. Hotlist the companies in Bullhorn so the whole team benefits. The full method is \"Cold lead stripping\" in Business Development Fundamentals.",
       framework: { title: "Five things to check", steps: steps([
         [null, "Contact info", "Is a mobile or email in the contact section or the Featured section?"],
         [null, "Past companies", "Connect with similar people at every company they've worked at, then hotlist those companies."],

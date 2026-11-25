@@ -222,10 +222,10 @@
    {
     "_type": "formField",
     "_key": "b79",
-    "label": "Counter-offer risk",
+    "label": "Counteroffer risk",
     "lines": 2,
     "width": "full",
-    "placeholder": "How likely is a counter-offer, and what is their response?"
+    "placeholder": "How likely is a counteroffer, and what is their response?"
    },
    {
     "_type": "formField",
@@ -456,7 +456,7 @@
  {
   "_id": "drafts.form-counter-offer-guide",
   "_type": "formDocument",
-  "title": "Counter-Offer Conversation Guide",
+  "title": "Counteroffer Conversation Guide",
   "slug": {
    "_type": "slug",
    "current": "counter-offer-guide"
@@ -492,7 +492,7 @@
     "_type": "formChecklist",
     "_key": "b105",
     "items": [
-     "Counter-offers are reactive: they rarely fix the reasons someone wanted to leave",
+     "Counteroffers are reactive: they rarely fix the reasons someone wanted to leave",
      "Accepting one can change how the current employer sees them, for good",
      "The strongest argument is always the candidate's own reasons for moving",
      "Start this conversation at screening, and come back to it at offer stage"
@@ -526,21 +526,21 @@
       "_key": "b7",
       "tag": "Step 3",
       "title": "Explore the response",
-      "text": "And if they made you a counter-offer (matched the salary, gave you a promotion, promised things would change), what would you do?"
+      "text": "And if they made you a counteroffer (matched the salary, gave you a promotion, promised things would change), what would you do?"
      },
      {
       "_type": "guideStep",
       "_key": "b8",
       "tag": "Step 4",
       "title": "Address the root cause",
-      "text": "We spoke about why you are looking to move. A counter-offer might address the salary, but does it address the real reason you wanted to leave?"
+      "text": "We spoke about why you are looking to move. A counteroffer might address the salary, but does it address the real reason you wanted to leave?"
      },
      {
       "_type": "guideStep",
       "_key": "b9",
       "tag": "Step 5",
       "title": "Future pace",
-      "text": "If you imagine accepting the counter-offer and sitting back at your desk six months later, has anything actually changed?"
+      "text": "If you imagine accepting the counteroffer and sitting back at your desk six months later, has anything actually changed?"
      },
      {
       "_type": "guideStep",
@@ -573,7 +573,7 @@
     "label": "What did they say?",
     "lines": 3,
     "width": "full",
-    "placeholder": "Record their response to the counter-offer conversation"
+    "placeholder": "Record their response to the counteroffer conversation"
    },
    {
     "_type": "formField",
@@ -581,7 +581,7 @@
     "label": "Agreed position",
     "lines": 2,
     "width": "full",
-    "placeholder": "What has the candidate committed to doing if a counter-offer arrives?"
+    "placeholder": "What has the candidate committed to doing if a counteroffer arrives?"
    }
   ]
  },
@@ -1873,7 +1873,7 @@
      "Interview process is defined - stages, timeline, decision-makers",
      "No internal candidate being benchmarked",
      "Client has committed to a response time on CVs submitted",
-     "Counter-offer risk has been discussed with candidate",
+     "Counteroffer risk has been discussed with candidate",
      "Brief taken on a live call, not just by email"
     ]
    },
@@ -2073,12 +2073,12 @@
    {
     "_type": "formHeading",
     "_key": "b280",
-    "title": "Counter-offer risk"
+    "title": "Counteroffer risk"
    },
    {
     "_type": "formChoice",
     "_key": "b281",
-    "label": "Counter-offer likelihood",
+    "label": "Counteroffer likelihood",
     "options": [
      "High",
      "Medium",
@@ -2089,10 +2089,10 @@
    {
     "_type": "formField",
     "_key": "b282",
-    "label": "Counter-offer conversation notes",
+    "label": "Counteroffer conversation notes",
     "lines": 3,
     "width": "full",
-    "placeholder": "What did the candidate say when you discussed counter-offers?"
+    "placeholder": "What did the candidate say when you discussed counteroffers?"
    },
    {
     "_type": "formHeading",
@@ -2133,7 +2133,7 @@
   },
   "group": "Jobs and offers",
   "summary": "Capture structured client feedback after every interview stage",
-  "intro": "Capture structured client feedback after every interview stage - call within 2 hours",
+  "intro": "Capture structured client feedback after every interview stage - call the same day",
   "icon": "messages",
   "order": 130,
   "blocks": [

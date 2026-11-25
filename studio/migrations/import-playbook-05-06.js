@@ -284,7 +284,7 @@ const reverseHeadhunting = {
       tactics: [
         "Keep it short: under 120 words. Leaders skim on their phone",
         "Make it real: use genuine placements and searches",
-        "Follow up: two or three touches across LinkedIn, email and phone",
+        "Follow up: four to six touches across LinkedIn, email and phone",
       ],
       mistakes: [
         "Claiming placements or retained searches we don't have. A senior leader will check",
