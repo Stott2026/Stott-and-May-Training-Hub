@@ -9,8 +9,8 @@ export default {
     ["LuSearch", "Turn the spec into a search plan: persona, target companies and a working Boolean string"],
   ],
   facts: [["Duration", "90 minutes, including a mock call"], ["Who it's for", "Consultants, 0–12 months"], ["Pre-work", "Bring one live job spec from your desk"]],
-  parts: ["Why job specs matter", "Job qualification", "What makes a high-quality job", "Must have vs nice to have", "Job grading", "Building the search", "Building the search", "Practice", "Wrap-up"],
-  sectionNotes: { 0: [3], 1: [4], 2: [5], 3: [6], 4: [7], 5: [8], 6: [9], 7: [10], 8: [11] },
+  parts: ["Why job specs matter", "Job qualification", "What makes a high-quality job", "Must have vs nice to have", "Job grading", "Building the search", "Building the search", "Contract and SOW", "Contract and SOW", "Practice", "Wrap-up"],
+  sectionNotes: { 0: [3], 1: [4], 2: [5], 3: [6], 4: [7], 5: [8], 6: [9], 9: [10], 10: [11] },
   close: { title: "Qualify first. Then search.", body: "Next module: 05 Business Development Fundamentals." },
   people: { title: "person-3.webp", side: "person-6.webp", close: "person-1.webp" },
 };

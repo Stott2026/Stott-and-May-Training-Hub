@@ -9,8 +9,8 @@ export default {
     ["LuShieldCheck", "A way to share bad news fast, and a daily check that nothing goes quiet"],
   ],
   facts: [["Duration", "75 minutes"], ["Who it's for", "All consultants, perm and contract"], ["Pre-work", "Bring one live role and its candidates"]],
-  parts: ["Why it matters", "The standard", "The cadence", "Channels", "Managing the customer", "Managing the candidate", "Managing the candidate", "Bad news", "The daily check", "Practice", "Wrap-up"],
-  sectionNotes: {"0":[3],"1":[4],"2":[5],"3":[6],"4":[7],"5":[8],"6":[9],"7":[10],"8":[11],"9":[12],"10":[13]},
+  parts: ["Why it matters", "The standard", "The cadence", "Channels", "Managing the client", "Managing the candidate", "Managing the candidate", "Bad news", "The daily check", "Managing the candidate", "Practice", "Wrap-up"],
+  sectionNotes: { 0: [3], 1: [4], 2: [5], 3: [6], 4: [7], 5: [8], 6: [9], 7: [10], 8: [11], 10: [12], 11: [13] },
   close: { title: "Over-communicate. Every step.", body: "Nobody waits. Nothing held back. That's the end of the Playbook: revisit any module in the Training Hub." },
   people: { title: "person-3.webp", side: "person-6.webp", close: "person-5.webp" },
 };

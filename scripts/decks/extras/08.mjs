@@ -9,8 +9,8 @@ export default {
     ["LuMessagesSquare", "Pre-close scripts that surface objections, competing offers and counteroffer risk early"],
   ],
   facts: [["Duration", "90 minutes"], ["Who it's for", "Consultants with 3+ months on desk"], ["Pre-work", "Bring one candidate who is in process now"]],
-  parts: ["Preparing the candidate", "Preparing the candidate", "Preparing the candidate", "Preparing the client", "Pre-closing", "Pre-closing", "After the interview", "Practice", "Wrap-up"],
-  sectionNotes: {"0":[3],"1":[4],"2":[5],"3":[6],"4":[7],"5":[8],"6":[9],"7":[10],"8":[11]},
+  parts: ["Preparing the candidate", "Preparing the candidate", "Preparing the candidate", "Preparing the client", "Pre-closing", "Pre-closing", "After the interview", "Contract and SOW", "Contract and SOW", "Practice", "Wrap-up"],
+  sectionNotes: { 0: [3], 1: [4], 2: [5], 3: [6], 4: [7], 5: [8], 6: [9], 9: [10], 10: [11] },
   close: { title: "Prep both sides. Pre-close every call.", body: "Next module: 09 Counteroffer Management." },
   people: { title: "person-6.webp", side: "person-1.webp", close: "person-2.webp" },
 };
