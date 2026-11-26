@@ -27,6 +27,7 @@ export const rewards = defineType({
         { name: "quizAnswer", title: "Each right answer in the best quiz round", type: "number", initialValue: 5, validation: (r) => r.required().min(0).integer() },
         { name: "activity", title: "Finishing an activity (Put it in order or Flip cards)", type: "number", initialValue: 15, validation: (r) => r.min(0).integer() },
         { name: "toolSetup", title: "Setting up a tool (every item on its checklist)", type: "number", initialValue: 25, validation: (r) => r.min(0).integer() },
+        { name: "gamePoint", title: "Each point scored in your best game of each Games Room game", type: "number", initialValue: 1, validation: (r) => r.min(0).integer() },
       ],
     }),
     defineField({

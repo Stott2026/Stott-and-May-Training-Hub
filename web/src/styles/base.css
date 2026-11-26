@@ -106,4 +106,4 @@ a {
 .cc-text, .cc-keypoints, .cc-interactive, .cc-checklist, .cc-dodont, .cc-figure, .cc-stat, .assessment,
 .course-panel, .course-nav, .compliance-office, .form-sheet,
 .big-five, .workflow__step, .rhythm-card, .practice-card, .tool-side-card, .stat-tile, .achievements,
-.may-live, .may-panel { font-family: var(--font-ui); }
+.may-live, .may-panel, .games__card, .game__panel { font-family: var(--font-ui); }

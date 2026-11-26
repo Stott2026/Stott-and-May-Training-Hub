@@ -12,9 +12,9 @@ const ProgressContext = createContext(null);
 function load() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    return { completed: saved?.completed ?? {}, quizScores: saved?.quizScores ?? [], quickChecks: saved?.quickChecks ?? {}, activities: saved?.activities ?? {}, setup: saved?.setup ?? {}, toolsSetUp: saved?.toolsSetUp ?? {}, bigFive: saved?.bigFive ?? {}, days: saved?.days ?? [] };
+    return { completed: saved?.completed ?? {}, quizScores: saved?.quizScores ?? [], quickChecks: saved?.quickChecks ?? {}, activities: saved?.activities ?? {}, setup: saved?.setup ?? {}, toolsSetUp: saved?.toolsSetUp ?? {}, bigFive: saved?.bigFive ?? {}, games: saved?.games ?? {}, days: saved?.days ?? [] };
   } catch {
-    return { completed: {}, quizScores: [], quickChecks: {}, activities: {}, setup: {}, toolsSetUp: {}, bigFive: {}, days: [] };
+    return { completed: {}, quizScores: [], quickChecks: {}, activities: {}, setup: {}, toolsSetUp: {}, bigFive: {}, games: {}, days: [] };
   }
 }
 
@@ -63,6 +63,12 @@ export function ProgressProvider({ children }) {
       // Only the last two weeks of days are kept.
       const recent = Object.fromEntries(Object.entries(p.bigFive).sort(([a], [b]) => b.localeCompare(a)).slice(0, 14));
       return { ...p, bigFive: { ...recent, [today()]: { ticks, complete } }, days: withToday(p.days) };
+    }),
+    // The Games Room: each game's best score (and out of how many) and how many games played.
+    games: progress.games,
+    addGameScore: (slug, score, total) => setProgress((p) => {
+      const was = p.games[slug] ?? { best: 0, total, played: 0 };
+      return { ...p, games: { ...p.games, [slug]: { best: Math.max(was.best, score), total, played: was.played + 1 } }, days: withToday(p.days) };
     }),
     days: progress.days,
   };

@@ -165,6 +165,25 @@ export const queries = {
     "lessons": lessons[]{ _key, title, summary, "blocks": blocks[]{ ..., image{ alt, "url": asset->url } } }
   }`,
 
+  // The Games Room: its page (heading and the three levels) and a card's worth of each game.
+  games: `{
+    "page": *[_id == "gamesPage"][0]{ eyebrow, title, titleAccent, intro, friendly, tough, brutal, privacyNote },
+    "games": *[_type == "game" && defined(slug.current)] | order(order asc){
+      _id, title, "slug": slug.current, kind, comingSoon, tagline, icon, accent, "challenges": count(scenarios)
+    }
+  }`,
+
+  // One game, with what the learner sees of each challenge. The background for May and the words
+  // she looks up stay on the server (gameForMay).
+  game: `{
+    "page": *[_id == "gamesPage"][0]{ friendly, tough, brutal, privacyNote },
+    "game": *[_type == "game" && slug.current == $slug][0]{
+      _id, title, "slug": slug.current, kind, comingSoon, tagline, intro, icon, accent, rounds,
+      "scenarios": scenarios[]{ _key, who, line }
+    }
+  }`,
+  gameForMay: `*[_type == "game" && slug.current == $slug][0]{ title, kind, comingSoon, scenarios[]{ _key, who, line, background, lookUp } }`,
+
   // One tool's page, with the tools either side of it.
   tool: `*[_type == "techTool" && slug.current == $slug][0]{
     ${TOOL_SUMMARY}, why, learn, bestPractice, links, setup, dailyCheck, measures,

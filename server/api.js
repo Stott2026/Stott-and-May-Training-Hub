@@ -64,6 +64,16 @@ api.get("/compliance/:slug", async (req, res) => {
   res.json(course);
 });
 
+api.get("/games", async (req, res) => {
+  res.json(await sanity.fetch(queries.games));
+});
+
+api.get("/games/:slug", async (req, res) => {
+  const data = await sanity.fetch(queries.game, { slug: req.params.slug });
+  if (!data?.game) return res.status(404).json({ error: "Game not found" });
+  res.json(data);
+});
+
 api.get("/forms", async (req, res) => {
   res.json(await sanity.fetch(queries.forms));
 });

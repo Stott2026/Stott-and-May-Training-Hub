@@ -6,6 +6,7 @@ import { ClipboardIcon } from "@sanity/icons/Clipboard";
 import { HeartIcon } from "@sanity/icons/Heart";
 import { HelpCircleIcon } from "@sanity/icons/HelpCircle";
 import { HomeIcon } from "@sanity/icons/Home";
+import { JoystickIcon } from "@sanity/icons/Joystick";
 import { RocketIcon } from "@sanity/icons/Rocket";
 import { StarIcon } from "@sanity/icons/Star";
 import { TagIcon } from "@sanity/icons/Tag";
@@ -46,6 +47,11 @@ export const structure = (S) =>
       S.listItem().title("Library page").icon(DocumentsIcon).child(S.document().schemaType("libraryPage").documentId("libraryPage")),
       S.documentTypeListItem("libraryItem").title("Library").icon(DocumentsIcon)
         .child(S.documentTypeList("libraryItem").title("Library").defaultOrdering([{ field: "order", direction: "asc" }])),
+      S.divider(),
+      // The Games Room: "challenge May" (agreed with Ian, November 2026).
+      S.listItem().title("Games Room page").icon(JoystickIcon).child(S.document().schemaType("gamesPage").documentId("gamesPage")),
+      S.documentTypeListItem("game").title("Games").icon(JoystickIcon)
+        .child(S.documentTypeList("game").title("Games").defaultOrdering([{ field: "order", direction: "asc" }])),
       S.divider(),
       // The House: the front door to every Stott and May tool (a separate app, stott2026/the-house).
       S.listItem().title("The House").icon(HomeIcon).child(

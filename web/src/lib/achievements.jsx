@@ -28,6 +28,8 @@ const RULES = {
   "quiz-ace": (s) => s.quizAce,
   "streak-3": (s) => s.bestStreak >= 3,
   "streak-5": (s) => s.bestStreak >= 5,
+  "game-played": (s) => s.gamesPlayed >= 1,
+  "game-high": (s) => s.gameHigh,
 };
 
 // Working days in a row, so a weekend never breaks a streak. Learning at the weekend
@@ -97,9 +99,12 @@ export function AchievementsProvider({ children }) {
       quizRounds: progress.quizScores.length,
       quizAce: progress.quizScores.some((q) => q.total > 0 && q.score === q.total),
       bestStreak: streak.best,
+      gamesPlayed: Object.values(progress.games ?? {}).reduce((n, g) => n + (g.played ?? 0), 0),
+      gameHigh: Object.values(progress.games ?? {}).some((g) => g.total > 0 && g.best >= g.total * 0.8),
+      gameBest: Object.values(progress.games ?? {}).reduce((n, g) => n + (g.best ?? 0), 0),
     };
     const p = rewards.points ?? {};
-    const points = stats.sections * (p.section ?? 0) + stats.modules * (p.module ?? 0) + stats.quickChecks * (p.quickCheck ?? 0) + best * (p.quizAnswer ?? 0) + stats.activities * (p.activity ?? 0) + stats.toolsSetUp * (p.toolSetup ?? 0);
+    const points = stats.sections * (p.section ?? 0) + stats.modules * (p.module ?? 0) + stats.quickChecks * (p.quickCheck ?? 0) + best * (p.quizAnswer ?? 0) + stats.activities * (p.activity ?? 0) + stats.toolsSetUp * (p.toolSetup ?? 0) + stats.gameBest * (p.gamePoint ?? 0);
     const levels = [...rewards.levels].sort((a, b) => (a.points ?? 0) - (b.points ?? 0));
     const levelIndex = Math.max(0, levels.findLastIndex((l) => points >= (l.points ?? 0)));
     const badges = (rewards.badges ?? []).filter((b) => RULES[b.rule]).map((b) => ({ ...b, earned: RULES[b.rule](stats) }));

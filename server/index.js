@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { api } from "./api.js";
 import { acceptHousePass, auth, requireSignIn, session } from "./auth.js";
 import { may } from "./may.js";
+import { games } from "./games.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const webRoot = path.resolve(here, "../web");
@@ -41,6 +42,9 @@ app.get("/api/me", (req, res) => {
 
 // Ask May, the AI training coach. Signed-in staff only, like everything else.
 app.use("/api/may", express.json({ limit: "100kb" }), may);
+
+// The Games Room: May scores an answer in a game (server/games.js). Signed-in staff only.
+app.use("/api/games", express.json({ limit: "50kb" }), games);
 
 // Training content from Sanity: home page, values, modules, quiz and search.
 app.use("/api", api);

@@ -1,6 +1,7 @@
 // Choices shown to editors in drop-down lists.
 // The icon names must match the ones registered in web/src/components/icons.jsx.
 export const ICON_OPTIONS = [
+  { title: "Games controller", value: "gamepad-2" },
   { title: "Award ribbon", value: "award" },
   { title: "Crown", value: "crown" },
   { title: "Flame", value: "flame" },
@@ -99,6 +100,8 @@ export const BADGE_RULES = [
   { title: "Set up a first tool (every item on its checklist)", value: "tool-setup" },
   { title: "Set up all the core systems", value: "core-setup" },
   { title: "Do the daily Big 5 check on five days", value: "big-five" },
+  { title: "Finish a first game in the Games Room", value: "game-played" },
+  { title: "Score 80% or more in a Games Room game", value: "game-high" },
 ];
 
 // The jobs a tool can do, for the "Which tool does what" map on the Technology page.

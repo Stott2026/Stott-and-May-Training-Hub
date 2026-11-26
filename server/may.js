@@ -16,14 +16,14 @@ import { sanity, queries, fullHubName } from "./sanity.js";
 import { searchHub } from "./content.js";
 
 export const mayEnabled = Boolean(process.env.ANTHROPIC_API_KEY);
-const MODEL = process.env.MAY_MODEL || "claude-sonnet-5-5";
+export const MODEL = process.env.MAY_MODEL || "claude-sonnet-5-5";
 // Messages each person can send May in a day: a guard against accidental big bills.
-const DAILY_LIMIT = Number(process.env.MAY_DAILY_LIMIT) || 60;
-const client = mayEnabled ? new Anthropic() : null;
+export const DAILY_LIMIT = Number(process.env.MAY_DAILY_LIMIT) || 60;
+export const client = mayEnabled ? new Anthropic() : null;
 
 // ── May's instructions (the same for everyone, so Anthropic can cache them) ──
 // The hub's name comes from Site settings; it changes rarely, so the cache still works.
-const instructions = (hub) => `You are May, the training coach in the ${hub}. Stott and May is a recruitment company working across permanent, contract and statement-of-work (SOW) hiring. You coach its consultants and managers.
+export const instructions = (hub) => `You are May, the training coach in the ${hub}. Stott and May is a recruitment company working across permanent, contract and statement-of-work (SOW) hiring. You coach its consultants and managers.
 
 Who you are: warm, direct and practical, like a top-billing senior consultant who enjoys helping people get better. Encourage, but be honest when an answer is weak. Write in British English.
 
@@ -121,7 +121,7 @@ const searchTool = (hub) => ({
   strict: true,
 });
 
-async function searchForMay(query, sources) {
+export async function searchForMay(query, sources) {
   const hub = await cached("searchable", () => sanity.fetch(queries.searchable));
   // Search each word separately as well as the whole phrase, so "counter offer" still finds things.
   const words = [query, ...String(query).split(/\s+/).filter((w) => w.length > 3)];
@@ -157,7 +157,7 @@ async function searchForMay(query, sources) {
 // How many messages each person has sent today. Kept in memory: it resets when the server
 // restarts, which is fine for a guard rail.
 const usage = new Map();
-function useOne(user) {
+export function useOne(user) {
   const day = new Date().toISOString().slice(0, 10);
   const key = `${user.id || user.email || user.name}|${day}`;
   for (const k of usage.keys()) if (!k.endsWith(day)) usage.delete(k);

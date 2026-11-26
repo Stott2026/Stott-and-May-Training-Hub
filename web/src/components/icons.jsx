@@ -10,11 +10,12 @@ import {
   Phone, Calendar, FileCheck, ChartColumn, Banknote, Printer, RotateCcw, Minus, Plus,
   Award, Crown, Flame, Footprints, Lock, Medal, Star, Zap,
   ArrowDown, ArrowUp, GripVertical, Layers, ListOrdered, Repeat,
-  House, Monitor, PlugZap, HeartPulse, Gavel, Coffee, Globe, Fingerprint, MailWarning, Hand, UserCheck, ShieldAlert, LockKeyhole, Accessibility,
+  House, Monitor, PlugZap, HeartPulse, Gavel, Coffee, Globe, Fingerprint, MailWarning, Hand, UserCheck, ShieldAlert, LockKeyhole, Accessibility, Gamepad2,
 } from "lucide-react";
 
 export const icons = {
   house: House,
+  "gamepad-2": Gamepad2,
   monitor: Monitor,
   "plug-zap": PlugZap,
   "heart-pulse": HeartPulse,

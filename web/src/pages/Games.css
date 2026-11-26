@@ -1,0 +1,99 @@
+/* The Games Room (GamesPage.jsx) and one game (GamePage.jsx). Tokens only: no colour values here. */
+
+/* ── The Games Room ── */
+.games { padding-top: var(--space-10); padding-bottom: var(--space-16); }
+.games__notice { margin-bottom: var(--space-6); color: var(--color-text-muted); }
+.games__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-6); grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
+.games__grid > li { display: flex; }
+.games__card {
+  position: relative; display: flex; flex-direction: column; gap: var(--space-3); width: 100%;
+  padding: var(--space-6); border-radius: var(--radius-lg); background: var(--surface-card); box-shadow: var(--shadow-card);
+  color: var(--color-text); text-decoration: none; overflow: hidden;
+}
+.games__card::before { content: ""; position: absolute; inset: 0 0 auto; height: var(--accent-bar); background: var(--accent-gradient); }
+.games__card--open { transition: transform var(--duration-medium) var(--ease-out), box-shadow var(--duration-medium) var(--ease-out); }
+.games__card--open:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.games__card--soon { opacity: 0.7; }
+.games__tile { display: grid; place-items: center; width: 56px; height: 56px; border-radius: var(--radius-md); background: var(--accent-gradient); color: var(--color-text-on-brand); }
+.games__name { font-family: var(--font-heading); font-size: var(--text-lg); font-weight: var(--weight-extrabold); }
+.games__tagline { flex: 1; color: var(--color-text-muted); font-size: var(--text-sm); }
+.games__foot { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.games__play { display: inline-flex; align-items: center; gap: var(--space-1); font-weight: var(--weight-semibold); color: var(--color-link); }
+.games__card--open:hover .games__play { text-decoration: underline; }
+.games__best, .games__soon { padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); background: var(--color-surface-sunken); font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--color-text-muted); }
+
+/* ── One game ── */
+.container.game { max-width: calc(var(--reading-width) + 2 * var(--space-6)); padding-top: var(--space-8); padding-bottom: calc(var(--space-16) + var(--space-12)); /* room for the Ask May button */ }
+.game__back { display: inline-flex; align-items: center; gap: var(--space-1); margin-bottom: var(--space-4); font-weight: var(--weight-semibold); color: var(--color-link); text-decoration: none; }
+.game__back:hover { text-decoration: underline; }
+.game__panel {
+  position: relative; display: grid; gap: var(--space-5); padding: var(--space-8) var(--space-6) var(--space-6);
+  border-radius: var(--radius-lg); background: var(--surface-card); box-shadow: var(--shadow-md); overflow: hidden;
+}
+.game__panel::before { content: ""; position: absolute; inset: 0 0 auto; height: var(--accent-bar); background: var(--accent-gradient); }
+@media (max-width: 640px) { .game__panel { padding: var(--space-6) var(--space-4) var(--space-5); } }
+.game__start > .btn { justify-self: start; }
+.game__tile { display: grid; place-items: center; width: 64px; height: 64px; border-radius: var(--radius-md); background: var(--accent-gradient); color: var(--color-text-on-brand); }
+.game__title { font-family: var(--font-heading); font-size: var(--text-2xl); font-weight: var(--weight-extrabold); line-height: var(--leading-tight); }
+.game__intro { color: var(--color-text-muted); font-size: var(--text-lg); }
+.game__meta { font-size: var(--text-sm); color: var(--color-text-muted); }
+
+.game__levels { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); margin: 0; padding: 0; border: 0; }
+.game__levels legend { margin-bottom: var(--space-3); font-weight: var(--weight-bold); }
+.game__level { position: relative; display: grid; gap: var(--space-1); padding: var(--space-4); border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; }
+.game__level input { position: absolute; opacity: 0; }
+.game__level:has(input:checked) { border-color: var(--color-accent); background: var(--accent-soft); }
+.game__level:has(input:focus-visible) { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.game__level-name { font-weight: var(--weight-bold); }
+.game__level-line { font-size: var(--text-sm); color: var(--color-text-muted); }
+
+.game__bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2) var(--space-4); font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--color-text-muted); }
+.game__steps { display: flex; gap: var(--space-2); }
+.game__steps span { flex: 1; height: 6px; border-radius: var(--radius-pill); background: var(--color-track); }
+.game__steps .is-now { background: var(--accent-soft); }
+.game__steps .is-done { background: var(--accent-gradient); }
+
+.game__say { display: flex; gap: var(--space-3); align-items: flex-start; }
+.game__avatar { flex: none; width: 48px; height: 48px; padding: 3px; border-radius: 50%; background: var(--gradient-brand); }
+.game__avatar span { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: var(--color-surface); color: var(--color-link); font-family: var(--font-heading); font-weight: var(--weight-extrabold); }
+.game__who { margin-bottom: var(--space-1); font-size: var(--text-xs); font-weight: var(--weight-semibold); letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text-muted); }
+.game__bubble { margin: 0; padding: var(--space-4) var(--space-5); border-radius: var(--radius-sm) var(--radius-lg) var(--radius-lg) var(--radius-lg); background: var(--accent-soft); font-size: var(--text-lg); font-weight: var(--weight-medium); line-height: 1.45; }
+
+.game__answer { display: grid; gap: var(--space-2); }
+.game__label { font-weight: var(--weight-bold); }
+.game__answer textarea {
+  width: 100%; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border-strong); border-radius: var(--radius-md);
+  background: var(--color-surface); color: var(--color-text); font: inherit; font-size: var(--text-md); resize: vertical;
+}
+.game__answer textarea:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.game__hint { font-size: var(--text-sm); color: var(--color-text-muted); }
+.game__problem { color: var(--color-danger); font-weight: var(--weight-semibold); }
+.game__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: flex-end; }
+.game__actions--centre { justify-content: center; }
+
+.game__result { display: grid; gap: var(--space-5); }
+.game__result:focus { outline: none; }
+.game__you { margin-left: auto; max-width: 90%; padding: var(--space-3) var(--space-4); border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg); background: var(--color-surface-sunken); }
+.game__you-text { white-space: pre-wrap; }
+.game__score { display: flex; align-items: center; gap: var(--space-5); padding: var(--space-4); border-radius: var(--radius-lg); background: var(--color-surface-sunken); }
+.game__score-number { font-family: var(--font-ui); font-size: var(--text-xl); color: var(--color-text-muted); }
+.game__score-number strong { font-size: var(--text-display); font-weight: var(--weight-extrabold); color: var(--color-text); }
+.game__verdict { font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: var(--text-lg); }
+.game__feedback { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+.game__list, .game__line, .game__playbook { padding: var(--space-4); border-radius: var(--radius-md); border: 1px solid var(--color-border); }
+.game__list h2, .game__line h2, .game__playbook h2 { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2); font-size: var(--text-sm); font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: 0.06em; }
+.game__list ul, .game__playbook ul { margin: 0; padding-left: var(--space-5); display: grid; gap: var(--space-1); }
+.game__list--good h2 { color: var(--color-success); }
+.game__list--better h2 { color: var(--color-text-muted); }
+.game__line { background: var(--accent-soft); border-color: transparent; }
+.game__line p { font-size: var(--text-lg); font-weight: var(--weight-medium); }
+.game__playbook p { margin-bottom: var(--space-2); }
+.game__playbook a { color: var(--color-link); font-weight: var(--weight-semibold); }
+
+.game__end { justify-items: center; text-align: center; }
+.game__end .game__title { font-size: var(--text-display); }
+.game__end .game__title:focus { outline: none; }
+.game__recap { width: 100%; margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-2); text-align: left; }
+.game__recap li { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-3); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--color-surface-sunken); }
+.game__recap span { flex: 1; min-width: 12rem; }
+.game__recap em { font-style: normal; color: var(--color-text-muted); font-size: var(--text-sm); }

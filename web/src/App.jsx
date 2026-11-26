@@ -15,6 +15,8 @@ import TechPage from "./pages/TechPage.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
 import CompliancePage from "./pages/CompliancePage.jsx";
 import CoursePage from "./pages/CoursePage.jsx";
+import GamesPage from "./pages/GamesPage.jsx";
+import GamePage from "./pages/GamePage.jsx";
 import { ComplianceProvider } from "./lib/compliance.jsx";
 import { ToastProvider } from "./lib/toast.jsx";
 import { ProgressProvider } from "./lib/progress.jsx";
@@ -35,6 +37,8 @@ const NAV = [
   { id: "managers", label: "Managers", icon: "briefcase", href: "/managers" },
   { id: "documents", label: "Documents & Forms", icon: "file-text", href: "/documents" },
   { id: "compliance", label: "Compliance", icon: "shield-check", href: "/compliance" },
+  // The Games Room needs May, so it only shows when she's switched on (see Shell).
+  { id: "games", label: "Games Room", icon: "gamepad-2", href: "/games", needsMay: true },
 ];
 
 // Back to the top of the page whenever the page (not just the search words) changes.
@@ -63,13 +67,13 @@ const initialsOf = (name = "") => name.split(/\s+/).filter(Boolean).map((w) => w
 function Shell({ user, children }) {
   const { pathname } = useLocation();
   const area = useNavArea();
-  const { quickLinks, house } = useSite();
+  const { quickLinks, house, may } = useSite();
   const { name } = useHubName();
   const ach = useAchievements();
   // The level and points chip in the top bar, once badges and levels are switched on.
   const level = ach.enabled ? { title: ach.level.title, points: ach.points } : null;
-  const current = pathname.startsWith("/tech") ? "tech" : pathname.startsWith("/start") ? "start" : pathname.startsWith("/achievements") ? "achievements" : pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : pathname.startsWith("/documents") ? "documents" : pathname.startsWith("/compliance") ? "compliance" : "training";
-  return <AppShell productName={name} navItems={NAV} quickLinks={quickLinks ?? []} house={house} level={level} current={current} user={user}>{children}</AppShell>;
+  const current = pathname.startsWith("/tech") ? "tech" : pathname.startsWith("/start") ? "start" : pathname.startsWith("/achievements") ? "achievements" : pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : pathname.startsWith("/documents") ? "documents" : pathname.startsWith("/compliance") ? "compliance" : pathname.startsWith("/games") ? "games" : "training";
+  return <AppShell productName={name} navItems={NAV.filter((n) => !n.needsMay || may)} quickLinks={quickLinks ?? []} house={house} level={level} current={current} user={user}>{children}</AppShell>;
 }
 
 // The real Ask May, when it's switched on (the server has an Anthropic API key). The preview
@@ -108,6 +112,8 @@ export default function App() {
               <Route path="/compliance" element={<CompliancePage />} />
               <Route path="/compliance/:slug" element={<CoursePage />} />
               <Route path="/compliance/:slug/:step" element={<CoursePage />} />
+              <Route path="/games" element={<GamesPage />} />
+              <Route path="/games/:slug" element={<GamePage />} />
               <Route path="*" element={<LoadState error={{ status: 404 }} />} />
             </Routes>
           </Shell>
