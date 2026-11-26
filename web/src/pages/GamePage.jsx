@@ -29,8 +29,10 @@ import "./Games.css";
 // - "mistake" (Spot the mistake): May writes an email, InMail or advert with a few deliberate
 //   mistakes (POST /api/games/:slug/piece); you tap the sentences you think are wrong, and the page
 //   marks it: what you caught, what you missed and anything you flagged that was fine.
+// - "counter" (Counter-offer): the same call engine as Get the meeting; May plays a candidate who's
+//   resigned and been offered more to stay, and calls you. The meter is their commitment to the move.
 // Best scores are kept in this browser, like progress. Server: server/games.js.
-export const PLAYABLE = ["objection", "meeting", "rapid", "mistake"];
+export const PLAYABLE = ["objection", "meeting", "rapid", "mistake", "counter"];
 // Rapid fire needs no challenges of its own: its questions come from the quiz bank.
 export const isReady = (game) => !game.comingSoon && PLAYABLE.includes(game.kind) && (game.kind === "rapid" || (game.challenges ?? game.scenarios?.length ?? 0) > 0);
 const LEVELS = ["friendly", "tough", "brutal"];
@@ -198,7 +200,7 @@ function Game({ game, page }) {
   const levelName = page[level]?.name || LEVEL_FALLBACK[level];
   const count = Math.min(game.rounds || 3, game.scenarios?.length ?? 0);
   const questions = game.rounds || 10;
-  const note = game.kind === "meeting" ? `One call, up to ${MAX_TURNS} turns, scored out of 10`
+  const note = CALLS[game.kind] ? `One call, up to ${MAX_TURNS} turns, scored out of 10`
     : game.kind === "rapid" ? `${questions} questions from the Playbook, ${SECONDS[level]} seconds each`
     : game.kind === "mistake" ? `One piece of writing, ${level === "brutal" ? 4 : 3} mistakes to find, scored out of 10`
     : `${count} ${count === 1 ? "challenge" : "challenges"}, each scored out of 10`;
@@ -206,7 +208,7 @@ function Game({ game, page }) {
   const props = { game, page, level, levelName, onAgain: () => setPlaying((n) => n + 1), onLevel: () => setPlaying(0) };
   if (game.kind === "rapid") return <Rapid key={playing} {...props} />;
   if (game.kind === "mistake") return <Mistake key={playing} {...props} />;
-  return game.kind === "meeting" ? <Meeting key={playing} {...props} /> : <Objection key={playing} {...props} count={count} />;
+  return CALLS[game.kind] ? <Call key={playing} {...props} /> : <Objection key={playing} {...props} count={count} />;
 }
 
 // ── Handle the objection ──────────────────────────────────────
@@ -300,18 +302,43 @@ function Challenge({ game, page, level, levelName, scenario, number, of, running
   );
 }
 
-// ── Get the meeting ───────────────────────────────────────────
+// ── Get the meeting and Counter-offer (calls) ──────────────────
 
-const START_WARMTH = { friendly: 40, tough: 25, brutal: 10 };
-const warmthWord = (w) => (w >= 75 ? "Hot" : w >= 50 ? "Warm" : w >= 25 ? "Warming up" : "Cold");
+// The two call games: the meter's words, how it starts, and how it ends. Keep the starting points in
+// step with the levels in server/games.js (CALLS).
+const CALLS = {
+  meeting: {
+    start: { friendly: 40, tough: 25, brutal: 10 },
+    meterLabel: "How it's going",
+    meterName: "How warm May is to a meeting",
+    word: (w) => (w >= 75 ? "Hot" : w >= 50 ? "Warm" : w >= 25 ? "Warming up" : "Cold"),
+    ringing: "Calling…",
+    onCall: "On the phone to",
+    won: { icon: "calendar", text: "Meeting booked" },
+    lost: { icon: "phone", text: "They hung up" },
+    again: "Another call",
+  },
+  counter: {
+    start: { friendly: 55, tough: 40, brutal: 25 },
+    meterLabel: "Their commitment to the move",
+    meterName: "How committed the candidate is to the move",
+    word: (w) => (w >= 75 ? "Committed" : w >= 50 ? "Leaning your way" : w >= 25 ? "Wavering" : "Leaning towards staying"),
+    ringing: "Your candidate is calling…",
+    onCall: "On the phone with",
+    won: { icon: "handshake", text: "They're still joining" },
+    lost: { icon: "circle-x", text: "They took the counter" },
+    again: "Another call",
+  },
+};
 
-function Meeting({ game, page, level, levelName, onAgain, onLevel }) {
+function Call({ game, page, level, levelName, onAgain, onLevel }) {
+  const kind = CALLS[game.kind];
   const save = useSaveScore(game);
   const lineId = useId();
   const [scenario] = useState(() => shuffle(game.scenarios)[0]);
   const [ringing, setRinging] = useState(true);
   const [turns, setTurns] = useState(() => [{ role: "assistant", content: scenario.line }]);
-  const [warmth, setWarmth] = useState(START_WARMTH[level] ?? 25);
+  const [warmth, setWarmth] = useState(kind.start[level] ?? 25);
   const [line, setLine] = useState("");
   const [busy, setBusy] = useState(false);
   const [problem, setProblem] = useState(null);
@@ -361,13 +388,13 @@ function Meeting({ game, page, level, levelName, onAgain, onLevel }) {
     return (
       <section className="game__panel game__ringing" aria-labelledby="ring-title">
         <span className="ring-phone" aria-hidden="true"><Icon name="phone" size={40} /></span>
-        <h1 id="ring-title" className="game__title">Calling…</h1>
+        <h1 id="ring-title" className="game__title">{kind.ringing}</h1>
         <p className="game__intro">{scenario.who}</p>
       </section>
     );
   }
 
-  const booked = ended?.outcome === "meeting";
+  const booked = ended?.outcome === "won";
   return (
     <section className="game__panel game__call" aria-labelledby="call-title">
       {booked && <Confetti />}
@@ -375,10 +402,10 @@ function Meeting({ game, page, level, levelName, onAgain, onLevel }) {
         <span>{game.title} · {levelName}</span>
         <span>{ended ? "Call ended" : `Turn ${Math.min(used + 1, MAX_TURNS)} of ${MAX_TURNS}`}</span>
       </div>
-      <h1 id="call-title" className="game__call-title"><Icon name="phone" size={18} /> On the phone to: {scenario.who}</h1>
+      <h1 id="call-title" className="game__call-title"><Icon name="phone" size={18} /> {kind.onCall}: {scenario.who}</h1>
 
-      <div className="warmth" role="meter" aria-label="How warm May is to a meeting" aria-valuemin={0} aria-valuemax={100} aria-valuenow={warmth} aria-valuetext={warmthWord(warmth)}>
-        <div className="warmth__head"><span>How it's going</span><strong>{warmthWord(warmth)}</strong></div>
+      <div className="warmth" role="meter" aria-label={kind.meterName} aria-valuemin={0} aria-valuemax={100} aria-valuenow={warmth} aria-valuetext={kind.word(warmth)}>
+        <div className="warmth__head"><span>{kind.meterLabel}</span><strong>{kind.word(warmth)}</strong></div>
         <div className="warmth__track"><span className="warmth__fill" style={{ width: `${Math.max(4, warmth)}%` }} /><Icon name="flame" size={20} className="warmth__flame" style={{ left: `${Math.max(4, warmth)}%` }} /></div>
       </div>
 
@@ -404,12 +431,12 @@ function Meeting({ game, page, level, levelName, onAgain, onLevel }) {
       {ended && (
         <div className="game__result" ref={endRef} tabIndex={-1} aria-live="polite">
           <div className={`stamp ${booked ? "stamp--won" : "stamp--lost"}`}>
-            <Icon name={booked ? "calendar" : "phone"} size={22} />
-            {booked ? "Meeting booked" : "They hung up"}
+            <Icon name={booked ? kind.won.icon : kind.lost.icon} size={22} />
+            {booked ? kind.won.text : kind.lost.text}
           </div>
           {ended.final ? <ScoreCard result={ended.final} /> : <p className="game__intro">May couldn't score this call. Have another go.</p>}
           <div className="game__actions game__actions--centre">
-            <Button icon="rotate-ccw" onClick={onAgain}>Another call</Button>
+            <Button icon="rotate-ccw" onClick={onAgain}>{kind.again}</Button>
             <Button variant="secondary" onClick={onLevel}>Change level</Button>
             <Button variant="ghost" to="/games">Back to the Games Room</Button>
           </div>

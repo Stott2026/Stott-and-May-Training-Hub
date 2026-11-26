@@ -14,6 +14,10 @@
 // (0 to 100) and whether the call goes on, she agrees to a meeting, or she hangs up. On the fifth
 // turn she must decide. When the call ends she steps out and scores the whole call out of 10.
 //
+// "Counter-offer", the fifth game, runs on the same engine as Get the meeting: May plays a candidate
+// who has resigned and been offered more to stay; the meter is their commitment to the move, and
+// the call ends with them still joining (won) or taking the counter-offer (lost).
+//
 // "Rapid fire", the third game: questions from the hub's quiz bank against the clock
 // (GET /api/games/:slug/questions). No call to May, so it's instant and free.
 //
@@ -57,17 +61,18 @@ const FINAL_SCHEMA = {
   required: SCORE_SCHEMA.required.filter((k) => k !== "reaction"),
 };
 
-// One turn of a call.
-const TURN_SCHEMA = {
+// One turn of a call. outcome: "talking", or "won" or "lost" when the call ends (what those mean
+// depends on the game, see CALLS).
+const turnSchema = (call) => ({
   type: "object",
   properties: {
     reply: { type: "string", description: "What you say next, in character, as you'd say it on the phone: one to three short sentences." },
-    warmth: { type: "integer", description: "How open you now are to a meeting, from 0 (about to hang up) to 100 (keen to meet)." },
-    outcome: { type: "string", enum: ["talking", "meeting", "hangup"], description: "talking if the call goes on, meeting if you have just agreed to a meeting, hangup if you have just ended the call." },
+    warmth: { type: "integer", description: call.meter },
+    outcome: { type: "string", enum: ["talking", "won", "lost"], description: call.outcome },
   },
   required: ["reply", "warmth", "outcome"],
   additionalProperties: false,
-};
+});
 
 const MAX_TURNS = 5;
 
@@ -113,30 +118,62 @@ Write the piece described below as a Stott and May consultant might, between 8 a
 
 Use made-up first names only, and never real companies or people. Never invent Stott and May specifics such as fees, terms or policies, and don't make any mistakes about those. Write in British English, apart from the deliberate mistakes.`;
 
-const callRules = (title) => `You are running a game in the hub's Games Room called "${title}". The learner is practising cold calls to win a meeting, and has asked to be challenged.
+// The two call games: who May plays, how the meter and the ending work, and how the call is scored.
+const callCommon = `Stay in character the whole time and talk as that person really would on the phone: short, busy, human. Never invent Stott and May specifics such as fees or terms. If the learner uses real names or personal details of candidates, clients or colleagues, carry on but don't repeat them.`;
+const scoreCommon = `worked and improve: short, specific points. betterLine: one thing they could have said at the key moment, ready to use. playbook: what the hub's training says, citing it as labelled; empty if the hub has nothing on it. Never invent Stott and May specifics.
 
-How the game works: you play the person described below, who has just picked up the phone to the learner, a recruitment consultant at Stott and May calling out of the blue. The learner has at most ${MAX_TURNS} turns to win a meeting with you. Stay in character the whole time and talk as that person really would on the phone: short, busy, human.
+Keep every field short.`;
+
+const CALLS = {
+  meeting: {
+    meter: "How open you now are to a meeting, from 0 (about to hang up) to 100 (keen to meet).",
+    outcome: "talking if the call goes on, won if you have just agreed to a meeting, lost if you have just ended the call.",
+    opened: "You answered the phone with",
+    ending: { won: "you agreed to a meeting", lost: "you ended the call without agreeing to meet" },
+    rules: (title) => `You are running a game in the hub's Games Room called "${title}". The learner is practising cold calls to win a meeting, and has asked to be challenged.
+
+How the game works: you play the person described below, who has just picked up the phone to the learner, a recruitment consultant at Stott and May calling out of the blue. The learner has at most ${MAX_TURNS} turns to win a meeting with you. ${callCommon}
 
 Each turn, reply in character, then judge how the call is going:
 - warmth: how open you now are to a meeting, from 0 to 100. Start from the level's starting point below and move it with each turn: up for a relevant, confident, curious approach that is about your world (good questions, a credible reason to talk, something specific); down for a generic pitch, talking about themselves, pushiness, waffle or ignoring what you said.
-- outcome: "meeting" only once you have actually agreed to meet (a time or a clear yes), which should feel earned; "hangup" if they have lost you; otherwise "talking".
-On the learner's last turn you must decide: "meeting" or "hangup".
-
-Never invent Stott and May specifics such as fees or terms. If the learner uses real names or personal details of candidates, clients or colleagues, carry on but don't repeat them.`;
-
-const callLevels = {
-  friendly: "Level: Friendly. You're open and polite, with a real hiring problem you'd like help with. Start at warmth 40. A decent, relevant approach will win a meeting.",
-  tough: "Level: Tough. You're busy and wary of agencies, though you do have a hiring problem. Start at warmth 25. It takes a sharp, relevant approach and a good question or two to win a meeting.",
-  brutal: "Level: Brutal. You're impatient, you get agency calls every day and you dislike them. Start at warmth 10. Only an outstanding, specific approach that quickly shows value wins a meeting; anything generic gets you off the phone.",
-};
-
-const scoreCallRules = (title) => `You are scoring a cold call from the hub's Games Room game "${title}". Step out of character and coach the learner, written to them as "you".
+- outcome: "won" only once you have actually agreed to meet (a time or a clear yes), which should feel earned; "lost" if they have lost you and you end the call; otherwise "talking".
+On the learner's last turn you must decide: "won" or "lost".`,
+    levels: {
+      friendly: "Level: Friendly. You're open and polite, with a real hiring problem you'd like help with. Start at warmth 40. A decent, relevant approach will win a meeting.",
+      tough: "Level: Tough. You're busy and wary of agencies, though you do have a hiring problem. Start at warmth 25. It takes a sharp, relevant approach and a good question or two to win a meeting.",
+      brutal: "Level: Brutal. You're impatient, you get agency calls every day and you dislike them. Start at warmth 10. Only an outstanding, specific approach that quickly shows value wins a meeting; anything generic gets you off the phone.",
+    },
+    scoring: (title) => `You are scoring a cold call from the hub's Games Room game "${title}". Step out of character and coach the learner, written to them as "you".
 
 Score the whole call out of 10 at the level below, judging: a confident, clear opening with a reason for the call; curiosity (good questions about their world); relevance (linking to their situation, not a generic pitch); handling pushback; and asking for the meeting with a clear next step. Winning the meeting matters, but a well-run call that didn't land can still score well, and a lucky meeting after a weak call shouldn't score highly.
 
-worked and improve: short, specific points. betterLine: one thing they could have said at the key moment, ready to use. playbook: what the hub's training says, citing it as labelled; empty if the hub has nothing on it. Never invent Stott and May specifics.
+${scoreCommon}`,
+  },
+  counter: {
+    meter: "How committed you now are to leaving and joining the new employer, from 0 (taking the counter-offer) to 100 (definitely joining).",
+    outcome: "talking if the call goes on, won if you have just confirmed you're still joining the new employer, lost if you have just decided to take the counter-offer.",
+    opened: "You opened the call with",
+    ending: { won: "you confirmed you're still joining the new employer", lost: "you decided to take the counter-offer and stay" },
+    rules: (title) => `You are running a game in the hub's Games Room called "${title}". The learner is practising handling a counter-offer, and has asked to be challenged.
 
-Keep every field short.`;
+How the game works: you play the candidate described below. You accepted a job through the learner, a recruitment consultant at Stott and May, and resigned; your employer has now offered you more to stay, and you've rung the learner, unsettled. The learner has at most ${MAX_TURNS} turns to help you decide. ${callCommon} You're a real person with mixed feelings: flattered, loyal, worried about the unknown, and you can be won back to the move or talked into staying.
+
+Each turn, reply in character, then judge how the call is going:
+- warmth: how committed you now are to the move, from 0 to 100. Start from the level's starting point below and move it with each turn: up when the learner stays calm, listens, asks what's changed, takes you back to your own reasons for leaving and the things money won't fix, and treats it as your decision; down if they panic, pressure you, guilt-trip you, criticise your employer, or only talk about money.
+- outcome: "won" only once you have clearly said you're still joining, which should feel earned; "lost" if you decide to take the counter-offer; otherwise "talking".
+On the learner's last turn you must decide: "won" or "lost".`,
+    levels: {
+      friendly: "Level: Friendly. You're wobbling but mostly want the new job; you just need reassurance. Start at warmth 55.",
+      tough: "Level: Tough. The counter-offer is tempting and your manager has been persuasive. Start at warmth 40. It takes calm questions and a return to your reasons to keep you.",
+      brutal: "Level: Brutal. You're leaning towards staying: the counter-offer is big, your manager promised a promotion, and you feel guilty about leaving. Start at warmth 25. Only an outstanding, respectful conversation keeps you.",
+    },
+    scoring: (title) => `You are scoring a counter-offer call from the hub's Games Room game "${title}". Step out of character and coach the learner, written to them as "you".
+
+Score the whole call out of 10 at the level below, judging: staying calm and listening; finding out what was offered and what has changed; taking the candidate back to their own reasons for moving; respecting their current employer and the relationship (never criticising them); being honest about why counter-offers often don't last, without scaremongering; and leaving the decision with the candidate, with a clear next step. Keeping the candidate matters, but a well-handled call that didn't land can still score well, and a pushy win shouldn't score highly.
+
+${scoreCommon}`,
+  },
+};
 
 const gameRules = (title) => `You are running a game in the hub's Games Room called "${title}". The learner is practising handling objections, and has asked to be challenged.
 
@@ -332,36 +369,36 @@ games.post("/:slug/turn", async (req, res) => {
   if (!mayEnabled) return res.status(404).json({ error: "May isn't switched on yet, so the games can't be played." });
   const call = cleanCall(req.body?.turns);
   if (!call) return res.status(400).json({ error: "Please type what you'd say (up to 800 characters)." });
-  const level = callLevels[req.body?.level] ? req.body.level : "tough";
-
   const game = await sanity.fetch(queries.gameForMay, { slug: req.params.slug });
   const scenario = game?.scenarios?.find((s) => s._key === req.body?.scenario);
-  if (!game || game.comingSoon || game.kind !== "meeting" || !scenario) return res.status(404).json({ error: "That call isn't available. Please start a new game." });
+  const kind = CALLS[game?.kind];
+  if (!game || game.comingSoon || !kind || !scenario) return res.status(404).json({ error: "That call isn't available. Please start a new game." });
+  const level = kind.levels[req.body?.level] ? req.body.level : "tough";
   if (!useOne(req.user)) return res.status(429).json({ error: `You've reached today's limit of ${DAILY_LIMIT} messages with May. She'll be back tomorrow.` });
 
   const last = call.learnerTurns >= MAX_TURNS;
   const situation = [
-    callLevels[level],
+    kind.levels[level],
     `Who you are: ${scenario.who}`,
     scenario.background ? `Your situation (the learner doesn't know this unless they find out): ${scenario.background}` : "",
-    `You answered the phone with: "${scenario.line}"`,
-    `This is the learner's turn ${call.learnerTurns} of ${MAX_TURNS}.${last ? " It is their last: you must decide now, meeting or hangup." : ""}`,
+    `${kind.opened}: "${scenario.line}"`,
+    `This is the learner's turn ${call.learnerTurns} of ${MAX_TURNS}.${last ? " It is their last: you must decide now, won or lost." : ""}`,
   ].filter(Boolean).join("\n\n");
 
   try {
     const turn = await askForJson({
       system: [
         { type: "text", text: instructions(fullHubName()) },
-        { type: "text", text: callRules(game.title), cache_control: { type: "ephemeral" } },
+        { type: "text", text: kind.rules(game.title), cache_control: { type: "ephemeral" } },
         { type: "text", text: situation },
       ],
       messages: call.turns,
-      schema: TURN_SCHEMA,
+      schema: turnSchema(kind),
       maxTokens: 1000,
     });
     if (!turn) return res.status(422).json({ error: "May can't reply to that one. Please try saying it another way." });
-    let outcome = ["talking", "meeting", "hangup"].includes(turn.outcome) ? turn.outcome : "talking";
-    if (last && outcome === "talking") outcome = "hangup";
+    let outcome = ["talking", "won", "lost"].includes(turn.outcome) ? turn.outcome : "talking";
+    if (last && outcome === "talking") outcome = "lost";
     const reply = String(turn.reply ?? "");
     const warmth = Math.max(0, Math.min(100, Math.round(Number(turn.warmth) || 0)));
     if (outcome === "talking") return res.json({ reply, warmth, outcome });
@@ -370,15 +407,15 @@ games.post("/:slug/turn", async (req, res) => {
     const sources = {};
     const training = await lookUpTraining(scenario, sources);
     const transcript = [
-      `You played: ${scenario.who}. You answered: "${scenario.line}"`,
+      `You played: ${scenario.who}. ${kind.opened}: "${scenario.line}"`,
       ...call.turns.map((t) => `${t.role === "user" ? "Learner" : "You"}: ${t.content}`),
       `You: ${reply}`,
-      `How it ended: ${outcome === "meeting" ? "you agreed to a meeting" : "you ended the call without agreeing to meet"}.`,
+      `How it ended: ${kind.ending[outcome]}.`,
     ].join("\n");
     const result = await askForJson({
       system: [
         { type: "text", text: instructions(fullHubName()) },
-        { type: "text", text: scoreCallRules(game.title), cache_control: { type: "ephemeral" } },
+        { type: "text", text: kind.scoring(game.title), cache_control: { type: "ephemeral" } },
         { type: "text", text: [LEVELS[level], training ? `What the hub's training says (cite as labelled):\n\n${training}` : "The hub's training has nothing specific on this, so mark against good recruitment practice and leave playbook empty."].join("\n\n") },
       ],
       messages: [{ role: "user", content: `The call:\n\n${transcript}` }],

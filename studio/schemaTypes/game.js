@@ -11,7 +11,7 @@ export const GAME_KINDS = [
   { title: "Get the meeting: a cold call of up to five turns; May agrees to meet or hangs up, then scores the call", value: "meeting" },
   { title: "Rapid fire: questions from the hub's quiz bank against the clock (no challenges needed below)", value: "rapid" },
   { title: "Spot the mistake (coming next)", value: "mistake" },
-  { title: "Counter-offer (coming next)", value: "counter" },
+  { title: "Counter-offer: May plays a candidate who has been offered more to stay; five turns to keep them, then she scores the call", value: "counter" },
 ];
 
 export const game = defineType({
