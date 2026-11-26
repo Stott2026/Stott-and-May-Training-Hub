@@ -25,6 +25,7 @@ export const gamesPage = defineType({
     defineField({ name: "title", title: "Heading", type: "string", description: "For example: Challenge May.", validation: (r) => r.required().max(40) }),
     defineField({ name: "titleAccent", title: "Heading, second line", type: "string", description: "Shown in the accent colour, for example: Think on your feet.", validation: (r) => r.max(40) }),
     defineField({ name: "intro", title: "Introduction", type: "text", rows: 2, validation: (r) => r.max(240) }),
+    defineField({ name: "heroImage", title: "Header picture (optional)", type: "image", options: { hotspot: true }, description: "A cut-out photo of a person (clear background), shown in the brand shape beside the heading. Until one is added, a photo from the brand guidelines shows." }),
     level("friendly", "Level 1", { name: "Friendly", line: "May plays nice and marks kindly." }),
     level("tough", "Level 2", { name: "Tough", line: "Real pushback, marked like a manager would." }),
     level("brutal", "Level 3", { name: "Brutal", line: "The hardest buyer you'll meet. No easy marks." }),

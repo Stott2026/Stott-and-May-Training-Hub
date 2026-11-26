@@ -10,6 +10,7 @@ export const placeholderPhotos = {
   // person-7 and scenes 4 to 7 are from the brand's own collateral (LATAM, AI/ML and Astralis pieces).
   tech: assetUrl("placeholders/person-7.webp"),
   achievements: assetUrl("placeholders/person-2.webp"),
+  games: assetUrl("placeholders/person-4.webp"),
   start: assetUrl("placeholders/scene-4.webp"),
   managers: assetUrl("placeholders/scene-6.webp"),
   library: assetUrl("placeholders/scene-7.webp"),

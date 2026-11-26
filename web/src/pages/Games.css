@@ -6,21 +6,51 @@
 .games__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-6); grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
 .games__grid > li { display: flex; }
 .games__card {
-  position: relative; display: flex; flex-direction: column; gap: var(--space-3); width: 100%;
-  padding: var(--space-6); border-radius: var(--radius-lg); background: var(--surface-card); box-shadow: var(--shadow-card);
+  position: relative; display: flex; flex-direction: column; width: 100%;
+  border-radius: var(--radius-lg); background: var(--surface-card); box-shadow: var(--shadow-card);
   color: var(--color-text); text-decoration: none; overflow: hidden;
 }
-.games__card::before { content: ""; position: absolute; inset: 0 0 auto; height: var(--accent-bar); background: var(--accent-gradient); }
-.games__card--open { transition: transform var(--duration-medium) var(--ease-out), box-shadow var(--duration-medium) var(--ease-out); }
-.games__card--open:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.games__card--soon { opacity: 0.7; }
-.games__tile { display: grid; place-items: center; width: 56px; height: 56px; border-radius: var(--radius-md); background: var(--accent-gradient); color: var(--color-text-on-brand); }
+.games__card::before { content: ""; position: absolute; inset: 0 0 auto; z-index: 1; height: var(--accent-bar); background: var(--accent-gradient); }
+.games__card--soon { opacity: 0.72; }
+.games__card--soon .games__art { filter: grayscale(0.6); }
+.games__art { position: relative; display: block; aspect-ratio: 240 / 140; background: var(--accent-soft); overflow: hidden; }
+.games__art > svg, .games__art > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.games__tile {
+  position: absolute; left: var(--space-5); bottom: calc(-1 * var(--space-5)); display: grid; place-items: center;
+  width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--accent-gradient); color: var(--color-text-on-brand);
+  box-shadow: var(--shadow-md);
+}
+.games__body { display: flex; flex: 1; flex-direction: column; gap: var(--space-2); padding: var(--space-8) var(--space-5) var(--space-5); }
+.games__card .games__art { overflow: visible; }
+.games__card .games__art > svg { overflow: hidden; }
 .games__name { font-family: var(--font-heading); font-size: var(--text-lg); font-weight: var(--weight-extrabold); }
 .games__tagline { flex: 1; color: var(--color-text-muted); font-size: var(--text-sm); }
-.games__foot { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.games__foot { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-2); }
 .games__play { display: inline-flex; align-items: center; gap: var(--space-1); font-weight: var(--weight-semibold); color: var(--color-link); }
 .games__card--open:hover .games__play { text-decoration: underline; }
-.games__best, .games__soon { padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); background: var(--color-surface-sunken); font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--color-text-muted); }
+.games__best, .games__soon { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); background: var(--color-surface-sunken); font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--color-text-muted); }
+.games__best { background: var(--accent-soft); color: var(--color-text); }
+
+/* The pictures (GameArt.jsx). */
+.game-art { display: block; width: 100%; height: auto; }
+.art-fill-paper { fill: var(--sm-white); }
+.art-fill-paper-soft { fill: var(--sm-white); opacity: 0.7; }
+.art-fill-brand { fill: var(--sm-teal); }
+.art-fill-brand-soft { fill: var(--sm-teal-100); }
+.art-fill-ink { fill: var(--sm-ink); }
+.art-fill-ink-soft { fill: var(--sm-mist); }
+.art-fill-ui { fill: var(--ill-ui); }
+.art-fill-alert { fill: var(--color-danger); }
+.art-fill-alert-soft { fill: var(--sm-danger-50); stroke: var(--color-danger); stroke-width: 1; }
+.art-line { stroke: var(--color-border-strong); stroke-width: 1.5; }
+.art-ring { fill: none; stroke: var(--sm-teal); stroke-width: 3; }
+.art-wave { fill: none; stroke: var(--sm-teal); stroke-width: 4; stroke-linecap: round; }
+.art-tick, .art-tick-paper { fill: none; stroke: var(--sm-ink); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.art-tick-paper { stroke: var(--sm-white); }
+.art-circle-alert { fill: none; stroke: var(--color-danger); stroke-width: 3; }
+.art-glass { stroke: var(--sm-teal); stroke-width: 6; }
+.art-rope { fill: none; stroke: var(--sm-ink); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 8 6; }
+.art-arrow-paper { fill: none; stroke: var(--sm-white); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ── One game ── */
 .container.game { max-width: calc(var(--reading-width) + 2 * var(--space-6)); padding-top: var(--space-8); padding-bottom: calc(var(--space-16) + var(--space-12)); /* room for the Ask May button */ }
@@ -33,6 +63,10 @@
 .game__panel::before { content: ""; position: absolute; inset: 0 0 auto; height: var(--accent-bar); background: var(--accent-gradient); }
 @media (max-width: 640px) { .game__panel { padding: var(--space-6) var(--space-4) var(--space-5); } }
 .game__start > .btn { justify-self: start; }
+.game__art-wrap { margin: calc(-1 * var(--space-8)) calc(-1 * var(--space-6)) 0; background: var(--accent-soft); }
+.game__art { max-height: 220px; margin: 0 auto; }
+@media (max-width: 640px) { .game__art-wrap { margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-4)) 0; } }
+.game__level-heat { display: flex; gap: 2px; color: var(--color-link); }
 .game__tile { display: grid; place-items: center; width: 64px; height: 64px; border-radius: var(--radius-md); background: var(--accent-gradient); color: var(--color-text-on-brand); }
 .game__title { font-family: var(--font-heading); font-size: var(--text-2xl); font-weight: var(--weight-extrabold); line-height: var(--leading-tight); }
 .game__intro { color: var(--color-text-muted); font-size: var(--text-lg); }
@@ -96,3 +130,120 @@
 .game__recap li { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-3); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--color-surface-sunken); }
 .game__recap span { flex: 1; min-width: 12rem; }
 .game__recap em { font-style: normal; color: var(--color-text-muted); font-size: var(--text-sm); }
+
+/* ── Get the meeting ── */
+.game__call-title { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-heading); font-size: var(--text-lg); font-weight: var(--weight-bold); }
+.warmth { display: grid; gap: var(--space-2); padding: var(--space-4); border-radius: var(--radius-md); background: var(--color-surface-sunken); }
+.warmth__head { display: flex; justify-content: space-between; font-size: var(--text-sm); color: var(--color-text-muted); }
+.warmth__head strong { color: var(--color-text); }
+.warmth__track { position: relative; height: 12px; border-radius: var(--radius-pill); background: var(--color-track); }
+.warmth__fill { display: block; height: 100%; border-radius: inherit; background: var(--gradient-brand); }
+.warmth__flame { position: absolute; top: 50%; translate: -50% -50%; padding: 4px; box-sizing: content-box; border-radius: 50%; background: var(--color-surface); color: var(--color-link); box-shadow: var(--shadow-sm); }
+.game__log { display: grid; gap: var(--space-4); max-height: 28rem; overflow-y: auto; padding: var(--space-1); }
+.game__turns { display: flex; gap: var(--space-1); margin-right: auto; align-self: center; }
+.game__turns span { width: 10px; height: 10px; border-radius: 50%; background: var(--color-track); }
+.game__turns .is-done { background: var(--sm-teal); }
+.game__ringing { justify-items: center; text-align: center; padding-block: var(--space-16); }
+.ring-phone { position: relative; display: grid; place-items: center; width: 96px; height: 96px; border-radius: 50%; background: var(--gradient-brand); color: var(--color-text-on-brand); }
+.ring-phone::before, .ring-phone::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--sm-teal); opacity: 0; }
+.stamp {
+  justify-self: center; display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-3) var(--space-6);
+  border: 3px solid currentColor; border-radius: var(--radius-md); font-family: var(--font-heading); font-weight: var(--weight-extrabold);
+  font-size: var(--text-xl); letter-spacing: 0.04em; text-transform: uppercase; rotate: -4deg;
+}
+.stamp--won { color: var(--color-success); background: var(--accent-soft); }
+.stamp--lost { color: var(--color-danger); background: var(--sm-danger-50); }
+
+/* May's typing dots. */
+.game__bubble--typing { display: inline-flex; padding-block: var(--space-4); }
+.typing { display: inline-flex; gap: 5px; }
+.typing span { width: 8px; height: 8px; border-radius: 50%; background: var(--color-link); opacity: 0.5; }
+
+.game__score { position: relative; }
+.game__score-trophy { margin-left: auto; color: var(--color-link); }
+.game__end-ring { position: relative; }
+.game__end-trophy { position: absolute; right: -12px; top: -8px; padding: 8px; box-sizing: content-box; border-radius: 50%; background: var(--gradient-brand); color: var(--color-text-on-brand); box-shadow: var(--shadow-md); }
+
+/* Confetti (Confetti.jsx): only drawn when motion is allowed. */
+.game__panel { isolation: isolate; }
+.confetti { position: absolute; inset: 0; z-index: 5; overflow: hidden; pointer-events: none; }
+.confetti__bit { position: absolute; top: -12px; width: 8px; height: 14px; border-radius: 2px; background: var(--sm-teal); animation: confetti-fall 1.8s var(--ease-out) forwards; }
+.confetti__bit--1 { background: var(--sm-aqua); }
+.confetti__bit--2 { background: var(--sm-ink); }
+.confetti__bit--round { width: 10px; height: 10px; border-radius: 50%; }
+
+/* ── Micro-animations: quick, playful, and all off for reduced motion ── */
+@media (prefers-reduced-motion: no-preference) {
+  /* Cards arrive one after another, lift and tilt a little on hover, and press in when clicked. */
+  .games__grid > li { animation: games-in 480ms var(--ease-spring) both; animation-delay: calc(var(--i, 0) * 70ms); }
+  .games__card--open { transition: transform var(--duration-medium) var(--ease-spring), box-shadow var(--duration-medium) var(--ease-out); }
+  .games__card--open:hover { transform: translateY(-6px) rotate(-0.6deg); box-shadow: var(--shadow-lg); }
+  .games__card--open:active { transform: translateY(-2px) scale(0.97); transition-duration: 90ms; }
+  .games__tile { transition: transform var(--duration-medium) var(--ease-spring); }
+  .games__card--open:hover .games__tile { transform: rotate(-10deg) scale(1.12); }
+  .games__card--open:hover .art__float--a, .game__start .art__float--a { animation: art-float 3s ease-in-out infinite; }
+  .games__card--open:hover .art__float--b, .game__start .art__float--b { animation: art-float 3s ease-in-out -1.5s infinite; }
+  .games__card--open:hover .art__spin, .game__start .art__spin { animation: art-spin 6s linear infinite; }
+  .games__card--open:hover .art__spin--fast, .game__start .art__spin--fast { animation-duration: 1.6s; }
+  .games__card--open:hover .art__pop, .game__start .art__pop { animation: art-pop 1.4s var(--ease-spring) infinite; }
+  .games__card--open:hover .art__shake, .game__start .art__shake { animation: art-shake 1.2s ease-in-out infinite; }
+  .games__card--open:hover .art-wave, .game__start .art-wave { animation: art-wave 1.2s ease-out infinite; }
+  .games__card--open:hover .art-wave--2, .game__start .art-wave--2 { animation-delay: 0.3s; }
+  .games__card--open:hover .art__draw, .game__start .art__draw { stroke-dasharray: 300; animation: art-draw 1.6s ease-out infinite; }
+  .games__card--open:hover .art__search, .game__start .art__search { animation: art-search 2.4s ease-in-out infinite; }
+  .games__card--open:hover .art-rope, .game__start .art-rope { animation: art-rope 0.8s linear infinite; }
+  .art__float, .art__spin, .art__pop, .art__shake, .art__search, .art__draw { transform-box: fill-box; transform-origin: center; }
+
+  /* Choosing a level makes it pop; the start button glows. */
+  .game__level { transition: border-color var(--duration-fast), background var(--duration-fast), transform var(--duration-fast); }
+  .game__level:hover { transform: translateY(-2px); }
+  .game__level:has(input:checked) { animation: level-pop 360ms var(--ease-spring); }
+  .game__level:has(input:checked) .game__level-heat { animation: flame-flicker 1.2s ease-in-out infinite; }
+  .game__go { animation: go-glow 2.4s ease-in-out infinite; }
+  .btn:active { transform: scale(0.96); }
+
+  /* Bubbles pop in, May types, feedback rises in turn. */
+  .game__pop { animation: bubble-in 380ms var(--ease-spring) both; }
+  .game__you.game__pop { transform-origin: right top; }
+  .typing span { animation: typing 1s ease-in-out infinite; }
+  .typing span:nth-child(2) { animation-delay: 0.15s; }
+  .typing span:nth-child(3) { animation-delay: 0.3s; }
+  .game__score { animation: bubble-in 420ms var(--ease-spring) both; }
+  .game__score--low { animation: score-shake 520ms ease-in-out 200ms both; }
+  .game__score-trophy, .game__end-trophy { animation: trophy-bounce 900ms var(--ease-spring) 400ms both; }
+  .game__rise { animation: reveal-up 420ms var(--ease-out) both; animation-delay: calc(240ms + var(--i, 0) * 110ms); }
+  .game__steps span { transition: background var(--duration-medium) var(--ease-out); }
+
+  /* The call: the phone rings, the warmth meter slides, the flame grows when it's hot, the stamp lands. */
+  .ring-phone { animation: phone-shake 0.6s ease-in-out infinite; }
+  .ring-phone::before { animation: ring-out 1.2s ease-out infinite; }
+  .ring-phone::after { animation: ring-out 1.2s ease-out 0.6s infinite; }
+  .warmth__fill { transition: width 700ms var(--ease-spring); }
+  .warmth__flame { transition: left 700ms var(--ease-spring), transform 300ms; }
+  .warmth[aria-valuenow] .warmth__flame { animation: flame-flicker 1.4s ease-in-out infinite; }
+  .stamp { animation: stamp-in 520ms var(--ease-spring) both; }
+}
+
+@keyframes games-in { from { opacity: 0; transform: translateY(18px) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes art-float { 50% { transform: translateY(-5px); } }
+@keyframes art-spin { to { transform: rotate(360deg); } }
+@keyframes art-pop { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.18); } }
+@keyframes art-shake { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(-7deg); } 40% { transform: rotate(6deg); } 60% { transform: rotate(-4deg); } 80% { transform: rotate(2deg); } }
+@keyframes art-wave { from { opacity: 1; } to { opacity: 0; } }
+@keyframes art-draw { from { stroke-dashoffset: 300; } to { stroke-dashoffset: 0; } }
+@keyframes art-search { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(-18px, 6px); } 66% { transform: translate(-6px, -6px); } }
+@keyframes art-rope { to { stroke-dashoffset: -14; } }
+@keyframes level-pop { 40% { transform: scale(1.05); } }
+@keyframes flame-flicker { 50% { transform: scale(1.12) rotate(-4deg); } }
+@keyframes go-glow { 50% { box-shadow: var(--shadow-glow); } }
+@keyframes bubble-in { from { opacity: 0; transform: translateY(8px) scale(0.92); } to { opacity: 1; transform: none; } }
+@keyframes typing { 0%, 100% { transform: translateY(0); opacity: 0.4; } 40% { transform: translateY(-5px); opacity: 1; } }
+@keyframes score-shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+@keyframes trophy-bounce { from { opacity: 0; transform: translateY(-20px) scale(0.4) rotate(-20deg); } to { opacity: 1; transform: none; } }
+@keyframes phone-shake { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-10deg); } 75% { transform: rotate(10deg); } }
+@keyframes ring-out { from { opacity: 0.8; transform: scale(1); } to { opacity: 0; transform: scale(1.8); } }
+@keyframes stamp-in { from { opacity: 0; transform: scale(2.2); } to { opacity: 1; transform: none; } }
+@keyframes confetti-fall {
+  0% { opacity: 1; transform: translate(0, 0) rotate(0); }
+  100% { opacity: 0; transform: translate(var(--drift), 520px) rotate(var(--spin)); }
+}

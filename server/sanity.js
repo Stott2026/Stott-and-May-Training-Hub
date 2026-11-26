@@ -167,9 +167,9 @@ export const queries = {
 
   // The Games Room: its page (heading and the three levels) and a card's worth of each game.
   games: `{
-    "page": *[_id == "gamesPage"][0]{ eyebrow, title, titleAccent, intro, friendly, tough, brutal, privacyNote },
+    "page": *[_id == "gamesPage"][0]{ eyebrow, title, titleAccent, intro, ${image("heroImage")}, friendly, tough, brutal, privacyNote },
     "games": *[_type == "game" && defined(slug.current)] | order(order asc){
-      _id, title, "slug": slug.current, kind, comingSoon, tagline, icon, accent, "challenges": count(scenarios)
+      _id, title, "slug": slug.current, kind, comingSoon, tagline, icon, accent, ${image("image")}, "challenges": count(scenarios)
     }
   }`,
 
@@ -178,7 +178,7 @@ export const queries = {
   game: `{
     "page": *[_id == "gamesPage"][0]{ friendly, tough, brutal, privacyNote },
     "game": *[_type == "game" && slug.current == $slug][0]{
-      _id, title, "slug": slug.current, kind, comingSoon, tagline, intro, icon, accent, rounds,
+      _id, title, "slug": slug.current, kind, comingSoon, tagline, intro, icon, accent, ${image("image")}, rounds,
       "scenarios": scenarios[]{ _key, who, line }
     }
   }`,

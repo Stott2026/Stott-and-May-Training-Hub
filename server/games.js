@@ -9,7 +9,12 @@
 //    against the training, as JSON: what worked, what to improve, a better line and what the
 //    Playbook says, citing it.
 //
-// Each answer counts as one message towards May's daily limit. Nothing typed is stored.
+// "Get the meeting", the second game: a cold call of up to five turns. May answers the phone as a
+// decision-maker; each turn the learner speaks, she replies in character and says how warm she is
+// (0 to 100) and whether the call goes on, she agrees to a meeting, or she hangs up. On the fifth
+// turn she must decide. When the call ends she steps out and scores the whole call out of 10.
+//
+// Each answer (or turn) counts as one message towards May's daily limit. Nothing typed is stored.
 import Anthropic from "@anthropic-ai/sdk";
 import { Router } from "express";
 import { sanity, queries, fullHubName } from "./sanity.js";
@@ -37,6 +42,52 @@ const SCORE_SCHEMA = {
   additionalProperties: false,
 };
 
+// The same feedback for a whole call, without the in-character reply.
+const FINAL_SCHEMA = {
+  ...SCORE_SCHEMA,
+  properties: Object.fromEntries(Object.entries(SCORE_SCHEMA.properties).filter(([k]) => k !== "reaction")),
+  required: SCORE_SCHEMA.required.filter((k) => k !== "reaction"),
+};
+
+// One turn of a call.
+const TURN_SCHEMA = {
+  type: "object",
+  properties: {
+    reply: { type: "string", description: "What you say next, in character, as you'd say it on the phone: one to three short sentences." },
+    warmth: { type: "integer", description: "How open you now are to a meeting, from 0 (about to hang up) to 100 (keen to meet)." },
+    outcome: { type: "string", enum: ["talking", "meeting", "hangup"], description: "talking if the call goes on, meeting if you have just agreed to a meeting, hangup if you have just ended the call." },
+  },
+  required: ["reply", "warmth", "outcome"],
+  additionalProperties: false,
+};
+
+const MAX_TURNS = 5;
+
+const callRules = (title) => `You are running a game in the hub's Games Room called "${title}". The learner is practising cold calls to win a meeting, and has asked to be challenged.
+
+How the game works: you play the person described below, who has just picked up the phone to the learner, a recruitment consultant at Stott and May calling out of the blue. The learner has at most ${MAX_TURNS} turns to win a meeting with you. Stay in character the whole time and talk as that person really would on the phone: short, busy, human.
+
+Each turn, reply in character, then judge how the call is going:
+- warmth: how open you now are to a meeting, from 0 to 100. Start from the level's starting point below and move it with each turn: up for a relevant, confident, curious approach that is about your world (good questions, a credible reason to talk, something specific); down for a generic pitch, talking about themselves, pushiness, waffle or ignoring what you said.
+- outcome: "meeting" only once you have actually agreed to meet (a time or a clear yes), which should feel earned; "hangup" if they have lost you; otherwise "talking".
+On the learner's last turn you must decide: "meeting" or "hangup".
+
+Never invent Stott and May specifics such as fees or terms. If the learner uses real names or personal details of candidates, clients or colleagues, carry on but don't repeat them.`;
+
+const callLevels = {
+  friendly: "Level: Friendly. You're open and polite, with a real hiring problem you'd like help with. Start at warmth 40. A decent, relevant approach will win a meeting.",
+  tough: "Level: Tough. You're busy and wary of agencies, though you do have a hiring problem. Start at warmth 25. It takes a sharp, relevant approach and a good question or two to win a meeting.",
+  brutal: "Level: Brutal. You're impatient, you get agency calls every day and you dislike them. Start at warmth 10. Only an outstanding, specific approach that quickly shows value wins a meeting; anything generic gets you off the phone.",
+};
+
+const scoreCallRules = (title) => `You are scoring a cold call from the hub's Games Room game "${title}". Step out of character and coach the learner, written to them as "you".
+
+Score the whole call out of 10 at the level below, judging: a confident, clear opening with a reason for the call; curiosity (good questions about their world); relevance (linking to their situation, not a generic pitch); handling pushback; and asking for the meeting with a clear next step. Winning the meeting matters, but a well-run call that didn't land can still score well, and a lucky meeting after a weak call shouldn't score highly.
+
+worked and improve: short, specific points. betterLine: one thing they could have said at the key moment, ready to use. playbook: what the hub's training says, citing it as labelled; empty if the hub has nothing on it. Never invent Stott and May specifics.
+
+Keep every field short.`;
+
 const gameRules = (title) => `You are running a game in the hub's Games Room called "${title}". The learner is practising handling objections, and has asked to be challenged.
 
 How the game works: you played the person described below and said the objection below. The learner's message is their answer to it, as if they were speaking to that person. Then:
@@ -57,6 +108,47 @@ function cleanAnswer(answer) {
   return text && text.length <= 1200 ? text : null;
 }
 
+// What the hub's training says, found with the challenge's own words (or the first line itself).
+async function lookUpTraining(scenario, sources) {
+  const words = (scenario.lookUp || "").trim() || scenario.line.split(/\s+/).filter((w) => w.length > 4).slice(0, 2).join(" ");
+  if (!words) return "";
+  try {
+    return await searchForMay(words.slice(0, 40), sources);
+  } catch (error) {
+    console.error("Games: couldn't search the hub:", error);
+    return "";
+  }
+}
+
+const list = (items, max) => (Array.isArray(items) ? items.filter((x) => typeof x === "string" && x.trim()).slice(0, max) : []);
+const feedback = (result) => ({
+  score: Math.max(0, Math.min(10, Math.round(Number(result.score) || 0))),
+  verdict: String(result.verdict ?? ""),
+  worked: list(result.worked, 3),
+  improve: list(result.improve, 3),
+  betterLine: String(result.betterLine ?? ""),
+  playbook: String(result.playbook ?? ""),
+});
+
+// Ask May for JSON in the given shape. Returns the parsed object, or null if she declined.
+async function askForJson({ system, messages, schema, maxTokens = 2000 }) {
+  const reply = await client.messages.create({
+    model: MODEL,
+    max_tokens: maxTokens,
+    output_config: { effort: "low", format: { type: "json_schema", schema } },
+    system,
+    messages,
+  });
+  if (reply.stop_reason === "refusal") return null;
+  return JSON.parse(reply.content.find((b) => b.type === "text")?.text ?? "{}");
+}
+
+function failed(res, error, what) {
+  console.error("Games:", error);
+  const busy = error instanceof Anthropic.RateLimitError || error instanceof Anthropic.InternalServerError || error instanceof Anthropic.APIConnectionError;
+  res.status(busy ? 503 : 500).json({ error: busy ? "May is very busy right now. Please try again in a minute." : `Sorry, May couldn't ${what}. Please try again.` });
+}
+
 export const games = Router();
 
 games.post("/:slug/score", async (req, res) => {
@@ -70,15 +162,8 @@ games.post("/:slug/score", async (req, res) => {
   if (!game || game.comingSoon || game.kind !== "objection" || !scenario) return res.status(404).json({ error: "That challenge isn't available. Please start a new game." });
   if (!useOne(req.user)) return res.status(429).json({ error: `You've reached today's limit of ${DAILY_LIMIT} messages with May. She'll be back tomorrow.` });
 
-  // What the hub's training says, found with the challenge's own words (or the objection itself).
   const sources = {};
-  const lookUp = (scenario.lookUp || "").trim() || scenario.line.split(/\s+/).filter((w) => w.length > 4).slice(0, 2).join(" ");
-  let training = "";
-  try {
-    training = lookUp ? await searchForMay(lookUp.slice(0, 40), sources) : "";
-  } catch (error) {
-    console.error("Games: couldn't search the hub:", error);
-  }
+  const training = await lookUpTraining(scenario, sources);
 
   const challenge = [
     LEVELS[level],
@@ -89,34 +174,93 @@ games.post("/:slug/score", async (req, res) => {
   ].filter(Boolean).join("\n\n");
 
   try {
-    const reply = await client.messages.create({
-      model: MODEL,
-      max_tokens: 2000,
-      output_config: { effort: "low", format: { type: "json_schema", schema: SCORE_SCHEMA } },
+    const result = await askForJson({
       system: [
         { type: "text", text: instructions(fullHubName()) },
         { type: "text", text: gameRules(game.title), cache_control: { type: "ephemeral" } },
         { type: "text", text: challenge },
       ],
       messages: [{ role: "user", content: answer }],
+      schema: SCORE_SCHEMA,
     });
-    if (reply.stop_reason === "refusal") return res.status(422).json({ error: "May can't score that one. Please try another answer." });
-    const text = reply.content.find((b) => b.type === "text")?.text ?? "";
-    const result = JSON.parse(text);
-    const list = (items, max) => (Array.isArray(items) ? items.filter((x) => typeof x === "string" && x.trim()).slice(0, max) : []);
-    res.json({
-      reaction: String(result.reaction ?? ""),
-      score: Math.max(0, Math.min(10, Math.round(Number(result.score) || 0))),
-      verdict: String(result.verdict ?? ""),
-      worked: list(result.worked, 3),
-      improve: list(result.improve, 3),
-      betterLine: String(result.betterLine ?? ""),
-      playbook: String(result.playbook ?? ""),
-      sources,
-    });
+    if (!result) return res.status(422).json({ error: "May can't score that one. Please try another answer." });
+    res.json({ reaction: String(result.reaction ?? ""), ...feedback(result), sources });
   } catch (error) {
-    console.error("Games:", error);
-    const busy = error instanceof Anthropic.RateLimitError || error instanceof Anthropic.InternalServerError || error instanceof Anthropic.APIConnectionError;
-    res.status(busy ? 503 : 500).json({ error: busy ? "May is very busy right now. Please try again in a minute." : "Sorry, May couldn't score that. Please try again." });
+    failed(res, error, "score that");
+  }
+});
+
+// The call so far as the browser sends it: May's lines and the learner's, the learner's last.
+function cleanCall(turns) {
+  if (!Array.isArray(turns)) return null;
+  const clean = turns.filter((t) => (t?.role === "user" || t?.role === "assistant") && typeof t.content === "string" && t.content.trim()).map((t) => ({ role: t.role, content: t.content.trim() }));
+  while (clean.length && clean[0].role !== "user") clean.shift(); // May's opening line is in her instructions
+  if (!clean.length || clean.at(-1).role !== "user") return null;
+  if (clean.some((t) => t.role === "user" && t.content.length > 800)) return null;
+  for (let i = 1; i < clean.length; i++) if (clean[i].role === clean[i - 1].role) return null;
+  const learnerTurns = clean.filter((t) => t.role === "user").length;
+  if (learnerTurns > MAX_TURNS) return null;
+  return { turns: clean.map((t) => ({ role: t.role, content: t.content.slice(0, 800) })), learnerTurns };
+}
+
+games.post("/:slug/turn", async (req, res) => {
+  if (!mayEnabled) return res.status(404).json({ error: "May isn't switched on yet, so the games can't be played." });
+  const call = cleanCall(req.body?.turns);
+  if (!call) return res.status(400).json({ error: "Please type what you'd say (up to 800 characters)." });
+  const level = callLevels[req.body?.level] ? req.body.level : "tough";
+
+  const game = await sanity.fetch(queries.gameForMay, { slug: req.params.slug });
+  const scenario = game?.scenarios?.find((s) => s._key === req.body?.scenario);
+  if (!game || game.comingSoon || game.kind !== "meeting" || !scenario) return res.status(404).json({ error: "That call isn't available. Please start a new game." });
+  if (!useOne(req.user)) return res.status(429).json({ error: `You've reached today's limit of ${DAILY_LIMIT} messages with May. She'll be back tomorrow.` });
+
+  const last = call.learnerTurns >= MAX_TURNS;
+  const situation = [
+    callLevels[level],
+    `Who you are: ${scenario.who}`,
+    scenario.background ? `Your situation (the learner doesn't know this unless they find out): ${scenario.background}` : "",
+    `You answered the phone with: "${scenario.line}"`,
+    `This is the learner's turn ${call.learnerTurns} of ${MAX_TURNS}.${last ? " It is their last: you must decide now, meeting or hangup." : ""}`,
+  ].filter(Boolean).join("\n\n");
+
+  try {
+    const turn = await askForJson({
+      system: [
+        { type: "text", text: instructions(fullHubName()) },
+        { type: "text", text: callRules(game.title), cache_control: { type: "ephemeral" } },
+        { type: "text", text: situation },
+      ],
+      messages: call.turns,
+      schema: TURN_SCHEMA,
+      maxTokens: 1000,
+    });
+    if (!turn) return res.status(422).json({ error: "May can't reply to that one. Please try saying it another way." });
+    let outcome = ["talking", "meeting", "hangup"].includes(turn.outcome) ? turn.outcome : "talking";
+    if (last && outcome === "talking") outcome = "hangup";
+    const reply = String(turn.reply ?? "");
+    const warmth = Math.max(0, Math.min(100, Math.round(Number(turn.warmth) || 0)));
+    if (outcome === "talking") return res.json({ reply, warmth, outcome });
+
+    // The call has ended: score it.
+    const sources = {};
+    const training = await lookUpTraining(scenario, sources);
+    const transcript = [
+      `You played: ${scenario.who}. You answered: "${scenario.line}"`,
+      ...call.turns.map((t) => `${t.role === "user" ? "Learner" : "You"}: ${t.content}`),
+      `You: ${reply}`,
+      `How it ended: ${outcome === "meeting" ? "you agreed to a meeting" : "you ended the call without agreeing to meet"}.`,
+    ].join("\n");
+    const result = await askForJson({
+      system: [
+        { type: "text", text: instructions(fullHubName()) },
+        { type: "text", text: scoreCallRules(game.title), cache_control: { type: "ephemeral" } },
+        { type: "text", text: [LEVELS[level], training ? `What the hub's training says (cite as labelled):\n\n${training}` : "The hub's training has nothing specific on this, so mark against good recruitment practice and leave playbook empty."].join("\n\n") },
+      ],
+      messages: [{ role: "user", content: `The call:\n\n${transcript}` }],
+      schema: FINAL_SCHEMA,
+    });
+    res.json({ reply, warmth, outcome, final: result ? { ...feedback(result), sources } : null });
+  } catch (error) {
+    failed(res, error, "reply to that");
   }
 });
