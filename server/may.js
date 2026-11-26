@@ -15,6 +15,19 @@ import { Router } from "express";
 import { sanity, queries, fullHubName } from "./sanity.js";
 import { searchHub } from "./content.js";
 
+// The Anthropic account's monthly spend limit has been reached (set in the Claude Console, Settings →
+// Spend limits). Anthropic says so in one of two ways: a 400 whose message says "You have reached
+// your specified (workspace) API usage limits" (our own limit), or a 429 with the error code
+// enforced_spend_limit_reached (the plan's ceiling). Either way May is off until the limit is raised
+// or the month turns over, so people get a friendly message instead of an error (agreed with Ian,
+// November 2026).
+export const SPEND_LIMIT_MESSAGE = "May has had a busy month. She'll be back soon.";
+export function spendLimitReached(error) {
+  const body = error?.error?.error ?? error?.error ?? {};
+  const message = String(body?.message ?? error?.message ?? "");
+  return body?.details?.error_code === "enforced_spend_limit_reached" || /specified (workspace )?API usage limits/i.test(message);
+}
+
 export const mayEnabled = Boolean(process.env.ANTHROPIC_API_KEY);
 export const MODEL = process.env.MAY_MODEL || "claude-sonnet-5-5";
 // Messages each person can send May in a day: a guard against accidental big bills.
@@ -250,7 +263,7 @@ may.post("/", async (req, res) => {
     if (!closed) {
       console.error("May:", error);
       const busy = error instanceof Anthropic.RateLimitError || error instanceof Anthropic.InternalServerError || error instanceof Anthropic.APIConnectionError;
-      send({ type: "error", message: busy ? "May is very busy right now. Please try again in a minute." : "Sorry, May couldn't answer that. Please try again." });
+      send({ type: "error", message: spendLimitReached(error) ? SPEND_LIMIT_MESSAGE : busy ? "May is very busy right now. Please try again in a minute." : "Sorry, May couldn't answer that. Please try again." });
     }
   }
   res.end();

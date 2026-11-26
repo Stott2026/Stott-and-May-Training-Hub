@@ -30,7 +30,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { Router } from "express";
 import { sanity, queries, fullHubName } from "./sanity.js";
-import { client, mayEnabled, MODEL, DAILY_LIMIT, instructions, searchForMay, useOne } from "./may.js";
+import { client, mayEnabled, MODEL, DAILY_LIMIT, instructions, searchForMay, useOne, spendLimitReached, SPEND_LIMIT_MESSAGE } from "./may.js";
 
 const LEVELS = {
   friendly: "Level: Friendly. Play the part as a fair, open-minded person who can be won round. Mark kindly: a sensible answer that deals with the objection scores 6 or 7; save 9 and 10 for a really good one.",
@@ -232,6 +232,7 @@ async function askForJson({ system, messages, schema, maxTokens = 2000 }) {
 
 function failed(res, error, what) {
   console.error("Games:", error);
+  if (spendLimitReached(error)) return res.status(503).json({ error: SPEND_LIMIT_MESSAGE });
   const busy = error instanceof Anthropic.RateLimitError || error instanceof Anthropic.InternalServerError || error instanceof Anthropic.APIConnectionError;
   res.status(busy ? 503 : 500).json({ error: busy ? "May is very busy right now. Please try again in a minute." : `Sorry, May couldn't ${what}. Please try again.` });
 }
