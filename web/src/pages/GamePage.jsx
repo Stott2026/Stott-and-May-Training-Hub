@@ -96,6 +96,29 @@ function MayBubble({ children, who, typing = false }) {
   );
 }
 
+// The phone ringing before a call or a challenge: a moment, then it's answered. Straight through
+// for anyone whose device asks for reduced motion.
+function useRinging(ms = 1600) {
+  const [ringing, setRinging] = useState(true);
+  useEffect(() => {
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const t = setTimeout(() => setRinging(false), reduced ? 0 : ms);
+    return () => clearTimeout(t);
+  }, [ms]);
+  return ringing;
+}
+
+function Ringing({ title, who, note }) {
+  return (
+    <section className="game__panel game__ringing" aria-labelledby="ring-title">
+      <span className="ring-phone" aria-hidden="true"><Icon name="phone" size={40} /></span>
+      <h1 id="ring-title" className="game__title">{title}</h1>
+      <p className="game__intro">{who}</p>
+      {note && <p className="game__meta">{note}</p>}
+    </section>
+  );
+}
+
 function YouBubble({ children }) {
   return (
     <div className="game__you game__pop">
@@ -233,6 +256,7 @@ function Objection({ game, page, level, levelName, count, onAgain, onLevel }) {
 }
 
 function Challenge({ game, page, level, levelName, scenario, number, of, runningScore, onNext }) {
+  const ringing = useRinging(1400);
   const answerId = useId();
   const [answer, setAnswer] = useState("");
   const [busy, setBusy] = useState(false);
@@ -241,7 +265,7 @@ function Challenge({ game, page, level, levelName, scenario, number, of, running
   const resultRef = useRef(null);
   const boxRef = useRef(null);
 
-  useEffect(() => { boxRef.current?.focus(); }, []);
+  useEffect(() => { if (!ringing) boxRef.current?.focus(); }, [ringing]);
   useEffect(() => { if (result) resultRef.current?.focus(); }, [result]);
 
   async function submit(e) {
@@ -258,6 +282,7 @@ function Challenge({ game, page, level, levelName, scenario, number, of, running
     }
   }
 
+  if (ringing) return <Ringing title="Calling…" who={scenario.who} note={`Challenge ${number} of ${of}`} />;
   return (
     <section className="game__panel" aria-labelledby="challenge-title">
       {result?.score >= 8 && <Confetti />}
@@ -336,7 +361,7 @@ function Call({ game, page, level, levelName, onAgain, onLevel }) {
   const save = useSaveScore(game);
   const lineId = useId();
   const [scenario] = useState(() => shuffle(game.scenarios)[0]);
-  const [ringing, setRinging] = useState(true);
+  const ringing = useRinging();
   const [turns, setTurns] = useState(() => [{ role: "assistant", content: scenario.line }]);
   const [warmth, setWarmth] = useState(kind.start[level] ?? 25);
   const [line, setLine] = useState("");
@@ -348,12 +373,6 @@ function Call({ game, page, level, levelName, onAgain, onLevel }) {
   const logRef = useRef(null);
   const used = turns.filter((t) => t.role === "user").length;
 
-  // The phone rings for a moment, then May picks up.
-  useEffect(() => {
-    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    const t = setTimeout(() => setRinging(false), reduced ? 0 : 1600);
-    return () => clearTimeout(t);
-  }, []);
   useEffect(() => { if (!ringing && !ended) boxRef.current?.focus(); }, [ringing, ended, busy]);
   useEffect(() => { if (ended) endRef.current?.focus(); }, [ended]);
   useEffect(() => { logRef.current?.lastElementChild?.scrollIntoView?.({ block: "nearest", behavior: "smooth" }); }, [turns, busy]);
@@ -384,15 +403,7 @@ function Call({ game, page, level, levelName, onAgain, onLevel }) {
     }
   }
 
-  if (ringing) {
-    return (
-      <section className="game__panel game__ringing" aria-labelledby="ring-title">
-        <span className="ring-phone" aria-hidden="true"><Icon name="phone" size={40} /></span>
-        <h1 id="ring-title" className="game__title">{kind.ringing}</h1>
-        <p className="game__intro">{scenario.who}</p>
-      </section>
-    );
-  }
+  if (ringing) return <Ringing title={kind.ringing} who={scenario.who} />;
 
   const booked = ended?.outcome === "won";
   return (
