@@ -11,7 +11,7 @@ import { Icon } from "../components/icons.jsx";
 import { useApi } from "../lib/api.js";
 import { assetUrl } from "../lib/assetUrl.js";
 import { useProgress } from "../lib/progress.jsx";
-import { shuffle } from "../lib/shuffle.js";
+import { shuffle, shuffleAnswers } from "../lib/shuffle.js";
 import { usePageTitle, useSite } from "../lib/site.jsx";
 import { useToast } from "../lib/toast.jsx";
 import "../components/accents.css";
@@ -24,8 +24,12 @@ import "./Games.css";
 // - "meeting" (Get the meeting): a cold call of up to five turns (POST /api/games/:slug/turn). May
 //   answers the phone, a warmth meter shows how it's going, and she either agrees to a meeting or
 //   hangs up, then scores the whole call.
+// - "rapid" (Rapid fire): questions from the hub's quiz bank against the clock (GET
+//   /api/games/:slug/questions); the level sets the seconds per question. No call to May.
 // Best scores are kept in this browser, like progress. Server: server/games.js.
-export const PLAYABLE = ["objection", "meeting"];
+export const PLAYABLE = ["objection", "meeting", "rapid"];
+// Rapid fire needs no challenges of its own: its questions come from the quiz bank.
+export const isReady = (game) => !game.comingSoon && PLAYABLE.includes(game.kind) && (game.kind === "rapid" || (game.challenges ?? game.scenarios?.length ?? 0) > 0);
 const LEVELS = ["friendly", "tough", "brutal"];
 const LEVEL_FALLBACK = { friendly: "Friendly", tough: "Tough", brutal: "Brutal" };
 // May's picture, the same one as in Ask May.
@@ -52,7 +56,7 @@ export default function GamePage() {
   usePageTitle(data ? data.game.title : null);
   if (error || !data) return <LoadState error={error} notFoundText="We couldn't find that game." />;
   const { game, page = {} } = data;
-  const playable = may && !game.comingSoon && PLAYABLE.includes(game.kind) && game.scenarios?.length > 0;
+  const playable = may && isReady(game);
   return (
     <div className="container game" data-accent={game.accent || "brand"}>
       <Link className="game__back" to="/games"><Icon name="arrow-left" size={16} /> Games Room</Link>
@@ -189,10 +193,14 @@ function Game({ game, page }) {
   const [level, setLevel] = useState("tough");
   const [playing, setPlaying] = useState(0); // a new number starts a new game
   const levelName = page[level]?.name || LEVEL_FALLBACK[level];
-  const count = Math.min(game.rounds || 3, game.scenarios.length);
-  const note = game.kind === "meeting" ? `One call, up to ${MAX_TURNS} turns, scored out of 10` : `${count} ${count === 1 ? "challenge" : "challenges"}, each scored out of 10`;
+  const count = Math.min(game.rounds || 3, game.scenarios?.length ?? 0);
+  const questions = game.rounds || 10;
+  const note = game.kind === "meeting" ? `One call, up to ${MAX_TURNS} turns, scored out of 10`
+    : game.kind === "rapid" ? `${questions} questions from the Playbook, ${SECONDS[level]} seconds each`
+    : `${count} ${count === 1 ? "challenge" : "challenges"}, each scored out of 10`;
   if (!playing) return <Start game={game} page={page} level={level} setLevel={setLevel} note={note} onStart={() => setPlaying(1)} />;
   const props = { game, page, level, levelName, onAgain: () => setPlaying((n) => n + 1), onLevel: () => setPlaying(0) };
+  if (game.kind === "rapid") return <Rapid key={playing} {...props} />;
   return game.kind === "meeting" ? <Meeting key={playing} {...props} /> : <Objection key={playing} {...props} count={count} />;
 }
 
@@ -406,9 +414,195 @@ function Meeting({ game, page, level, levelName, onAgain, onLevel }) {
   );
 }
 
+// ── Rapid fire ────────────────────────────────────────────────
+
+// Seconds per question at each level.
+const SECONDS = { friendly: 25, tough: 12, brutal: 7 };
+
+function Rapid({ game, level, levelName, onAgain, onLevel }) {
+  const save = useSaveScore(game);
+  const seconds = SECONDS[level] ?? 12;
+  const [questions, setQuestions] = useState(null);
+  const [problem, setProblem] = useState(null);
+  const [index, setIndex] = useState(0);
+  const [picked, setPicked] = useState(null); // the option chosen, or "time" when the clock ran out
+  const [left, setLeft] = useState(seconds);
+  const [results, setResults] = useState([]);
+  const [streak, setStreak] = useState(0);
+  const [bestStreak, setBestStreak] = useState(0);
+  const [started] = useState(() => Date.now());
+  const [finishedAt, setFinishedAt] = useState(null);
+  const deadline = useRef(0);
+  const nextRef = useRef(null);
+  const headingRef = useRef(null);
+
+  // A fresh set of questions, each with its answers in a new order.
+  useEffect(() => {
+    let gone = false;
+    fetch(`/api/games/${game.slug}/questions`)
+      .then(async (res) => {
+        const data = await res.json().catch(() => null);
+        if (!res.ok || !Array.isArray(data) || !data.length) throw new Error(data?.error || "The questions couldn't be loaded. Please try again.");
+        if (!gone) setQuestions(data.map(shuffleAnswers));
+      })
+      .catch((err) => !gone && setProblem(err.message));
+    return () => { gone = true; };
+  }, [game.slug]);
+
+  const q = questions?.[index];
+  const answered = picked !== null;
+
+  // The clock: starts when each question appears, stops when it's answered.
+  useEffect(() => {
+    if (!q || answered) return;
+    deadline.current = Date.now() + seconds * 1000;
+    setLeft(seconds);
+    headingRef.current?.focus();
+    const tick = setInterval(() => {
+      const remaining = Math.max(0, (deadline.current - Date.now()) / 1000);
+      setLeft(remaining);
+      if (remaining <= 0) choose("time");
+    }, 100);
+    return () => clearInterval(tick);
+  }, [q, answered]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  function choose(option) {
+    if (!q || picked !== null) return;
+    const right = option === q.correct;
+    setPicked(option);
+    setResults((r) => [...r, { q, right, timedOut: option === "time" }]);
+    setStreak((n) => {
+      const next = right ? n + 1 : 0;
+      setBestStreak((b) => Math.max(b, next));
+      return next;
+    });
+  }
+
+  function next() {
+    if (index + 1 >= questions.length) {
+      const score = results.filter((r) => r.right).length;
+      save(score, questions.length);
+      setFinishedAt(Date.now());
+    } else {
+      setIndex((i) => i + 1);
+      setPicked(null);
+    }
+  }
+
+  // A right answer moves on by itself; a wrong one waits, so the explanation can be read.
+  useEffect(() => {
+    if (picked === null) return;
+    if (picked === q.correct) {
+      const t = setTimeout(next, 900);
+      return () => clearTimeout(t);
+    }
+    nextRef.current?.focus();
+  }, [picked]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Keys 1 to 4 answer, as well as clicking.
+  useEffect(() => {
+    if (!q || answered) return;
+    const onKey = (e) => {
+      if (e.target.closest?.("input, textarea")) return;
+      const n = Number(e.key);
+      if (n >= 1 && n <= q.options.length) choose(n - 1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (problem) return <section className="game__panel"><p className="game__problem" role="alert">{problem}</p><Button onClick={onLevel}>Back</Button></section>;
+  if (!questions) return <section className="game__panel game__ringing"><MayBubble typing /></section>;
+
+  if (finishedAt) {
+    const score = results.filter((r) => r.right).length;
+    const time = Math.round((finishedAt - started) / 1000);
+    const missed = results.filter((r) => !r.right);
+    return (
+      <Finished game={game} score={score} total={questions.length} levelName={levelName} onAgain={onAgain} onLevel={onLevel}
+        recap={[
+          { label: "Best streak", score: `${bestStreak} in a row` },
+          { label: "Time", score: `${Math.floor(time / 60)}:${String(time % 60).padStart(2, "0")}` },
+        ]}>
+        {missed.length > 0 && (
+          <div className="rapid__missed">
+            <h2>The ones that got away</h2>
+            <ul>
+              {missed.map(({ q: m, timedOut }) => (
+                <li key={m._id}>
+                  <p className="rapid__missed-q">{m.question}</p>
+                  <p><strong>Answer:</strong> {m.options[m.correct]}{timedOut ? " (out of time)" : ""}</p>
+                  {m.explanation && <p className="rapid__missed-why">{m.explanation}</p>}
+                  {m.source && <Link to={m.source.href}>{m.source.label}</Link>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </Finished>
+    );
+  }
+
+  const right = answered && picked === q.correct;
+  const low = !answered && left <= 3;
+  return (
+    <section className="game__panel rapid" aria-labelledby="rapid-q">
+      <div className="game__bar">
+        <span>{game.title} · {levelName}</span>
+        <span>Question {index + 1} of {questions.length}</span>
+        <span>Score: {results.filter((r) => r.right).length}</span>
+      </div>
+      <div className="game__steps" aria-hidden="true">
+        {questions.map((_, i) => <span key={i} className={i < index || (i === index && answered) ? (results[i]?.right ? "is-done" : "is-missed") : i === index ? "is-now" : ""} />)}
+      </div>
+
+      <div className={`rapid__clock${low ? " is-low" : ""}`} role="timer" aria-label={`${Math.ceil(left)} seconds left`}>
+        <Icon name="timer" size={18} />
+        <span className="rapid__track"><span className="rapid__fill" style={{ width: `${(left / seconds) * 100}%` }} /></span>
+        <strong aria-hidden="true">{Math.ceil(left)}</strong>
+      </div>
+
+      {streak >= 2 && <p key={streak} className="rapid__streak"><Icon name="flame" size={18} /> {streak} in a row</p>}
+
+      <div className="game__say game__pop" key={q._id}>
+        <span className="game__avatar"><Avatar src={MAY_PHOTO} size={48} /></span>
+        <h1 id="rapid-q" className="game__bubble rapid__question" ref={headingRef} tabIndex={-1}>{q.question}</h1>
+      </div>
+
+      <div className="rapid__options" role="group" aria-label="Answers">
+        {q.options.map((o, i) => {
+          const state = !answered ? "" : i === q.correct ? " is-right" : i === picked ? " is-wrong" : " is-dim";
+          return (
+            <button key={o} type="button" className={`rapid__option${state}`} onClick={() => choose(i)} disabled={answered} style={{ "--i": i }}>
+              <span className="rapid__key" aria-hidden="true">{i + 1}</span>
+              <span>{o}</span>
+              {answered && i === q.correct && <Icon name="circle-check" size={20} className="rapid__mark" />}
+              {answered && i === picked && i !== q.correct && <Icon name="circle-x" size={20} className="rapid__mark" />}
+            </button>
+          );
+        })}
+      </div>
+
+      <div aria-live="polite">
+        {right && <p className="rapid__verdict rapid__verdict--right">Right! <span className="rapid__plus" aria-hidden="true">+1</span></p>}
+        {answered && !right && (
+          <div className="rapid__why">
+            <p className="rapid__verdict rapid__verdict--wrong">{picked === "time" ? "Out of time." : "Not quite."} The answer is: {q.options[q.correct]}</p>
+            {q.explanation && <p>{q.explanation}</p>}
+            {q.source && <p className="rapid__source"><Icon name="book-open" size={16} /> <Link to={q.source.href}>{q.source.label}</Link></p>}
+            <div className="game__actions">
+              <Button ref={nextRef} iconAfter="arrow-right" onClick={next}>{index + 1 < questions.length ? "Next question" : "See your score"}</Button>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 // ── The end of a game ─────────────────────────────────────────
 
-function Finished({ game, score, total, recap, levelName, onAgain, onLevel }) {
+function Finished({ game, score, total, recap, levelName, onAgain, onLevel, children }) {
   const headingRef = useRef(null);
   useEffect(() => { headingRef.current?.focus(); }, []);
   const pct = total ? Math.round((score / total) * 100) : 0;
@@ -428,6 +622,7 @@ function Finished({ game, score, total, recap, levelName, onAgain, onLevel }) {
           <li key={i} className="game__rise" style={{ "--i": i + 1 }}><span>{r.label}</span><strong>{r.score}</strong>{r.note && <em>{r.note}</em>}</li>
         ))}
       </ol>
+      {children}
       <div className="game__actions game__actions--centre">
         <Button icon="rotate-ccw" onClick={onAgain}>Play again</Button>
         <Button variant="secondary" onClick={onLevel}>Change level</Button>

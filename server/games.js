@@ -14,6 +14,9 @@
 // (0 to 100) and whether the call goes on, she agrees to a meeting, or she hangs up. On the fifth
 // turn she must decide. When the call ends she steps out and scores the whole call out of 10.
 //
+// "Rapid fire", the third game: questions from the hub's quiz bank against the clock
+// (GET /api/games/:slug/questions). No call to May, so it's instant and free.
+//
 // Each answer (or turn) counts as one message towards May's daily limit. Nothing typed is stored.
 import Anthropic from "@anthropic-ai/sdk";
 import { Router } from "express";
@@ -150,6 +153,30 @@ function failed(res, error, what) {
 }
 
 export const games = Router();
+
+// Rapid fire: a fresh set of questions, picked at random from the quiz bank.
+games.get("/:slug/questions", async (req, res, next) => {
+  try {
+    const game = await sanity.fetch(queries.gameForMay, { slug: req.params.slug });
+    if (!game || game.comingSoon || game.kind !== "rapid") return res.status(404).json({ error: "That game isn't available." });
+    const bank = (await sanity.fetch(queries.rapidQuestions)).filter((q) => Array.isArray(q.options) && q.options.length > 1 && Number.isInteger(q.correct));
+    const count = Math.min(Math.max(Number(game.rounds) || 10, 1), 20, bank.length);
+    for (let i = bank.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [bank[i], bank[j]] = [bank[j], bank[i]];
+    }
+    res.json(bank.slice(0, count).map((q) => ({
+      _id: q._id,
+      question: q.question,
+      options: q.options,
+      correct: q.correct,
+      explanation: q.explanation ?? "",
+      source: q.module?.slug ? { label: q.module.title, href: `/modules/${q.module.slug}${q.afterSection ? `?section=${q.afterSection}` : ""}` } : null,
+    })));
+  } catch (error) {
+    next(error);
+  }
+});
 
 games.post("/:slug/score", async (req, res) => {
   if (!mayEnabled) return res.status(404).json({ error: "May isn't switched on yet, so the games can't be played." });

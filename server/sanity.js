@@ -182,7 +182,12 @@ export const queries = {
       "scenarios": scenarios[]{ _key, who, line }
     }
   }`,
-  gameForMay: `*[_type == "game" && slug.current == $slug][0]{ title, kind, comingSoon, scenarios[]{ _key, who, line, background, lookUp } }`,
+  // Rapid fire: the quiz bank (as on the quiz page, without manager-only modules), with the module
+  // each question belongs to, for "learn more" links.
+  rapidQuestions: `*[_type == "quizQuestion" && !(module->${FOR_MANAGERS})]{
+    _id, question, options, correct, explanation, afterSection, "module": module->{ title, "slug": slug.current }
+  }`,
+  gameForMay: `*[_type == "game" && slug.current == $slug][0]{ title, kind, comingSoon, rounds, scenarios[]{ _key, who, line, background, lookUp } }`,
 
   // One tool's page, with the tools either side of it.
   tool: `*[_type == "techTool" && slug.current == $slug][0]{

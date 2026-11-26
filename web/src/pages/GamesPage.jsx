@@ -7,7 +7,7 @@ import { useApi } from "../lib/api.js";
 import { placeholderPhotos } from "../lib/placeholderPhotos.js";
 import { useProgress } from "../lib/progress.jsx";
 import { usePageTitle, useSite } from "../lib/site.jsx";
-import { PLAYABLE } from "./GamePage.jsx";
+import { isReady } from "./GamePage.jsx";
 import "../components/accents.css";
 import "./Games.css";
 
@@ -29,7 +29,7 @@ export default function GamesPage() {
         <ul className="games__grid">
           {data.games.map((g, i) => {
             const score = scores[g.slug];
-            const open = !g.comingSoon && PLAYABLE.includes(g.kind) && g.challenges > 0;
+            const open = isReady(g);
             const body = (
               <>
                 <span className="games__art" aria-hidden="true">

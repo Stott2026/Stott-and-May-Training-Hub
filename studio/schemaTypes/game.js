@@ -9,7 +9,7 @@ import { ACCENT_OPTIONS, ICON_OPTIONS } from "./options.js";
 export const GAME_KINDS = [
   { title: "Handle the objection: May plays someone with an objection, you answer, she scores you out of 10", value: "objection" },
   { title: "Get the meeting: a cold call of up to five turns; May agrees to meet or hangs up, then scores the call", value: "meeting" },
-  { title: "Rapid fire (coming next)", value: "rapid" },
+  { title: "Rapid fire: questions from the hub's quiz bank against the clock (no challenges needed below)", value: "rapid" },
   { title: "Spot the mistake (coming next)", value: "mistake" },
   { title: "Counter-offer (coming next)", value: "counter" },
 ];
@@ -30,7 +30,7 @@ export const game = defineType({
     defineField({ name: "icon", title: "Icon", type: "string", options: { list: ICON_OPTIONS }, initialValue: "target" }),
     defineField({ name: "accent", title: "Colour", type: "string", options: { list: ACCENT_OPTIONS, layout: "radio" }, initialValue: "brand" }),
     defineField({ name: "order", title: "Display order", type: "number", description: "Games are shown smallest number first.", validation: (r) => r.integer() }),
-    defineField({ name: "rounds", title: "Challenges per game", type: "number", initialValue: 3, description: "Handle the objection: how many challenges one game has, picked at random from the list below, each scored out of 10. Get the meeting is always one call, picked at random.", validation: (r) => r.min(1).max(5).integer() }),
+    defineField({ name: "rounds", title: "Challenges (or questions) per game", type: "number", initialValue: 3, description: "Handle the objection: how many challenges one game has, picked at random from the list below, each scored out of 10 (up to 5). Rapid fire: how many quiz questions (up to 20; 10 works well). Get the meeting is always one call, picked at random.", validation: (r) => r.min(1).max(20).integer() }),
     defineField({
       name: "scenarios",
       title: "Challenges",
