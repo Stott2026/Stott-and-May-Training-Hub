@@ -1,11 +1,13 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Link, useParams } from "react-router";
+import Avatar from "../components/Avatar.jsx";
 import Button from "../components/Button.jsx";
 import LoadState from "../components/LoadState.jsx";
 import ProgressRing from "../components/ProgressRing.jsx";
 import { Icon } from "../components/icons.jsx";
 import { useApi } from "../lib/api.js";
 import { useProgress } from "../lib/progress.jsx";
+import { assetUrl } from "../lib/assetUrl.js";
 import { shuffle } from "../lib/shuffle.js";
 import { usePageTitle, useSite } from "../lib/site.jsx";
 import { useToast } from "../lib/toast.jsx";
@@ -17,6 +19,8 @@ import "./Games.css";
 // it out of 10 against the hub's training (server/games.js). A game is a few challenges picked at
 // random from the game's list in the Studio. Your best score is kept in this browser, like progress.
 const LEVELS = ["friendly", "tough", "brutal"];
+// May's picture, the same one as in Ask May.
+const MAY_PHOTO = assetUrl("concepts/may.svg");
 const LEVEL_FALLBACK = { friendly: "Friendly", tough: "Tough", brutal: "Brutal" };
 
 // May's playbook line, with her [R1]-style citations taken out and listed as links instead.
@@ -161,7 +165,7 @@ function Challenge({ game, page, level, levelName, scenario, number, of, running
 
       <h1 id="challenge-title" className="visually-hidden">Challenge {number}: {scenario.who}</h1>
       <div className="game__say">
-        <div className="game__avatar" aria-hidden="true"><span>M</span></div>
+        <span className="game__avatar"><Avatar src={MAY_PHOTO} size={48} /></span>
         <div>
           <p className="game__who">May plays: {scenario.who}</p>
           <blockquote className="game__bubble">{scenario.line}</blockquote>
@@ -188,7 +192,7 @@ function Challenge({ game, page, level, levelName, scenario, number, of, running
           </div>
           {result.reaction && (
             <div className="game__say">
-              <div className="game__avatar" aria-hidden="true"><span>M</span></div>
+              <span className="game__avatar"><Avatar src={MAY_PHOTO} size={48} /></span>
               <blockquote className="game__bubble">{result.reaction}</blockquote>
             </div>
           )}
