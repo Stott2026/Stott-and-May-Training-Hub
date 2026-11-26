@@ -26,8 +26,11 @@ import "./Games.css";
 //   hangs up, then scores the whole call.
 // - "rapid" (Rapid fire): questions from the hub's quiz bank against the clock (GET
 //   /api/games/:slug/questions); the level sets the seconds per question. No call to May.
+// - "mistake" (Spot the mistake): May writes an email, InMail or advert with a few deliberate
+//   mistakes (POST /api/games/:slug/piece); you tap the sentences you think are wrong, and the page
+//   marks it: what you caught, what you missed and anything you flagged that was fine.
 // Best scores are kept in this browser, like progress. Server: server/games.js.
-export const PLAYABLE = ["objection", "meeting", "rapid"];
+export const PLAYABLE = ["objection", "meeting", "rapid", "mistake"];
 // Rapid fire needs no challenges of its own: its questions come from the quiz bank.
 export const isReady = (game) => !game.comingSoon && PLAYABLE.includes(game.kind) && (game.kind === "rapid" || (game.challenges ?? game.scenarios?.length ?? 0) > 0);
 const LEVELS = ["friendly", "tough", "brutal"];
@@ -197,10 +200,12 @@ function Game({ game, page }) {
   const questions = game.rounds || 10;
   const note = game.kind === "meeting" ? `One call, up to ${MAX_TURNS} turns, scored out of 10`
     : game.kind === "rapid" ? `${questions} questions from the Playbook, ${SECONDS[level]} seconds each`
+    : game.kind === "mistake" ? `One piece of writing, ${level === "brutal" ? 4 : 3} mistakes to find, scored out of 10`
     : `${count} ${count === 1 ? "challenge" : "challenges"}, each scored out of 10`;
   if (!playing) return <Start game={game} page={page} level={level} setLevel={setLevel} note={note} onStart={() => setPlaying(1)} />;
   const props = { game, page, level, levelName, onAgain: () => setPlaying((n) => n + 1), onLevel: () => setPlaying(0) };
   if (game.kind === "rapid") return <Rapid key={playing} {...props} />;
+  if (game.kind === "mistake") return <Mistake key={playing} {...props} />;
   return game.kind === "meeting" ? <Meeting key={playing} {...props} /> : <Objection key={playing} {...props} count={count} />;
 }
 
@@ -596,6 +601,140 @@ function Rapid({ game, level, levelName, onAgain, onLevel }) {
           </div>
         )}
       </div>
+    </section>
+  );
+}
+
+// ── Spot the mistake ──────────────────────────────────────────
+
+const FORMAT_LABEL = { email: "Email", inmail: "LinkedIn InMail", advert: "Job advert", message: "Message" };
+
+// The score: each mistake found counts, each sentence flagged that was fine takes half back.
+function markPiece(sentences, flagged) {
+  const mistakes = sentences.filter((x) => x.mistake).length;
+  const hits = sentences.filter((x, i) => x.mistake && flagged.has(i)).length;
+  const wrong = sentences.filter((x, i) => !x.mistake && flagged.has(i)).length;
+  const score = Math.max(0, Math.min(10, Math.round((10 * Math.max(0, hits - wrong / 2)) / Math.max(1, mistakes))));
+  const verdict = hits === mistakes && !wrong ? "Eagle-eyed" : hits === mistakes ? "Found them all, plus a few extras" : hits === 0 ? "They all got past you" : `${hits} of ${mistakes} found`;
+  return { mistakes, hits, wrong, score, verdict };
+}
+
+function Mistake({ game, level, levelName, onAgain, onLevel }) {
+  const save = useSaveScore(game);
+  const [scenario] = useState(() => shuffle(game.scenarios)[0]);
+  const [piece, setPiece] = useState(null);
+  const [problem, setProblem] = useState(null);
+  const [flagged, setFlagged] = useState(() => new Set());
+  const [checked, setChecked] = useState(null);
+  const docRef = useRef(null);
+  const resultRef = useRef(null);
+
+  useEffect(() => {
+    let gone = false;
+    post(`${game.slug}/piece`, { scenario: scenario._key, level }, "write that")
+      .then((p) => !gone && setPiece(p))
+      .catch((err) => !gone && setProblem(err.message));
+    return () => { gone = true; };
+  }, [game.slug, scenario._key, level]);
+  useEffect(() => { if (piece) docRef.current?.focus(); }, [piece]);
+  useEffect(() => { if (checked) resultRef.current?.focus(); }, [checked]);
+
+  if (problem) return <section className="game__panel"><p className="game__problem" role="alert">{problem}</p><div className="game__actions"><Button onClick={onAgain}>Try again</Button></div></section>;
+  if (!piece) {
+    return (
+      <section className="game__panel game__ringing" aria-live="polite">
+        <span className="writing-pen" aria-hidden="true"><Icon name="file-text" size={40} /></span>
+        <h1 className="game__title">May is writing…</h1>
+        <p className="game__intro">{scenario.who}</p>
+      </section>
+    );
+  }
+
+  const toggle = (i) => {
+    if (checked) return;
+    setFlagged((f) => { const n = new Set(f); n.has(i) ? n.delete(i) : n.add(i); return n; });
+  };
+  const mistakes = piece.sentences.filter((x) => x.mistake).length;
+  const check = () => {
+    const result = markPiece(piece.sentences, flagged);
+    setChecked(result);
+    save(result.score, 10);
+  };
+
+  // The piece as paragraphs of tappable sentences.
+  const paragraphs = [];
+  piece.sentences.forEach((x, i) => {
+    if (!paragraphs.length || x.newParagraph) paragraphs.push([]);
+    paragraphs.at(-1).push(i);
+  });
+
+  return (
+    <section className="game__panel" aria-labelledby="piece-title">
+      {checked?.score >= 8 && <Confetti />}
+      <div className="game__bar">
+        <span>{game.title} · {levelName}</span>
+        <span>{checked ? "Checked" : `Flagged ${flagged.size} · ${mistakes} to find`}</span>
+      </div>
+      <h1 id="piece-title" className="game__call-title"><Icon name="search" size={18} /> {scenario.who}</h1>
+      {!checked && <p className="game__hint">Tap each sentence you think is a mistake. Tap again to change your mind.</p>}
+
+      <article className={`piece piece--${piece.format}${checked ? " is-checked" : ""}`} ref={docRef} tabIndex={-1} aria-label={FORMAT_LABEL[piece.format] ?? "The piece"}>
+        <header className="piece__head">
+          <span className="piece__kind">{FORMAT_LABEL[piece.format] ?? "Message"}</span>
+          {piece.from && <p><span>From</span> {piece.from}</p>}
+          {piece.to && <p><span>To</span> {piece.to}</p>}
+          {piece.subject && <p className="piece__subject"><span>{piece.format === "advert" ? "Role" : "Subject"}</span> {piece.subject}</p>}
+        </header>
+        <div className="piece__body">
+          {paragraphs.map((para, p) => (
+            <p key={p}>
+              {para.map((i) => {
+                const x = piece.sentences[i];
+                const on = flagged.has(i);
+                const state = !checked ? (on ? " is-flagged" : "") : x.mistake && on ? " is-hit" : x.mistake ? " is-missed" : on ? " is-wrong" : "";
+                return (
+                  <button key={i} type="button" className={`piece__s${state}`} aria-pressed={on} onClick={() => toggle(i)} disabled={!!checked}>
+                    {x.text}
+                  </button>
+                );
+              })}
+            </p>
+          ))}
+        </div>
+      </article>
+
+      {!checked && (
+        <div className="game__actions">
+          <Button iconAfter="arrow-right" onClick={check} disabled={!flagged.size}>Check it</Button>
+        </div>
+      )}
+
+      {checked && (
+        <div className="game__result" ref={resultRef} tabIndex={-1} aria-live="polite">
+          <ScoreCard result={{ score: checked.score, verdict: checked.verdict, worked: [], improve: [], betterLine: "", playbook: piece.playbook, sources: piece.sources }} />
+          <ol className="spotted">
+            {piece.sentences.map((x, i) => ({ x, i })).filter(({ x, i }) => x.mistake || flagged.has(i)).map(({ x, i }, n) => {
+              const kind = x.mistake && flagged.has(i) ? "hit" : x.mistake ? "missed" : "wrong";
+              return (
+                <li key={i} className={`spotted__item spotted__item--${kind} game__rise`} style={{ "--i": n + 1 }}>
+                  <p className="spotted__tag">
+                    <Icon name={kind === "hit" ? "circle-check" : kind === "missed" ? "eye" : "circle-x"} size={16} />
+                    {kind === "hit" ? "You spotted it" : kind === "missed" ? "You missed this one" : "This one was fine"}
+                  </p>
+                  <p className="spotted__text">“{x.text}”</p>
+                  {x.why && <p>{x.why}</p>}
+                  {x.fix && <p className="spotted__fix"><strong>Better:</strong> “{x.fix}”</p>}
+                </li>
+              );
+            })}
+          </ol>
+          <div className="game__actions game__actions--centre">
+            <Button icon="rotate-ccw" onClick={onAgain}>Another one</Button>
+            <Button variant="secondary" onClick={onLevel}>Change level</Button>
+            <Button variant="ghost" to="/games">Back to the Games Room</Button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

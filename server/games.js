@@ -17,6 +17,11 @@
 // "Rapid fire", the third game: questions from the hub's quiz bank against the clock
 // (GET /api/games/:slug/questions). No call to May, so it's instant and free.
 //
+// "Spot the mistake", the fourth game: May writes a short piece (an email, an InMail, an advert) with
+// a few deliberate mistakes (POST /api/games/:slug/piece), sentence by sentence, each marked as a
+// mistake or not with why and a fix. The learner taps the sentences they think are wrong and the
+// page marks it, so only writing the piece needs May.
+//
 // Each answer (or turn) counts as one message towards May's daily limit. Nothing typed is stored.
 import Anthropic from "@anthropic-ai/sdk";
 import { Router } from "express";
@@ -65,6 +70,48 @@ const TURN_SCHEMA = {
 };
 
 const MAX_TURNS = 5;
+
+// A piece of writing with deliberate mistakes, one sentence at a time.
+const PIECE_SCHEMA = {
+  type: "object",
+  properties: {
+    format: { type: "string", enum: ["email", "inmail", "advert", "message"], description: "What kind of writing it is." },
+    from: { type: "string", description: "Who it's from, for an email or message, for example: Alex Morgan, Stott and May. Empty for an advert." },
+    to: { type: "string", description: "Who it's to (a made-up first name and their role). Empty for an advert." },
+    subject: { type: "string", description: "The subject line or advert title." },
+    sentences: {
+      type: "array",
+      description: "The piece, one sentence (or greeting, or sign-off) per item, in order.",
+      items: {
+        type: "object",
+        properties: {
+          text: { type: "string" },
+          newParagraph: { type: "boolean", description: "True if this sentence starts a new paragraph." },
+          mistake: { type: "boolean" },
+          why: { type: "string", description: "For a mistake: in one sentence, why it's wrong. Empty otherwise." },
+          fix: { type: "string", description: "For a mistake: a better version of the sentence. Empty otherwise." },
+        },
+        required: ["text", "newParagraph", "mistake", "why", "fix"],
+        additionalProperties: false,
+      },
+    },
+    playbook: { type: "string", description: "One or two sentences on what the hub's training says about writing this kind of piece, citing it as [R1], [R2]. Empty if the hub has nothing on it." },
+  },
+  required: ["format", "from", "to", "subject", "sentences", "playbook"],
+  additionalProperties: false,
+};
+
+const pieceLevels = {
+  friendly: { mistakes: 3, text: "Level: Friendly. Exactly 3 mistakes, fairly obvious ones a new consultant should spot." },
+  tough: { mistakes: 3, text: "Level: Tough. Exactly 3 mistakes, the kind an experienced consultant would spot but a busy one might miss." },
+  brutal: { mistakes: 4, text: "Level: Brutal. Exactly 4 mistakes, subtle ones; make the other sentences look plausible too, so it's hard to tell." },
+};
+
+const pieceRules = (title) => `You are running a game in the hub's Games Room called "${title}". The learner is practising spotting mistakes in recruitment writing.
+
+Write the piece described below as a Stott and May consultant might, between 8 and 14 sentences long, including a greeting and sign-off where it fits. Plant the number of mistakes the level asks for, each in its own sentence, and make every other sentence genuinely fine. Good mistakes are real, common ones in recruitment writing: generic or templated wording, all about us not them, no clear next step, too pushy, vague about the role, criticising a competitor or employer, over-promising, jargon, getting the tone wrong, breaking good practice the hub teaches. Mark against the hub's training below where it covers this.
+
+Use made-up first names only, and never real companies or people. Never invent Stott and May specifics such as fees, terms or policies, and don't make any mistakes about those. Write in British English, apart from the deliberate mistakes.`;
 
 const callRules = (title) => `You are running a game in the hub's Games Room called "${title}". The learner is practising cold calls to win a meeting, and has asked to be challenged.
 
@@ -214,6 +261,57 @@ games.post("/:slug/score", async (req, res) => {
     res.json({ reaction: String(result.reaction ?? ""), ...feedback(result), sources });
   } catch (error) {
     failed(res, error, "score that");
+  }
+});
+
+// Spot the mistake: May writes a fresh piece with mistakes for the learner to find.
+games.post("/:slug/piece", async (req, res) => {
+  if (!mayEnabled) return res.status(404).json({ error: "May isn't switched on yet, so the games can't be played." });
+  const level = pieceLevels[req.body?.level] ? req.body.level : "tough";
+  const game = await sanity.fetch(queries.gameForMay, { slug: req.params.slug });
+  const scenario = game?.scenarios?.find((s) => s._key === req.body?.scenario);
+  if (!game || game.comingSoon || game.kind !== "mistake" || !scenario) return res.status(404).json({ error: "That challenge isn't available. Please start a new game." });
+  if (!useOne(req.user)) return res.status(429).json({ error: `You've reached today's limit of ${DAILY_LIMIT} messages with May. She'll be back tomorrow.` });
+
+  const sources = {};
+  const training = await lookUpTraining(scenario, sources);
+  const brief = [
+    pieceLevels[level].text,
+    `What to write: ${scenario.who}. ${scenario.line}`,
+    scenario.background ? `Ideas for mistakes: ${scenario.background}` : "",
+    training ? `What the hub's training says (cite as labelled):\n\n${training}` : "The hub's training has nothing specific on this, so use good recruitment practice and leave playbook empty.",
+  ].filter(Boolean).join("\n\n");
+
+  try {
+    const piece = await askForJson({
+      system: [
+        { type: "text", text: instructions(fullHubName()) },
+        { type: "text", text: pieceRules(game.title), cache_control: { type: "ephemeral" } },
+        { type: "text", text: brief },
+      ],
+      messages: [{ role: "user", content: "Write the piece now." }],
+      schema: PIECE_SCHEMA,
+      maxTokens: 3000,
+    });
+    const sentences = (piece?.sentences ?? []).filter((x) => typeof x?.text === "string" && x.text.trim()).slice(0, 20).map((x) => ({
+      text: x.text.trim(),
+      newParagraph: Boolean(x.newParagraph),
+      mistake: Boolean(x.mistake),
+      why: x.mistake ? String(x.why ?? "") : "",
+      fix: x.mistake ? String(x.fix ?? "") : "",
+    }));
+    if (!piece || sentences.filter((x) => x.mistake).length === 0) return res.status(422).json({ error: "May couldn't write that one. Please try again." });
+    res.json({
+      format: piece.format,
+      from: String(piece.from ?? ""),
+      to: String(piece.to ?? ""),
+      subject: String(piece.subject ?? ""),
+      sentences,
+      playbook: String(piece.playbook ?? ""),
+      sources,
+    });
+  } catch (error) {
+    failed(res, error, "write that");
   }
 });
 
