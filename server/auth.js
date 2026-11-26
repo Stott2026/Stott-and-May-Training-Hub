@@ -35,6 +35,12 @@ export const houseSignIn = houseReady && Boolean(SESSION_SECRET);
 // addresses (comma-separated, a Railway variable), only those people can use the hub; everyone else
 // signed in sees "coming soon". Remove the variable to open the hub to everyone.
 const earlyAccess = new Set((process.env.EARLY_ACCESS || "").split(",").map((e) => e.trim().toLowerCase()).filter(Boolean));
+// While the rest of the hub is early access only, the Games Room is open to everyone signed in
+// (agreed with Ian, November 2026): its pages, its own requests, and what the page needs to load.
+// Everyone else sees just the Games Room ("games only"); the rest stays coming soon.
+const GAMES_FOR_ALL = [/^\/games(\/|$)/, /^\/api\/games(\/|$)/, /^\/api\/(site|me)$/, /^\/assets\//, /^\/(placeholders|concepts)\//, /^\/[^/]+\.(svg|png|ico|webp|jpg|txt|webmanifest)$/];
+const gamesForAll = (path) => GAMES_FOR_ALL.some((rule) => rule.test(path));
+
 if (earlyAccess.size) console.warn(`Sign-in: early access only (${earlyAccess.size} ${earlyAccess.size === 1 ? "person" : "people"}); everyone else sees "coming soon".`);
 
 // For local development before IT's details arrive: DEV_SIGNIN_AS="Your Name" signs you in as that
@@ -189,9 +195,14 @@ export function requireSignIn(req, res, next) {
   const limit = req.session?.via === "house" ? SIGN_IN_AGAIN_AFTER_HOUSE : SIGN_IN_AGAIN_AFTER;
   if (user && Date.now() - signedInAt < limit) {
     if (earlyAccess.size && !devUser && !earlyAccess.has(String(user.email || "").toLowerCase())) {
-      if (req.path.startsWith("/api/")) return res.status(403).json({ error: "The hub is coming soon." });
-      const house = houseSignIn ? `<p><a href="${HOUSE_URL}/?hallway">Back to the House</a></p>` : "";
-      return res.status(403).send(page("Coming soon", `The ${hubName()} is being got ready and opens soon. Thanks for your patience.`).replace("</body>", `${house}</body>`));
+      if (gamesForAll(req.path)) {
+        req.gamesOnly = true;
+      } else {
+        if (req.path.startsWith("/api/")) return res.status(403).json({ error: "The hub is coming soon." });
+        const house = houseSignIn ? `<p><a href="${HOUSE_URL}/?hallway">Back to the House</a></p>` : "";
+        const games = `<p><a href="/games">Play in the Games Room</a></p>`;
+        return res.status(403).send(page("Coming soon", `The ${hubName()} is being got ready and opens soon. Thanks for your patience. The Games Room is open now.`).replace("</body>", `${games}${house}</body>`));
+      }
     }
     req.user = user;
     // Renew the 7 days. Changing the session makes the browser keep the cookie for another 7 days;

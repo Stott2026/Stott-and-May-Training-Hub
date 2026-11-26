@@ -161,6 +161,7 @@ function Start({ game, page, level, setLevel, onStart, note }) {
 // May's feedback on one answer or a whole call: the score, what worked, what to do better, a better
 // line and what the Playbook says.
 function ScoreCard({ result }) {
+  const { gamesOnly } = useSite();
   const playbook = cited(result.playbook, result.sources);
   const mood = result.score >= 8 ? "great" : result.score <= 3 ? "low" : "ok";
   return (
@@ -198,7 +199,7 @@ function ScoreCard({ result }) {
           <h2><Icon name="book-open" size={18} /> What the Playbook says</h2>
           <p>{playbook.text}</p>
           {playbook.links.length > 0 && (
-            <ul>{playbook.links.map((s) => <li key={s.href}><Link to={s.href}>{s.label}</Link></li>)}</ul>
+            <ul>{playbook.links.map((s) => <li key={s.href}>{gamesOnly ? s.label : <Link to={s.href}>{s.label}</Link>}</li>)}</ul>
           )}
         </div>
       )}
@@ -464,6 +465,7 @@ const SECONDS = { friendly: 25, tough: 12, brutal: 7 };
 
 function Rapid({ game, level, levelName, onAgain, onLevel }) {
   const save = useSaveScore(game);
+  const { gamesOnly } = useSite();
   const seconds = SECONDS[level] ?? 12;
   const [questions, setQuestions] = useState(null);
   const [problem, setProblem] = useState(null);
@@ -576,7 +578,7 @@ function Rapid({ game, level, levelName, onAgain, onLevel }) {
                   <p className="rapid__missed-q">{m.question}</p>
                   <p><strong>Answer:</strong> {m.options[m.correct]}{timedOut ? " (out of time)" : ""}</p>
                   {m.explanation && <p className="rapid__missed-why">{m.explanation}</p>}
-                  {m.source && <Link to={m.source.href}>{m.source.label}</Link>}
+                  {m.source && (gamesOnly ? <span className="rapid__missed-why">From: {m.source.label}</span> : <Link to={m.source.href}>{m.source.label}</Link>)}
                 </li>
               ))}
             </ul>
@@ -632,7 +634,7 @@ function Rapid({ game, level, levelName, onAgain, onLevel }) {
           <div className="rapid__why">
             <p className="rapid__verdict rapid__verdict--wrong">{picked === "time" ? "Out of time." : "Not quite."} The answer is: {q.options[q.correct]}</p>
             {q.explanation && <p>{q.explanation}</p>}
-            {q.source && <p className="rapid__source"><Icon name="book-open" size={16} /> <Link to={q.source.href}>{q.source.label}</Link></p>}
+            {q.source && <p className="rapid__source"><Icon name="book-open" size={16} /> {gamesOnly ? q.source.label : <Link to={q.source.href}>{q.source.label}</Link>}</p>}
             <div className="game__actions">
               <Button ref={nextRef} iconAfter="arrow-right" onClick={next}>{index + 1 < questions.length ? "Next question" : "See your score"}</Button>
             </div>

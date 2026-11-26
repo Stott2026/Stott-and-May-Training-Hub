@@ -9,7 +9,9 @@ export const api = Router();
 
 api.get("/site", async (req, res) => {
   // may: whether Ask May is switched on (it is when ANTHROPIC_API_KEY is set).
-  res.json({ ...((await sanity.fetch(queries.site)) ?? {}), may: mayEnabled });
+  // gamesOnly: this person can only use the Games Room while the rest of the hub is early access
+  // only (server/auth.js), so the page shows just that.
+  res.json({ ...((await sanity.fetch(queries.site)) ?? {}), may: mayEnabled, gamesOnly: Boolean(req.gamesOnly) });
 });
 
 api.get("/home", async (req, res) => {

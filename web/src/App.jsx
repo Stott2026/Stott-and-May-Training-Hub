@@ -67,20 +67,20 @@ const initialsOf = (name = "") => name.split(/\s+/).filter(Boolean).map((w) => w
 function Shell({ user, children }) {
   const { pathname } = useLocation();
   const area = useNavArea();
-  const { quickLinks, house, may } = useSite();
+  const { quickLinks, house, may, gamesOnly } = useSite();
   const { name } = useHubName();
   const ach = useAchievements();
   // The level and points chip in the top bar, once badges and levels are switched on.
   const level = ach.enabled ? { title: ach.level.title, points: ach.points } : null;
   const current = pathname.startsWith("/tech") ? "tech" : pathname.startsWith("/start") ? "start" : pathname.startsWith("/achievements") ? "achievements" : pathname.startsWith("/library") ? "library" : pathname.startsWith("/managers") || area === "managers" ? "managers" : pathname.startsWith("/documents") ? "documents" : pathname.startsWith("/compliance") ? "compliance" : pathname.startsWith("/games") ? "games" : "training";
-  return <AppShell productName={name} navItems={NAV.filter((n) => !n.needsMay || may)} quickLinks={quickLinks ?? []} house={house} level={level} current={current} user={user}>{children}</AppShell>;
+  return <AppShell productName={name} navItems={NAV.filter((n) => (gamesOnly ? n.id === "games" : !n.needsMay || may))} quickLinks={quickLinks ?? []} house={house} level={level} current={current} user={user}>{children}</AppShell>;
 }
 
 // The real Ask May, when it's switched on (the server has an Anthropic API key). The preview
 // build has no server, so it shows the concept instead.
 function LiveMay() {
-  const { may } = useSite();
-  return may && !showMayConcept ? <AskMay /> : null;
+  const { may, gamesOnly } = useSite();
+  return may && !gamesOnly && !showMayConcept ? <AskMay /> : null;
 }
 
 export default function App() {
